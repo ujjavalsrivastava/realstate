@@ -7,7 +7,7 @@ use View;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
+    /**S
      * Register any application services.
      *
      * @return void
@@ -17,15 +17,14 @@ class AppServiceProvider extends ServiceProvider
         //
     }
 
-    /**
+    /**s
      * Bootstrap any application services.
      *
      * @return void
      */
     public function boot()
     {
-        //
-        $menu = \App\Models\CategoryModel::with('getSubctegory')->where('type','Menu')->where('status','Active')->orderBy('sequence_no','ASC')->get();
-        View::share('menu', $menu);
+
+
     }
 }
