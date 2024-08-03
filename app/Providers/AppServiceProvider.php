@@ -7,7 +7,7 @@ use View;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
+    /**S
      * Register any application services.
      *
      * @return void
@@ -17,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
         //
     }
 
-    /**
+    /**s
      * Bootstrap any application services.
      *
      * @return void

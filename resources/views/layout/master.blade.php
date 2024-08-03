@@ -1,23 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zxx">
+
 
 <head>
-<meta charset="utf-8">
-<title>@yield('title');</title>
-
-<link href="{{ URL::asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
-<link href="{{ URL::asset('assets/css/style.css')}}" rel="stylesheet">
-<link href="{{ URL::asset('assets/css/style-color-yellow.css')}}" rel="stylesheet">
-<link rel="shortcut icon" href="images/favicon-yellow.png" type="image/x-icon">
-<link rel="icon" href="images/favicon-yellow.png" type="image/x-icon">
-
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-@yield('style')
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="html 5 template">
+    <meta name="author" content="">
+    <title>@yield('title');</title>
+    <!-- FAVICON -->
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/jquery-ui.css')}}">
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i%7CMontserrat:600,800" rel="stylesheet">
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="{{ URL::asset('assets/font/flaticon.css')}}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/fontawesome-all.min.css')}}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/fontawesome-5-all.min.css')}}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/font-awesome.min.css')}}">
+    <!-- ARCHIVES CSS -->
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/search.css')}}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/animate.css')}}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/aos.css')}}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/aos2.css')}}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/magnific-popup.css')}}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/lightcase.css')}}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/menu.css')}}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/slick.css')}}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/styles.css')}}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/maps.css')}}">
+    <link rel="stylesheet" id="color" href="{{ URL::asset('assets/css/colors/pink.css')}}">
+    <style>
+        .loginbuttoncolor{
+            background:#FF385C !important;
+            color:white !important;
+        }
+        
+    </style>
+    @yield('style')
 </head>
-<body>
-<div class="page-wrapper">
 
+<body class="homepage-9 hp-6 homepage-1 mh">
+    <!-- Wrapper -->
+    <div id="wrapper">
 <!-- <div class="preloader"></div> -->
 
 @include('comman.header')
@@ -25,23 +53,276 @@
 @yield('content');
 
 @include('comman.footer')
-</div>
+<a data-scroll href="#wrapper" class="go-up"><i class="fa fa-angle-double-up" aria-hidden="true"></i></a>
+        <!-- END FOOTER -->
 
-<div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-angle-up"></span></div>
-<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
+        <!--register form -->
+        <div class="login-and-register-form modal">
+            <div class="main-overlay"></div>
+            <div class="main-register-holder">
+                <div class="main-register fl-wrap">
+                    <div class="close-reg" onclick="closeRegisterLoginModel()"><i class="fa fa-times"></i></div>
+                    <h3>Welcome to <span>Find<strong>Houses</strong></span></h3>
+                    <!-- <div class="soc-log fl-wrap">
+                        <p>Login</p>
+                        <a href="#" class="facebook-log"><i class="fa fa-facebook-official"></i>Log in with Facebook</a>
+                        <a href="#" class="twitter-log"><i class="fa fa-twitter"></i> Log in with Twitter</a>
+                    </div>
+                    <div class="log-separator fl-wrap"><span>Or</span></div> -->
+                    <div id="tabs-container">
+                        <ul class="tabs-menu">
+                            <li id="showhidelogin" onclick="showLoginModel()"><a href="#tab-1" id="loginbuttoncolor" class="loginbuttoncolor">Login</a></li>
+                            <li id="showhideregister" onclick="showRegisterModel()"><a href="#tab-2">Register</a></li>
+                        </ul>
+                        <div class="tab">
+                            <div id="tab-1" class="tab-contents">
+                                <div class="custom-form">
+                                    <form method="post" name="registerform">
+                                        <label>Username or Email Address * </label>
+                                        <input name="email" type="text" onClick="this.select()" value="">
+                                        <label>Password * </label>
+                                        <input name="password" type="password" onClick="this.select()" value="">
+                                        <button type="submit" class="log-submit-btn"><span>Log In</span></button>
+                                        <div class="clearfix"></div>
+                                        <div class="filter-tags">
+                                            <input id="check-a" type="checkbox" name="check">
+                                            <label for="check-a">Remember me</label>
+                                        </div>
+                                    </form>
+                                    <div class="lost_password">
+                                        <a href="#">Lost Your Password?</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab">
+                                <div id="tab-2" class="tab-contents">
+                                    <div class="custom-form">
+                                        <form method="post" name="registerform" class="main-register-form" id="main-register-form2">
+                                            <label>First Name * </label>
+                                            <input name="name" type="text" onClick="this.select()" value="">
+                                            <label>Second Name *</label>
+                                            <input name="name2" type="text" onClick="this.select()" value="">
+                                            <label>Email Address *</label>
+                                            <input name="email" type="text" onClick="this.select()" value="">
+                                            <label>Password *</label>
+                                            <input name="password" type="password" onClick="this.select()" value="">
+                                            <button type="submit" class="log-submit-btn"><span>Register</span></button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--register form end -->
 
-</script><script src="{{ URL::asset('assets/js/jquery.js')}}"></script>
-<script src="{{ URL::asset('assets/js/popper.min.js')}}"></script>
-<script src="{{ URL::asset('assets/js/bootstrap.min.js')}}"></script>
-<script src="{{ URL::asset('assets/js/jquery.fancybox.js')}}"></script>
-<script src="{{ URL::asset('assets/js/jquery-ui.js')}}"></script>
-<script src="{{ URL::asset('assets/js/wow.js')}}"></script>
-<script src="{{ URL::asset('assets/js/appear.js')}}"></script>
-<script src="{{ URL::asset('assets/js/select2.min.js')}}"></script>
-<script src="{{ URL::asset('assets/js/swiper.min.js')}}"></script>
-<script src="{{ URL::asset('assets/js/owl.js')}}"></script>
-<script src="{{ URL::asset('assets/js/script.js')}}"></script>
-@yield('script');
+        <!-- START PRELOADER -->
+        <div id="preloader">
+            <div id="status">
+                <div class="status-mes"></div>
+            </div>
+        </div>
+        <!-- END PRELOADER -->
+
+        <!-- ARCHIVES JS -->
+        <script src="{{ URL::asset('assets/js/jquery-3.5.1.min.js')}}"></script>
+        <script src="{{ URL::asset('assets/js/rangeSlider.js')}}"></script>
+        <script src="{{ URL::asset('assets/js/tether.min.js')}}"></script>
+        <script src="{{ URL::asset('assets/js/moment.js')}}"></script>
+        <script src="{{ URL::asset('assets/js/bootstrap.min.js')}}"></script>
+        <script src="{{ URL::asset('assets/js/mmenu.min.js')}}"></script>
+        <script src="{{ URL::asset('assets/js/mmenu.js')}}"></script>
+        <script src="{{ URL::asset('assets/js/aos.js')}}"></script>
+        <script src="{{ URL::asset('assets/js/aos2.js')}}"></script>
+        <script src="{{ URL::asset('assets/js/animate.js')}}"></script>
+        <script src="{{ URL::asset('assets/js/slick.min.js')}}"></script>
+        <script src="{{ URL::asset('assets/js/fitvids.js')}}"></script>
+        <script src="{{ URL::asset('assets/js/jquery.waypoints.min.js')}}"></script>
+        <script src="{{ URL::asset('assets/js/typed.min.js')}}"></script>
+        <script src="{{ URL::asset('assets/js/jquery.counterup.min.js')}}"></script>
+        <script src="{{ URL::asset('assets/js/imagesloaded.pkgd.min.js')}}"></script>
+        <script src="{{ URL::asset('assets/js/isotope.pkgd.min.js')}}"></script>
+        <script src="{{ URL::asset('assets/js/smooth-scroll.min.js')}}"></script>
+        <script src="{{ URL::asset('assets/js/lightcase.js')}}"></script>
+        <script src="{{ URL::asset('assets/js/search.js')}}"></script>
+        <script src="{{ URL::asset('assets/js/owl.carousel.js')}}"></script>
+        <script src="{{ URL::asset('assets/js/jquery.magnific-popup.min.js')}}"></script>
+        <script src="{{ URL::asset('assets/js/ajaxchimp.min.js')}}"></script>
+        <script src="{{ URL::asset('assets/js/newsletter.js')}}"></script>
+        <script src="{{ URL::asset('assets/js/jquery.form.js')}}"></script>
+        <script src="{{ URL::asset('assets/js/jquery.validate.min.js')}}"></script>
+        <script src="{{ URL::asset('assets/js/searched.js')}}"></script>
+        <script src="{{ URL::asset('assets/js/forms-2.js')}}"></script>
+        <script src="{{ URL::asset('assets/js/map-style2.js')}}"></script>
+        <script src="{{ URL::asset('assets/js/range.js')}}"></script>
+        <script src="{{ URL::asset('assets/js/color-switcher.js')}}"></script>
+        <script>
+            $(window).on('scroll load', function() {
+                $("#header.cloned #logo img").attr("src", $('#header #logo img').attr('data-sticky-logo'));
+            });
+
+        </script>
+
+        <!-- Slider Revolution scripts -->
+        <script src="revolution/{{ URL::asset('assets/js/jquery.themepunch.tools.min.js')}}"></script>
+        <script src="revolution/{{ URL::asset('assets/js/jquery.themepunch.revolution.min.js')}}"></script>
+
+        <script>
+            var typed = new Typed('.typed', {
+                strings: ["House ^2000", "Apartment ^2000", "Plaza ^4000"],
+                smartBackspace: false,
+                loop: true,
+                showCursor: true,
+                cursorChar: "|",
+                typeSpeed: 50,
+                backSpeed: 30,
+                startDelay: 800
+            });
+
+        </script>
+        <script>
+            function openRegisterLoginModel(){
+                $('.login-and-register-form').css("display", "block");
+            }
+
+            function closeRegisterLoginModel(){
+                $('.login-and-register-form').css("display", "none");
+            }
+
+            function showRegisterModel(){
+                $('#tab-2').css("display", "block");
+                $('#tab-1').css("display", "none");
+                $('#showhideregister').addClass("current");
+                $('#showhidelogin').removeClass("current");
+                $('#loginbuttoncolor').removeClass("loginbuttoncolor");
+            }
+
+            function showLoginModel(){
+                $('#tab-2').css("display", "none");
+                $('#tab-1').css("display", "block");
+                $('#showhidelogin').addClass("current");
+                $('#showhideregister').removeClass("current");
+            }
+        </script>
+
+        <script>
+            $('.slick-lancers').slick({
+                infinite: false,
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                dots: true,
+                arrows: false,
+                adaptiveHeight: true,
+                responsive: [{
+                    breakpoint: 1292,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
+                        dots: true,
+                        arrows: false
+                    }
+                }, {
+                    breakpoint: 993,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
+                        dots: true,
+                        arrows: false
+                    }
+                }, {
+                    breakpoint: 769,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        dots: true,
+                        arrows: false
+                    }
+                }]
+            });
+
+        </script>
+
+        <script>
+            $('.job_clientSlide').owlCarousel({
+                items: 2,
+                loop: true,
+                margin: 30,
+                autoplay: false,
+                nav: true,
+                smartSpeed: 1000,
+                slideSpeed: 1000,
+                navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"],
+                dots: false,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    991: {
+                        items: 3
+                    }
+                }
+            });
+
+        </script>
+
+        <script>
+            $('.style2').owlCarousel({
+                loop: true,
+                margin: 0,
+                dots: false,
+                autoWidth: false,
+                autoplay: true,
+                autoplayTimeout: 5000,
+                responsive: {
+                    0: {
+                        items: 2,
+                        margin: 20
+                    },
+                    400: {
+                        items: 2,
+                        margin: 20
+                    },
+                    500: {
+                        items: 3,
+                        margin: 20
+                    },
+                    768: {
+                        items: 4,
+                        margin: 20
+                    },
+                    992: {
+                        items: 5,
+                        margin: 20
+                    },
+                    1000: {
+                        items: 7,
+                        margin: 20
+                    }
+                }
+            });
+
+        </script>
+
+        <script>
+            $(".dropdown-filter").on('click', function() {
+
+                $(".explore__form-checkbox-list").toggleClass("filter-block");
+
+            });
+
+        </script>
+
+        <!-- MAIN JS -->
+        <script src="{{ URL::asset('assets/js/script.js')}}"></script>
+
+    </div>
+    
+    @yield('script')
+    <!-- Wrapper / End -->
 </body>
 
+
 </html>
+{{dd()}}
