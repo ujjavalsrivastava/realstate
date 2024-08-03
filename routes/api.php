@@ -25,10 +25,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
-Route::group(['middleware' => ['jwt.verify']], function() {
+//Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('logout', [AuthController::class, 'logout']);
     Route::get('get_user', [AuthController::class, 'getUser']);
-    Route::get('categroys', [HomeController::class, 'getCategroys']);
+    Route::get('get_type', [AuthController::class, 'getType']);
+    Route::get('get_pro_type', [AuthController::class, 'getProType']);
    
-});
+//});
 

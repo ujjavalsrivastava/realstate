@@ -6,6 +6,7 @@ use JWTAuth;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\Models\User;
+use App\Models\RealPerameterModel;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,20 +23,25 @@ class AuthController extends Controller
                       [ 
                       'name' => 'required',
                       'email' => 'required|email|unique:users',
-                      'password' => 'required',  
+                      'password' => 'required|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[@#$%&*!]).*$/', 
+                      'mobile' => 'required|unique:users|max:10', 
+                      'type' => 'required',
+                      'pro_type' => 'required',
+                      'address' => 'required',
+                      'pin_no' => 'required|min:6|max:8'
                     //   'c_password' => 'required|same:password', 
                      ]);  
-
          if ($validator->fails()) {  
-
                return response()->json(['error'=>$validator->errors()], 401); 
-
             }   
-
-
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->mobile = $request->mobile;
+        $user->type = $request->type;
+        $user->pro_type = $request->pro_type;
+        $user->address = $request->address;
+        $user->pin_no = $request->pin_no;
         $user->password = bcrypt($request->password);
         $user->save();
 
@@ -92,14 +98,19 @@ class AuthController extends Controller
         }
     }
 
-    public function getUser(Request $request)
+    public function getType(Request $request)
     {
-        $this->validate($request, [
-            'token' => 'required'
-        ]);
+     
+        
 
-        $user = JWTAuth::authenticate($request->token);
+        $type_list = RealPerameterModel::where('controle_code','TYPE')->get();
+        return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $type_list]);
+    }
 
-        return response()->json(['user' => $user]);
+    public function getProType(Request $request)
+    {
+
+        $pro_type_list = RealPerameterModel::where('controle_code','PRO_TYPE')->get();
+        return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $pro_type_list]);
     }
 }
