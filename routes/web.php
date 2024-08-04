@@ -19,6 +19,12 @@ use App\Http\Controllers\HomeController;
 Route::get('/',[HomeController::class, 'index']);
 Route::get('/about-us',[HomeController::class, 'aboutUs']);
 Route::get('/login',[HomeController::class, 'showlogin']);
+Route::post('/loginPost',[HomeController::class, 'loginPost']);
+
+Route::get('/logout',[HomeController::class, 'logout']);
+
+
+
 Route::get('/{category}/{subcategory}',[HomeController::class, 'serviceDetails']);
 
 // Route::get('custom-login', [HomeController::class, 'showLoginForm'])->name('custom.login');
