@@ -26,12 +26,13 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 Route::post('send_mail', [AuthController::class, 'sendMail']);
 Route::post('verify_otp', [AuthController::class, 'verifyOtp']);
+Route::get('get_type', [AuthController::class, 'getType']);
+Route::get('get_pro_type', [AuthController::class, 'getProType']);
+Route::get('get_res_com_type_details', [AuthController::class, 'getResComTypeDetails']);
 
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('logout', [AuthController::class, 'logout']);
-    Route::get('get_type', [AuthController::class, 'getType']);
-    Route::get('get_pro_type', [AuthController::class, 'getProType']);
-    Route::get('get_res_com_type_details', [AuthController::class, 'getResComTypeDetails']);
+    
    
 });
 
