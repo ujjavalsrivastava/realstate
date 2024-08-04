@@ -5,25 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RealPerameterModel extends Model
+class ResComDetailModel extends Model
 {
     use HasFactory;
 
-     /**
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'controle_code',
-        'code',
-        'description'
+        'real_per_code',
+        'property_type'
         
     ];
-   protected $table='real_perameter';
+   protected $table='res_com_details';
 
-   public function getResComDetails()
-    {
-        return $this->hasMany(ResComDetailModel::class, 'real_per_code','code');
-    }
 }

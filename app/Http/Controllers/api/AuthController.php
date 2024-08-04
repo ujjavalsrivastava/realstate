@@ -7,10 +7,13 @@ use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\Models\User;
 use App\Models\RealPerameterModel;
+use App\Models\ResComDetailModel;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OtpSendMail;
 
 class AuthController extends Controller
 {
@@ -65,10 +68,7 @@ class AuthController extends Controller
                 'success' => false,
                 'message' => 'Invalid Email or Password',
             ], Response::HTTP_UNAUTHORIZED);
-           
-
         }
-       
             return response()->json([
             'success' => true,
             'token' => $jwt_token,
@@ -77,15 +77,38 @@ class AuthController extends Controller
         ]);
     }
 
+    public function sendMail(Request $request){
+
+        try{
+        $validator = Validator::make($request->all(), 
+        [ 
+        'email' => 'required|email|exists:users,email',
+        
+       ]);  
+        if ($validator->fails()) {  
+        return response()->json(['error'=>$validator->errors()], 401); 
+        }   
+
+        $details = [
+            'otp' => rand(1000,9999)
+            
+        ];
+   
+       Mail::to($request->input('email'))->send(new OtpSendMail($details));
+        return response()->json(['message' => 'Email sent successfully'], 200);
+    }catch(\Exception $e){
+        return response()->json(['message' => $e->getMessage()], 401); 
+    }
+    }
+
+
     public function logout(Request $request)
     {
         $this->validate($request, [
             'token' => 'required'
         ]);
-
         try {
             JWTAuth::invalidate($request->token);
-
             return response()->json([
                 'success' => true,
                 'message' => 'User logged out successfully'
@@ -100,17 +123,19 @@ class AuthController extends Controller
 
     public function getType(Request $request)
     {
-     
-        
-
         $type_list = RealPerameterModel::where('controle_code','TYPE')->get();
         return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $type_list]);
     }
 
     public function getProType(Request $request)
     {
-
         $pro_type_list = RealPerameterModel::where('controle_code','PRO_TYPE')->get();
         return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $pro_type_list]);
+    }
+
+    // Residentail Commercial Type and details List Get
+    function getResComTypeDetails(request $request){
+        $res_type_list = RealPerameterModel::with('getResComDetails')->where('controle_code','RES_COM_TYPE')->get();
+        return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $res_type_list]);
     }
 }
