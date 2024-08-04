@@ -8,6 +8,7 @@ use Validator;
 use App\Models\User;
 use App\Models\RealPerameterModel;
 use App\Models\ResComDetailModel;
+use App\Models\OtpVerifyModel;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,8 +33,7 @@ class AuthController extends Controller
                       'pro_type' => 'required',
                       'address' => 'required',
                       'pin_no' => 'required|min:6|max:8'
-                    //   'c_password' => 'required|same:password', 
-                     ]);  
+                    ]);  
          if ($validator->fails()) {  
                return response()->json(['error'=>$validator->errors()], 401); 
             }   
@@ -92,8 +92,9 @@ class AuthController extends Controller
             'otp' => rand(1000,9999)  
         ];
        Mail::to($request->input('email'))->send(new OtpSendMail($details));
-        $getotp = User::where('email',$request->email)->update([
-        'otp' => $details['otp']
+        $getotp = OtpVerifyModel::insert([
+            'email' => $request->input('email'),
+            'otp' => $details['otp']
         ]);
         return response()->json(['message' => 'Email sent successfully'], 200);
     }catch(\Exception $e){
@@ -112,8 +113,9 @@ class AuthController extends Controller
             if ($validator->fails()) {  
             return response()->json(['error'=>$validator->errors()], 401); 
             }   
-            $verify = User::where('email',$request->email)->where('otp',$request->otp)->exists();
+            $verify = OtpVerifyModel::where('email',$request->email)->where('otp',$request->otp)->exists();
            if($verify){
+            $delete = OtpVerifyModel::where('email',$request->email)->delete();
             return response()->json(['message' => 'OTP Verify successfully'], 200);
            }else{
             return response()->json(['message' => 'Invelid OTP'], 400);
