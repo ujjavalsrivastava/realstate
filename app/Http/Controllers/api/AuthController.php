@@ -126,6 +126,25 @@ class AuthController extends Controller
         }
     }
 
+    public function changePassword(Request $request){
+        try{
+            $validator = Validator::make($request->all(), 
+            [ 
+            'email' => 'required|email',
+            'password' => 'required|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[@#$%&*!]).*$/',
+           ]);  
+            if ($validator->fails()) {  
+            return response()->json(['error'=>$validator->errors()], 401); 
+            }   
+            $changepass = User::where('email',$request->email)->update([
+                'password' => bcrypt($request->password),
+            ]);
+            return response()->json(['message' => 'Password Change Successfully'], 200);
+        }catch(\Exception $e){
+            return response()->json(['message' => $e->getMessage()], 400); 
+        }
+    }
+
 
     public function logout(Request $request)
     {

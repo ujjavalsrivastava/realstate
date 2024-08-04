@@ -29,6 +29,7 @@ Route::post('verify_otp', [AuthController::class, 'verifyOtp']);
 Route::get('get_type', [AuthController::class, 'getType']);
 Route::get('get_pro_type', [AuthController::class, 'getProType']);
 Route::get('get_res_com_type_details', [AuthController::class, 'getResComTypeDetails']);
+Route::post('change_password', [AuthController::class, 'changePassword']);
 
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('logout', [AuthController::class, 'logout']);
