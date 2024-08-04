@@ -351,7 +351,7 @@
                     <div class="col-xl-3 col-lg-6 col-sm-6" data-aos="fade-up" data-aos-delay="150">
                         <div class="small-category-2">
                             <div class="small-category-2-thumb img-1">
-                                <a href="properties-full-grid-1.html"><img src="{ URL::asset('assets/images/popular-places/12.jpg')}}" alt=""></a>
+                                <a href="properties-full-grid-1.html"><img src="{{URL::asset('assets/images/popular-places/12.jpg')}}" alt=""></a>
                             </div>
                             <div class="sc-2-detail">
                                 <h4 class="sc-jb-title"><a href="properties-full-grid-1.html">New York</a></h4>
@@ -363,7 +363,7 @@
                     <div class="col-xl-3 col-lg-6 col-sm-6" data-aos="fade-up" data-aos-delay="250">
                         <div class="small-category-2">
                             <div class="small-category-2-thumb img-2">
-                                <a href="properties-full-grid-1.html"><img src="{ URL::asset('assets/images/popular-places/13.jpg')}}" alt=""></a>
+                                <a href="properties-full-grid-1.html"><img src="{{URL::asset('assets/images/popular-places/13.jpg')}}" alt=""></a>
                             </div>
                             <div class="sc-2-detail">
                                 <h4 class="sc-jb-title"><a href="properties-full-grid-1.html">Los Angeles</a></h4>
@@ -375,7 +375,7 @@
                     <div class="col-xl-3 col-lg-6 col-sm-6" data-aos="fade-up" data-aos-delay="350">
                         <div class="small-category-2">
                             <div class="small-category-2-thumb img-3">
-                                <a href="properties-full-grid-1.html"><img src="{ URL::asset('assets/images/popular-places/14.jpg')}}" alt=""></a>
+                                <a href="properties-full-grid-1.html"><img src="{{URL::asset('assets/images/popular-places/14.jpg')}}" alt=""></a>
                             </div>
                             <div class="sc-2-detail">
                                 <h4 class="sc-jb-title"><a href="properties-full-grid-1.html">San Francisco</a></h4>
@@ -387,7 +387,7 @@
                     <div class="col-xl-3 col-lg-6 col-sm-6" data-aos="fade-up" data-aos-delay="450">
                         <div class="small-category-2">
                             <div class="small-category-2-thumb img-3">
-                                <a href="properties-full-grid-1.html"><img src="{ URL::asset('assets/images/popular-places/9.jpg')}}" alt=""></a>
+                                <a href="properties-full-grid-1.html"><img src="{{URL::asset('assets/images/popular-places/9.jpg')}}" alt=""></a>
                             </div>
                             <div class="sc-2-detail">
                                 <h4 class="sc-jb-title"><a href="properties-full-grid-1.html">Atlanta</a></h4>
@@ -399,7 +399,7 @@
                     <div class="col-xl-3 col-lg-6 col-sm-6" data-aos="fade-up" data-aos-delay="150">
                         <div class="small-category-2 mob-mt">
                             <div class="small-category-2-thumb img-8">
-                                <a href="properties-full-grid-1.html"><img src="{ URL::asset('assets/images/popular-places/15.jpg')}}" alt=""></a>
+                                <a href="properties-full-grid-1.html"><img src="{{URL::asset('assets/images/popular-places/15.jpg')}}" alt=""></a>
                             </div>
                             <div class="sc-2-detail">
                                 <h4 class="sc-jb-title"><a href="properties-full-grid-1.html">Miami</a></h4>
@@ -411,7 +411,7 @@
                     <div class="col-xl-3 col-lg-6 col-sm-6" data-aos="fade-up" data-aos-delay="250">
                         <div class="small-category-2">
                             <div class="small-category-2-thumb img-10">
-                                <a href="properties-full-grid-1.html"><img src="{ URL::asset('assets/images/popular-places/10.jpg')}}" alt=""></a>
+                                <a href="properties-full-grid-1.html"><img src="{{URL::asset('assets/images/popular-places/10.jpg')}}" alt=""></a>
                             </div>
                             <div class="sc-2-detail">
                                 <h4 class="sc-jb-title"><a href="properties-full-grid-1.html">Chicago</a></h4>
@@ -423,7 +423,7 @@
                     <div class="col-xl-3 col-lg-6 col-sm-6" data-aos="fade-up" data-aos-delay="350">
                         <div class="small-category-2 si-mt">
                             <div class="small-category-2-thumb img-11">
-                                <a href="properties-full-grid-1.html"><img src="{ URL::asset('assets/images/popular-places/5.jpg')}}" alt=""></a>
+                                <a href="properties-full-grid-1.html"><img src="{{URL::asset('assets/images/popular-places/5.jpg')}}" alt=""></a>
                             </div>
                             <div class="sc-2-detail">
                                 <h4 class="sc-jb-title"><a href="properties-full-grid-1.html">Houston</a></h4>
@@ -435,7 +435,7 @@
                     <div class="col-xl-3 col-lg-6 col-sm-6" data-aos="fade-up" data-aos-delay="450">
                         <div class="small-category-2 no-mb si-mt">
                             <div class="small-category-2-thumb img-11">
-                                <a href="properties-full-grid-1.html"><img src="{ URL::asset('assets/images/popular-places/6.jpg')}}" alt=""></a>
+                                <a href="properties-full-grid-1.html"><img src="{{URL::asset('assets/images/popular-places/6.jpg')}}" alt=""></a>
                             </div>
                             <div class="sc-2-detail">
                                 <h4 class="sc-jb-title"><a href="properties-full-grid-1.html">Orlando</a></h4>
@@ -465,7 +465,7 @@
                                     <a href="single-property-1.html" class="homes-img">
                                         <div class="homes-tag button alt featured">Featured</div>
                                         <div class="homes-tag button alt sale">For Sale</div>
-                                        <img src="{ URL::asset('assets/images/blog/b-11.jpg')}}" alt="home-1" class="img-responsive">
+                                        <img src="{{URL::asset('assets/images/blog/b-11.jpg')}}" alt="home-1" class="img-responsive">
                                     </a>
                                 </div>
                                 <div class="button-effect">
@@ -528,7 +528,7 @@
                                     <!-- homes img -->
                                     <a href="single-property-1.html" class="homes-img">
                                         <div class="homes-tag button sale rent">For Rent</div>
-                                        <img src="{ URL::asset('assets/images/blog/b-12.jpg')}}" alt="home-1" class="img-responsive">
+                                        <img src="{{URL::asset('assets/images/blog/b-12.jpg')}}" alt="home-1" class="img-responsive">
                                     </a>
                                 </div>
                                 <div class="button-effect">
@@ -591,7 +591,7 @@
                                     <!-- homes img -->
                                     <a href="single-property-1.html" class="homes-img">
                                         <div class="homes-tag button alt sale">For Sale</div>
-                                        <img src="{ URL::asset('assets/images/blog/b-1.jpg')}}" alt="home-1" class="img-responsive">
+                                        <img src="{{URL::asset('assets/images/blog/b-1.jpg')}}" alt="home-1" class="img-responsive">
                                     </a>
                                 </div>
                                 <div class="button-effect">
@@ -655,7 +655,7 @@
                                     <a href="single-property-1.html" class="homes-img">
                                         <div class="homes-tag button alt featured">Featured</div>
                                         <div class="homes-tag button sale rent">For Rent</div>
-                                        <img src="{ URL::asset('assets/images/feature-properties/fp-10.jpg')}}" alt="home-1" class="img-responsive">
+                                        <img src="{{URL::asset('assets/images/feature-properties/fp-10.jpg')}}" alt="home-1" class="img-responsive">
                                     </a>
                                 </div>
                                 <div class="button-effect">
@@ -719,7 +719,7 @@
                                     <a href="single-property-1.html" class="homes-img">
                                         <div class="homes-tag button alt featured">Featured</div>
                                         <div class="homes-tag button alt sale">For Sale</div>
-                                        <img src="{ URL::asset('assets/images/feature-properties/fp-11.jpg')}}" alt="home-1" class="img-responsive">
+                                        <img src="{{URL::asset('assets/images/feature-properties/fp-11.jpg')}}" alt="home-1" class="img-responsive">
                                     </a>
                                 </div>
                                 <div class="button-effect">
@@ -782,7 +782,7 @@
                                     <!-- homes img -->
                                     <a href="single-property-1.html" class="homes-img">
                                         <div class="homes-tag button sale rent">For Rent</div>
-                                        <img src="{ URL::asset('assets/images/feature-properties/fp-12.jpg')}}" alt="home-1" class="img-responsive">
+                                        <img src="{{URL::asset('assets/images/feature-properties/fp-12.jpg')}}" alt="home-1" class="img-responsive">
                                     </a>
                                 </div>
                                 <div class="button-effect">
@@ -856,7 +856,7 @@
                     <article class="col-lg-3 col-md-6 col-xs-12 serv" data-aos="fade-up" data-aos-delay="150">
                         <div class="serv-flex">
                             <div class="art-1 img-13">
-                                <img src="{ URL::asset('assets/images/icons/icon-4.svg" alt="">
+                                <img src="{{URL::asset('assets/images/icons/icon-4.svg')}}" alt="">
                                 <h3>Wide Renge Of Properties</h3>
                             </div>
                             <div class="service-text-p">
@@ -867,7 +867,7 @@
                     <article class="col-lg-3 col-md-6 col-xs-12 serv" data-aos="fade-up" data-aos-delay="250">
                         <div class="serv-flex">
                             <div class="art-1 img-14">
-                                <img src="{ URL::asset('assets/images/icons/icon-5.svg" alt="">
+                                <img src="{{URL::asset('assets/images/icons/icon-5.svg')}}" alt="">
                                 <h3>Trusted by thousands</h3>
                             </div>
                             <div class="service-text-p">
@@ -878,7 +878,7 @@
                     <article class="col-lg-3 col-md-6 col-xs-12 serv mb-0 pt" data-aos="fade-up" data-aos-delay="350">
                         <div class="serv-flex arrow">
                             <div class="art-1 img-15">
-                                <img src="{ URL::asset('assets/images/icons/icon-6.svg" alt="">
+                                <img src="{{URL::asset('assets/images/icons/icon-6.svg')}}" alt="">
                                 <h3>Financing made easy</h3>
                             </div>
                             <div class="service-text-p">
@@ -889,7 +889,7 @@
                     <article class="col-lg-3 col-md-6 col-xs-12 serv mb-0 pt its-2" data-aos="fade-up" data-aos-delay="450">
                         <div class="serv-flex">
                             <div class="art-1 img-14">
-                                <img src="{ URL::asset('assets/images/icons/icon-15.svg" alt="">
+                                <img src="{{URL::asset('assets/images/icons/icon-15.svg')}}" alt="">
                                 <h3>We are here near you</h3>
                             </div>
                             <div class="service-text-p">
@@ -920,7 +920,7 @@
                                             <a href="single-property-1.html" class="homes-img">
                                                 <div class="homes-tag button alt featured">Featured</div>
                                                 <div class="homes-tag button alt sale">For Sale</div>
-                                                <img src="{ URL::asset('assets/images/blog/b-11.jpg')}}" alt="home-1" class="img-responsive">
+                                                <img src="{{URL::asset('assets/images/blog/b-11.jpg')}}" alt="home-1" class="img-responsive">
                                             </a>
                                         </div>
                                         <div class="button-effect">
@@ -985,7 +985,7 @@
                                             <!-- homes img -->
                                             <a href="single-property-1.html" class="homes-img">
                                                 <div class="homes-tag button sale rent">For Rent</div>
-                                                <img src="{ URL::asset('assets/images/blog/b-12.jpg')}}" alt="home-1" class="img-responsive">
+                                                <img src="{{URL::asset('assets/images/blog/b-12.jpg')}}" alt="home-1" class="img-responsive">
                                             </a>
                                         </div>
                                         <div class="button-effect">
@@ -1050,7 +1050,7 @@
                                             <!-- homes img -->
                                             <a href="single-property-1.html" class="homes-img">
                                                 <div class="homes-tag button alt sale">For Sale</div>
-                                                <img src="{ URL::asset('assets/images/blog/b-1.jpg')}}" alt="home-1" class="img-responsive">
+                                                <img src="{{URL::asset('assets/images/blog/b-1.jpg')}}" alt="home-1" class="img-responsive">
                                             </a>
                                         </div>
                                         <div class="button-effect">
@@ -1116,7 +1116,7 @@
                                             <a href="single-property-1.html" class="homes-img">
                                                 <div class="homes-tag button alt featured">Featured</div>
                                                 <div class="homes-tag button sale rent">For Rent</div>
-                                                <img src="{ URL::asset('assets/images/feature-properties/fp-10.jpg')}}" alt="home-1" class="img-responsive">
+                                                <img src="{{URL::asset('assets/images/feature-properties/fp-10.jpg')}}" alt="home-1" class="img-responsive">
                                             </a>
                                         </div>
                                         <div class="button-effect">
@@ -1181,7 +1181,7 @@
                                             <!-- homes img -->
                                             <a href="single-property-1.html" class="homes-img">
                                                 <div class="homes-tag button alt sale">For Sale</div>
-                                                <img src="{ URL::asset('assets/images/feature-properties/fp-11.jpg')}}" alt="home-1" class="img-responsive">
+                                                <img src="{{URL::asset('assets/images/feature-properties/fp-11.jpg')}}" alt="home-1" class="img-responsive">
                                             </a>
                                         </div>
                                         <div class="button-effect">
@@ -1246,7 +1246,7 @@
                                             <!-- homes img -->
                                             <a href="single-property-1.html" class="homes-img">
                                                 <div class="homes-tag button sale rent">For Rent</div>
-                                                <img src="{ URL::asset('assets/images/feature-properties/fp-12.jpg')}}" alt="home-1" class="img-responsive">
+                                                <img src="{{URL::asset('assets/images/feature-properties/fp-12.jpg')}}" alt="home-1" class="img-responsive">
                                             </a>
                                         </div>
                                         <div class="button-effect">
@@ -1312,7 +1312,7 @@
                                             <a href="single-property-1.html" class="homes-img">
                                                 <div class="homes-tag button alt featured">Featured</div>
                                                 <div class="homes-tag button alt sale">For Sale</div>
-                                                <img src="{ URL::asset('assets/images/blog/b-11.jpg')}}" alt="home-1" class="img-responsive">
+                                                <img src="{{URL::asset('assets/images/blog/b-11.jpg')}}" alt="home-1" class="img-responsive">
                                             </a>
                                         </div>
                                         <div class="button-effect">
@@ -1377,7 +1377,7 @@
                                             <!-- homes img -->
                                             <a href="single-property-1.html" class="homes-img">
                                                 <div class="homes-tag button sale rent">For Rent</div>
-                                                <img src="{ URL::asset('assets/images/blog/b-12.jpg')}}" alt="home-1" class="img-responsive">
+                                                <img src="{{URL::asset('assets/images/blog/b-12.jpg')}}" alt="home-1" class="img-responsive">
                                             </a>
                                         </div>
                                         <div class="button-effect">
@@ -1452,7 +1452,7 @@
                     <div class="team-block col-sm-6 col-md-4 col-lg-4 col-xl-2" data-aos="fade-up" data-aos-delay="150">
                         <div class="inner-box team-details">
                             <div class="image team-head">
-                                <a href="agents-listing-grid.html"><img src="{ URL::asset('assets/images/team/t-5.jpg')}}" alt="" /></a>
+                                <a href="agents-listing-grid.html"><img src="{{URL::asset('assets/images/team/t-5.jpg')}}" alt="" /></a>
                                 <div class="team-hover">
                                     <ul class="team-social">
                                         <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
@@ -1472,7 +1472,7 @@
                     <div class="team-block col-sm-6 col-md-4 col-lg-4 col-xl-2" data-aos="fade-up" data-aos-delay="250">
                         <div class="inner-box team-details">
                             <div class="image team-head">
-                                <a href="agents-listing-grid.html"><img src="{ URL::asset('assets/images/team/t-6.jpg')}}" alt="" /></a>
+                                <a href="agents-listing-grid.html"><img src="{{URL::asset('assets/images/team/t-6.jpg')}}" alt="" /></a>
                                 <div class="team-hover">
                                     <ul class="team-social">
                                         <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
@@ -1492,7 +1492,7 @@
                     <div class="team-block col-sm-6 col-md-4 col-lg-4 col-xl-2" data-aos="fade-up" data-aos-delay="350">
                         <div class="inner-box team-details">
                             <div class="image team-head">
-                                <a href="agents-listing-grid.html"><img src="{ URL::asset('assets/images/team/t-7.jpg')}}" alt="" /></a>
+                                <a href="agents-listing-grid.html"><img src="{{URL::asset('assets/images/team/t-7.jpg')}}" alt="" /></a>
                                 <div class="team-hover">
                                     <ul class="team-social">
                                         <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
@@ -1512,7 +1512,7 @@
                     <div class="team-block col-sm-6 col-md-4 col-lg-4 col-xl-2 pb-none" data-aos="fade-up" data-aos-delay="450">
                         <div class="inner-box team-details">
                             <div class="image team-head">
-                                <a href="agents-listing-grid.html"><img src="{ URL::asset('assets/images/team/t-8.jpg')}}" alt="" /></a>
+                                <a href="agents-listing-grid.html"><img src="{{URL::asset('assets/images/team/t-8.jpg')}}" alt="" /></a>
                                 <div class="team-hover">
                                     <ul class="team-social">
                                         <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
@@ -1531,7 +1531,7 @@
                     <div class="team-block col-sm-6 col-md-4 col-lg-4 col-xl-2 pb-none" data-aos="fade-up" data-aos-delay="550">
                         <div class="inner-box team-details">
                             <div class="image team-head">
-                                <a href="agents-listing-grid.html"><img src="{ URL::asset('assets/images/team/team-image-2.jpg')}}" alt="" /></a>
+                                <a href="agents-listing-grid.html"><img src="{{URL::asset('assets/images/team/team-image-2.jpg')}}" alt="" /></a>
                                 <div class="team-hover">
                                     <ul class="team-social">
                                         <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
@@ -1550,7 +1550,7 @@
                     <div class="team-block col-sm-6 col-md-4 col-lg-4 col-xl-2 pb-none" data-aos="fade-up" data-aos-delay="650">
                         <div class="inner-box team-details">
                             <div class="image team-head">
-                                <a href="agents-listing-grid.html"><img src="{ URL::asset('assets/images/team/team-image-7.jpg')}}" alt="" /></a>
+                                <a href="agents-listing-grid.html"><img src="{{URL::asset('assets/images/team/team-image-7.jpg')}}" alt="" /></a>
                                 <div class="team-hover">
                                     <ul class="team-social">
                                         <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
@@ -1584,7 +1584,7 @@
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore gna a. Ut enim ad minim veniam,
                         </p>
                         <div class="detailJC">
-                            <span><img src="{ URL::asset('assets/images/testimonials/ts-1.jpg')}}" alt=""/></span>
+                            <span><img src="{{URL::asset('assets/images/testimonials/ts-1.jpg')}}" alt=""/></span>
                             <h5>Lisa Smith</h5>
                             <p>New York</p>
                         </div>
@@ -1594,7 +1594,7 @@
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore gna a. Ut enim ad minim veniam,
                         </p>
                         <div class="detailJC">
-                            <span><img src="{ URL::asset('assets/images/testimonials/ts-2.jpg')}}" alt=""/></span>
+                            <span><img src="{{URL::asset('assets/images/testimonials/ts-2.jpg')}}" alt=""/></span>
                             <h5>Jhon Morris</h5>
                             <p>Los Angeles</p>
                         </div>
@@ -1604,7 +1604,7 @@
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore gna a. Ut enim ad minim veniam,
                         </p>
                         <div class="detailJC">
-                            <span><img src="{ URL::asset('assets/images/testimonials/ts-3.jpg')}}" alt=""/></span>
+                            <span><img src="{{URL::asset('assets/images/testimonials/ts-3.jpg')}}" alt=""/></span>
                             <h5>Mary Deshaw</h5>
                             <p>Chicago</p>
                         </div>
@@ -1614,7 +1614,7 @@
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore gna a. Ut enim ad minim veniam,
                         </p>
                         <div class="detailJC">
-                            <span><img src="{ URL::asset('assets/images/testimonials/ts-4.jpg')}}" alt=""/></span>
+                            <span><img src="{{URL::asset('assets/images/testimonials/ts-4.jpg')}}" alt=""/></span>
                             <h5>Gary Steven</h5>
                             <p>Philadelphia</p>
                         </div>
@@ -1624,7 +1624,7 @@
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore gna a. Ut enim ad minim veniam,
                         </p>
                         <div class="detailJC">
-                            <span><img src="{ URL::asset('assets/images/testimonials/ts-5.jpg')}}" alt=""/></span>
+                            <span><img src="{{URL::asset('assets/images/testimonials/ts-5.jpg')}}" alt=""/></span>
                             <h5>Cristy Mayer</h5>
                             <p>San Francisco</p>
                         </div>
@@ -1634,7 +1634,7 @@
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore gna a. Ut enim ad minim veniam,
                         </p>
                         <div class="detailJC">
-                            <span><img src="{ URL::asset('assets/images/testimonials/ts-6.jpg')}}" alt=""/></span>
+                            <span><img src="{{URL::asset('assets/images/testimonials/ts-6.jpg')}}" alt=""/></span>
                             <h5>Ichiro Tasaka</h5>
                             <p>Houston</p>
                         </div>
@@ -1652,16 +1652,16 @@
                     <p>The Companies That Represent Us.</p>
                 </div>
                 <div class="owl-carousel style2">
-                    <div class="owl-item" data-aos="fade-up"><img src="{ URL::asset('assets/images/partners/11.jpg')}}" alt=""></div>
-                    <div class="owl-item" data-aos="fade-up"><img src="{ URL::asset('assets/images/partners/12.jpg')}}" alt=""></div>
-                    <div class="owl-item" data-aos="fade-up"><img src="{ URL::asset('assets/images/partners/13.jpg')}}" alt=""></div>
-                    <div class="owl-item" data-aos="fade-up"><img src="{ URL::asset('assets/images/partners/14.jpg')}}" alt=""></div>
-                    <div class="owl-item" data-aos="fade-up"><img src="{ URL::asset('assets/images/partners/15.jpg')}}" alt=""></div>
-                    <div class="owl-item" data-aos="fade-up"><img src="{ URL::asset('assets/images/partners/16.jpg')}}" alt=""></div>
-                    <div class="owl-item" data-aos="fade-up"><img src="{ URL::asset('assets/images/partners/17.jpg')}}" alt=""></div>
-                    <div class="owl-item" data-aos="fade-up"><img src="{ URL::asset('assets/images/partners/11.jpg')}}" alt=""></div>
-                    <div class="owl-item" data-aos="fade-up"><img src="{ URL::asset('assets/images/partners/12.jpg')}}" alt=""></div>
-                    <div class="owl-item" data-aos="fade-up"><img src="{ URL::asset('assets/images/partners/13.jpg')}}" alt=""></div>
+                    <div class="owl-item" data-aos="fade-up"><img src="{{URL::asset('assets/images/partners/11.jpg')}}" alt=""></div>
+                    <div class="owl-item" data-aos="fade-up"><img src="{{URL::asset('assets/images/partners/12.jpg')}}" alt=""></div>
+                    <div class="owl-item" data-aos="fade-up"><img src="{{URL::asset('assets/images/partners/13.jpg')}}" alt=""></div>
+                    <div class="owl-item" data-aos="fade-up"><img src="{{URL::asset('assets/images/partners/14.jpg')}}" alt=""></div>
+                    <div class="owl-item" data-aos="fade-up"><img src="{{URL::asset('assets/images/partners/15.jpg')}}" alt=""></div>
+                    <div class="owl-item" data-aos="fade-up"><img src="{{URL::asset('assets/images/partners/16.jpg')}}" alt=""></div>
+                    <div class="owl-item" data-aos="fade-up"><img src="{{URL::asset('assets/images/partners/17.jpg')}}" alt=""></div>
+                    <div class="owl-item" data-aos="fade-up"><img src="{{URL::asset('assets/images/partners/11.jpg')}}" alt=""></div>
+                    <div class="owl-item" data-aos="fade-up"><img src="{{URL::asset('assets/images/partners/12.jpg')}}" alt=""></div>
+                    <div class="owl-item" data-aos="fade-up"><img src="{{URL::asset('assets/images/partners/13.jpg')}}" alt=""></div>
                 </div>
             </div>
         </div>
@@ -1670,5 +1670,8 @@
 @endsection
 
 @section('script')
+<script>
+
+</script>
 	
 @endsection
