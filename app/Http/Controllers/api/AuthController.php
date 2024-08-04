@@ -78,7 +78,6 @@ class AuthController extends Controller
     }
 
     public function sendMail(Request $request){
-
         try{
         $validator = Validator::make($request->all(), 
         [ 
@@ -90,15 +89,39 @@ class AuthController extends Controller
         }   
 
         $details = [
-            'otp' => rand(1000,9999)
-            
+            'otp' => rand(1000,9999)  
         ];
-   
        Mail::to($request->input('email'))->send(new OtpSendMail($details));
+        $getotp = User::where('email',$request->email)->update([
+        'otp' => $details['otp']
+        ]);
         return response()->json(['message' => 'Email sent successfully'], 200);
     }catch(\Exception $e){
-        return response()->json(['message' => $e->getMessage()], 401); 
+        return response()->json(['message' => $e->getMessage()], 400); 
     }
+    }
+
+    public function verifyOtp(Request $request){
+        try{
+            $validator = Validator::make($request->all(), 
+            [ 
+            'email' => 'required',
+            'otp' => 'required'
+            
+           ]);  
+            if ($validator->fails()) {  
+            return response()->json(['error'=>$validator->errors()], 401); 
+            }   
+            $verify = User::where('email',$request->email)->where('otp',$request->otp)->exists();
+           if($verify){
+            return response()->json(['message' => 'OTP Verify successfully'], 200);
+           }else{
+            return response()->json(['message' => 'Invelid OTP'], 400);
+           }
+            
+        }catch(\Exception $e){
+            return response()->json(['message' => $e->getMessage()], 400); 
+        }
     }
 
 
