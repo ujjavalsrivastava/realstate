@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\api;
-
 use JWTAuth;
 use Illuminate\Support\Facades\Auth;
 use Validator;
@@ -22,7 +21,6 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-
          $validator = Validator::make($request->all(), 
                       [ 
                       'name' => 'required',
@@ -58,6 +56,7 @@ class AuthController extends Controller
         ], Response::HTTP_OK);
     }
 
+    // login 
     public function login(Request $request)
     {
         $input = $request->only('email', 'password');
@@ -77,6 +76,7 @@ class AuthController extends Controller
         ]);
     }
 
+    // Otp send on mail 
     public function sendMail(Request $request){
         try{
         $validator = Validator::make($request->all(), 
@@ -102,6 +102,7 @@ class AuthController extends Controller
     }
     }
 
+    // otp verify 
     public function verifyOtp(Request $request){
         try{
             $validator = Validator::make($request->all(), 
@@ -126,6 +127,7 @@ class AuthController extends Controller
         }
     }
 
+    // change password
     public function changePassword(Request $request){
         try{
             $validator = Validator::make($request->all(), 
@@ -145,7 +147,7 @@ class AuthController extends Controller
         }
     }
 
-
+    // logout 
     public function logout(Request $request)
     {
         $this->validate($request, [
@@ -165,12 +167,14 @@ class AuthController extends Controller
         }
     }
 
+    // type: owner/ borcker/ customer
     public function getType(Request $request)
     {
         $type_list = RealPerameterModel::where('controle_code','TYPE')->get();
         return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $type_list]);
     }
 
+    // Property type: sell/ rent 
     public function getProType(Request $request)
     {
         $pro_type_list = RealPerameterModel::where('controle_code','PRO_TYPE')->get();
