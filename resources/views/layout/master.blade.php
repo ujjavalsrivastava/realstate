@@ -7,8 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="html 5 template">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="author" content="">
-    <title>@yield('title');</title>
+    <title>@yield('title')</title>
     <!-- FAVICON -->
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="{{ URL::asset('assets/css/jquery-ui.css')}}">
@@ -38,7 +39,13 @@
             background:#FF385C !important;
             color:white !important;
         }
-        
+        .alert {
+    z-index: 9999999;
+    top: 3px;
+    position: absolute;
+    right: 3px;
+    width: 31%;
+}
     </style>
     @yield('style')
 </head>
@@ -47,7 +54,7 @@
     <!-- Wrapper -->
     <div id="wrapper">
 <!-- <div class="preloader"></div> -->
-
+@include('comman.notify')
 @include('comman.header')
 
 @yield('content');
@@ -77,7 +84,8 @@
                         <div class="tab">
                             <div id="tab-1" class="tab-contents">
                                 <div class="custom-form">
-                                    <form method="post" name="registerform">
+                                    <form method="post"  id="registerform">
+                                        @csrf()
                                         <label>Username or Email Address * </label>
                                         <input name="email" type="text" onClick="this.select()" value="">
                                         <label>Password * </label>
@@ -127,6 +135,7 @@
         <!-- END PRELOADER -->
 
         <!-- ARCHIVES JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="{{ URL::asset('assets/js/jquery-3.5.1.min.js')}}"></script>
         <script src="{{ URL::asset('assets/js/rangeSlider.js')}}"></script>
         <script src="{{ URL::asset('assets/js/tether.min.js')}}"></script>
@@ -162,6 +171,34 @@
             $(window).on('scroll load', function() {
                 $("#header.cloned #logo img").attr("src", $('#header #logo img').attr('data-sticky-logo'));
             });
+
+            $('#registerform').on('submit', function(e) {
+                e.preventDefault(); 
+                $.ajax({
+                    type: "POST",
+                    url: "{{url('/loginPost')}}",
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        if(response.status == '200'){
+                            $('#successNotification').show();
+                            $('#successMessage').text(response.success);
+                            location.reload().delay(5000);
+                        }else{
+                            $('#errorNotification').show();
+                            $('#errorMessage').text(response.error);
+                        }
+                        
+                    },
+                    error: function (response) {
+         
+            $('#errorNotification').show();
+            $('#errorMessage').text(response.responseJSON.error);
+        },
+                });
+            });
+
+             
+            
 
         </script>
 
