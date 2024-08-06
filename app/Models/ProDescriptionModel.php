@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\RealPerameterModel;
 use App\Models\ResComDetailModel;
 use App\Models\ProMediaModel;
+use App\Models\User;
 use App\Models\ProFeatureModel;
 
 class ProDescriptionModel extends Model
@@ -20,6 +21,7 @@ class ProDescriptionModel extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'user_id',
         'pro_title',
         'pro_description',
         'pro_type',
@@ -43,6 +45,11 @@ class ProDescriptionModel extends Model
 
     ];
    protected $table='pro_description';
+
+   public function getUser()
+    {
+        return $this->hasMany(User::class, 'id','user_id');
+    }
 
    public function getProType()
     {

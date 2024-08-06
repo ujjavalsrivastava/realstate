@@ -21,7 +21,6 @@ class HomeController extends Controller
     public function proDescription(Request $request)
     {
        // DB::beginTransaction();
-        //dd($request->file('images'));
        try{
         $validator = Validator::make($request->all(), 
                     [ 
@@ -41,10 +40,10 @@ class HomeController extends Controller
                         'google_map_log' => 'required',
                         'age' => 'required',
                         'bathroom' => 'required',
-                        'name' => 'required',
+                        'name' => 'required|max:50',
                         'username' => 'required',
-                        'email' => 'required',
-                        'phone' => 'required',
+                        'email' => 'required|email',
+                        'phone' => 'required|min:10|max:11',
                         'feature_id' => 'required',
                         'feature_id.*' => 'required',
                         'images.*' => 'required|mimes:jpg,jpeg,png|max:2048'
@@ -52,7 +51,10 @@ class HomeController extends Controller
             if ($validator->fails()) {  
                return response()->json(['error'=>$validator->errors()], 401); 
             } 
+            $user = JWTAuth::parseToken()->authenticate();
+        // dd($user->id);
             $pro_des = new ProDescriptionModel();
+            $pro_des->user_id = $user->id;
             $pro_des->pro_title = $request->pro_title;
             $pro_des->pro_description = $request->pro_description;
             $pro_des->pro_type = $request->pro_type;
@@ -80,15 +82,19 @@ class HomeController extends Controller
                 'pro_des_id' => $pro_des->id]);
             }
         // Loop through each image and store it
-        foreach ($request->file('images') as $image) {
+        if(!empty($request->file('images'))){
+            foreach ($request->file('images') as $image) {
             
-            $filename = uniqid() . '.' . $image->getClientOriginalExtension();
-            $path = url('public/images/'.$filename);
-            $uploade_path = public_path('images');
-            $image->move($uploade_path,$filename);
-            $imageFile = ProMediaModel::insert(['file_name' => $filename,'file_path' => $path,
-                'pro_des_id' => $pro_des->id]);
-            }
+                $filename = uniqid() . '.' . $image->getClientOriginalExtension();
+                $path = url('public/images/'.$filename);
+                $uploade_path = public_path('images');
+                $image->move($uploade_path,$filename);
+    
+                $imageFile = ProMediaModel::insert(['file_name' => $filename,'file_path' => $path,
+                    'pro_des_id' => $pro_des->id]);
+                }
+        }
+        
             return response()->json([
                 'status'=>'200',
                 'message'=>'Data save successfully',
