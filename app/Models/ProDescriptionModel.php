@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\RealPerameterModel;
 use App\Models\ResComDetailModel;
 use App\Models\ProMediaModel;
+use App\Models\ProFeatureModel;
 
 class ProDescriptionModel extends Model
 {
@@ -55,6 +56,10 @@ class ProDescriptionModel extends Model
     public function getResComDetails()
     {
         return $this->hasMany(ResComDetailModel::class, 'id','res_com_detail');
+    }
+    public function getProFeature()
+    {
+        return $this->hasMany(ProFeatureModel::class, 'pro_des_id','id')->with('getProFeatureMaster');
     }
     public function getMedia()
     {

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\ProFeatureMasterModel;
 
 class ProFeatureModel extends Model
 {
@@ -18,4 +19,9 @@ class ProFeatureModel extends Model
         'feature_id'
     ];
    protected $table='pro_feature';
+
+   public function getProFeatureMaster()
+    {
+        return $this->hasOne(ProFeatureMasterModel::class, 'id','feature_id');
+    }
 }
