@@ -20,7 +20,8 @@ class HomeController extends Controller
 {
     public function proDescription(Request $request)
     {
-        DB::beginTransaction();
+       // DB::beginTransaction();
+        //dd($request->file('images'));
        try{
         $validator = Validator::make($request->all(), 
                     [ 
@@ -45,8 +46,8 @@ class HomeController extends Controller
                         'email' => 'required',
                         'phone' => 'required',
                         'feature_id' => 'required',
-                        // 'images' => 'required',
-                        // 'images.*' => 'required|mimes:jpg,jpeg,png|max:2048'
+                        'feature_id.*' => 'required',
+                        'images.*' => 'required|mimes:jpg,jpeg,png|max:2048'
                     ]);  
             if ($validator->fails()) {  
                return response()->json(['error'=>$validator->errors()], 401); 
@@ -57,6 +58,7 @@ class HomeController extends Controller
             $pro_des->pro_type = $request->pro_type;
             $pro_des->res_com_type = $request->res_com_type;
             $pro_des->res_com_detail = $request->res_com_detail;
+            $pro_des->area_sq = $request->area_sq;
             $pro_des->room = $request->room;
             $pro_des->price = $request->price;
             $pro_des->city = $request->city;
@@ -74,33 +76,36 @@ class HomeController extends Controller
             $pro_des->save();
             // feature 
              foreach ($request->feature_id as $item) {
-                ProFeatureModel::insert(['feature_id' => $item,
+                $feature= ProFeatureModel::insert(['feature_id' => $item,
                 'pro_des_id' => $pro_des->id]);
             }
-        //     dd($request->hasfile('images'));
-        // $imagePaths = [];
-
         // Loop through each image and store it
-        // foreach ($request->hasfile('images') as $image) {
-        //     dd($image);
-        //     $filename = uniqid() . '.' . $image->getClientOriginalExtension();
-        //     $path = $image->storeAs('public/images', $filename);
-        //     $imagePaths[] = $path;
-        //     ProMediaModel::insert(['file_name' => $imagePaths,
-        //         'pro_des_id' => $pro_des->id]);
-        //     }
+        foreach ($request->file('images') as $image) {
+            
+            $filename = uniqid() . '.' . $image->getClientOriginalExtension();
+            $path = url('public/images/'.$filename);
+            $uploade_path = public_path('images');
+            $image->move($uploade_path,$filename);
+            $imageFile = ProMediaModel::insert(['file_name' => $filename,'file_path' => $path,
+                'pro_des_id' => $pro_des->id]);
+            }
             return response()->json([
                 'status'=>'200',
                 'message'=>'Data save successfully',
                 'success' => true,
-                'data' => $pro_des,
-                'feature' => $item,
+                'data' => $pro_des
             ]);
-            DB::commit();
+            //DB::commit();
         }catch(\Exception $e){
-            DB::rollBack();
+           // DB::rollBack();
             return response()->json(['message' => $e->getMessage()], 400); 
         }
+    }
+
+    //get property Description
+    public function getProDescription(){
+        $pro_description_list = ProDescriptionModel::with('getProType','getResComType','getResComDetails','getMedia')->get();
+        return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $pro_description_list]);
     }
 
     // get property feature master

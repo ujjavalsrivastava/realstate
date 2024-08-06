@@ -34,5 +34,6 @@ Route::post('change_password', [AuthController::class, 'changePassword']);
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('logout', [AuthController::class, 'logout']);
     Route::post('pro_description', [HomeController::class, 'proDescription']);  
-    Route::get('get_pro_feature_master', [HomeController::class, 'getProFeatureMas']);  
+    Route::get('get_pro_feature_master', [HomeController::class, 'getProFeatureMas']);
+    Route::get('get_pro_description', [HomeController::class, 'getProDescription']);  
 });
