@@ -22,6 +22,7 @@ Route::get('/login',[HomeController::class, 'showlogin']);
 Route::post('/loginPost',[HomeController::class, 'loginPost']);
 
 Route::get('/logout',[HomeController::class, 'logout']);
+Route::get('/getReletiondata/{id}',[HomeController::class, 'getReletiondata']);
 
 
 

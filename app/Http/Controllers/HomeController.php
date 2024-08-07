@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use Auth;
 use Validator;
-use App\Models\ServiceDetails;
+use App\Models\ResComDetailModel;
 
 class HomeController extends Controller
 {
@@ -47,8 +47,9 @@ class HomeController extends Controller
         return redirect('/');
     }
  
-    function serviceDetails($category , $subcategory){
-        // $details =  ServiceDetails::first();
-        // return view('front.servicedetails',compact('details'));
+    function getReletiondata($id){
+       
+       $data =  ResComDetailModel::where('real_per_code',$id)->get();
+       return view('ajax.radio',compact('data'));
     }
 }
