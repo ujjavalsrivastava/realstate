@@ -105,16 +105,52 @@
                             <div class="tab">
                                 <div id="tab-2" class="tab-contents">
                                     <div class="custom-form">
+                                     
                                         <form method="post" name="registerform" class="main-register-form" id="main-register-form2">
-                                            <label>First Name * </label>
-                                            <input name="name" type="text" onClick="this.select()" value="">
-                                            <label>Second Name *</label>
-                                            <input name="name2" type="text" onClick="this.select()" value="">
+                                           <div id="first">
+                                        <ul class="tabs-menu">
+                                        @foreach($type as $k => $row)
+                                        <li class="{{($k == 0)?'current':''}} protype" onclick="selectProtype(this)"><a href="#" id="loginbuttoncolor" >{{ucwords($row->description)}}</a></li>
+                                         @endforeach
+                                       </ul>
+                                       <input type="hidden" name="type" id="type">
+                                        <label>Full Name * </label>
+                                            <input  type="text"  name="name">
+                                            <label>Mobile No *</label>
+                                            <input name="mobile" type="text" >
                                             <label>Email Address *</label>
-                                            <input name="email" type="text" onClick="this.select()" value="">
+                                            <input name="email" type="text" >
                                             <label>Password *</label>
-                                            <input name="password" type="password" onClick="this.select()" value="">
-                                            <button type="submit" class="log-submit-btn"><span>Register</span></button>
+                                            <input name="password" type="password" >
+                                            <a href="#" onclick="nextFun()" class="log-submit-btn"><span>Next</span></a>
+                                             </div>
+                                             <div id="second" style="display:none">
+
+                                             <label>Property Type * </label>
+                                             <select class="form-control">
+                                             <option value=>Select Option</option>
+                                            @foreach($pro_type as $row)
+                                            <option value="{{$row->code}}">{{$row->description}}</option>
+                                            @endforeach
+                                            </select>
+
+                                            <label>What type of Property is it * </label>
+                                             <select class="form-control" onchange="getRelationData(this.value)">
+                                             <option value=>Select Option</option>
+                                            @foreach($res_com_type as $row)
+                                            <option value="{{$row->code}}">{{$row->description}}</option>
+                                            @endforeach
+                                            </select>
+
+                                            <div id="redioResult">
+                                            
+                                            
+                                            </div>
+                                             
+                                          
+                                             <button type="submit" class="log-submit-btn"><span>Register</span></button>
+                                             <div>
+                                            
                                         </form>
                                     </div>
                                 </div>
@@ -172,6 +208,32 @@
                 $("#header.cloned #logo img").attr("src", $('#header #logo img').attr('data-sticky-logo'));
             });
 
+            function selectProtype(thisval){
+               
+                jQuery('.protype').each(function(index, currentElement) {
+                    $(this).removeClass("current");
+                 });
+                let val = $(thisval).find('a').text();
+                 $(thisval).addClass('current');
+                 $('#type').val(val);
+            }
+
+            function getRelationData(code){
+                $.ajax({
+                    type: "GET",
+                    url: "{{url('/getReletiondata')}}/"+code,
+                    
+                    success: function(response) {
+                       $('#redioResult').html(response)
+                    },
+                    error: function (response) {
+         
+            $('#errorNotification').show();
+            $('#errorMessage').text('some think went to worng');
+        },
+                });
+            }
+
             $('#registerform').on('submit', function(e) {
                 e.preventDefault(); 
                 $.ajax({
@@ -220,6 +282,11 @@
 
         </script>
         <script>
+              function nextFun(){
+                $('#first').hide();
+                $('#second').show();
+              }
+
             function openRegisterLoginModel(){
                 $('.login-and-register-form').css("display", "block");
             }
