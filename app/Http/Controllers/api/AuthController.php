@@ -116,7 +116,11 @@ class AuthController extends Controller
             }   
             $verify = OtpVerifyModel::where('email',$request->email)->where('otp',$request->otp)->exists();
            if($verify){
+            $ldate = date('Y-m-d H:i:s');
             $delete = OtpVerifyModel::where('email',$request->email)->delete();
+            User::where('email',$request->email)->update([
+                'email_verified_at' => $ldate
+            ]);
             return response()->json(['message' => 'OTP Verify successfully'], 200);
            }else{
             return response()->json(['message' => 'Invelid OTP'], 400);
