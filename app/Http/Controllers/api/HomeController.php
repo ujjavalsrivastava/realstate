@@ -119,4 +119,19 @@ class HomeController extends Controller
         $feature_list = ProFeatureMasterModel::get();
         return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $feature_list]);
     }
+
+    // Data search
+    public function getSearchProperty(Request $request){
+        $data = ProDescriptionModel::where('pro_type','like',"%{$request->pro_type}%");
+                if($request->res_com_type){
+                    $data->where('res_com_type','like',"%{$request->res_com_type}%");
+                }
+                if($request->res_com_detail){
+                    $data->where('res_com_detail','like',"%{$request->res_com_detail}%");
+                }
+
+                $search = $data->get();
+                return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $search]);
+
+    }
 }
