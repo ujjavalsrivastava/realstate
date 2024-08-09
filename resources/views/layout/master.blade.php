@@ -116,16 +116,15 @@
                                        <input type="hidden" name="type" id="type">
                                         <label>Full Name * </label>
                                             <input  type="text"  name="name">
-                                            <label>Mobile No *</label>
+                                            <label>Mobile No *</labe>
                                             <input name="mobile" type="text" >
                                             <label>Email Address *</label>
-                                            <input name="email" type="text" >
+                                            <input name="email" id="emailId" type="text" >
                                             <label>Password *</label>
                                             <input name="password" type="password" >
-                                            <a href="#" onclick="nextFun()" class="log-submit-btn"><span>Next</span></a>
+                                            <a href="#" onclick="nextFun()"  class="log-submit-btn"><span>Next</span></a>
                                              </div>
-                                             <div id="second" style="display:none">
-
+                                             <!-- <div id="third" style="display:none">
                                              <label>Property Type * </label>
                                              <select class="form-control">
                                              <option value=>Select Option</option>
@@ -133,7 +132,6 @@
                                             <option value="{{$row->code}}">{{$row->description}}</option>
                                             @endforeach
                                             </select>
-
                                             <label>What type of Property is it * </label>
                                              <select class="form-control" onchange="getRelationData(this.value)">
                                              <option value=>Select Option</option>
@@ -141,16 +139,36 @@
                                             <option value="{{$row->code}}">{{$row->description}}</option>
                                             @endforeach
                                             </select>
-
                                             <div id="redioResult">
-                                            
-                                            
-                                            </div>
-                                             
-                                          
+                                            </div>                                      
                                              <button type="submit" class="log-submit-btn"><span>Register</span></button>
-                                             <div>
-                                            
+                                             <div>    -->
+                                            <div id="second" style="display:none">
+                                                <label>OTP* </label>
+                                                <input  type="text"  name="otp">
+                                                <a href="#" onclick="nextPage()"  class="log-submit-btn"><span>Next</span></a>
+                                            </div>
+
+                                            <div id="third" style="display:none">
+                                             <label>Property Type * </label>
+                                             <select class="form-control">
+                                             <option value=>Select Option</option>
+                                            @foreach($pro_type as $row)
+                                            <option value="{{$row->code}}">{{$row->description}}</option>
+                                            @endforeach
+                                            </select>
+                                            <label>What type of Property is it * </label>
+                                             <select class="form-control" onchange="getRelationData(this.value)">
+                                             <option value=>Select Option</option>
+                                            @foreach($res_com_type as $row)
+                                            <option value="{{$row->code}}">{{$row->description}}</option>
+                                            @endforeach
+                                            </select>
+                                            <div id="redioResult">
+                                            </div>                                      
+                                             <button type="submit" class="log-submit-btn"><span>Register</span></button>
+                                             <div> 
+
                                         </form>
                                     </div>
                                 </div>
@@ -282,9 +300,36 @@
 
         </script>
         <script>
-              function nextFun(){
+            
+            function nextFun(){
                 $('#first').hide();
-                $('#second').show();
+                $('#third').hide();
+                var email = $('#emailId').val();
+                $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+                $.ajax({
+                    url: "{{url('send_mail')}}?email="+email, // The route that handles the request
+                    type: 'GET',
+                    success: function(response) {
+                        // Handle success response
+                        alert(response);
+                        $('#second').show();
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error response
+                        console.error('AJAX error:', status, error);
+                    }
+                });
+                
+                
+              }
+              function nextPage(){
+                $('#first').hide();
+                $('#second').hide();
+                $('#third').show();
               }
 
             function openRegisterLoginModel(){

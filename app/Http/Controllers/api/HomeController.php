@@ -129,6 +129,9 @@ class HomeController extends Controller
                 if($request->res_com_detail){
                     $data->where('res_com_detail','like',"%{$request->res_com_detail}%");
                 }
+                if($request->room){
+                    $data->where('room','like',"%{$request->room}%");
+                }
 
                 $search = $data->get();
                 return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $search]);
