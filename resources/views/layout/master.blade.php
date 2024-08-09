@@ -326,11 +326,12 @@
                     $('#errorMessage').text('Email is required');
                     return false;
                 }
-               
+                $('#loadingDiv').show();
                 $.ajax({
                     url: "{{url('send_mail')}}?email="+email, // The route that handles the request
                     type: 'GET',
                     success: function(response) {
+                        $('#loadingDiv').hide();
                         if(response.status == '200'){
                           
                             $('#first').hide();
