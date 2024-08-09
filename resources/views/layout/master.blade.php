@@ -35,6 +35,21 @@
     <link rel="stylesheet" href="{{ URL::asset('assets/css/maps.css')}}">
     <link rel="stylesheet" id="color" href="{{ URL::asset('assets/css/colors/pink.css')}}">
     <style>
+
+#loadingDiv{
+				position:fixed;
+				top:0px;
+				right:0px;
+				width:100%;
+				height:100%;
+				background-color:#666;
+				background-image:url("{{url('assets/images/ajax-loader.gif')}}");
+				background-repeat:no-repeat;
+				background-position:center;
+				z-index:10000000;
+				opacity: 0.4;
+				filter: alpha(opacity=40); /* For IE8 and earlier */
+				}
         .loginbuttoncolor{
             background:#FF385C !important;
             color:white !important;
@@ -51,6 +66,7 @@
 </head>
 
 <body class="homepage-9 hp-6 homepage-1 mh">
+<div id="loadingDiv" style="display:none"></div>
     <!-- Wrapper -->
     <div id="wrapper">
 <!-- <div class="preloader"></div> -->
@@ -84,7 +100,7 @@
                         <div class="tab">
                             <div id="tab-1" class="tab-contents">
                                 <div class="custom-form">
-                                    <form method="post"  id="registerform">
+                                    <form method="post"  id="loginform">
                                         @csrf()
                                         <label>Username or Email Address * </label>
                                         <input name="email" type="text" onClick="this.select()" value="">
@@ -106,14 +122,15 @@
                                 <div id="tab-2" class="tab-contents">
                                     <div class="custom-form">
                                      
-                                        <form method="post" name="registerform" class="main-register-form" id="main-register-form2">
+                                        <form method="post"  id="registerform" >
+                                        @csrf()
                                            <div id="first">
                                         <ul class="tabs-menu">
                                         @foreach($type as $k => $row)
                                         <li class="{{($k == 0)?'current':''}} protype" onclick="selectProtype(this)"><a href="#" id="loginbuttoncolor" >{{ucwords($row->description)}}</a></li>
                                          @endforeach
                                        </ul>
-                                       <input type="hidden" name="type" id="type">
+                                       <input type="hidden" name="type" id="type" value="Owner">
                                         <label>Full Name * </label>
                                             <input  type="text"  name="name">
                                             <label>Mobile No *</labe>
@@ -145,29 +162,26 @@
                                              <div>    -->
                                             <div id="second" style="display:none">
                                                 <label>OTP* </label>
-                                                <input  type="text"  name="otp">
+                                                <input  type="text"  name="otp" id="otp">
                                                 <a href="#" onclick="nextPage()"  class="log-submit-btn"><span>Next</span></a>
                                             </div>
 
                                             <div id="third" style="display:none">
                                              <label>Property Type * </label>
-                                             <select class="form-control">
+                                             <select class="form-control" name="pro_type">
                                              <option value=>Select Option</option>
                                             @foreach($pro_type as $row)
                                             <option value="{{$row->code}}">{{$row->description}}</option>
                                             @endforeach
                                             </select>
-                                            <label>What type of Property is it * </label>
-                                             <select class="form-control" onchange="getRelationData(this.value)">
-                                             <option value=>Select Option</option>
-                                            @foreach($res_com_type as $row)
-                                            <option value="{{$row->code}}">{{$row->description}}</option>
-                                            @endforeach
-                                            </select>
-                                            <div id="redioResult">
-                                            </div>                                      
+                                            <label> Address *</label>
+                                            <input name="address" id="address" type="text" >
+                                            <label> Pin Code *</label>
+                                            <input name="pin_no" id="pin_no" type="text" >
+                                                                            
                                              <button type="submit" class="log-submit-btn"><span>Register</span></button>
                                              <div> 
+                                             </div>   
 
                                         </form>
                                     </div>
@@ -252,7 +266,7 @@
                 });
             }
 
-            $('#registerform').on('submit', function(e) {
+            $('#loginform').on('submit', function(e) {
                 e.preventDefault(); 
                 $.ajax({
                     type: "POST",
@@ -277,7 +291,9 @@
                 });
             });
 
-             
+             function closeAlert(closeId){
+                $('#'+closeId).hide();
+             }
             
 
         </script>
@@ -302,35 +318,114 @@
         <script>
             
             function nextFun(){
-                $('#first').hide();
-                $('#third').hide();
+              
                 var email = $('#emailId').val();
-                $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                
+                if(email == ''){
+                    $('#errorNotification').show();
+                    $('#errorMessage').text('Email is required');
+                    return false;
                 }
-            });
+                $('#loadingDiv').show();
                 $.ajax({
                     url: "{{url('send_mail')}}?email="+email, // The route that handles the request
                     type: 'GET',
                     success: function(response) {
-                        // Handle success response
-                        alert(response);
-                        $('#second').show();
+                        $('#loadingDiv').hide();
+                        if(response.status == '200'){
+                          
+                            $('#first').hide();
+                            $('#second').show();
+                            $('#third').hide();
+
+                            $('#successNotification').show();
+                            $('#successMessage').text(response.message);
+                           
+                        }else{
+                            $('#errorNotification').show();
+                            $('#errorMessage').text(response.message);
+                        }
                     },
-                    error: function(xhr, status, error) {
-                        // Handle error response
-                        console.error('AJAX error:', status, error);
-                    }
+                    error: function (response) {
+         
+                                $('#errorNotification').show();
+                                $('#errorMessage').text(response.responseJSON.error);
+                            },
                 });
                 
                 
               }
               function nextPage(){
-                $('#first').hide();
-                $('#second').hide();
-                $('#third').show();
+                
+                var email = $('#emailId').val();
+                var otp = $('#otp').val();
+                if(email == ''){
+                    $('#errorNotification').show();
+                    $('#errorMessage').text('Email is required');
+                    return false;
+                }
+               
+                if(otp == ''){
+                    $('#errorNotification').show();
+                    $('#errorMessage').text('OTP is required');
+                    return false;
+                }
+               
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: "{{url('verifyOtp')}}", // The route that handles the request
+                    type: 'POST',
+                    data: {'email':email,'otp':otp},
+                    success: function(response) {
+                        if(response.status == '200'){
+
+                            $('#first').hide();
+                            $('#second').hide();
+                            $('#third').show();
+                            $('#successNotification').show();
+                            $('#successMessage').text(response.message);
+                           
+                          
+                        }else{
+                            $('#errorNotification').show();
+                            $('#errorMessage').text(response.message);
+                        }
+                    },
+                    error: function (response) {
+                            
+                                $('#errorNotification').show();
+                                $('#errorMessage').text(response.responseJSON.error);
+                            },
+                });
               }
+
+
+              $('#registerform').on('submit', function(e) {
+                e.preventDefault(); 
+                $.ajax({
+                    type: "POST",
+                    url: "{{url('/register')}}",
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        if(response.status == '200'){
+                            $('#successNotification').show();
+                            $('#successMessage').text(response.success);
+                            location.reload().delay(5000);
+                        }else{
+                            $('#errorNotification').show();
+                            $('#errorMessage').text(response.message);
+                        }
+                        
+                    },
+                    error: function (response) {
+                     
+            $('#errorNotification').show();
+            $('#errorMessage').text(response.responseJSON.error);
+        },
+                });
+            });
 
             function openRegisterLoginModel(){
                 $('.login-and-register-form').css("display", "block");
