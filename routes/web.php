@@ -22,6 +22,7 @@ Route::get('/login',[HomeController::class, 'showlogin']);
 Route::post('/loginPost',[HomeController::class, 'loginPost']);
 Route::post('/register',[HomeController::class, 'register']);
 Route::get('send_mail', [HomeController::class, 'sendMail']);
+Route::post('verifyOtp', [HomeController::class, 'verifyOtp']);
 
 Route::get('/logout',[HomeController::class, 'logout']);
 Route::get('/getReletiondata/{id}',[HomeController::class, 'getReletiondata']);
