@@ -54,7 +54,6 @@ class HomeController extends Controller
     }
 
     function register(Request $request) {
-
         $validator = Validator::make($request->all(), 
         [ 
         'name' => 'required',
@@ -83,7 +82,6 @@ class HomeController extends Controller
 
        $credentials = $request->only('email', 'password');
             //dd($credentials);
-            
             if (Auth::attempt($credentials)) {
                 // Authentication passed
                 return response()->json(['status'=> 200,'message'=> 'Login Successfuly']); 
@@ -91,7 +89,6 @@ class HomeController extends Controller
                 return response()->json(['status'=> 201, 'message'=> 'Invalid  credentials ']); 
             }
        return response()->json(['success' => true,'message' => 'Registered successfully'], 200);
-
     }catch(\Exception $e){
         return response()->json(['status'=>'400', 'message' => $e->getMessage()]); 
     }
@@ -154,7 +151,6 @@ class HomeController extends Controller
     }
 }
     function getReletiondata($id){
-       
        $data =  ResComDetailModel::where('real_per_code',$id)->get();
        return view('ajax.radio',compact('data'));
     }

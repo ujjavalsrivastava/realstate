@@ -72,13 +72,10 @@
 <!-- <div class="preloader"></div> -->
 @include('comman.notify')
 @include('comman.header')
-
 @yield('content');
-
 @include('comman.footer')
 <a data-scroll href="#wrapper" class="go-up"><i class="fa fa-angle-double-up" aria-hidden="true"></i></a>
         <!-- END FOOTER -->
-
         <!--register form -->
         <div class="login-and-register-form modal">
             <div class="main-overlay"></div>
@@ -121,24 +118,23 @@
                             <div class="tab">
                                 <div id="tab-2" class="tab-contents">
                                     <div class="custom-form">
-                                     
                                         <form method="post"  id="registerform" >
                                         @csrf()
                                            <div id="first">
                                         <ul class="tabs-menu">
                                         @foreach($type as $k => $row)
-                                        <li class="{{($k == 0)?'current':''}} protype" onclick="selectProtype(this)"><a href="#" id="loginbuttoncolor" >{{ucwords($row->description)}}</a></li>
+                                        <li class="{{($k == 0)?'current':''}} protype" onclick="selectProtype(this)"><a href="#" id="loginbuttoncolor">{{ucwords($row->description)}}</a></li>
                                          @endforeach
                                        </ul>
                                        <input type="hidden" name="type" id="type" value="Owner">
                                         <label>Full Name * </label>
-                                            <input  type="text"  name="name">
+                                            <input  type="text" name="name">
                                             <label>Mobile No *</labe>
                                             <input name="mobile" type="text" >
                                             <label>Email Address *</label>
                                             <input name="email" id="emailId" type="text" >
                                             <label>Password *</label>
-                                            <input name="password" type="password" >
+                                            <input name="password" type="password">
                                             <a href="#" onclick="nextFun()"  class="log-submit-btn"><span>Next</span></a>
                                              </div>
                                              <!-- <div id="third" style="display:none">
@@ -165,7 +161,6 @@
                                                 <input  type="text"  name="otp" id="otp">
                                                 <a href="#" onclick="nextPage()"  class="log-submit-btn"><span>Next</span></a>
                                             </div>
-
                                             <div id="third" style="display:none">
                                              <label>Property Type * </label>
                                              <select class="form-control" name="pro_type">
@@ -177,12 +172,10 @@
                                             <label> Address *</label>
                                             <input name="address" id="address" type="text" >
                                             <label> Pin Code *</label>
-                                            <input name="pin_no" id="pin_no" type="text" >
-                                                                            
+                                            <input name="pin_no" id="pin_no" type="text" >                           
                                              <button type="submit" class="log-submit-btn"><span>Register</span></button>
                                              <div> 
                                              </div>   
-
                                         </form>
                                     </div>
                                 </div>
@@ -193,7 +186,6 @@
             </div>
         </div>
         <!--register form end -->
-
         <!-- START PRELOADER -->
         <div id="preloader">
             <div id="status">
@@ -201,7 +193,6 @@
             </div>
         </div>
         <!-- END PRELOADER -->
-
         <!-- ARCHIVES JS -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="{{ URL::asset('assets/js/jquery-3.5.1.min.js')}}"></script>
@@ -241,7 +232,6 @@
             });
 
             function selectProtype(thisval){
-               
                 jQuery('.protype').each(function(index, currentElement) {
                     $(this).removeClass("current");
                  });
@@ -281,7 +271,6 @@
                             $('#errorNotification').show();
                             $('#errorMessage').text(response.error);
                         }
-                        
                     },
                     error: function (response) {
          
@@ -318,9 +307,7 @@
         <script>
             
             function nextFun(){
-              
                 var email = $('#emailId').val();
-                
                 if(email == ''){
                     $('#errorNotification').show();
                     $('#errorMessage').text('Email is required');
@@ -333,11 +320,9 @@
                     success: function(response) {
                         $('#loadingDiv').hide();
                         if(response.status == '200'){
-                          
                             $('#first').hide();
                             $('#second').show();
                             $('#third').hide();
-
                             $('#successNotification').show();
                             $('#successMessage').text(response.message);
                            
@@ -355,8 +340,8 @@
                 
                 
               }
+              
               function nextPage(){
-                
                 var email = $('#emailId').val();
                 var otp = $('#otp').val();
                 if(email == ''){
