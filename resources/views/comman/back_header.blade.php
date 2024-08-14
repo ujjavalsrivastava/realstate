@@ -1,24 +1,24 @@
-<header id="header-container" class="db-top-header">
-                <!-- Header -->
-                <div id="header">
-                    <div class="container-fluid">
-                        <!-- Left Side Content -->
-                        <div class="left-side">
-                            <!-- Logo -->
-                            <div id="logo">
-                                <a href="index.html"><img src="{{url('assets/images/logo.svg')}}" alt=""></a>
-                            </div>
-                            <!-- Mobile Navigation -->
-                            <div class="mmenu-trigger">
-                                <button class="hamburger hamburger--collapse" type="button">
-                                    <span class="hamburger-box">
+<header id="header-container">
+            <!-- Header -->
+            <div id="header">
+                <div class="container container-header">
+                    <!-- Left Side Content -->
+                    <div class="left-side">
+                        <!-- Logo -->
+                        <div id="logo">
+                            <a href="index.html"><img src="images/logo-red.svg" alt=""></a>
+                        </div>
+                        <!-- Mobile Navigation -->
+                        <div class="mmenu-trigger">
+                            <button class="hamburger hamburger--collapse" type="button">
+                                <span class="hamburger-box">
 							<span class="hamburger-inner"></span>
-                                    </span>
-                                </button>
-                            </div>
-                            <!-- Main Navigation -->
-                            <nav id="navigation" class="style-1">
-                                <ul id="responsive">
+                                </span>
+                            </button>
+                        </div>
+                        <!-- Main Navigation -->
+                        <nav id="navigation" class="style-1">
+                            <ul id="responsive">
                                 <li><a href="#">Home</a>
                                     <ul>
                                         <li><a href="#">Home Map</a>
@@ -52,7 +52,7 @@
                                                 </ul>
                                             </li>
                                             <li><a href="#">Home Slider</a>
-                                                <ul>                                                    
+                                                <ul>
                                                     <li><a href="index-11.html">Slider Presentation 2</a></li>
                                                     <li><a href="index-16.html">Slider Presentation 3</a></li>
                                                     <li><a href="index-19.html">Home Modern Slider</a></li>
@@ -181,26 +181,61 @@
                                     <li class="d-none d-xl-none d-block d-lg-block"><a href="register.html">Register</a></li>
                                     <li class="d-none d-xl-none d-block d-lg-block mt-5 pb-4 ml-5 border-bottom-0"><a href="add-property.html" class="button border btn-lg btn-block text-center">Add Listing<i class="fas fa-laptop-house ml-2"></i></a></li>
                             </ul>
-                            </nav>
-                            <div class="clearfix"></div>
-                            <!-- Main Navigation / End -->
+                        </nav>
+                        <!-- Main Navigation / End -->
+                    </div>
+                    <!-- Left Side Content / End -->
+
+                    <!-- Right Side Content / End -->
+                    <div class="right-side d-none d-none d-lg-none d-xl-flex">
+                        <!-- Header Widget -->
+                        <div class="header-widget">
+                            <a href="add-property.html" class="button border">Add Listing<i class="fas fa-laptop-house ml-2"></i></a>
                         </div>
-                        <!-- Left Side Content / End -->
-                        <!-- Right Side Content / -->
-                        <div class="header-user-menu user-menu">
-                            <div class="header-user-name">
-                                <span><img src="{{url('assets/images/testimonials/ts-1.jpg')}}" alt=""></span>Hi, Mary!
-                            </div>
-                            <ul>
-                                <li><a href="user-profile.html"> Edit profile</a></li>
-                                <li><a href="add-property.html"> Add Property</a></li>
-                                <li><a href="payment-method.html">  Payments</a></li>
-                                <li><a href="change-password.html"> Change Password</a></li>
-                                <li><a href="#">Log Out</a></li>
+                        <!-- Header Widget / End -->
+                    </div>
+                    <!-- Right Side Content / End -->
+
+                    <!-- Right Side Content / End -->
+                    <div class="header-user-menu user-menu add">
+                        <div class="header-user-name">
+                            <span><img src="images/testimonials/ts-1.jpg" alt=""></span>Hi, Mary!
+                        </div>
+                        <ul>
+                            <li><a href="user-profile.html"> Edit profile</a></li>
+                            <li><a href="add-property.html"> Add Property</a></li>
+                            <li><a href="payment-method.html">  Payments</a></li>
+                            <li><a href="change-password.html"> Change Password</a></li>
+                            <li><a href="#">Log Out</a></li>
+                        </ul>
+                    </div>
+                    <!-- Right Side Content / End -->
+
+                    <div class="right-side d-none d-none d-lg-none d-xl-flex sign ml-0">
+                        <!-- Header Widget -->
+                        <div class="header-widget sign-in">
+                            <div class="show-reg-form modal-open"><a href="#">Sign In</a></div>
+                        </div>
+                        <!-- Header Widget / End -->
+                    </div>
+                    <!-- Right Side Content / End -->
+
+                    <!-- lang-wrap-->
+                    <div class="header-user-menu user-menu add d-none d-lg-none d-xl-flex">
+                        <div class="lang-wrap">
+                            <div class="show-lang"><span><i class="fas fa-globe-americas"></i><strong>ENG</strong></span><i class="fa fa-caret-down arrlan"></i></div>
+                            <ul class="lang-tooltip lang-action no-list-style">
+                                <li><a href="#" class="current-lan" data-lantext="En">English</a></li>
+                                <li><a href="#" data-lantext="Fr">Francais</a></li>
+                                <li><a href="#" data-lantext="Es">Espanol</a></li>
+                                <li><a href="#" data-lantext="De">Deutsch</a></li>
                             </ul>
                         </div>
-                        <!-- Right Side Content / End -->
                     </div>
+                    <!-- lang-wrap end-->
+
                 </div>
-                <!-- Header / End -->
-            </header>
+            </div>
+            <!-- Header / End -->
+
+        </header>

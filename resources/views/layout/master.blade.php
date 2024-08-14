@@ -67,11 +67,21 @@
 
 <body class="homepage-9 hp-6 homepage-1 mh">
 <div id="loadingDiv" style="display:none"></div>
+<input type="hidden" id="loadmorepage" value="1">
     <!-- Wrapper -->
     <div id="wrapper">
+        
+   
 <!-- <div class="preloader"></div> -->
 @include('comman.notify')
-@include('comman.header')
+
+
+@if(Request::segment(1) === 'get_property')
+@include('comman.back_header')
+    @else
+    @include('comman.header') 
+@endif
+
 @yield('content');
 @include('comman.footer')
 <a data-scroll href="#wrapper" class="go-up"><i class="fa fa-angle-double-up" aria-hidden="true"></i></a>

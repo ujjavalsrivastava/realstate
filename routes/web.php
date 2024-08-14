@@ -14,11 +14,9 @@ use App\Http\Controllers\PostPropertyController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+
 Route::get('/',[HomeController::class, 'index']);
-Route::get('/about-us',[HomeController::class, 'aboutUs']);
+// Route::get('/about-us',[HomeController::class, 'aboutUs']);
 
 //login regisater ---
 Route::get('/login',[HomeController::class, 'showlogin']);
@@ -31,7 +29,12 @@ Route::get('/logout',[HomeController::class, 'logout']);
 //property post ----
 Route::get('post_property', [PostPropertyController::class, 'postProperty']);
 Route::post('pro_post_des', [PostPropertyController::class, 'proPostDes']);
-// for dropdown
+Route::get('fatch_post', [PostPropertyController::class, 'fatchPost']);
+
+//property post details -------
+Route::get('get_property/{id}', [PostPropertyController::class, 'getProperty']);
+
+// for dropdown ---------
 Route::get('show_res_com_details/{id}', [PostPropertyController::class, 'showResComDestail']);
 
 

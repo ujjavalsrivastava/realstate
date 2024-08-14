@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Validator;
 use DB;
+use Auth;
+use JWTAuth;
 use App\Models\ProDescriptionModel;
 use App\Models\ProFeatureModel;
 use App\Models\ProFeatureMasterModel;
@@ -33,8 +35,7 @@ class PostPropertyController extends Controller
 
     public function proPostDes(Request $request)
     {
-        dd($request->all());
-       // DB::beginTransaction();
+     // DB::beginTransaction();
        try{
         $validator = Validator::make($request->all(), 
                     [ 
@@ -43,7 +44,7 @@ class PostPropertyController extends Controller
                         'pro_type' => 'required',
                         'res_com_type' => 'required',
                         'res_com_detail' => 'required',
-                        'room' => 'required',
+                        // 'room' => 'required',
                         'price' => 'required',
                         'area_sq' => 'required',
                         'address' => 'required',
@@ -53,19 +54,19 @@ class PostPropertyController extends Controller
                         'google_map_lat' => 'required',
                         'google_map_log' => 'required',
                         'age' => 'required',
-                        'bathroom' => 'required',
+                        // 'bathroom' => 'required',
                         'name' => 'required|max:50',
                         'username' => 'required',
                         'email' => 'required|email',
                         'phone' => 'required|min:10|max:11',
-                        'feature_id' => 'required',
-                        'feature_id.*' => 'required',
+                        // 'feature_id' => 'required',
+                        // 'feature_id.*' => 'required',
                         'images.*' => 'required|mimes:jpg,jpeg,png|max:2048'
                     ]);  
             if ($validator->fails()) {  
-               return response()->json(['error'=>$validator->errors()], 401); 
+               return response()->json(['error'=>$validator->errors()->first()], 401); 
             } 
-            $user = JWTAuth::parseToken()->authenticate();
+            $user = Auth::user();
         // dd($user->id);
             $pro_des = new ProDescriptionModel();
             $pro_des->user_id = $user->id;
@@ -76,6 +77,7 @@ class PostPropertyController extends Controller
             $pro_des->res_com_detail = $request->res_com_detail;
             $pro_des->area_sq = $request->area_sq;
             $pro_des->room = $request->room;
+            $pro_des->bathroom = $request->bathroom;
             $pro_des->price = $request->price;
             $pro_des->city = $request->city;
             $pro_des->address = $request->address;
@@ -91,24 +93,24 @@ class PostPropertyController extends Controller
             $pro_des->phone = $request->phone;
             $pro_des->save();
             // feature 
-             foreach ($request->feature_id as $item) {
-                $feature= ProFeatureModel::insert(['feature_id' => $item,
-                'pro_des_id' => $pro_des->id]);
+            if(!empty($request->feature_id)){
+                foreach ($request->feature_id as $item) {
+                    $feature= ProFeatureModel::insert(['feature_id' => $item,
+                    'pro_des_id' => $pro_des->id]);
+                }
             }
+             
         // Loop through each image and store it
         if(!empty($request->file('images'))){
             foreach ($request->file('images') as $image) {
-            
                 $filename = uniqid() . '.' . $image->getClientOriginalExtension();
                 $path = url('public/images/'.$filename);
                 $uploade_path = public_path('images');
                 $image->move($uploade_path,$filename);
-    
                 $imageFile = ProMediaModel::insert(['file_name' => $filename,'file_path' => $path,
                     'pro_des_id' => $pro_des->id]);
                 }
         }
-        
             return response()->json([
                 'status'=>'200',
                 'message'=>'Data save successfully',
@@ -119,5 +121,17 @@ class PostPropertyController extends Controller
            // DB::rollBack();
             return response()->json(['message' => $e->getMessage()], 400); 
         }
+    }
+
+    function getProperty($id){
+        $pro = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia')->where('id',$id)->first();
+        $images = ProMediaModel::where('pro_des_id',$id)->get();
+        $features = ProFeatureModel::with('getProFeatureMaster')->where('pro_des_id',$id)->get();
+        return view('front.property', compact('pro','images','features'));
+    }
+    
+    function fatchPost(Request $request){
+        $getPost = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia')->paginate(6);
+        return view('ajax.post', compact('getPost'));
     }
 }
