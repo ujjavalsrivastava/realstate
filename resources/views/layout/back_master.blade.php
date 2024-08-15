@@ -2,6 +2,7 @@
 <html lang="zxx">
 
 
+<!-- Mirrored from code-theme.com/html/findhouses/single-property-1.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 30 Jul 2024 06:22:02 GMT -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -9,22 +10,26 @@
     <meta name="description" content="html 5 template">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="author" content="">
-    <title>@yield('title')</title>
+    <title>Property Details</title>
     <!-- FAVICON -->
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ URL::asset('assets/favicon.ico')}}">
     <link rel="stylesheet" href="{{ URL::asset('assets/css/jquery-ui.css')}}">
     <!-- GOOGLE FONTS -->
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i%7CMontserrat:600,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i%7CMontserrat:500,600,800" rel="stylesheet">
     <!-- FONT AWESOME -->
     <link rel="stylesheet" href="{{ URL::asset('assets/font/flaticon.css')}}">
     <link rel="stylesheet" href="{{ URL::asset('assets/css/fontawesome-all.min.css')}}">
     <link rel="stylesheet" href="{{ URL::asset('assets/css/fontawesome-5-all.min.css')}}">
     <link rel="stylesheet" href="{{ URL::asset('assets/css/font-awesome.min.css')}}">
+    <!-- LEAFLET MAP -->
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/leaflet.css')}}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/leaflet-gesture-handling.min.css')}}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/leaflet.markercluster.css')}}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/leaflet.markercluster.default.css')}}">
     <!-- ARCHIVES CSS -->
-    <link rel="stylesheet" href="{{ URL::asset('assets/css/search.css')}}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/timedropper.css')}}">
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/datedropper.css')}}">
     <link rel="stylesheet" href="{{ URL::asset('assets/css/animate.css')}}">
-    <link rel="stylesheet" href="{{ URL::asset('assets/css/aos.css')}}">
-    <link rel="stylesheet" href="{{ URL::asset('assets/css/aos2.css')}}">
     <link rel="stylesheet" href="{{ URL::asset('assets/css/magnific-popup.css')}}">
     <link rel="stylesheet" href="{{ URL::asset('assets/css/lightcase.css')}}">
     <link rel="stylesheet" href="{{ URL::asset('assets/css/owl.carousel.min.css')}}">
@@ -32,9 +37,9 @@
     <link rel="stylesheet" href="{{ URL::asset('assets/css/menu.css')}}">
     <link rel="stylesheet" href="{{ URL::asset('assets/css/slick.css')}}">
     <link rel="stylesheet" href="{{ URL::asset('assets/css/styles.css')}}">
-    <link rel="stylesheet" href="{{ URL::asset('assets/css/maps.css')}}">
-    <link rel="stylesheet" id="color" href="{{ URL::asset('assets/css/colors/pink.css')}}">
+    <link rel="stylesheet" id="color" href="{{ URL::asset('assets/css/default.css')}}">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    @yield('style')
     <style>
 
 #loadingDiv{
@@ -63,31 +68,19 @@
     width: 31%;
 }
     </style>
-    @yield('style')
 </head>
 
-<body class="homepage-9 hp-6 homepage-1 mh">
+<body class="inner-pages sin-1 homepage-4 hd-white">
 <div id="loadingDiv" style="display:none"></div>
 <input type="hidden" id="loadmorepage" value="1">
     <!-- Wrapper -->
     <div id="wrapper">
         
-   
-<!-- <div class="preloader"></div> -->
-@include('comman.notify')
+        @include('comman.back_header')
+        @include('comman.notify')
+        @yield('content');
+        @include('comman.back_footer')
 
-
-@if(Request::segment(1) === 'get_property')
-@include('comman.back_header')
-    @else
-    @include('comman.header') 
-@endif
-
-@yield('content');
-@include('comman.footer')
-<a data-scroll href="#wrapper" class="go-up"><i class="fa fa-angle-double-up" aria-hidden="true"></i></a>
-        <!-- END FOOTER -->
-        <!--register form -->
         <div class="login-and-register-form modal">
             <div class="main-overlay"></div>
             <div class="main-register-holder">
@@ -196,49 +189,39 @@
                 </div>
             </div>
         </div>
-        <!--register form end -->
-        <!-- START PRELOADER -->
-        <div id="preloader">
-            <div id="status">
-                <div class="status-mes"></div>
-            </div>
-        </div>
-        <!-- END PRELOADER -->
+
+       
         <!-- ARCHIVES JS -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="{{ URL::asset('assets/js/jquery-3.5.1.min.js')}}"></script>
-        <script src="{{ URL::asset('assets/js/rangeSlider.js')}}"></script>
-        <script src="{{ URL::asset('assets/js/tether.min.js')}}"></script>
-        <script src="{{ URL::asset('assets/js/moment.js')}}"></script>
-        <script src="{{ URL::asset('assets/js/bootstrap.min.js')}}"></script>
-        <script src="{{ URL::asset('assets/js/mmenu.min.js')}}"></script>
-        <script src="{{ URL::asset('assets/js/mmenu.js')}}"></script>
-        <script src="{{ URL::asset('assets/js/aos.js')}}"></script>
-        <script src="{{ URL::asset('assets/js/aos2.js')}}"></script>
-        <script src="{{ URL::asset('assets/js/animate.js')}}"></script>
-        <script src="{{ URL::asset('assets/js/slick.min.js')}}"></script>
-        <script src="{{ URL::asset('assets/js/fitvids.js')}}"></script>
-        <script src="{{ URL::asset('assets/js/jquery.waypoints.min.js')}}"></script>
-        <script src="{{ URL::asset('assets/js/typed.min.js')}}"></script>
-        <script src="{{ URL::asset('assets/js/jquery.counterup.min.js')}}"></script>
-        <script src="{{ URL::asset('assets/js/imagesloaded.pkgd.min.js')}}"></script>
-        <script src="{{ URL::asset('assets/js/isotope.pkgd.min.js')}}"></script>
-        <script src="{{ URL::asset('assets/js/smooth-scroll.min.js')}}"></script>
-        <script src="{{ URL::asset('assets/js/lightcase.js')}}"></script>
-        <script src="{{ URL::asset('assets/js/search.js')}}"></script>
-        <script src="{{ URL::asset('assets/js/owl.carousel.js')}}"></script>
-        <script src="{{ URL::asset('assets/js/jquery.magnific-popup.min.js')}}"></script>
-        <script src="{{ URL::asset('assets/js/ajaxchimp.min.js')}}"></script>
-        <script src="{{ URL::asset('assets/js/newsletter.js')}}"></script>
-        <script src="{{ URL::asset('assets/js/jquery.form.js')}}"></script>
-        <script src="{{ URL::asset('assets/js/jquery.validate.min.js')}}"></script>
-        <script src="{{ URL::asset('assets/js/searched.js')}}"></script>
-        <script src="{{ URL::asset('assets/js/forms-2.js')}}"></script>
-        <script src="{{ URL::asset('assets/js/map-style2.js')}}"></script>
-        <script src="{{ URL::asset('assets/js/range.js')}}"></script>
-        <script src="{{ URL::asset('assets/js/color-switcher.js')}}"></script>
+        <script src="{{URL::asset('assets/js/jquery-3.5.1.min.js')}}"></script>
+        <script src="{{URL::asset('assets/js/jquery-ui.js')}}"></script>
+        <script src="{{URL::asset('assets/js/range-slider.js')}}"></script>
+        <script src="{{URL::asset('assets/js/tether.min.js')}}"></script>
+        <script src="{{URL::asset('assets/js/popper.min.js')}}"></script>
+        <script src="{{URL::asset('assets/js/bootstrap.min.js')}}"></script>
+        <script src="{{URL::asset('assets/js/mmenu.min.js')}}"></script>
+        <script src="{{URL::asset('assets/js/mmenu.js')}}"></script>
+        <script src="{{URL::asset('assets/js/slick.min.js')}}"></script>
+        <script src="{{URL::asset('assets/js/slick4.js')}}"></script>
+        <script src="{{URL::asset('assets/js/fitvids.js')}}"></script>
+        <script src="{{URL::asset('assets/js/smooth-scroll.min.js')}}"></script>
+        <script src="{{URL::asset('assets/js/jquery.magnific-popup.min.js')}}"></script>
+        <script src="{{URL::asset('assets/js/popup.js')}}"></script>
+        <script src="{{URL::asset('assets/js/ajaxchimp.min.js')}}"></script>
+        <script src="{{URL::asset('assets/js/newsletter.js')}}"></script>
+        <script src="{{URL::asset('assets/js/timedropper.js')}}"></script>
+        <script src="{{URL::asset('assets/js/datedropper.js')}}"></script>
+        <script src="{{URL::asset('assets/js/jqueryadd-count.js')}}"></script>
+        <script src="{{URL::asset('assets/js/leaflet.js')}}"></script>
+        <script src="{{URL::asset('assets/js/leaflet-gesture-handling.min.js')}}"></script>
+        <script src="{{URL::asset('assets/js/leaflet-providers.js')}}"></script>
+        <script src="{{URL::asset('assets/js/leaflet.markercluster.js')}}"></script>
+        <script src="{{URL::asset('assets/js/map-single.js')}}"></script>
+        <script src="{{URL::asset('assets/js/color-switcher.js')}}"></script>
+        <script src="{{URL::asset('assets/js/inner.js')}}"></script>
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <!-- Date Dropper Script-->
         <script>
+            $('#reservation-date').dateDropper();
 
             $(document).ready(function() {
             $('.select2').select2({
@@ -246,10 +229,64 @@
                 width: '100%' // Ensure it takes full width
             });
             });
+
+        </script>
+        <!-- Time Dropper Script-->
+        <script>
+            this.$('#reservation-time').timeDropper({
+                setCurrentTime: false,
+                meridians: true,
+                primaryColor: "#e8212a",
+                borderColor: "#e8212a",
+                minutesInterval: '15'
+            });
+
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                $('.popup-youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
+                    disableOn: 700,
+                    type: 'iframe',
+                    mainClass: 'mfp-fade',
+                    removalDelay: 160,
+                    preloader: false,
+                    fixedContentPos: false
+                });
+            });
+
+            function closeAlert(closeId){
+                $('#'+closeId).hide();
+            }
+
+        </script>
+
+        <script>
+            $('.slick-carousel').each(function() {
+                var slider = $(this);
+                $(this).slick({
+                    infinite: true,
+                    dots: false,
+                    arrows: false,
+                    centerMode: true,
+                    centerPadding: '0'
+                });
+
+                $(this).closest('.slick-slider-area').find('.slick-prev').on("click", function() {
+                    slider.slick('slickPrev');
+                });
+                $(this).closest('.slick-slider-area').find('.slick-next').on("click", function() {
+                    slider.slick('slickNext');
+                });
+            });
+
+        </script>
+
+<script>
             $(window).on('scroll load', function() {
                 $("#header.cloned #logo img").attr("src", $('#header #logo img').attr('data-sticky-logo'));
             });
-           
+
             function selectProtype(thisval){
                 jQuery('.protype').each(function(index, currentElement) {
                     $(this).removeClass("current");
@@ -562,18 +599,12 @@
 
         </script>
 
-        <!-- MAIN JS -->
-        <script src="{{ URL::asset('assets/js/script.js')}}"></script>
-
-        
-
 
     </div>
-    
-    @yield('script')
     <!-- Wrapper / End -->
+    @yield('script')
 </body>
 
 
+<!-- Mirrored from code-theme.com/html/findhouses/single-property-1.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 30 Jul 2024 06:22:03 GMT -->
 </html>
-

@@ -8,6 +8,9 @@ use App\Models\RealPerameterModel;
 use App\Models\ResComDetailModel;
 use App\Models\ProMediaModel;
 use App\Models\User;
+use App\Models\CountryModel;
+use App\Models\StateModel;
+use App\Models\CityModel;
 use App\Models\ProFeatureModel;
 
 class ProDescriptionModel extends Model
@@ -71,5 +74,17 @@ class ProDescriptionModel extends Model
     public function getMedia()
     {
         return $this->hasMany(ProMediaModel::class, 'pro_des_id','id');
+    }
+    public function getCountry()
+    {
+        return $this->belongsTo(CountryModel::class, 'country','id');
+    }
+    public function getState()
+    {
+        return $this->belongsTo(StateModel::class, 'state','id');
+    }
+    public function getCity()
+    {
+        return $this->belongsTo(CityModel::class, 'city','id');
     }
 }

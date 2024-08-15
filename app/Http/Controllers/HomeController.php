@@ -10,14 +10,20 @@ use Validator;
 use App\Models\User;
 use App\Models\ResComDetailModel;
 use App\Models\OtpVerifyModel;
+use App\Models\ProDescriptionModel;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OtpSendMail;
-
+use App\Models\CountryModel;
+use App\Models\StateModel;
+use App\Models\CityModel;
 
 class HomeController extends Controller
 {
     function index(){
-        return view('front.index');
+        $getCountries = CountryModel::get();
+        $getStates = StateModel::get();
+        $getCities = CityModel::get();
+         return view('front.index',compact('getCountries','getStates','getCities'));
     }
 
     function aboutUs(){
@@ -54,7 +60,6 @@ class HomeController extends Controller
     }
 
     function register(Request $request) {
-
         $validator = Validator::make($request->all(), 
         [ 
         'name' => 'required',
@@ -83,7 +88,6 @@ class HomeController extends Controller
 
        $credentials = $request->only('email', 'password');
             //dd($credentials);
-            
             if (Auth::attempt($credentials)) {
                 // Authentication passed
                 return response()->json(['status'=> 200,'message'=> 'Login Successfuly']); 
@@ -91,7 +95,6 @@ class HomeController extends Controller
                 return response()->json(['status'=> 201, 'message'=> 'Invalid  credentials ']); 
             }
        return response()->json(['success' => true,'message' => 'Registered successfully'], 200);
-
     }catch(\Exception $e){
         return response()->json(['status'=>'400', 'message' => $e->getMessage()]); 
     }
@@ -154,7 +157,6 @@ class HomeController extends Controller
     }
 }
     function getReletiondata($id){
-       
        $data =  ResComDetailModel::where('real_per_code',$id)->get();
        return view('ajax.radio',compact('data'));
     }

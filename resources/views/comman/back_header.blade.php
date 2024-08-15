@@ -1,14 +1,12 @@
- <!-- Header Container
-        ================================================== -->
-        <header id="header-container" class="header head-tr">
+<header id="header-container">
             <!-- Header -->
-            <div id="header" class="head-tr bottom">
+            <div id="header">
                 <div class="container container-header">
                     <!-- Left Side Content -->
                     <div class="left-side">
                         <!-- Logo -->
                         <div id="logo">
-                            <a href="{{url('/')}}"><img src="{{URL::asset('assets/images/logo.jpeg')}}" data-sticky-logo="{{URL::asset('assets/images/logo.jpeg')}}" alt=""></a>
+                            <a href="{{url('/')}}"><img src="{{URL::asset('assets/images/logo.jpeg')}}" alt=""></a>
                         </div>
                         <!-- Mobile Navigation -->
                         <div class="mmenu-trigger">
@@ -19,9 +17,9 @@
                             </button>
                         </div>
                         <!-- Main Navigation -->
-                        <nav id="navigation" class="style-1 head-tr">
-                            <ul id="responsive">
-                                @foreach($menu as $row)
+                        <nav id="navigation" class="style-1">
+                        <ul id="responsive">
+                        @foreach($menu as $row)
                                 <li><a href="#">{{$row->name}}</a>
                                     <ul>
                                         @foreach($row->getSubMenu as $row)
@@ -36,7 +34,7 @@
                                     </li>
                                  
                                 @endforeach
-                            </ul>
+                           </ul>
                         </nav>
                         <!-- Main Navigation / End -->
                     </div>
@@ -52,7 +50,6 @@
                     </div>
                     <!-- Right Side Content / End -->
 
-                    <!-- Right Side Content / End -->
                     @if(Auth::check())
                     <div class="header-user-menu user-menu add">
                         <div class="header-user-name">
@@ -76,13 +73,13 @@
                         <!-- Header Widget / End -->
                     </div>
                     @endif
-                    <!-- Right Side Content / End -->
 
+                    <!-- lang-wrap-->
                    
+                    <!-- lang-wrap end-->
 
                 </div>
             </div>
             <!-- Header / End -->
-
 
         </header>
