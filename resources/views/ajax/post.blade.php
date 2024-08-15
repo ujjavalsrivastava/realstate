@@ -24,7 +24,7 @@
                                 <h3><a href="{{url('get_property')}}/{{$post->id}}">{{$post->pro_title}}</a></h3>
                                 <p class="homes-address mb-3">
                                     <a href="single-property-1.html">
-                                        <i class="fa fa-map-marker"></i><span>{{$post->address}}, {{$post->city}}, {{$post->state}}, {{$post->country}}</span>
+                                        <i class="fa fa-map-marker"></i><span>{{strtoupper($post->address)}}, {{strtoupper(@$post->getCity->city)}}, {{strtoupper(@$post->getState->name)}}, {{strtoupper(@$post->getCountry->name)}}</span>
                                     </a>
                                 </p>
                                 <!-- homes List -->

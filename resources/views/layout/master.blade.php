@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="{{ URL::asset('assets/css/styles.css')}}">
     <link rel="stylesheet" href="{{ URL::asset('assets/css/maps.css')}}">
     <link rel="stylesheet" id="color" href="{{ URL::asset('assets/css/colors/pink.css')}}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <style>
 
 #loadingDiv{
@@ -236,11 +237,19 @@
         <script src="{{ URL::asset('assets/js/map-style2.js')}}"></script>
         <script src="{{ URL::asset('assets/js/range.js')}}"></script>
         <script src="{{ URL::asset('assets/js/color-switcher.js')}}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
         <script>
+
+            $(document).ready(function() {
+            $('.select2').select2({
+                theme: 'bootstrap4', // Use the Bootstrap theme for better compatibility
+                width: '100%' // Ensure it takes full width
+            });
+            });
             $(window).on('scroll load', function() {
                 $("#header.cloned #logo img").attr("src", $('#header #logo img').attr('data-sticky-logo'));
             });
-
+           
             function selectProtype(thisval){
                 jQuery('.protype').each(function(index, currentElement) {
                     $(this).removeClass("current");
@@ -556,6 +565,9 @@
         <!-- MAIN JS -->
         <script src="{{ URL::asset('assets/js/script.js')}}"></script>
 
+        
+
+
     </div>
     
     @yield('script')
@@ -564,4 +576,4 @@
 
 
 </html>
-{{dd()}}
+

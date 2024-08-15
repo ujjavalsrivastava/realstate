@@ -11,7 +11,9 @@
  <section id="hero-area" class="parallax-searchs home15 overlay thome-6 thome-1" data-stellar-background-ratio="0.5">
             <div class="hero-main">
                 <div class="container" data-aos="zoom-in">
+                <form method="GET" action="{{url('property-for-sale')}}"> 
                     <div class="row">
+                        
                         <div class="col-12">
                             <div class="hero-inner">
                                 <!-- Welcome Text -->
@@ -38,31 +40,34 @@
                                             <div class="tab-pane fade show active" id="tabs_1">
                                                 <div class="rld-main-search">
                                                     <div class="row">
-                                                        <div class="rld-single-input">
-                                                            <input type="text" placeholder="Enter Keyword...">
-                                                        </div>
                                                         <div class="rld-single-select ml-22">
-                                                            <select class="select single-select">
-                                                                <option value="1">Property Type</option>
-                                                                <option value="2">Family House</option>
-                                                                <option value="3">Apartment</option>
-                                                                <option value="3">Condo</option>
+                                                            <select class="select single-select select2"name="country" onchange="getstate(this.value)">
+                                                                <option value="">Country</option>
+                                                                @foreach($getCountries as $country)
+                                                                <option value="{{$country->id}}">{{$country->name}}</option>
+                                                                @endforeach
                                                             </select>
                                                         </div>
-                                                        <div class="rld-single-select">
-                                                            <select class="select single-select mr-0">
-                                                                <option value="1">Location</option>
-                                                                <option value="2">Los Angeles</option>
-                                                                <option value="3">Chicago</option>
-                                                                <option value="3">Philadelphia</option>
-                                                                <option value="3">San Francisco</option>
-                                                                <option value="3">Miami</option>
-                                                                <option value="3">Houston</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="dropdown-filter"><span>Advanced Search</span></div>
+                                                        <p>
+                                         <div class="dropdown faq-drop">
+                                            <select class="form-control wide select2" name="state" id="state" onchange="getCity(this.value)">
+                                                    <option value="">Select State</option>
+                                                   
+                                                </select>
+                                            </div>
+                                        </p>
+                                        <p>
+                                        <div class="dropdown faq-drop">
+                                            <select class="form-control wide select2" name="city" id="city">
+                                                    <option value="">Select City</option>
+                                                   
+                                                </select>
+                                            </div>
+                                         </p>
+                                                       <div class="dropdown-filter"><span>Advanced Search</span></div>
                                                         <div class="col-xl-2 col-lg-2 col-md-4 pl-0">
-                                                            <a class="btn btn-yellow" href="#">Search Now</a>
+                                                           
+                                                            <button class="btn btn-yellow" type="submit">Search Now</button>
                                                         </div>
                                                         <div class="explore__form-checkbox-list full-filter">
                                                             <div class="row">
@@ -188,7 +193,7 @@
                                                             <input type="text" placeholder="Enter Keyword...">
                                                         </div>
                                                         <div class="rld-single-select ml-22">
-                                                            <select class="select single-select">
+                                                            <select class="select single-select ">
                                                                 <option value="1">Property Type</option>
                                                                 <option value="2">Family House</option>
                                                                 <option value="3">Apartment</option>
@@ -208,7 +213,8 @@
                                                         </div>
                                                         <div class="dropdown-filter"><span>Advanced Search</span></div>
                                                         <div class="col-xl-2 col-lg-2 col-md-4 pl-0">
-                                                            <a class="btn btn-yellow" href="#">Search Now</a>
+                                                            
+                                                            <button class="btn btn-yellow" type="submit">Search Now</button>
                                                         </div>
                                                         <div class="explore__form-checkbox-list full-filter">
                                                             <div class="row">
@@ -330,10 +336,12 @@
                                         </div>
                                     </div>
                                 </div>
+                             
                                 <!--/ End Search Form -->
                             </div>
                         </div>
                     </div>
+                </form>
                 </div>
             </div>
         </section>
@@ -1324,6 +1332,46 @@
                 alert('Server not responding...');
             });
         }
+
+        function getstate(id){
+        $.ajax({
+            headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                url: '{{url('show_state')}}/' + id,
+                type: 'GET',
+                success: function(response) {
+                    var state = '<option value="" >Select State</option>';
+                    $.each(response.data, function( index, value ) {
+                        console.log(value);
+                        state +=  '<option value="' + value.id + '">' + value.name + '</option>'
+                    });
+                    // state += '</select>';
+                   $('#state').html(state);
+                    console.log(state);
+                }
+            });
+    }
+
+    function getCity(id){
+        $.ajax({
+            headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                url: '{{url('show_city')}}/' + id,
+                type: 'GET',
+                success: function(response) {
+                    var city = '<select class="form-control wide select2" name="city" id="city"><option value="" >Select City</option>';
+                    $.each(response.data, function( index, value ) {
+                        console.log(value);
+                        city +=  '<option value="' + value.id + '">' + value.city + '</option>'
+                    });
+                    city += '</select>';
+                   $('#city').html(city);
+                    console.log(city);
+                }
+            });
+    }
     </script>
 
 	

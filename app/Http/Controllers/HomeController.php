@@ -10,14 +10,20 @@ use Validator;
 use App\Models\User;
 use App\Models\ResComDetailModel;
 use App\Models\OtpVerifyModel;
+use App\Models\ProDescriptionModel;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OtpSendMail;
-
+use App\Models\CountryModel;
+use App\Models\StateModel;
+use App\Models\CityModel;
 
 class HomeController extends Controller
 {
     function index(){
-        return view('front.index');
+        $getCountries = CountryModel::get();
+        $getStates = StateModel::get();
+        $getCities = CityModel::get();
+         return view('front.index',compact('getCountries','getStates','getCities'));
     }
 
     function aboutUs(){

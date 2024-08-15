@@ -21,7 +21,7 @@
                                                 <h3>{{$pro->pro_title}} <span class="mrg-l-5 category-tag">For @if($pro->pro_type == 'R') Rant @else Sale @endif</span></h3>
                                                 <div class="mt-0">
                                                     <a href="#listing-location" class="listing-address">
-                                                        <i class="fa fa-map-marker pr-2 ti-location-pin mrg-r-5"></i>{{$pro->address}}, {{$pro->city}}, {{$pro->state}}, {{$pro->country}}
+                                                        <i class="fa fa-map-marker pr-2 ti-location-pin mrg-r-5"></i>{{strtoupper($pro->address)}}, {{strtoupper($pro->getCity->city)}}, {{strtoupper($pro->getState->name)}}, {{strtoupper($pro->getCountry->name)}}
                                                     </a>
                                                 </div>
                                             </div>

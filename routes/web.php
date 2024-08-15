@@ -27,15 +27,18 @@ Route::post('verifyOtp', [HomeController::class, 'verifyOtp']);
 Route::get('/logout',[HomeController::class, 'logout']);
 
 //property post ----
-Route::get('post_property', [PostPropertyController::class, 'postProperty']);
+Route::get('post-property', [PostPropertyController::class, 'postProperty']);
 Route::post('pro_post_des', [PostPropertyController::class, 'proPostDes']);
 Route::get('fatch_post', [PostPropertyController::class, 'fatchPost']);
-
+Route::get('property-for-sale', [PostPropertyController::class, 'propertyForSale']);
+Route::get('search-property', [PostPropertyController::class, 'searchPos']);
 //property post details -------
 Route::get('get_property/{id}', [PostPropertyController::class, 'getProperty']);
 
 // for dropdown ---------
 Route::get('show_res_com_details/{id}', [PostPropertyController::class, 'showResComDestail']);
+Route::get('show_state/{id}', [PostPropertyController::class, 'showState']);
+Route::get('show_city/{id}', [PostPropertyController::class, 'showCity']);
 
 
 Route::get('/getReletiondata/{id}',[HomeController::class, 'getReletiondata']);

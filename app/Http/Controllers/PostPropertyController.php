@@ -13,6 +13,9 @@ use App\Models\ProFeatureMasterModel;
 use App\Models\RealPerameterModel;
 use App\Models\ResComDetailModel;
 use App\Models\ProMediaModel;
+use App\Models\CountryModel;
+use App\Models\StateModel;
+use App\Models\CityModel;
 use App\Models\User;
 
 class PostPropertyController extends Controller
@@ -21,7 +24,8 @@ class PostPropertyController extends Controller
         $getfeatureMasters = ProFeatureMasterModel::get();
         $getProTypes = RealPerameterModel::where('controle_code','PRO_TYPE')->get();
         $getResComTypes = RealPerameterModel::where('controle_code','RES_COM_TYPE')->get();
-        return view('back.postProperty', compact('getfeatureMasters','getProTypes','getResComTypes'));
+        $countries = CountryModel::get();
+        return view('back.postProperty', compact('getfeatureMasters','getProTypes','getResComTypes','countries'));
     }
 
     // for dropdown
@@ -30,6 +34,22 @@ class PostPropertyController extends Controller
         return response()->json([
             'status'=>'200',
             'data' => $res_comm,
+          ]);
+    }
+
+    function showState($id){
+        $state = StateModel::where('country_id', $id)->get();
+        return response()->json([
+            'status'=>'200',
+            'data' => $state,
+          ]);
+    }
+
+    function showCity($id){
+        $city = CityModel::where('state_id', $id)->get();
+        return response()->json([
+            'status'=>'200',
+            'data' => $city,
           ]);
     }
 
@@ -66,6 +86,7 @@ class PostPropertyController extends Controller
             if ($validator->fails()) {  
                return response()->json(['error'=>$validator->errors()->first()], 401); 
             } 
+            
             $user = Auth::user();
         // dd($user->id);
             $pro_des = new ProDescriptionModel();
@@ -92,6 +113,7 @@ class PostPropertyController extends Controller
             $pro_des->email = $request->email;
             $pro_des->phone = $request->phone;
             $pro_des->save();
+            
             // feature 
             if(!empty($request->feature_id)){
                 foreach ($request->feature_id as $item) {
@@ -124,14 +146,35 @@ class PostPropertyController extends Controller
     }
 
     function getProperty($id){
-        $pro = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia')->where('id',$id)->first();
+        $pro = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->where('id',$id)->first();
         $images = ProMediaModel::where('pro_des_id',$id)->get();
         $features = ProFeatureModel::with('getProFeatureMaster')->where('pro_des_id',$id)->get();
         return view('front.property', compact('pro','images','features'));
     }
     
     function fatchPost(Request $request){
-        $getPost = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia')->paginate(6);
+        $getPost = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->paginate(6);
         return view('ajax.post', compact('getPost'));
+    }
+
+    function propertyForSale(Request $request){
+        return view('front.propertyforsale');
+    }
+
+    function searchPos(Request $request){
+        $getPost = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity');
+        if(!empty($request->country)){
+            $getPost->where('country',$request->country);
+        }
+        
+        if(!empty($request->state)){
+            $getPost->where('state',$request->state);
+        }
+        if(!empty($request->city)){
+            $getPost->where('city',$request->city);
+        }
+        
+        $getPost=$getPost->paginate(6);
+        return view('ajax.search', compact('getPost'));
     }
 }

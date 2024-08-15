@@ -128,23 +128,24 @@
             <div class="main-overlay"></div>
             <div class="main-register-holder">
                 <div class="main-register fl-wrap">
-                    <div class="close-reg"><i class="fa fa-times"></i></div>
+                    <div class="close-reg" onclick="closeRegisterLoginModel()"><i class="fa fa-times"></i></div>
                     <h3>Welcome to <span>Find<strong>Houses</strong></span></h3>
-                    <div class="soc-log fl-wrap">
+                    <!-- <div class="soc-log fl-wrap">
                         <p>Login</p>
                         <a href="#" class="facebook-log"><i class="fa fa-facebook-official"></i>Log in with Facebook</a>
                         <a href="#" class="twitter-log"><i class="fa fa-twitter"></i> Log in with Twitter</a>
                     </div>
-                    <div class="log-separator fl-wrap"><span>Or</span></div>
+                    <div class="log-separator fl-wrap"><span>Or</span></div> -->
                     <div id="tabs-container">
                         <ul class="tabs-menu">
-                            <li class="current"><a href="#tab-1">Login</a></li>
-                            <li><a href="#tab-2">Register</a></li>
+                            <li id="showhidelogin" onclick="showLoginModel()"><a href="#tab-1" id="loginbuttoncolor" class="loginbuttoncolor">Login</a></li>
+                            <li id="showhideregister" onclick="showRegisterModel()"><a href="#tab-2">Register</a></li>
                         </ul>
                         <div class="tab">
                             <div id="tab-1" class="tab-contents">
                                 <div class="custom-form">
-                                    <form method="post" name="registerform">
+                                    <form method="post"  id="loginform">
+                                        @csrf()
                                         <label>Username or Email Address * </label>
                                         <input name="email" type="text" onClick="this.select()" value="">
                                         <label>Password * </label>
@@ -164,16 +165,64 @@
                             <div class="tab">
                                 <div id="tab-2" class="tab-contents">
                                     <div class="custom-form">
-                                        <form method="post" name="registerform" class="main-register-form" id="main-register-form2">
-                                            <label>First Name * </label>
-                                            <input name="name" type="text" onClick="this.select()" value="">
-                                            <label>Second Name *</label>
-                                            <input name="name2" type="text" onClick="this.select()" value="">
+                                        <form method="post"  id="registerform" >
+                                        @csrf()
+                                           <div id="first">
+                                        <ul class="tabs-menu">
+                                        @foreach($type as $k => $row)
+                                        <li class="{{($k == 0)?'current':''}} protype" onclick="selectProtype(this)"><a href="#" id="loginbuttoncolor">{{ucwords($row->description)}}</a></li>
+                                         @endforeach
+                                       </ul>
+                                       <input type="hidden" name="type" id="type" value="Owner">
+                                        <label>Full Name * </label>
+                                            <input  type="text" name="name">
+                                            <label>Mobile No *</labe>
+                                            <input name="mobile" type="text" >
                                             <label>Email Address *</label>
-                                            <input name="email" type="text" onClick="this.select()" value="">
+                                            <input name="email" id="emailId" type="text" >
                                             <label>Password *</label>
-                                            <input name="password" type="password" onClick="this.select()" value="">
-                                            <button type="submit" class="log-submit-btn"><span>Register</span></button>
+                                            <input name="password" type="password">
+                                            <a href="#" onclick="nextFun()"  class="log-submit-btn"><span>Next</span></a>
+                                             </div>
+                                             <!-- <div id="third" style="display:none">
+                                             <label>Property Type * </label>
+                                             <select class="form-control">
+                                             <option value=>Select Option</option>
+                                            @foreach($pro_type as $row)
+                                            <option value="{{$row->code}}">{{$row->description}}</option>
+                                            @endforeach
+                                            </select>
+                                            <label>What type of Property is it * </label>
+                                             <select class="form-control" onchange="getRelationData(this.value)">
+                                             <option value=>Select Option</option>
+                                            @foreach($res_com_type as $row)
+                                            <option value="{{$row->code}}">{{$row->description}}</option>
+                                            @endforeach
+                                            </select>
+                                            <div id="redioResult">
+                                            </div>                                      
+                                             <button type="submit" class="log-submit-btn"><span>Register</span></button>
+                                             <div>    -->
+                                            <div id="second" style="display:none">
+                                                <label>OTP* </label>
+                                                <input  type="text"  name="otp" id="otp">
+                                                <a href="#" onclick="nextPage()"  class="log-submit-btn"><span>Next</span></a>
+                                            </div>
+                                            <div id="third" style="display:none">
+                                             <label>Property Type * </label>
+                                             <select class="form-control" name="pro_type">
+                                             <option value=>Select Option</option>
+                                            @foreach($pro_type as $row)
+                                            <option value="{{$row->code}}">{{$row->description}}</option>
+                                            @endforeach
+                                            </select>
+                                            <label> Address *</label>
+                                            <input name="address" id="address" type="text" >
+                                            <label> Pin Code *</label>
+                                            <input name="pin_no" id="pin_no" type="text" >                           
+                                             <button type="submit" class="log-submit-btn"><span>Register</span></button>
+                                             <div> 
+                                             </div>   
                                         </form>
                                     </div>
                                 </div>
@@ -184,3 +233,4 @@
             </div>
         </div>
         <!--register form end -->
+      

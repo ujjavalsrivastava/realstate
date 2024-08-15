@@ -98,28 +98,44 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-md-12">
                                         <p>
-                                            <label for="address">Address</label>
-                                            <input type="text" name="address" placeholder="Enter Your Address" id="address">
+                                            <!-- <label for="country">Country</label>
+                                            <input type="text" name="country" placeholder="Enter Your Country" id="country"> -->
+                                            <div class="dropdown faq-drop">
+                                            <select class="form-control wide select2" name="country" onchange="getstate(this.value)">
+                                                    <option value="">Select Country</option>
+                                                    @foreach($countries as $country)
+                                                    <option value="{{$country->id}}">{{ucfirst($country->name)}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         </p>
                                     </div>
                                     <div class="col-lg-6 col-md-12">
                                         <p>
-                                            <label for="city">City</label>
-                                            <input type="text" name="city" placeholder="Enter Your City" id="city">
+                                         <div class="dropdown faq-drop">
+                                            <select class="form-control wide select2" name="state" id="state" onchange="getCity(this.value)">
+                                                    <option value="">Select State</option>
+                                                   
+                                                </select>
+                                            </div>
                                         </p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-6 col-md-12">
                                         <p>
-                                            <label for="state">State</label>
-                                            <input type="text" name="state" placeholder="Enter Your State" id="state">
-                                        </p>
+                                        <div class="dropdown faq-drop">
+                                            <select class="form-control wide select2" name="city" id="city">
+                                                    <option value="">Select City</option>
+                                                   
+                                                </select>
+                                            </div>
+                                         </p>
                                     </div>
                                     <div class="col-lg-6 col-md-12">
-                                        <p>
-                                            <label for="country">Country</label>
-                                            <input type="text" name="country" placeholder="Enter Your Country" id="country">
+                                    <p>
+                                            <label for="address">Address</label>
+                                            <input type="text" name="address" placeholder="Enter Your Address" id="address">
                                         </p>
                                     </div>
                                 </div>
@@ -289,7 +305,7 @@ function openImage(){
                 url: '{{url('show_res_com_details')}}/' + id,
                 type: 'GET',
                 success: function(response) {
-                    var res_com = '<select class="form-control wide" name="res_com_detail" id="res_com_detail"><option>Select Property Detail</option>';
+                    var res_com = '<select class="form-control wide" name="res_com_detail" id="res_com_detail"><option value="" >Select Property Detail</option>';
                     $.each(response.data, function( index, value ) {
                         var propertytype = capitalizeFirstLetter(value.property_type);
                         res_com +=  '<option value="' + value.property_type + '">' + propertytype + '</option>'
@@ -297,6 +313,44 @@ function openImage(){
                     res_com += '</select>'
                    $('#res_com_detail').html(res_com);
                     console.log(res_com);
+                }
+            });
+    }
+    function getstate(id){
+        $.ajax({
+            headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                url: '{{url('show_state')}}/' + id,
+                type: 'GET',
+                success: function(response) {
+                    var state = '<option value="" >Select State</option>';
+                    $.each(response.data, function( index, value ) {
+                        console.log(value);
+                        state +=  '<option value="' + value.id + '">' + value.name + '</option>'
+                    });
+                    // state += '</select>';
+                   $('#state').html(state);
+                    console.log(state);
+                }
+            });
+    }
+    function getCity(id){
+        $.ajax({
+            headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                url: '{{url('show_city')}}/' + id,
+                type: 'GET',
+                success: function(response) {
+                    var city = '<select class="form-control wide select2" name="city" id="city"><option value="" >Select City</option>';
+                    $.each(response.data, function( index, value ) {
+                        console.log(value);
+                        city +=  '<option value="' + value.id + '">' + value.city + '</option>'
+                    });
+                    city += '</select>';
+                   $('#city').html(city);
+                    console.log(city);
                 }
             });
     }
