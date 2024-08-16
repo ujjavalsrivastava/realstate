@@ -112,7 +112,7 @@ class HomeController extends Controller
 
     //get property Description
     public function getProDescription(){
-        $pro_description_list = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia')->get();
+        $pro_description_list = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->get();
         return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $pro_description_list]);
     }
 
@@ -125,14 +125,14 @@ class HomeController extends Controller
     // Data search
     public function getSearchProperty(Request $request){
         $data = ProDescriptionModel::where('pro_type','like',"%{$request->pro_type}%");
-                if($request->res_com_type){
-                    $data->where('res_com_type','like',"%{$request->res_com_type}%");
+                if($request->country){
+                    $data->where('country','like',"%{$request->country}%");
                 }
-                if($request->res_com_detail){
-                    $data->where('res_com_detail','like',"%{$request->res_com_detail}%");
+                if($request->state){
+                    $data->where('country','like',"%{$request->country}%");
                 }
-                if($request->room){
-                    $data->where('room','like',"%{$request->room}%");
+                if($request->city){
+                    $data->where('city','like',"%{$request->city}%");
                 }
 
                 $search = $data->get();
