@@ -11,6 +11,8 @@ use App\Models\ProFeatureModel;
 use App\Models\ProFeatureMasterModel;
 use App\Models\ProMediaModel;
 use App\Models\User;
+use App\Models\Menu;
+use App\Models\CountryModel;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Symfony\Component\HttpFoundation\Response;
@@ -137,4 +139,13 @@ class HomeController extends Controller
                 return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $search]);
 
     }
+     function location(){
+        $loc = CountryModel::with('getState')->get();
+        return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $loc]);
+     }
+
+     function menu(){
+        $menu = Menu::get();
+        return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $menu]);
+     }
 }
