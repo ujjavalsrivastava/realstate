@@ -26,6 +26,7 @@ Route::post('/register',[HomeController::class, 'register']);
 Route::get('send_mail', [HomeController::class, 'sendMail']);
 Route::post('verifyOtp', [HomeController::class, 'verifyOtp']);
 Route::get('/logout',[HomeController::class, 'logout']);
+Route::get('show-forget-pass',[HomeController::class, 'showForgetPass']);
 
 //property post ----
 Route::get('post-property', [PostPropertyController::class, 'postProperty']);

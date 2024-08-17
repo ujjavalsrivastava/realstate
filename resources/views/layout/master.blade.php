@@ -321,10 +321,8 @@
                 backSpeed: 30,
                 startDelay: 800
             });
-
         </script>
         <script>
-            
             function nextFun(){
                 var email = $('#emailId').val();
                 if(email == ''){
@@ -384,21 +382,17 @@
                     data: {'email':email,'otp':otp},
                     success: function(response) {
                         if(response.status == '200'){
-
                             $('#first').hide();
                             $('#second').hide();
                             $('#third').show();
                             $('#successNotification').show();
                             $('#successMessage').text(response.message);
-                           
-                          
                         }else{
                             $('#errorNotification').show();
                             $('#errorMessage').text(response.message);
                         }
                     },
                     error: function (response) {
-                            
                                 $('#errorNotification').show();
                                 $('#errorMessage').text(response.responseJSON.error);
                             },
@@ -420,8 +414,7 @@
                         }else{
                             $('#errorNotification').show();
                             $('#errorMessage').text(response.message);
-                        }
-                        
+                        }   
                     },
                     error: function (response) {
                      
