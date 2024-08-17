@@ -7,6 +7,9 @@ use Validator;
 use DB;
 use Auth;
 use JWTAuth;
+use Razorpay\Api\Api;
+use Razorpay\Api\Errors\SignatureVerificationError;
+
 use App\Models\ProDescriptionModel;
 use App\Models\ProFeatureModel;
 use App\Models\ProFeatureMasterModel;
@@ -86,7 +89,26 @@ class PostPropertyController extends Controller
             if ($validator->fails()) {  
                return response()->json(['error'=>$validator->errors()->first()], 401); 
             } 
-            
+
+            $success = true;
+            $error = "Payment Failed!";
+    
+            if (empty($request->razorpay_payment_id) === false) {
+                $api = new Api(Config("values.razorpayKey"), Config("values.razorpaySecret"));
+                try {
+                    $attributes = [
+                        'razorpay_order_id' => $request->razorpay_order_id,
+                        'razorpay_payment_id' => $request->razorpay_payment_id,
+                        'razorpay_signature' => $request->razorpay_signature
+                    ];
+                    $api->utility->verifyPaymentSignature($attributes);
+                } catch (SignatureVerificationError $e) {
+                    $success = false;
+                    $error = 'Razorpay Error : ' . $e->getMessage();
+                }
+            }
+    
+            if ($success === true) {
             $user = Auth::user();
         // dd($user->id);
             $pro_des = new ProDescriptionModel();
@@ -138,6 +160,13 @@ class PostPropertyController extends Controller
                 'message'=>'Data save successfully',
                 'success' => true,
               ]);
+
+            } else {
+                // Update database with error data
+                // Redirect to payment page with error
+                // Pass $error along with route
+                return response()->json(['message' => 'Field Payment'], 400);
+            }    
             //DB::commit();
         }catch(\Exception $e){
            // DB::rollBack();
