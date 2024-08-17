@@ -38,6 +38,8 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('get_pro_feature_master', [HomeController::class, 'getProFeatureMas']);
     Route::get('get_pro_description', [HomeController::class, 'getProDescription']);  
     Route::get('get_search_property', [HomeController::class, 'getSearchProperty']);  
-    Route::get('get-location', [HomeController::class, 'location']); 
+    Route::get('get-country', [HomeController::class, 'getCountry']); 
+    Route::post('get-state', [HomeController::class, 'getState']); 
+    Route::post('get-city', [HomeController::class, 'getCity']); 
     Route::get('get-menu', [HomeController::class, 'menu']); 
 });

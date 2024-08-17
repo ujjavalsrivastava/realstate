@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\api;
-
+use DB;
 use JWTAuth;
 use Illuminate\Support\Facades\Auth;
 use Validator;
-use DB;
 use App\Models\ProDescriptionModel;
 use App\Models\ProFeatureModel;
 use App\Models\ProFeatureMasterModel;
@@ -13,6 +12,8 @@ use App\Models\ProMediaModel;
 use App\Models\User;
 use App\Models\Menu;
 use App\Models\CountryModel;
+use App\Models\StateModel;
+use App\Models\CityModel;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,15 +47,12 @@ class HomeController extends Controller
                         'username' => 'required',
                         'email' => 'required|email',
                         'phone' => 'required|min:10|max:11',
-                        'feature_id' => 'required',
-                        'feature_id.*' => 'required',
                         'images.*' => 'required|mimes:jpg,jpeg,png|max:2048'
                     ]);  
             if ($validator->fails()) {  
                return response()->json(['error'=>$validator->errors()], 401); 
             } 
             $user = JWTAuth::parseToken()->authenticate();
-        // dd($user->id);
             $pro_des = new ProDescriptionModel();
             $pro_des->user_id = $user->id;
             $pro_des->pro_title = $request->pro_title;
@@ -86,12 +84,10 @@ class HomeController extends Controller
         // Loop through each image and store it
         if(!empty($request->file('images'))){
             foreach ($request->file('images') as $image) {
-            
                 $filename = uniqid() . '.' . $image->getClientOriginalExtension();
                 $path = url('public/images/'.$filename);
                 $uploade_path = public_path('images');
                 $image->move($uploade_path,$filename);
-    
                 $imageFile = ProMediaModel::insert(['file_name' => $filename,'file_path' => $path,
                     'pro_des_id' => $pro_des->id]);
                 }
@@ -134,14 +130,21 @@ class HomeController extends Controller
                 if($request->city){
                     $data->where('city','like',"%{$request->city}%");
                 }
-
                 $search = $data->get();
                 return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $search]);
-
     }
-     function location(){
-        $loc = CountryModel::with('getState')->get();
-        return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $loc]);
+
+     function getCountry(){
+        $country = CountryModel::get();
+        return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $country]);
+     }
+     function getState(Request $request){
+        $state = StateModel::where('country_id',$request->country_id)->get();
+        return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $state]);
+     }
+     function getCity(Request $request){
+        $city = CityModel::where('state_id',$request->state_id)->get();
+        return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $city]);
      }
 
      function menu(){
