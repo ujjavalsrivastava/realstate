@@ -56,16 +56,16 @@ class ProDescriptionModel extends Model
 
    public function getProType()
     {
-        return $this->hasMany(RealPerameterModel::class, 'id','pro_type');
+        return $this->hasMany(RealPerameterModel::class, 'code','pro_type');
     }
 
     public function getResComType()
     {
-        return $this->hasMany(RealPerameterModel::class, 'id','res_com_type');
+        return $this->hasMany(RealPerameterModel::class, 'code','res_com_type');
     }
     public function getResComDetails()
     {
-        return $this->hasMany(ResComDetailModel::class, 'id','res_com_detail');
+        return $this->hasMany(ResComDetailModel::class, 'real_per_code','res_com_detail');
     }
     public function getProFeature()
     {

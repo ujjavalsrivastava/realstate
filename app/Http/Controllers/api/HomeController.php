@@ -106,6 +106,11 @@ class HomeController extends Controller
         }
     }
 
+    public function proDetail(Request $request){
+        $proDetail = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->where('id',$request->id)->get();
+        return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $proDetail]);
+    }
+
     //get property Description
     public function getProDescription(){
         $pro_description_list = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->get();
@@ -120,7 +125,7 @@ class HomeController extends Controller
 
     // Data search
     public function getSearchProperty(Request $request){
-        $data = ProDescriptionModel::where('pro_type','like',"%{$request->pro_type}%");
+        $data = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->where('pro_type','like',"%{$request->pro_type}%");
                 if($request->country){
                     $data->where('country','like',"%{$request->country}%");
                 }
