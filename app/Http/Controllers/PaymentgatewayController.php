@@ -1,10 +1,10 @@
 <?php
 namespace App\Http\Controllers;
-
+use Auth;
 use Illuminate\Http\Request;
 use Razorpay\Api\Api;
 use Razorpay\Api\Errors\SignatureVerificationError;
-
+use App\Models\PaymentDetails;
 class PaymentgatewayController extends Controller
 {
     public function orderGenerate(Request $request)
@@ -19,9 +19,15 @@ class PaymentgatewayController extends Controller
 
         $data = [
             "key"               => Config("values.razorpayKey"),
-            "amount"            => $request->price * 100,
+            "amount"            => $request->price,
             "order_id"          => $orderData['id'],
         ];
+        $user = Auth::user();
+        $payment =  new PaymentDetails();
+        $payment->user_id = $user->id;
+        $payment->price = $request->price * 100;
+        $payment->razorpay_order_id = $orderData['id'];
+        $payment->save();
         return response()->json($data, 200);
     }
 

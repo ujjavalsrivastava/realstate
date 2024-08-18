@@ -9,7 +9,7 @@ use Auth;
 use JWTAuth;
 use Razorpay\Api\Api;
 use Razorpay\Api\Errors\SignatureVerificationError;
-
+use App\Models\PaymentDetails;
 use App\Models\ProDescriptionModel;
 use App\Models\ProFeatureModel;
 use App\Models\ProFeatureMasterModel;
@@ -135,6 +135,13 @@ class PostPropertyController extends Controller
             $pro_des->email = $request->email;
             $pro_des->phone = $request->phone;
             $pro_des->save();
+
+            $payment = PaymentDetails::where('razorpay_order_id',$request->razorpay_order_id)->first();
+            $payment->razorpay_payment_id = $request->razorpay_payment_id;
+            $payment->razorpay_signature = $request->razorpay_signature;
+            $payment->post_id = $pro_des->id;
+            $payment->status = 'Success';
+            $payment->save();
             
             // feature 
             if(!empty($request->feature_id)){

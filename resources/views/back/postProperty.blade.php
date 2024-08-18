@@ -262,6 +262,11 @@
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 <script>
+
+           @if(!Auth::check())
+              $('.openModal').click();
+            @endif
+
     function PaymentNow(){
     var options = {
         "key": "rzp_test_vDBwnM5DROejIY",
@@ -272,9 +277,7 @@
         "image": "YOUR COMPANY IMAGE",
         "order_id": $('#razorpay_order_id').val(),
         "handler": function(response) {
-            alert(response.razorpay_payment_id);
-            alert(response.razorpay_order_id);
-            alert(response.razorpay_signature);
+            console.log('response '+ JSON.stringify(response) );
             document.getElementById('razorpay_payment_id').value = response.razorpay_payment_id;
             document.getElementById('razorpay_signature').value = response.razorpay_signature;
             $('#btnsubmit').show();
@@ -333,6 +336,7 @@ function openImage(){
 
  $('#postform').on('submit', function(e) {
               e.preventDefault(); 
+              $('#btnsubmit').text('Processing....')
               var form = $('#postform')[0];
     var formData = new FormData(form);
              // var formData = new FormData(this);
@@ -346,9 +350,13 @@ function openImage(){
                         if(response.status == '200'){
                             $('#successNotification').show();
                             $('#successMessage').text(response.message);
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                            location.reload().delay(5000);
                         }else{
                             $('#errorNotification').show();
                             $('#errorMessage').text(response.message);
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                            $('#btnsubmit').text('Submit Property');
                         }
                         
                     },
@@ -356,6 +364,8 @@ function openImage(){
                      
             $('#errorNotification').show();
             $('#errorMessage').text(response.responseJSON.error);
+            $('#btnsubmit').text('Submit Property')
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         },
                 });
     });
