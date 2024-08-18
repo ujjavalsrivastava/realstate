@@ -25,7 +25,7 @@ class PaymentgatewayController extends Controller
         $user = Auth::user();
         $payment =  new PaymentDetails();
         $payment->user_id = $user->id;
-        $payment->price = $request->price * 100;
+        $payment->price = $request->price;
         $payment->razorpay_order_id = $orderData['id'];
         $payment->save();
         return response()->json($data, 200);
