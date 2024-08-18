@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostPropertyController;
+use App\Http\Controllers\PaymentgatewayController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,3 +44,6 @@ Route::get('show_city/{id}', [PostPropertyController::class, 'showCity']);
 
 
 Route::get('/getReletiondata/{id}',[HomeController::class, 'getReletiondata']);
+
+Route::post('/orderGenerate',[PaymentgatewayController::class, 'orderGenerate']);
+Route::post('/verify',[PaymentgatewayController::class, 'verify']);

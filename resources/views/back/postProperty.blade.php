@@ -240,7 +240,12 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="prperty-submit-button">
-                                        <button type="submit">Submit Property</button>
+                                        <button type="submit" id="btnsubmit" style="display:none">Submit Property</button>
+                                        <input type="hidden" value="945" id="payPrice">
+                                        <input type="hidden" name="razorpay_payment_id" id="razorpay_payment_id">
+                                        <input type="hidden" name="razorpay_signature" id="razorpay_signature">
+                                        <input type="hidden" name="razorpay_order_id" id="razorpay_order_id">
+                                        <button type="button" onclick="orderGenrate(this)" >Pay Now</button>
                                     </div>
                                 </div>
                             </div>
@@ -254,7 +259,76 @@
         @endsection
 
 @section('script')
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
 <script>
+
+           @if(!Auth::check())
+              $('.openModal').click();
+            @endif
+
+    function PaymentNow(){
+    var options = {
+        "key": "rzp_test_vDBwnM5DROejIY",
+        "amount": $('#payPrice').val(),
+        "currency": "INR",
+        "name": "YOUR COMPANY NAME",
+        "description": "YOUR COMPANY DESCRIPTION",
+        "image": "YOUR COMPANY IMAGE",
+        "order_id": $('#razorpay_order_id').val(),
+        "handler": function(response) {
+            console.log('response '+ JSON.stringify(response) );
+            document.getElementById('razorpay_payment_id').value = response.razorpay_payment_id;
+            document.getElementById('razorpay_signature').value = response.razorpay_signature;
+            $('#btnsubmit').show();
+        },
+        "theme": {
+            "color": "#F37254"
+        }
+    };
+ 
+    var rzp1 = new Razorpay(options);
+    rzp1.on('payment.failed', function(response) {
+        alert(response.error.code);
+        alert(response.error.description);
+        alert(response.error.source);
+        alert(response.error.step);
+        alert(response.error.reason);
+        alert(response.error.metadata.order_id);
+        alert(response.error.metadata.payment_id);
+    });
+    rzp1.open();
+}
+</script>
+<script>
+
+    function orderGenrate(thisval){
+        var price =  $('#payPrice').val();
+        $(thisval).text('Proccessing...');
+                    $.ajax({
+                        headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: "POST",
+                    url: "{{url('/orderGenerate')}}",
+                    data: {price:price},
+                    success: function(response) {
+                        $(thisval).hide();
+                        
+                        console.log(response);
+                        
+                       
+                           $('#razorpay_order_id').val(response.order_id);
+                           PaymentNow();
+                       
+                    },
+                    error: function (response) {
+         
+            $('#errorNotification').show();
+            $('#errorMessage').text(response.responseJSON.error);
+        },
+                });
+    }
 
 function openImage(){
    $('#imageupload').click();
@@ -262,6 +336,7 @@ function openImage(){
 
  $('#postform').on('submit', function(e) {
               e.preventDefault(); 
+              $('#btnsubmit').text('Processing....')
               var form = $('#postform')[0];
     var formData = new FormData(form);
              // var formData = new FormData(this);
@@ -275,9 +350,13 @@ function openImage(){
                         if(response.status == '200'){
                             $('#successNotification').show();
                             $('#successMessage').text(response.message);
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                            location.reload().delay(5000);
                         }else{
                             $('#errorNotification').show();
                             $('#errorMessage').text(response.message);
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                            $('#btnsubmit').text('Submit Property');
                         }
                         
                     },
@@ -285,6 +364,8 @@ function openImage(){
                      
             $('#errorNotification').show();
             $('#errorMessage').text(response.responseJSON.error);
+            $('#btnsubmit').text('Submit Property')
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         },
                 });
     });

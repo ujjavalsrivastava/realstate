@@ -68,7 +68,7 @@
                     <div class="right-side d-none d-none d-lg-none d-xl-flex sign ml-0">
                         <!-- Header Widget -->
                         <div class="header-widget sign-in">
-                            <div class="show-reg-form modal-open" onclick="openRegisterLoginModel()"><a href="javascript:void(0)">Sign In</a></div>
+                            <div class="show-reg-form modal-open openModal" onclick="openRegisterLoginModel()"><a href="javascript:void(0)">Sign In</a></div>
                         </div>
                         <!-- Header Widget / End -->
                     </div>
