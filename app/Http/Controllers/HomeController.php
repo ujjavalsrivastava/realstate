@@ -16,6 +16,7 @@ use App\Mail\OtpSendMail;
 use App\Models\CountryModel;
 use App\Models\StateModel;
 use App\Models\CityModel;
+use App\Models\ProFeatureMasterModel;
 
 class HomeController extends Controller
 {
@@ -23,7 +24,8 @@ class HomeController extends Controller
         $getCountries = CountryModel::get();
         $getStates = StateModel::get();
         $getCities = CityModel::get();
-         return view('front.index',compact('getCountries','getStates','getCities'));
+        $featureMaster = ProFeatureMasterModel::get();
+         return view('front.index',compact('getCountries','getStates','getCities','featureMaster'));
     }
 
     function aboutUs(){

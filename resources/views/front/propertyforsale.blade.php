@@ -36,7 +36,7 @@
                                 <div class="detail-wrapper-body">
                                     <div class="listing-title-bar">
                                         <div class="text-heading text-left">
-                                            <p class="font-weight-bold mb-0 mt-3">7 Search results</p>
+                                            <p class="font-weight-bold mb-0 mt-3">{{$getPostcount}} Search results</p>
                                         </div>
                                     </div>
                                 </div>
@@ -297,14 +297,7 @@
 
 @section('script')
 <script>
-    function getParameterByName(name, url = window.location.href) {
-    name = name.replace(/[\[\]]/g, '\\$&');
-    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, ' '));
-}
+   
 
 var url = window.location.href;
 hashes = url.split("?")[1]
@@ -313,8 +306,12 @@ hashes = url.split("?")[1]
 var page = 1;
 loadMoreData(1)
 $(window).scroll(function() {
-    if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+   //$(window).scrollTop() + $(window).height();
+   var scroll_position_for_post_load = $(window).height() + $(window).scrollTop() + 300;
+
+    if ( scroll_position_for_post_load >= $(document).height()) {
         page++;
+       
         loadMoreData(page);
     }
 });
