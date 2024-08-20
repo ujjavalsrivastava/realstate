@@ -201,11 +201,18 @@ class PostPropertyController extends Controller
     }
 
     function propertyForSale(Request $request){
-        return view('front.propertyforsale');
-    }
-
-    function searchPos(Request $request){
+       
+        $f = $request->feature;
         $getPost = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity');
+       if(!empty($f)){
+        $getPost->whereHas('getProFeature', function ($query) use($f) {
+            $feature = explode(',',$f);
+            if(count($feature) > 0){
+                $query->whereIn('feature_id', $feature);
+            }  
+       });
+       }
+       
         if(!empty($request->country)){
             $getPost->where('country',$request->country);
         }
@@ -216,7 +223,77 @@ class PostPropertyController extends Controller
         if(!empty($request->city)){
             $getPost->where('city',$request->city);
         }
+
+        if(!empty($request->pro_type)){
+            $getPost->where('pro_type',$request->pro_type);
+        }
+        if(!empty($request->room)){
+            $getPost->where('room',$request->room);
+        }
+        if(!empty($request->fromarea) && !empty($request->toarea)){
+            $fromArea = str_replace(' sq ft','',$request->fromarea) ;
+            $toArea = str_replace(' sq ft','',$request->toarea) ;
+           
+            $getPost->whereBetween('area_sq',[(int)$fromArea,(int)$toArea]);
+        }
+        if(!empty($request->fromprice) && !empty($request->toprice)){
+            $fromPrice = str_replace('₹','',$request->fromprice) ;
+            $fromPrice = str_replace(',','',$fromPrice) ;
+            $toPrice = str_replace('₹','',$request->toprice) ;
+            $toPrice = str_replace(',','',$toPrice) ;
+           
+            $getPost->whereBetween('area_sq',[(int)$fromPrice,(int)$toPrice]);
+        }
         
+        $getPostcount=$getPost->count();
+      
+        return view('front.propertyforsale',compact('getPostcount'));
+    }
+
+    function searchPos(Request $request){
+        
+        $f = $request->feature;
+        $getPost = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity');
+       if(!empty($f)){
+        $getPost->whereHas('getProFeature', function ($query) use($f) {
+            $feature = explode(',',$f);
+            if(count($feature) > 0){
+                $query->whereIn('feature_id', $feature);
+            }  
+       });
+       }
+       
+        if(!empty($request->country)){
+            $getPost->where('country',$request->country);
+        }
+        
+        if(!empty($request->state)){
+            $getPost->where('state',$request->state);
+        }
+        if(!empty($request->city)){
+            $getPost->where('city',$request->city);
+        }
+
+        if(!empty($request->pro_type)){
+            $getPost->where('pro_type',$request->pro_type);
+        }
+        if(!empty($request->room)){
+            $getPost->where('room',$request->room);
+        }
+        if(!empty($request->fromarea) && !empty($request->toarea)){
+            $fromArea = str_replace(' sq ft','',$request->fromarea) ;
+            $toArea = str_replace(' sq ft','',$request->toarea) ;
+           
+            $getPost->whereBetween('area_sq',[(int)$fromArea,(int)$toArea]);
+        }
+        if(!empty($request->fromprice) && !empty($request->toprice)){
+            $fromPrice = str_replace('₹','',$request->fromprice) ;
+            $fromPrice = str_replace(',','',$fromPrice) ;
+            $toPrice = str_replace('₹','',$request->toprice) ;
+            $toPrice = str_replace(',','',$toPrice) ;
+           
+            $getPost->whereBetween('area_sq',[(int)$fromPrice,(int)$toPrice]);
+        }
         $getPost=$getPost->paginate(6);
         return view('ajax.search', compact('getPost'));
     }
