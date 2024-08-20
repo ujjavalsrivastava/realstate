@@ -13,7 +13,6 @@
                 <div class="container" data-aos="zoom-in">
                 <form method="GET" action="{{url('property-for-sale')}}"> 
                     <div class="row">
-                        
                         <div class="col-12">
                             <div class="hero-inner">
                                 <!-- Welcome Text -->

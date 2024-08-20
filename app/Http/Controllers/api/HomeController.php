@@ -23,6 +23,7 @@ class HomeController extends Controller
 {
     public function proDescription(Request $request)
     {
+        // dd($request->user_id);
        // DB::beginTransaction();
        try{
         $validator = Validator::make($request->all(), 
@@ -47,13 +48,23 @@ class HomeController extends Controller
                         'username' => 'required',
                         'email' => 'required|email',
                         'phone' => 'required|min:10|max:11',
-                        'images.*' => 'required|mimes:jpg,jpeg,png|max:2048'
+                        'images.*' => 'required|mimes:jpg,jpeg,png|max:2048',
+                        'vedio' => 'file|mimes:mp4,mov,avi,flv|max:2048'
                     ]);  
             if ($validator->fails()) {  
                return response()->json(['error'=>$validator->errors()], 401); 
             } 
             $user = JWTAuth::parseToken()->authenticate();
+            if ($request->file('video')) {
+                $filename = uniqid() . '.' . $request->file('video')->getClientOriginalExtension();
+                    $path = url('videos/'.$filename);
+                    $uploade_path = public_path('videos');
+                    $request->file('video')->move($uploade_path,$filename);
+                    // $videoFile = ProDescriptionModel::insert(['video' => $path]);
+              }
             $pro_des = new ProDescriptionModel();
+            // video
+        
             $pro_des->user_id = $user->id;
             $pro_des->pro_title = $request->pro_title;
             $pro_des->pro_description = $request->pro_description;
@@ -75,6 +86,7 @@ class HomeController extends Controller
             $pro_des->username = $request->username;
             $pro_des->email = $request->email;
             $pro_des->phone = $request->phone;
+            @$pro_des->video = @$path;
             $pro_des->save();
             // feature 
              foreach ($request->feature_id as $item) {
@@ -85,13 +97,22 @@ class HomeController extends Controller
         if(!empty($request->file('images'))){
             foreach ($request->file('images') as $image) {
                 $filename = uniqid() . '.' . $image->getClientOriginalExtension();
-                $path = url('public/images/'.$filename);
+                $path = url('images/'.$filename);
                 $uploade_path = public_path('images');
                 $image->move($uploade_path,$filename);
                 $imageFile = ProMediaModel::insert(['file_name' => $filename,'file_path' => $path,
                     'pro_des_id' => $pro_des->id]);
                 }
         }
+
+        // // video
+        // if ($request->file('video')) {
+        //     $filename = uniqid() . '.' . $request->file('video')->getClientOriginalExtension();
+        //         $path = url('videos/'.$filename);
+        //         // $uploade_path = public_path('videos');
+                // $video->move($uploade_path,$filename);
+        //         $videoFile = ProDescriptionModel::insert(['video' => $path]);
+        //   }
         
             return response()->json([
                 'status'=>'200',

@@ -110,6 +110,12 @@ class PostPropertyController extends Controller
     
             if ($success === true) {
             $user = Auth::user();
+            if ($request->file('video')) {
+                $filename = uniqid() . '.' . $request->file('video')->getClientOriginalExtension();
+                    $path = url('videos/'.$filename);
+                    $uploade_path = public_path('videos');
+                    $request->file('video')->move($uploade_path,$filename);
+              }
         // dd($user->id);
             $pro_des = new ProDescriptionModel();
             $pro_des->user_id = $user->id;
@@ -134,6 +140,7 @@ class PostPropertyController extends Controller
             $pro_des->username = $request->username;
             $pro_des->email = $request->email;
             $pro_des->phone = $request->phone;
+            @$pro_des->video = @$path;
             $pro_des->save();
 
             $payment = PaymentDetails::where('razorpay_order_id',$request->razorpay_order_id)->first();

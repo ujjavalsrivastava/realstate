@@ -44,7 +44,8 @@ class ProDescriptionModel extends Model
         'name',
         'username',
         'email',
-        'phone'
+        'phone',
+        'video'
 
     ];
    protected $table='pro_description';

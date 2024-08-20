@@ -93,6 +93,16 @@
                             </div>
                         </div>
                         <div class="single-add-property">
+                            <h3>property Video</h3>
+                            <div class="property-form-group">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                    <input type="file" name="video" id="video" accept="video/*">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single-add-property">
                             <h3>property Location</h3>
                             <div class="property-form-group">
                                 <div class="row">
