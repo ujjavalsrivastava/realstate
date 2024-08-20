@@ -19,9 +19,9 @@
                                             </a>
                                         </div>
                                         <div class="button-effect">
-                                            <a href="single-property-1.html" class="btn"><i class="fa fa-link"></i></a>
+                                            <a href="#" class="btn"><i class="fa fa-link"></i></a>
                                             <a href="https://www.youtube.com/watch?v=2xHQqYRcrx4" class="btn popup-video popup-youtube"><i class="fas fa-video"></i></a>
-                                            <a href="single-property-2.html" class="img-poppu btn"><i class="fa fa-photo"></i></a>
+                                            <a href="#" class="img-poppu btn"><i class="fa fa-photo"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -29,7 +29,7 @@
                             <!-- homes content -->
                             <div class="col-lg-7 col-md-12 homes-content pb-0 mb-44 mt" data-aos="fade-up" style="margin-bottom:20px">
                                 <!-- homes address -->
-                                <h3><a href="single-property-1.html">{{$row->pro_title}}</a></h3>
+                                <h3><a href="{{url('get_property')}}/{{$row->id}}">{{$row->pro_title}}</a></h3>
                                 <p class="homes-address mb-3">
                                     <a href="single-property-1.html">
                                         <i class="fa fa-map-marker"></i><span>{{$row->address}} {{ucwords($row->getCity->city)}} {{ucwords($row->getState->name)}} {{ucwords($row->getCountry->name)}}</span>
