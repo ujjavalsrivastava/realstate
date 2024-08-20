@@ -199,7 +199,7 @@ class PostPropertyController extends Controller
         $getPost = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity');
        if(!empty($f)){
         $getPost->whereHas('getProFeature', function ($query) use($f) {
-            $feature = explode(',',$request->feature);
+            $feature = explode(',',$f);
             if(count($feature) > 0){
                 $query->whereIn('feature_id', $feature);
             }  
@@ -249,7 +249,7 @@ class PostPropertyController extends Controller
         $getPost = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity');
        if(!empty($f)){
         $getPost->whereHas('getProFeature', function ($query) use($f) {
-            $feature = explode(',',$request->feature);
+            $feature = explode(',',$f);
             if(count($feature) > 0){
                 $query->whereIn('feature_id', $feature);
             }  
