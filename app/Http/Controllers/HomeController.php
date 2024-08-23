@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use Auth;
 use Validator;
-
+use Hash;
 use App\Models\User;
 use App\Models\ResComDetailModel;
 use App\Models\OtpVerifyModel;
@@ -177,8 +177,72 @@ class HomeController extends Controller
         return response()->json(['status'=>'400','message' => $e->getMessage()]); 
     }
 }
+
+function changePassword(Request $request){
+
+    try{
+
+    $validator = Validator::make($request->all(), 
+    [ 
+    'email' => 'required|email|exists:users,email',
+    'forgetpasword' => 'required'
+    
+   ]);  
+    if ($validator->fails()) {  
+    return response()->json(['error'=>$validator->errors()], 401); 
+    }
+
+    User::where('email',$request->email)->update([
+        'password' => Hash($request->forgetpasword)
+    ]);
+    return response()->json(['status'=>'200','message' => 'changed  successfully'], 200);
+
+}catch(\Exception $e){
+    return response()->json(['status'=>'400','message' => $e->getMessage()]); 
+}
+
+}
     function getReletiondata($id){
        $data =  ResComDetailModel::where('real_per_code',$id)->get();
        return view('ajax.radio',compact('data'));
+    }
+
+    function forget(Request $request){
+        try{
+          //  dd($request->all());
+            if(!empty($request->type)){
+                $validator = Validator::make($request->all(), 
+                [ 
+                'email' => 'required|email|exists:users,email',
+                
+               ]);
+
+            }else{
+                $validator = Validator::make($request->all(), 
+                [ 
+                'email' => 'required|email',
+                
+               ]);
+
+            }
+             
+            if ($validator->fails()) {  
+            return response()->json(['error'=>$validator->errors()->first()], 401); 
+            }   
+        
+            $details = [
+                'otp' => rand(1000,9999)  
+            ];
+           $data=Mail::to($request->input('email'))->send(new OtpSendMail($details));
+          $delete = OtpVerifyModel::where('email',$request->email)->delete();
+            $getotp = OtpVerifyModel::insert([
+                'email' => $request->input('email'),
+                'otp' => $details['otp']
+            ]);
+            return response()->json([ 'status'=>'200', 'message' => 'OTP Send on Your Email '], 200);
+        }catch(\Exception $e){
+            return response()->json(['status'=>'400', 'message' => $e->getMessage()]); 
+        }
+
     }
 }

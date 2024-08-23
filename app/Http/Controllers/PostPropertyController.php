@@ -200,8 +200,8 @@ class PostPropertyController extends Controller
         return view('ajax.post', compact('getPost'));
     }
 
-    function propertyForSale(Request $request){
-       
+    function propertyForSale(Request $request)
+    { 
         $f = $request->feature;
         $getPost = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity');
        if(!empty($f)){
@@ -246,7 +246,7 @@ class PostPropertyController extends Controller
         }
         
         $getPostcount=$getPost->count();
-      
+        
         return view('front.propertyforsale',compact('getPostcount'));
     }
 

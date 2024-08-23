@@ -122,7 +122,7 @@
                                         </div>
                                     </form>
                                     <div class="lost_password">
-                                        <a href="#">Lost Your Password?</a>
+                                        <a href="#" onclick="forgetPass()">Lost Your Password?</a>
                                     </div>
                                 </div>
                             </div>
@@ -197,6 +197,54 @@
             </div>
         </div>
         <!--register form end -->
+
+        <!-- forget password -->
+        <div class="forget-form modal">
+            <div class="main-overlay"></div>
+            <div class="main-register-holder">
+                <div class="main-register fl-wrap">
+                    <div class="close-reg" onclick="closeRegisterLoginModel()"><i class="fa fa-times"></i></div>
+                    <h3>Welcome to <span>Find<strong>Houses</strong></span></h3>
+                     <div id="tabs-container">
+                     <form method="post"  id="forget">
+                        <div class="tab">
+                            <div id="tab-1" class="tab-contents">
+                                <div id="forgetFirst" class="custom-form">
+                                    
+                                        @csrf()
+                                        <div >
+                                        <label>Email Address * </label>
+                                        <input name="forgetemail"  id="forgetemail" type="text" >
+                                        <button type="button" class="log-submit-btn" onclick="forgetnextFun()"><span>Submit</span></button>
+                                        <div class="clearfix"></div>
+                                       </div>
+                                   
+                                </div>  
+                            </div>
+                            <div class="tab">
+                            <div id="forgetSecond" class="custom-form" style="display:none">
+                                <label>OTP* </label>
+                                     <input  type="text"  name="forgetotp" id="forgetotp">
+                                     <button type="button" class="log-submit-btn" onclick="forgetnextPageFun()"><span>Submit</span></button>
+                                </div>
+                            </div>
+                            <div class="tab">
+                            <div id="forgetThird"  class="custom-form" style="display:none">
+                                <label>Password* </label>
+                                     <input  type="text"  name="forgetpasword" id="forgetpassword">
+                                     <label>Confirm Password* </label>
+                                     <input  type="text"  name="cforgetpasword" id="cforgetpassword">
+                                     <button type="submit" class="log-submit-btn" >Submit</button>
+                                </div>
+                            </div>
+                     
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <!-- forget password end -->
         <!-- START PRELOADER -->
         <div id="preloader">
             <div id="status">
@@ -239,6 +287,111 @@
         <script src="{{ URL::asset('assets/js/color-switcher.js')}}"></script>
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
         <script>
+            $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+}); 
+
+
+$('#forget').on('submit', function(e) {
+                e.preventDefault(); 
+                $.ajax({
+                    type: "POST",
+                    url: "{{url('/changePassword')}}",
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        if(response.status == '200'){
+                            $('#successNotification').show();
+                            $('#successMessage').text(response.success);
+                            location.reload().delay(5000);
+                        }else{
+                            $('#errorNotification').show();
+                            $('#errorMessage').text(response.error);
+                        }
+                    },
+                    error: function (response) {
+         
+            $('#errorNotification').show();
+            $('#errorMessage').text(response.responseJSON.error);
+        },
+                });
+            });
+
+            function forgetnextPageFun(){
+                var email = $('#forgetemail').val();
+                var otp = $('#forgetotp').val();
+                if(otp == ''){
+                    $('#errorNotification').show();
+                    $('#errorMessage').text('OTP is required');
+                    return false;
+                }
+
+
+                $('#loadingDiv').show();
+                $.ajax({
+                    url: "{{url('verifyOtp')}}", // The route that handles the request
+                    type: 'POST',
+                    data:{'email':email,'otp':otp},
+                    success: function(response) {
+                        $('#loadingDiv').hide();
+                        if(response.status == '200'){
+                            $('#forgetFirst').hide();
+                            $('#forgetSecond').hide();
+                            $('#forgetThird').show();
+                            $('#successNotification').show();
+                            $('#successMessage').text(response.message);
+                           
+                        }else{
+                            $('#errorNotification').show();
+                            $('#errorMessage').text(response.message);
+                        }
+                    },
+                    error: function (response) {
+                        $('#loadingDiv').hide();
+                                $('#errorNotification').show();
+                                $('#errorMessage').text(response.responseJSON.error);
+                            },
+                });
+                
+            }
+
+            function forgetnextFun(){
+                var email = $('#forgetemail').val();
+                if(email == ''){
+                    $('#errorNotification').show();
+                    $('#errorMessage').text('Email is required');
+                    return false;
+                }
+
+
+                $('#loadingDiv').show();
+                $.ajax({
+                    url: "{{url('forget')}}?type=forget", // The route that handles the request
+                    type: 'POST',
+                    data:{'email':email},
+                    success: function(response) {
+                        $('#loadingDiv').hide();
+                        if(response.status == '200'){
+                            $('#forgetFirst').hide();
+                            $('#forgetSecond').show();
+                            $('#forgetThird').hide();
+                            $('#successNotification').show();
+                            $('#successMessage').text(response.message);
+                           
+                        }else{
+                            $('#errorNotification').show();
+                            $('#errorMessage').text(response.message);
+                        }
+                    },
+                    error: function (response) {
+                        $('#loadingDiv').hide();
+                                $('#errorNotification').show();
+                                $('#errorMessage').text(response.responseJSON.error);
+                            },
+                });
+
+            }
 
             $(document).ready(function() {
             $('.select2').select2({
@@ -263,7 +416,6 @@
                 $.ajax({
                     type: "GET",
                     url: "{{url('/getReletiondata')}}/"+code,
-                    
                     success: function(response) {
                        $('#redioResult').html(response)
                     },
@@ -399,6 +551,49 @@
                 });
               }
 
+              function forgetnextPage(){
+                var email = $('#emailId').val();
+                var otp = $('#otp').val();
+                if(email == ''){
+                    $('#errorNotification').show();
+                    $('#errorMessage').text('Email is required');
+                    return false;
+                }
+               
+                if(otp == ''){
+                    $('#errorNotification').show();
+                    $('#errorMessage').text('OTP is required');
+                    return false;
+                }
+               
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: "{{url('verifyOtp')}}", // The route that handles the request
+                    type: 'POST',
+                    data: {'email':email,'otp':otp},
+                    success: function(response) {
+                        if(response.status == '200'){
+                            $('#forgetFirst').hide();
+                            $('#forgetSecond').hide();
+                            $('#forgetThird').show();
+                            $('#successNotification').show();
+                            $('#successMessage').text(response.message);
+                        }else{
+                            $('#errorNotification').show();
+                            $('#errorMessage').text(response.message);
+                        }
+                    },
+                    error: function (response) {
+                                $('#errorNotification').show();
+                                $('#errorMessage').text(response.responseJSON.error);
+                            },
+                });
+              }
+              
+
+
 
               $('#registerform').on('submit', function(e) {
                 e.preventDefault(); 
@@ -423,6 +618,34 @@
         },
                 });
             });
+
+
+            $('#forget').on('submit', function(e) {
+                e.preventDefault(); 
+                $.ajax({
+                    type: "POST",
+                    url: "{{url('/forget')}}",
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        if(response.status == '200'){
+                            $('#successNotification').show();
+                            $('#successMessage').text(response.success);
+                            location.reload().delay(5000);
+                        }else{
+                            $('#errorNotification').show();
+                            $('#errorMessage').text(response.message);
+                        }   
+                    },
+                    error: function (response) {
+                     
+            $('#errorNotification').show();
+            $('#errorMessage').text(response.responseJSON.error);
+        },
+                });
+            });
+            function forgetPass(){
+                $('.forget-form').css("display", "block");
+            }
 
             function openRegisterLoginModel(){
                 $('.login-and-register-form').css("display", "block");

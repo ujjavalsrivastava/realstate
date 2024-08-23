@@ -292,18 +292,18 @@
                                 </div>
                             </div>
                         </div>
+                        @if(!empty($pro->video))
                         <div class="property wprt-image-video w50 pro">
                             <h5>Property Video</h5>
-                            <img alt="image" src="{{URL::asset('assets/images/slider/home-slider-4.jpg')}}">
-                            <a class="icon-wrap popup-video popup-youtube" href="https://www.youtube.com/watch?v=14semTlwyUY">
-                                <i class="fa fa-play"></i>
-                            </a>
-                            <div class="iq-waves">
-                                <div class="waves wave-1"></div>
-                                <div class="waves wave-2"></div>
-                                <div class="waves wave-3"></div>
-                            </div>
+                            <video controls style="width: 684px;">
+                            <source src="{{$pro->video}}" type="video/mp4" center>
+                            Your browser does not support the video tag.
+                            </video>
+                            <!-- <a class="icon-wrap popup-video popup-youtube" href="{{$pro->video}}"> -->
+                                <!-- <i class="fa fa-play"></i> -->
+                            <!-- </a> -->
                         </div>
+                        @endif
                         <div class="property-location map">
                             <h5>Location</h5>
                             <div class="divider-fade"></div>

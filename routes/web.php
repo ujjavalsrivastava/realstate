@@ -23,8 +23,10 @@ Route::get('/',[HomeController::class, 'index']);
 Route::get('/login',[HomeController::class, 'showlogin']);
 Route::post('/loginPost',[HomeController::class, 'loginPost']);
 Route::post('/register',[HomeController::class, 'register']);
+Route::post('/forget',[HomeController::class, 'forget']);
 Route::get('send_mail', [HomeController::class, 'sendMail']);
 Route::post('verifyOtp', [HomeController::class, 'verifyOtp']);
+Route::post('changePassword', [HomeController::class, 'changePassword']);
 Route::get('/logout',[HomeController::class, 'logout']);
 Route::get('show-forget-pass',[HomeController::class, 'showForgetPass']);
 

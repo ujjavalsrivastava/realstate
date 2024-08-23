@@ -58,8 +58,7 @@
                                         <div class="col-lg-4 col-md-12">
                                             <div class="dropdown faq-drop">
                                             <select class="form-control wide" name="res_com_detail" id="res_com_detail">
-                                                    <option value="">Select Property Detail</option>
-                                                   
+                                                    <option value="">Select Property Detail</option> 
                                                 </select>
                                             </div>
                                         </div>
@@ -426,6 +425,7 @@ function openImage(){
                 }
             });
     }
+    
     function getCity(id){
         $.ajax({
             headers: {
