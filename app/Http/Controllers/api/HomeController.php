@@ -128,7 +128,7 @@ class HomeController extends Controller
     }
 
     public function proDetail(Request $request){
-        $proDetail = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->where('id',$request->id)->get();
+        $proDetail = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->where('id',$request->id)->first();
         return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $proDetail]);
     }
 
