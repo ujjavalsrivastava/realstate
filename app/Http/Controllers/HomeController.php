@@ -25,7 +25,9 @@ class HomeController extends Controller
         $getStates = StateModel::get();
         $getCities = CityModel::get();
         $featureMaster = ProFeatureMasterModel::get();
-         return view('front.index',compact('getCountries','getStates','getCities','featureMaster'));
+        $popularPlace =  DB::select('select count(city) as cntcount,city as cityId,(select city from cities where id = cityId) cityname  from pro_description group by city limit 8');
+
+         return view('front.index',compact('getCountries','getStates','getCities','featureMaster','popularPlace'));
     }
 
     function aboutUs(){
