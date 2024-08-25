@@ -29,7 +29,7 @@
                             <!-- homes content -->
                             <div class="col-lg-7 col-md-12 homes-content pb-0 mb-44 mt" data-aos="fade-up" style="margin-bottom:20px">
                                 <!-- homes address -->
-                                <h3><a href="{{url('get_property')}}/{{$row->id}}">{{$row->pro_title}}</a></h3>
+                                <h3><a href="{{url('get_property')}}/{{$row->id}}">{{ucfirst($row->pro_title)}}</a></h3>
                                 <p class="homes-address mb-3">
                                     <a href="single-property-1.html">
                                         <i class="fa fa-map-marker"></i><span>{{$row->address}} {{ucwords($row->getCity->city)}} {{ucwords($row->getState->name)}} {{ucwords($row->getCountry->name)}}</span>
@@ -39,20 +39,20 @@
                                 <ul class="homes-list clearfix pb-3">
                                     <li class="the-icons">
                                         <i class="flaticon-bed mr-2" aria-hidden="true"></i>
-                                        <span>6 Bedrooms</span>
+                                        <span>{{$row->room}} Bedrooms</span>
                                     </li>
                                     <li class="the-icons">
                                         <i class="flaticon-bathtub mr-2" aria-hidden="true"></i>
-                                        <span>3 Bathrooms</span>
+                                        <span>{{$row->bathroom}} Bathrooms</span>
                                     </li>
                                     <li class="the-icons">
                                         <i class="flaticon-square mr-2" aria-hidden="true"></i>
-                                        <span>720 sq ft</span>
+                                        <span>&#8377;{{$row->area_sq}} sq ft</span>
                                     </li>
-                                    <li class="the-icons">
+                                    <!-- <li class="the-icons">
                                         <i class="flaticon-car mr-2" aria-hidden="true"></i>
                                         <span>2 Garages</span>
-                                    </li>
+                                    </li> -->
                                 </ul>
                                 <!-- Price -->
                                 <div class="price-properties">

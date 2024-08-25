@@ -192,7 +192,13 @@ class PostPropertyController extends Controller
         $pro = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->where('id',$id)->first();
         $images = ProMediaModel::where('pro_des_id',$id)->get();
         $features = ProFeatureModel::with('getProFeatureMaster')->where('pro_des_id',$id)->get();
-        return view('front.property', compact('pro','images','features'));
+        $letistPro = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->orderBy('id','DESC')->limit(3)->get();
+        $saidFeatures = ProDescriptionModel::with('getMedia','getCountry')->whereHas('getProFeature', function ($query){
+            $query->where('feature_id' ,'>',0);
+        })->orderBy('id','DESC')->limit(10)->get();
+
+       
+        return view('front.property', compact('pro','images','features','letistPro','saidFeatures'));
     }
     
     function fatchPost(Request $request){
@@ -246,8 +252,9 @@ class PostPropertyController extends Controller
         }
         
         $getPostcount=$getPost->count();
+        $letistPro = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->orderBy('id','DESC')->limit(3)->get();
         
-        return view('front.propertyforsale',compact('getPostcount'));
+        return view('front.propertyforsale',compact('getPostcount','letistPro'));
     }
 
     function searchPos(Request $request){

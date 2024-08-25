@@ -302,7 +302,7 @@ $('#forgetForm').on('submit', function(e) {
                     success: function(response) {
                         if(response.status == '200'){
                             $('#successNotification').show();
-                            $('#successMessage').text(response.success);
+                            $('#successMessage').text(response.message);
                             location.reload().delay(5000);
                         }else{
                             $('#errorNotification').show();

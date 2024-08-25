@@ -56,7 +56,7 @@
                     @if(Auth::check())
                     <div class="header-user-menu user-menu add">
                         <div class="header-user-name">
-                            <span><img src="{{URL::asset('assets/images/testimonials/ts-1.jpg')}}" alt=""></span>{{Auth::user()->name}}
+                            <span><img src="{{URL::asset('assets/images/user.jpg')}}" alt=""></span>{{ucfirst(Auth::user()->name)}}
                         </div>
                         <ul>
                             <li><a href="user-profile.html"> Edit profile</a></li>

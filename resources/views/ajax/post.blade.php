@@ -39,7 +39,7 @@
                                     </li>
                                     <li class="the-icons">
                                         <i class="flaticon-square mr-2" aria-hidden="true"></i>
-                                        <span>{{$post->area_sq}} sq ft</span>
+                                        <span>&#8377;{{$post->area_sq}} sq ft</span>
                                     </li>
                                     <!-- <li class="the-icons">
                                         <i class="flaticon-car mr-2" aria-hidden="true"></i>
