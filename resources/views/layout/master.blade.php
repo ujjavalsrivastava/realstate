@@ -206,7 +206,7 @@
                     <div class="close-reg" onclick="closeRegisterLoginModel()"><i class="fa fa-times"></i></div>
                     <h3>Welcome to <span>Find<strong>Houses</strong></span></h3>
                      <div id="tabs-container">
-                     <form method="post"  id="forget">
+                     <form method="post"  id="forgetForm">
                         <div class="tab">
                             <div id="tab-1" class="tab-contents">
                                 <div id="forgetFirst" class="custom-form">
@@ -231,13 +231,12 @@
                             <div class="tab">
                             <div id="forgetThird"  class="custom-form" style="display:none">
                                 <label>Password* </label>
-                                     <input  type="text"  name="forgetpasword" id="forgetpassword">
+                                     <input  type="password"  name="forgetpasword" id="forgetpassword">
                                      <label>Confirm Password* </label>
-                                     <input  type="text"  name="cforgetpasword" id="cforgetpassword">
+                                     <input  type="password"  name="cforgetpasword" id="cforgetpassword">
                                      <button type="submit" class="log-submit-btn" >Submit</button>
                                 </div>
                             </div>
-                     
                         </div>
                     </form>
                     </div>
@@ -294,7 +293,7 @@
 }); 
 
 
-$('#forget').on('submit', function(e) {
+$('#forgetForm').on('submit', function(e) {
                 e.preventDefault(); 
                 $.ajax({
                     type: "POST",

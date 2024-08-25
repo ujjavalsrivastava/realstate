@@ -184,16 +184,17 @@ function changePassword(Request $request){
 
     $validator = Validator::make($request->all(), 
     [ 
-    'email' => 'required|email|exists:users,email',
-    'forgetpasword' => 'required'
+    'forgetemail' => 'required|email',
+    'forgetpasword' => 'required|min:6',
+    'cforgetpasword' => 'required_with:forgetpasword|same:forgetpasword|min:6'
     
    ]);  
     if ($validator->fails()) {  
-    return response()->json(['error'=>$validator->errors()], 401); 
+    return response()->json(['error'=>$validator->errors()->first()], 401); 
     }
 
     User::where('email',$request->email)->update([
-        'password' => Hash($request->forgetpasword)
+        'password' => Hash::make($request->forgetpasword)
     ]);
     return response()->json(['status'=>'200','message' => 'changed  successfully'], 200);
 
