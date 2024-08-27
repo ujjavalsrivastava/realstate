@@ -52,7 +52,7 @@ class HomeController extends Controller
                         'vedio' => 'file|mimes:mp4,mov,avi,flv|max:2048'
                     ]);  
             if ($validator->fails()) {  
-               return response()->json(['error'=>$validator->errors()], 401); 
+               return response()->json(['message'=>$validator->errors()], 400); 
             } 
             $user = JWTAuth::parseToken()->authenticate();
             if ($request->file('video')) {

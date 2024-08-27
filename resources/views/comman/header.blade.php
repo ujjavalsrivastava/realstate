@@ -46,7 +46,7 @@
                     <div class="right-side d-none d-none d-lg-none d-xl-flex">
                         <!-- Header Widget -->
                         <div class="header-widget">
-                            <a href="{{url('/post-property')}}" class="button border">Add Listing<i class="fas fa-laptop-house ml-2"></i></a>
+                            <a href="{{url('/post-property')}}" class="button border">Add Listing</a>
                         </div>
                         <!-- Header Widget / End -->
                     </div>
