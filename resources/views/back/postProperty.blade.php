@@ -377,7 +377,7 @@ function openImage(){
             window.scrollTo({ top: 0, behavior: 'smooth' });
         },
                 });
-    });
+});
 
     //for letter caps
     function capitalizeFirstLetter(string) {

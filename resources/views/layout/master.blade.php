@@ -766,6 +766,47 @@ $('#forgetForm').on('submit', function(e) {
                 }
             });
 
+
+        function getstate(id){
+        $.ajax({
+            headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                url: '{{url('show_state')}}/' + id,
+                type: 'GET',
+                success: function(response) {
+                    var state = '<option value="" >Select State</option>';
+                    $.each(response.data, function( index, value ) {
+                        console.log(value);
+                        state +=  '<option value="' + value.id + '">' + value.name + '</option>'
+                    });
+                    // state += '</select>';
+                   $('#state').html(state);
+                    console.log(state);
+                }
+            });
+    }
+
+    function getCity(id){
+        $.ajax({
+            headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                url: '{{url('show_city')}}/' + id,
+                type: 'GET',
+                success: function(response) {
+                    var city = '<select class="form-control wide select2" name="city" id="city"><option value="" >Select City</option>';
+                    $.each(response.data, function( index, value ) {
+                        console.log(value);
+                        city +=  '<option value="' + value.id + '">' + value.city + '</option>'
+                    });
+                    city += '</select>';
+                   $('#city').html(city);
+                    console.log(city);
+                }
+            });
+    }
+
         </script>
 
         <script>

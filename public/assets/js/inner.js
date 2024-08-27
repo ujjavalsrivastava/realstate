@@ -63,7 +63,7 @@ jQuery(document).on('ready', function ($) {
         var dataMax = $(this).attr('data-max');
         var dataUnit = $(this).attr('data-unit');
 
-        $(this).append("<input type='text' class='first-slider-value'disabled/><input type='text' class='second-slider-value' disabled/>");
+        $(this).append("<input type='text' name='fromarea'  class='first-slider-value' readonly/><input type='text' name='toarea'  class='second-slider-value' readonly/>");
 
         $(this).slider({
 

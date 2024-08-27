@@ -95,6 +95,7 @@
         <script src="{{URL::asset('assets/js/ajaxchimp.min.js')}}"></script>
         <script src="{{URL::asset('assets/js/newsletter.js')}}"></script>
         <script src="{{URL::asset('assets/js/inner.js')}}"></script>
+        
         <script src="{{URL::asset('assets/js/color-switcher.js')}}"></script>
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
         <script>
@@ -411,6 +412,60 @@
                     }
                 }
             });
+
+    function fetureFun(){
+        var arr = [];
+        $('.checkboxall').each(function(i, obj) {
+            if ($(obj).is(':checked')){
+               var id = $(obj).val();
+               arr.push(id);
+            }
+      });
+      console.log(arr);
+    $('#feature').val(arr.join());
+    }
+
+
+        function getstate(id){
+        $.ajax({
+            headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                url: '{{url('show_state')}}/' + id,
+                type: 'GET',
+                success: function(response) {
+                    var state = '<option value="" >Select State</option>';
+                    $.each(response.data, function( index, value ) {
+                        console.log(value);
+                        state +=  '<option value="' + value.id + '">' + value.name + '</option>'
+                    });
+                    // state += '</select>';
+                   $('#state').html(state);
+                    console.log(state);
+                }
+            });
+    }
+
+    function getCity(id){
+        $.ajax({
+            headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                url: '{{url('show_city')}}/' + id,
+                type: 'GET',
+                success: function(response) {
+                    var city = '<select class="form-control wide select2" name="city" id="city"><option value="" >Select City</option>';
+                    $.each(response.data, function( index, value ) {
+                        console.log(value);
+                        city +=  '<option value="' + value.id + '">' + value.city + '</option>'
+                    });
+                    city += '</select>';
+                   $('#city').html(city);
+                    console.log(city);
+                }
+            });
+    }
+
 
         </script>
 

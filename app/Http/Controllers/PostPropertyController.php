@@ -15,6 +15,7 @@ use App\Models\ProFeatureModel;
 use App\Models\ProFeatureMasterModel;
 use App\Models\RealPerameterModel;
 use App\Models\ResComDetailModel;
+use App\Models\FavoriteProModel;
 use App\Models\ProMediaModel;
 use App\Models\CountryModel;
 use App\Models\StateModel;
@@ -188,6 +189,8 @@ class PostPropertyController extends Controller
         }
     }
 
+
+
     function getProperty($id){
         $pro = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->where('id',$id)->first();
         $images = ProMediaModel::where('pro_des_id',$id)->get();
@@ -196,15 +199,17 @@ class PostPropertyController extends Controller
         $saidFeatures = ProDescriptionModel::with('getMedia','getCountry')->whereHas('getProFeature', function ($query){
             $query->where('feature_id' ,'>',0);
         })->orderBy('id','DESC')->limit(10)->get();
-
-       
         return view('front.property', compact('pro','images','features','letistPro','saidFeatures'));
     }
     
+
+
     function fatchPost(Request $request){
         $getPost = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->paginate(6);
         return view('ajax.post', compact('getPost'));
     }
+
+
 
     function propertyForSale(Request $request)
     { 
@@ -253,12 +258,14 @@ class PostPropertyController extends Controller
         
         $getPostcount=$getPost->count();
         $letistPro = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->orderBy('id','DESC')->limit(3)->get();
-        
-        return view('front.propertyforsale',compact('getPostcount','letistPro'));
+        $getCountries = CountryModel::get();
+        $getStates = StateModel::get();
+        $getCities = CityModel::get();
+        $featureMaster = ProFeatureMasterModel::get();
+        return view('front.propertyforsale',compact('getPostcount','letistPro','getStates','getCities','getCountries','featureMaster'));
     }
 
     function searchPos(Request $request){
-        
         $f = $request->feature;
         $getPost = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity');
        if(!empty($f)){
@@ -303,5 +310,21 @@ class PostPropertyController extends Controller
         }
         $getPost=$getPost->paginate(6);
         return view('ajax.search', compact('getPost'));
+    }
+
+    // for favorite property
+    function favoritePro(Request $request){
+        $user = Auth::user();
+        try{
+            $fav = new FavoriteProModel();
+            $fav->user_id = $user->id;
+            $fav->pro_des_id = $request->pro_des_id;
+            $fav->fav_pro = $request->fav_pro;
+            $fav->save();
+     
+            return response()->json(['status'=>'200','data' => $fav]);
+        }catch(\Exception $e){
+            return response()->json(['message' => $e->getMessage()], 400); 
+        }
     }
 }

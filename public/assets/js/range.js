@@ -21,7 +21,7 @@ $("#area-range").each(function () {
     var dataMax = $(this).attr('data-max');
     var dataUnit = $(this).attr('data-unit');
 
-    $(this).append("<input type='text' name='fromarea' class='first-slider-value'/><input type='text' name='toarea' class='second-slider-value' />");
+    $(this).append("<input type='text' name='fromarea' class='first-slider-value' readonly/><input type='text' name='toarea' class='second-slider-value' readonly />");
 
     $(this).slider({
 

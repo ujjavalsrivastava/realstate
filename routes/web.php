@@ -44,8 +44,12 @@ Route::get('show_res_com_details/{id}', [PostPropertyController::class, 'showRes
 Route::get('show_state/{id}', [PostPropertyController::class, 'showState']);
 Route::get('show_city/{id}', [PostPropertyController::class, 'showCity']);
 
+// fav pro
+Route::post('/fav-pro',[PostPropertyController::class, 'favoritePro']);
+
 
 Route::get('/getReletiondata/{id}',[HomeController::class, 'getReletiondata']);
-
 Route::post('/orderGenerate',[PaymentgatewayController::class, 'orderGenerate']);
 Route::post('/verify',[PaymentgatewayController::class, 'verify']);
+
+
