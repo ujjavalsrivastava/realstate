@@ -316,13 +316,20 @@ class PostPropertyController extends Controller
     function favoritePro(Request $request){
         $user = Auth::user();
         try{
-            $fav = new FavoriteProModel();
-            $fav->user_id = $user->id;
-            $fav->pro_des_id = $request->pro_des_id;
-            $fav->fav_pro = $request->fav_pro;
-            $fav->save();
+            if(FavoriteProModel::where('pro_des_id',$request->pro_des_id)->where('user_id',$user->id)->exists()){
+                FavoriteProModel::where('pro_des_id',$request->pro_des_id)->where('user_id',$user->id)->delete();
+                return response()->json(['status'=>'200','msg' => 'delete successfully','flag'=>'N']);
+            }else{
+                $fav = new FavoriteProModel();
+                $fav->user_id = $user->id;
+                $fav->pro_des_id = $request->pro_des_id;
+                $fav->fav_pro = $request->fav_pro;
+                $fav->save();
+                return response()->json(['status'=>'200','msg' => 'added successfully','flag'=>'Y']);
+            }
+            
      
-            return response()->json(['status'=>'200','data' => $fav]);
+            
         }catch(\Exception $e){
             return response()->json(['message' => $e->getMessage()], 400); 
         }

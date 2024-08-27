@@ -292,6 +292,35 @@
     }
 }); 
 
+function addFav(postid){
+
+    $('#loadingDiv').show();
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: "{{url('fav-pro')}}", // The route that handles the request
+                    type: 'POST',
+                    data:{'pro_des_id':postid,'fav_pro':'Y'},
+                    success: function(response) {
+                        $('#loadingDiv').hide();
+                        if(response.flag=='N'){
+                            $('#fav_'+postid).removeAttr( 'style' );
+
+                        }else{
+                            $('#fav_'+postid).css("color", "red");
+                        }
+                      
+                    },
+                    error: function (response) {
+                        $('#loadingDiv').hide();
+                                $('#errorNotification').show();
+                                $('#errorMessage').text(response.responseJSON.error);
+                            },
+                });
+
+}
+
 
 $('#forgetForm').on('submit', function(e) {
                 e.preventDefault(); 

@@ -66,9 +66,20 @@
                                         <a href="#" title="Share">
                                             <i class="fas fa-share-alt"></i>
                                         </a>
-                                        <a href="#" title="Favorites">
-                                            <i class="fa fa-heart-o"></i>
+
+
+                                        @if(auth()->check())
+                                        @php
+                                        $fav = getFavirateUser($row->id);
+                                        @endphp
+                                        
+                                        <a href="javascript:void(0)" onclick="addFav('{{$row->id}}')" title="Favorites">
+                                        <i @if($fav) style="color:red" @endif id="fav_{{$row->id}}" class="flaticon-heart"></i>
                                         </a>
+                                        @else
+                                        <a href="javascript:void(0)" onclick="openRegisterLoginModel()" title="Favorites">
+                                            <i class="flaticon-heart"></i></a>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

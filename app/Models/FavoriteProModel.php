@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class FavoriteProModel extends Model
 {
     use HasFactory;
+    protected $table='favorite_pro';
 }

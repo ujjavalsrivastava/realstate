@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="html 5 template">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="author" content="">
     <title>List View</title>
     <!-- FAVICON -->
@@ -70,7 +71,118 @@
     @include('comman.back_header')
         @include('comman.notify')
         @yield('content');
+
+        
         @include('comman.back_footer')
+
+        <div class="login-and-register-form modal">
+            <div class="main-overlay"></div>
+            <div class="main-register-holder">
+                <div class="main-register fl-wrap">
+                    <div class="close-reg" onclick="closeRegisterLoginModel()"><i class="fa fa-times"></i></div>
+                    <h3>Welcome to <span>Find<strong>Houses</strong></span></h3>
+                    <!-- <div class="soc-log fl-wrap">
+                        <p>Login</p>
+                        <a href="#" class="facebook-log"><i class="fa fa-facebook-official"></i>Log in with Facebook</a>
+                        <a href="#" class="twitter-log"><i class="fa fa-twitter"></i> Log in with Twitter</a>
+                    </div>
+                    <div class="log-separator fl-wrap"><span>Or</span></div> -->
+                    <div id="tabs-container">
+                        <ul class="tabs-menu">
+                            <li id="showhidelogin" onclick="showLoginModel()"><a href="#tab-1" id="loginbuttoncolor" class="loginbuttoncolor">Login</a></li>
+                            <li id="showhideregister" onclick="showRegisterModel()"><a href="#tab-2">Register</a></li>
+                        </ul>
+                        <div class="tab">
+                            <div id="tab-1" class="tab-contents">
+                                <div class="custom-form">
+                                    <form method="post"  id="loginform">
+                                        @csrf()
+                                        <label>Username or Email Address * </label>
+                                        <input name="email" type="text" onClick="this.select()" value="">
+                                        <label>Password * </label>
+                                        <input name="password" type="password" onClick="this.select()" value="">
+                                        <button type="submit" class="log-submit-btn"><span>Log In</span></button>
+                                        <div class="clearfix"></div>
+                                        <div class="filter-tags">
+                                            <input id="check-a" type="checkbox" name="check">
+                                            <label for="check-a">Remember me</label>
+                                        </div>
+                                    </form>
+                                    <div class="lost_password">
+                                        <a href="#">Lost Your Password?</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab">
+                                <div id="tab-2" class="tab-contents">
+                                    <div class="custom-form">
+                                        <form method="post"  id="registerform" >
+                                        @csrf()
+                                           <div id="first">
+                                        <ul class="tabs-menu">
+                                        @foreach($type as $k => $row)
+                                        <li class="{{($k == 0)?'current':''}} protype" onclick="selectProtype(this)"><a href="#" id="loginbuttoncolor">{{ucwords($row->description)}}</a></li>
+                                         @endforeach
+                                       </ul>
+                                       <input type="hidden" name="type" id="type" value="Owner">
+                                        <label>Full Name * </label>
+                                            <input  type="text" name="name">
+                                            <label>Mobile No *</labe>
+                                            <input name="mobile" type="text" >
+                                            <label>Email Address *</label>
+                                            <input name="email" id="emailId" type="text" >
+                                            <label>Password *</label>
+                                            <input name="password" type="password">
+                                            <a href="#" onclick="nextFun()"  class="log-submit-btn"><span>Next</span></a>
+                                             </div>
+                                             <!-- <div id="third" style="display:none">
+                                             <label>Property Type * </label>
+                                             <select class="form-control">
+                                             <option value=>Select Option</option>
+                                            @foreach($pro_type as $row)
+                                            <option value="{{$row->code}}">{{$row->description}}</option>
+                                            @endforeach
+                                            </select>
+                                            <label>What type of Property is it * </label>
+                                             <select class="form-control" onchange="getRelationData(this.value)">
+                                             <option value=>Select Option</option>
+                                            @foreach($res_com_type as $row)
+                                            <option value="{{$row->code}}">{{$row->description}}</option>
+                                            @endforeach
+                                            </select>
+                                            <div id="redioResult">
+                                            </div>                                      
+                                             <button type="submit" class="log-submit-btn"><span>Register</span></button>
+                                             <div>    -->
+                                            <div id="second" style="display:none">
+                                                <label>OTP* </label>
+                                                <input  type="text"  name="otp" id="otp">
+                                                <a href="#" onclick="nextPage()"  class="log-submit-btn"><span>Next</span></a>
+                                            </div>
+                                            <div id="third" style="display:none">
+                                             <label>Property Type * </label>
+                                             <select class="form-control" name="pro_type">
+                                             <option value=>Select Option</option>
+                                            @foreach($pro_type as $row)
+                                            <option value="{{$row->code}}">{{$row->description}}</option>
+                                            @endforeach
+                                            </select>
+                                            <label> Address *</label>
+                                            <input name="address" id="address" type="text" >
+                                            <label> Pin Code *</label>
+                                            <input name="pin_no" id="pin_no" type="text" >                           
+                                             <button type="submit" class="log-submit-btn"><span>Register</span></button>
+                                             <div> 
+                                             </div>   
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
          <!-- ARCHIVES JS -->
@@ -109,6 +221,36 @@
                 width: '100%' // Ensure it takes full width
             });
             });
+
+
+            function addFav(postid){
+
+$('#loadingDiv').show();
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "{{url('fav-pro')}}", // The route that handles the request
+                type: 'POST',
+                data:{'pro_des_id':postid,'fav_pro':'Y'},
+                success: function(response) {
+                    $('#loadingDiv').hide();
+                    if(response.flag=='N'){
+                        $('#fav_'+postid).removeAttr( 'style' );
+
+                    }else{
+                        $('#fav_'+postid).css("color", "red");
+                    }
+                  
+                },
+                error: function (response) {
+                    $('#loadingDiv').hide();
+                            $('#errorNotification').show();
+                            $('#errorMessage').text(response.responseJSON.error);
+                        },
+            });
+
+}
 
             function selectProtype(thisval){
                 jQuery('.protype').each(function(index, currentElement) {

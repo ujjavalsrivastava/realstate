@@ -1,16 +1,12 @@
 <?php
+use App\Models\FavoriteProModel;
+use Auth;
 
-$curl = curl_init();
 
-curl_setopt_array($curl, array(
-  CURLOPT_URL => 'https://api.countrystatecity.in/v1/states',
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_HTTPHEADER => array(
-    'X-CSCAPI-KEY: API_KEY'
-  ),
-));
 
-$response = curl_exec($curl);
+function getFavirateUser($postId)
+{
+  $user = Auth::user();
+  return FavoriteProModel::where('pro_des_id', '=', $postId)->where('user_id',$user->id)->exists();
 
-curl_close($curl);
-echo $response;
+}

@@ -221,6 +221,35 @@
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
         <!-- Date Dropper Script-->
         <script>
+
+function addFav(postid){
+
+$('#loadingDiv').show();
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "{{url('fav-pro')}}", // The route that handles the request
+                type: 'POST',
+                data:{'pro_des_id':postid,'fav_pro':'Y'},
+                success: function(response) {
+                    $('#loadingDiv').hide();
+                    if(response.flag=='N'){
+                        $('#fav_'+postid).removeAttr( 'style' );
+
+                    }else{
+                        $('#fav_'+postid).css("color", "red");
+                    }
+                  
+                },
+                error: function (response) {
+                    $('#loadingDiv').hide();
+                            $('#errorNotification').show();
+                            $('#errorMessage').text(response.responseJSON.error);
+                        },
+            });
+
+}
            
             $('#reservation-date').dateDropper();
 
