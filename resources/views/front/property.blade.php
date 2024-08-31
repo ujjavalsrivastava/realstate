@@ -533,19 +533,19 @@
                                                     <div class="listing-item compact">
                                                         <a href="properties-details.html" class="listing-img-container">
                                                             <div class="listing-badges">
-                                                                <span class="featured">&#8377; {{$saidFeature->price}}</span>
+                                                                <span class="featured">&#8377; {{@$saidFeature->price}}</span>
                                                                 <span>For @if($saidFeature->pro_type == 'R') Rent @else Sale @endif</span>
                                                             </div>
                                                             <div class="listing-img-content">
-                                                                <span class="listing-compact-title">{{ucfirst($saidFeature->pro_title)}} <i>{{$saidFeature->getCountry->name}}</i></span>
+                                                                <span class="listing-compact-title">{{ucfirst(@$saidFeature->pro_title)}} <i>{{@$saidFeature->getCountry->name}}</i></span>
                                                                 <ul class="listing-hidden-content">
-                                                                    <li>Area <span>&#8377; {{$saidFeature->area_sq}} sq ft</span></li>
+                                                                    <li>Area <span>&#8377; {{@$saidFeature->area_sq}} sq ft</span></li>
                                                                     @if(!empty($saidFeature->room))
                                                                     <li>Rooms <span>{{$saidFeature->room}}</span></li>
                                                                     @endif
                                                                     <!-- <li>Beds <span>2</span></li> -->
                                                                      @if(!empty($saidFeature->bathroom))
-                                                                    <li>Baths <span>{{$saidFeature->bathroom}}</span></li>
+                                                                    <li>Baths <span>{{@$saidFeature->bathroom}}</span></li>
                                                                     @endif
                                                                 </ul>
                                                             </div>
