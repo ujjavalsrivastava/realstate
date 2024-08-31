@@ -11,7 +11,10 @@ use App\Models\User;
 use App\Models\CountryModel;
 use App\Models\StateModel;
 use App\Models\CityModel;
+use JWTAuth;
+use Auth;
 use App\Models\ProFeatureModel;
+use App\Models\FavoriteProModel;
 
 class ProDescriptionModel extends Model
 {
@@ -87,5 +90,38 @@ class ProDescriptionModel extends Model
     public function getCity()
     {
         return $this->belongsTo(CityModel::class, 'city','id');
+    }
+    public function getFavPro()
+    {
+        try {
+            $user = JWTAuth::parseToken()->authenticate();
+            $userId = $user->id;
+         
+        } catch (\Exception $e) {
+            if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException){
+                $userId = null;
+            }else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException){
+                $userId = null;
+            }else{
+                $userId = null;
+            }
+        }
+        
+        return $this->hasOne(FavoriteProModel::class, 'pro_des_id','id')->where('user_id',@$userId);
+    }
+
+    public function getFavProAuth()
+    {
+        try {
+            $user = Auth::user();
+            $userId = $user->id;
+         
+        } catch (\Exception $e) {
+           
+                $userId = null;
+            
+        }
+        
+        return $this->hasOne(FavoriteProModel::class, 'pro_des_id','id')->where('user_id',@$userId);
     }
 }

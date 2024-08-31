@@ -43,5 +43,7 @@ Route::post('pro-detail', [HomeController::class, 'proDetail']);
 
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('logout', [AuthController::class, 'logout']);
-    Route::post('pro_description', [HomeController::class, 'proDescription']);    
+    Route::post('pro_description', [HomeController::class, 'proDescription']); 
+    // fav pro ----------
+    Route::post('/fav-pro',[HomeController::class, 'favoritePro']);   
 });

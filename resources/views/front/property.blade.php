@@ -40,7 +40,8 @@
                                         </div>
                                     </div>
                                 </section>
-                                <!-- main slider carousel items -->
+                                <!-- main slider carousel items -->         
+                                @if($images)
                                 <div id="listingDetailsSlider" class="carousel listing-details-sliders slide mb-30">
                                     <h5 class="mb-4">Gallery</h5>
                                     <div class="carousel-inner">
@@ -48,56 +49,26 @@
                                             <img src="{{asset('images')}}/{{@$pro->getMedia[0]->file_name}}" class="img-fluid" alt="slider-listing">
                                         </div>
                                         @foreach($images as $image)
-                                         <div class="item carousel-item" data-slide-number="1">
-                                            <img src="{{asset('images')}}/{{@$image->file_name}}" class="img-fluid" alt="slider-listing">
-                                        </div>
+                                            <div class="item carousel-item" data-slide-number="1">
+                                                <img src="{{asset('images')}}/{{@$image->file_name}}" class="img-fluid" alt="slider-listing">
+                                            </div>
                                         @endforeach
-                                       <!-- <div class="item carousel-item" data-slide-number="2">
-                                            <img src="{{URL::asset('assets/images/single-property/s-3.jpg')}}" class="img-fluid" alt="slider-listing">
-                                        </div>
-                                        <div class="item carousel-item" data-slide-number="4">
-                                            <img src="{{URL::asset('assets/images/single-property/s-4.jpg')}}" class="img-fluid" alt="slider-listing">
-                                        </div>
-                                        <div class="item carousel-item" data-slide-number="5">
-                                            <img src="{{URL::asset('assets/images/single-property/s-5.jpg')}}" class="img-fluid" alt="slider-listing">
-                                        </div> -->
-
                                         <a class="carousel-control left" href="#listingDetailsSlider" data-slide="prev"><i class="fa fa-angle-left"></i></a>
                                         <a class="carousel-control right" href="#listingDetailsSlider" data-slide="next"><i class="fa fa-angle-right"></i></a>
-
                                     </div>
                                     <!-- main slider carousel nav controls -->
                                     <ul class="carousel-indicators smail-listing list-inline">
                                     @foreach($images as $image)
                                         <li class="list-inline-item active">
                                             <a id="carousel-selector-0" class="selected" data-slide-to="0" data-target="#listingDetailsSlider">
-                                                <img src="{{asset('images')}}/{{@$image->file_name}}" class="img-fluid" alt="listing-small">
+                                               <img src="{{asset('images')}}/{{@$image->file_name}}" class="img-fluid" alt="listing-small">
                                             </a>
                                         </li>
-                                        @endforeach
-                                        <!-- <li class="list-inline-item">
-                                            <a id="carousel-selector-1" data-slide-to="1" data-target="#listingDetailsSlider">
-                                                <img src="{{URL::asset('assets/images/single-property/s-2.jpg')}}" class="img-fluid" alt="listing-small">
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a id="carousel-selector-2" data-slide-to="2" data-target="#listingDetailsSlider">
-                                                <img src="{{URL::asset('assets/images/single-property/s-3.jpg')}}" class="img-fluid" alt="listing-small">
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a id="carousel-selector-3" data-slide-to="3" data-target="#listingDetailsSlider">
-                                                <img src="{{URL::asset('assets/images/single-property/s-4.jpg')}}" class="img-fluid" alt="listing-small">
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a id="carousel-selector-4" data-slide-to="4" data-target="#listingDetailsSlider">
-                                                <img src="{{URL::asset('assets/images/single-property/s-5.jpg')}}" class="img-fluid" alt="listing-small">
-                                            </a>
-                                        </li> -->
+                                    @endforeach
                                     </ul>
                                     <!-- main slider carousel items -->
                                 </div>
+                                @endif
                                 <div class="blog-info details mb-30">
                                     <h5 class="mb-4">Description</h5>
                                     <p class="mb-3">{{$pro->pro_description}}</p>
@@ -132,14 +103,6 @@
                                     <span class="font-weight-bold mr-1">Bath:</span>
                                     <span class="det">{{$pro->bathroom}}</span>
                                 </li>
-                                <!-- <li>
-                                    <span class="font-weight-bold mr-1">Garages:</span>
-                                    <span class="det">2</span>
-                                </li> -->
-                                <!-- <li>
-                                    <span class="font-weight-bold mr-1">Year Built:</span>
-                                    <span class="det">10/6/2020</span>
-                                </li> -->
                             </ul>
                             <!-- title -->
                             <h5 class="mt-5">Amenities</h5>
@@ -398,6 +361,7 @@
                         <!-- End Reviews -->
                         <!-- Star Add Review -->
                         <section class="single reviews leve-comments details">
+                        <form action="">
                             <div id="add-review" class="add-review-box">
                                 <!-- Add Review -->
                                 <h3 class="listing-desc-headline margin-bottom-20 mb-4">Add Review</h3>
@@ -457,6 +421,7 @@
                                     </div>
                                 </div>
                             </div>
+                        </form>
                         </section>
                         <!-- End Add Review -->
                     </div>
@@ -529,20 +494,9 @@
                                                 <p class="author__meta">Agent of Property</p>
                                             </div>
                                             <ul class="author__contact">
-                                                <!-- <li><span class="la la-map-marker"><i class="fa fa-map-marker"></i></span>{{($pro->address)}}, {{($pro->getCity->city)}}, {{($pro->getState->name)}}, {{strtoupper($pro->getCountry->name)}}</li> -->
                                                 <li><span class="la la-phone"><i class="fa fa-phone" aria-hidden="true"></i></span><a href="#">{{$pro->phone}}</a></li>
                                                 <li><span class="la la-envelope-o"><i class="fa fa-envelope" aria-hidden="true"></i></span><a href="#">{{$pro->email}}</a></li>
                                             </ul>
-                                            <!-- <div class="agent-contact-form-sidebar">
-                                                <h4>Request Inquiry</h4>
-                                                <form name="contact_form" method="post" action="#">
-                                                    <input type="text" id="fname" name="full_name" placeholder="Full Name" required />
-                                                    <input type="number" id="pnumber" name="phone_number" placeholder="Phone Number" required />
-                                                    <input type="email" id="emailid" name="email_address" placeholder="Email Address" required />
-                                                    <textarea placeholder="Message" name="message" required></textarea>
-                                                    <input type="submit" name="sendmessage" class="multiple-send-message" value="Submit Request" />
-                                                </form>
-                                            </div> -->
                                         </div>
                                     </div>
                                 </div>
@@ -553,15 +507,6 @@
                                         </div>
                                         <div class="widget-boxed-body">
                                             <div class="recent-post">
-                                                <!-- <div class="recent-main">
-                                                    <div class="recent-img">
-                                                        <a href="blog-details.html"><img src="{{URL::asset('assets/images/feature-properties/fp-1.jpg')}}" alt=""></a>
-                                                    </div>
-                                                    <div class="info-img">
-                                                        <a href="blog-details.html"><h6>Family Home</h6></a>
-                                                        <p>$230,000</p>
-                                                    </div>
-                                                </div> -->
                                                 @foreach($letistPro as $latist)
                                                 <div class="recent-main my-4">
                                                     <div class="recent-img">
@@ -573,15 +518,6 @@
                                                     </div>
                                                 </div>
                                                 @endforeach
-                                                <!-- <div class="recent-main">
-                                                    <div class="recent-img">
-                                                        <a href="blog-details.html"><img src="{{URL::asset('assets/images/feature-properties/fp-3.jpg')}}" alt=""></a>
-                                                    </div>
-                                                    <div class="info-img">
-                                                        <a href="blog-details.html"><h6>Family Home</h6></a>
-                                                        <p>$230,000</p>
-                                                    </div>
-                                                </div> -->
                                             </div>
                                         </div>
                                     </div>
@@ -670,175 +606,71 @@
                     <div class="container">
                         <h5>Similar Properties</h5>
                         <div class="row portfolio-items">
-                            <div class="item col-lg-4 col-md-6 col-xs-12 landscapes">
-                                <div class="project-single">
-                                    <div class="project-inner project-head">
-                                        <div class="homes">
-                                            <!-- homes img -->
-                                            <a href="single-property-1.html" class="homes-img">
-                                                <div class="homes-tag button alt featured">Featured</div>
-                                                <div class="homes-tag button alt sale">For Sale</div>
-                                                <div class="homes-price">$9,000/mo</div>
-                                                <img src="{{URL::asset('assets/images/blog/b-11.jpg')}}" alt="home-1" class="img-responsive">
-                                            </a>
+                            @foreach($similarPro as $similar)
+                                <div class="item col-lg-4 col-md-6 col-xs-12 landscapes">
+                                    <div class="project-single">
+                                        <div class="project-inner project-head">
+                                            <div class="homes">
+                                                <!-- homes img -->
+                                                <a href="single-property-1.html" class="homes-img">
+                                                @if(count($similar->getProFeature)>0)
+                                                    <div class="homes-tag button alt featured">Featured</div>
+                                                @endif
+                                                    <div class="homes-tag button alt sale">For @if($similar->pro_type == 'R') Rant @else Sale @endif</div>
+                                                    <div class="homes-price">&#8377; {{$similar->price}}</div>
+                                                    <img src="{{asset('images')}}/{{@$similar->getMedia[0]->file_name}}" alt="home-1" class="img-responsive">
+                                                </a>
+                                            </div>
+                                            <div class="button-effect">
+                                                <a href="{{url('get_property')}}/{{$similar->id}}" class="btn"><i class="fa fa-link"></i></a>
+                                                <a href="https://www.youtube.com/watch?v=14semTlwyUY" class="btn popup-video popup-youtube"><i class="fas fa-video"></i></a>
+                                                <a href="single-property-2.html" class="img-poppu btn"><i class="fa fa-photo"></i></a>
+                                            </div>
                                         </div>
-                                        <div class="button-effect">
-                                            <a href="single-property-1.html" class="btn"><i class="fa fa-link"></i></a>
-                                            <a href="https://www.youtube.com/watch?v=14semTlwyUY" class="btn popup-video popup-youtube"><i class="fas fa-video"></i></a>
-                                            <a href="single-property-2.html" class="img-poppu btn"><i class="fa fa-photo"></i></a>
-                                        </div>
-                                    </div>
-                                    <!-- homes content -->
-                                    <div class="homes-content">
-                                        <!-- homes address -->
-                                        <h3><a href="single-property-1.html">Real House Luxury Villa</a></h3>
-                                        <p class="homes-address mb-3">
-                                            <a href="single-property-1.html">
-                                                <i class="fa fa-map-marker"></i><span>Est St, 77 - Central Park South, NYC</span>
-                                            </a>
-                                        </p>
-                                        <!-- homes List -->
-                                        <ul class="homes-list clearfix pb-3">
-                                            <li class="the-icons">
-                                                <i class="flaticon-bed mr-2" aria-hidden="true"></i>
-                                                <span>6 Bedrooms</span>
-                                            </li>
-                                            <li class="the-icons">
-                                                <i class="flaticon-bathtub mr-2" aria-hidden="true"></i>
-                                                <span>3 Bathrooms</span>
-                                            </li>
-                                            <li class="the-icons">
-                                                <i class="flaticon-square mr-2" aria-hidden="true"></i>
-                                                <span>720 sq ft</span>
-                                            </li>
-                                            <li class="the-icons">
-                                                <i class="flaticon-car mr-2" aria-hidden="true"></i>
-                                                <span>2 Garages</span>
-                                            </li>
-                                        </ul>
-                                        <div class="footer">
-                                            <a href="agent-details.html">
-                                                <img src="{{URL::asset('assets/images/testimonials/ts-1.jpg')}}" alt="" class="mr-2"> Lisa Jhonson
-                                            </a>
-                                            <span>2 months ago</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item col-lg-4 col-md-6 col-xs-12 people">
-                                <div class="project-single">
-                                    <div class="project-inner project-head">
-                                        <div class="homes">
-                                            <!-- homes img -->
-                                            <a href="single-property-1.html" class="homes-img">
-                                                <div class="homes-tag button sale rent">For Rent</div>
-                                                <div class="homes-price">$3,000/mo</div>
-                                                <img src="{{URL::asset('assets/images/blog/b-12.jpg')}}" alt="home-1" class="img-responsive">
-                                            </a>
-                                        </div>
-                                        <div class="button-effect">
-                                            <a href="single-property-1.html" class="btn"><i class="fa fa-link"></i></a>
-                                            <a href="https://www.youtube.com/watch?v=14semTlwyUY" class="btn popup-video popup-youtube"><i class="fas fa-video"></i></a>
-                                            <a href="single-property-2.html" class="img-poppu btn"><i class="fa fa-photo"></i></a>
-                                        </div>
-                                    </div>
-                                    <!-- homes content -->
-                                    <div class="homes-content">
-                                        <!-- homes address -->
-                                        <h3><a href="single-property-1.html">Real House Luxury Villa</a></h3>
-                                        <p class="homes-address mb-3">
-                                            <a href="single-property-1.html">
-                                                <i class="fa fa-map-marker"></i><span>Est St, 77 - Central Park South, NYC</span>
-                                            </a>
-                                        </p>
-                                        <!-- homes List -->
-                                        <ul class="homes-list clearfix pb-3">
-                                            <li class="the-icons">
-                                                <i class="flaticon-bed mr-2" aria-hidden="true"></i>
-                                                <span>6 Bedrooms</span>
-                                            </li>
-                                            <li class="the-icons">
-                                                <i class="flaticon-bathtub mr-2" aria-hidden="true"></i>
-                                                <span>3 Bathrooms</span>
-                                            </li>
-                                            <li class="the-icons">
-                                                <i class="flaticon-square mr-2" aria-hidden="true"></i>
-                                                <span>720 sq ft</span>
-                                            </li>
-                                            <li class="the-icons">
-                                                <i class="flaticon-car mr-2" aria-hidden="true"></i>
-                                                <span>2 Garages</span>
-                                            </li>
-                                        </ul>
-                                        <div class="footer">
-                                            <a href="agent-details.html">
-                                                <img src="{{URL::asset('assets/images/testimonials/ts-2.jpg')}}" alt="" class="mr-2"> Karl Smith
-                                            </a>
-                                            <span>2 months ago</span>
+                                        <!-- homes content -->
+                                        <div class="homes-content">
+                                            <!-- homes address -->
+                                            <h3><a href="{{url('get_property')}}/{{$similar->id}}">{{$similar->pro_title}}</a></h3>
+                                            <p class="homes-address mb-3">
+                                                <a href="{{url('get_property')}}/{{$similar->id}}">
+                                                    <i class="fa fa-map-marker"></i><span>{{strtoupper($similar->address)}}, {{strtoupper(@$similar->getCity->city)}}, {{strtoupper(@$similar->getState->name)}}, {{strtoupper(@$similar->getCountry->name)}}</span>
+                                                </a>
+                                            </p>
+                                            <!-- homes List -->
+                                            <ul class="homes-list clearfix pb-3">
+                                                <li class="the-icons">
+                                                    <i class="flaticon-bed mr-2" aria-hidden="true"></i>
+                                                    <span>{{$similar->room}} Bedrooms</span>
+                                                </li>
+                                                <li class="the-icons">
+                                                    <i class="flaticon-bathtub mr-2" aria-hidden="true"></i>
+                                                    <span>{{$similar->bathroom}} Bathrooms</span>
+                                                </li>
+                                                <li class="the-icons">
+                                                    <i class="flaticon-square mr-2" aria-hidden="true"></i>
+                                                    <span>&#8377;{{$similar->area_sq}} sq ft</span>
+                                                </li>
+                                                <!-- <li class="the-icons">
+                                                    <i class="flaticon-car mr-2" aria-hidden="true"></i>
+                                                    <span>2 Garages</span>
+                                                </li> -->
+                                            </ul>
+                                            <div class="footer">
+                                                <a href="agent-details.html">
+                                                    <img src="{{URL::asset('assets/images/testimonials/ts-1.jpg')}}" alt="" class="mr-2">{{ucfirst(@$similar->getUser[0]->name)}}
+                                                </a>
+                                                <span>{{timeDifference($similar->created_at) }}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="item col-lg-4 col-md-6 col-xs-12 people landscapes no-pb pbp-3">
-                                <div class="project-single no-mb mbp-3">
-                                    <div class="project-inner project-head">
-                                        <div class="homes">
-                                            <!-- homes img -->
-                                            <a href="single-property-1.html" class="homes-img">
-                                                <div class="homes-tag button alt sale">For Sale</div>
-                                                <div class="homes-price">$9,000/mo</div>
-                                                <img src="{{URL::asset('assets/images/blog/b-1.jpg')}}" alt="home-1" class="img-responsive">
-                                            </a>
-                                        </div>
-                                        <div class="button-effect">
-                                            <a href="single-property-1.html" class="btn"><i class="fa fa-link"></i></a>
-                                            <a href="https://www.youtube.com/watch?v=14semTlwyUY" class="btn popup-video popup-youtube"><i class="fas fa-video"></i></a>
-                                            <a href="single-property-2.html" class="img-poppu btn"><i class="fa fa-photo"></i></a>
-                                        </div>
-                                    </div>
-                                    <!-- homes content -->
-                                    <div class="homes-content">
-                                        <!-- homes address -->
-                                        <h3><a href="single-property-1.html">Real House Luxury Villa</a></h3>
-                                        <p class="homes-address mb-3">
-                                            <a href="single-property-1.html">
-                                                <i class="fa fa-map-marker"></i><span>Est St, 77 - Central Park South, NYC</span>
-                                            </a>
-                                        </p>
-                                        <!-- homes List -->
-                                        <ul class="homes-list clearfix pb-3">
-                                            <li class="the-icons">
-                                                <i class="flaticon-bed mr-2" aria-hidden="true"></i>
-                                                <span>6 Bedrooms</span>
-                                            </li>
-                                            <li class="the-icons">
-                                                <i class="flaticon-bathtub mr-2" aria-hidden="true"></i>
-                                                <span>3 Bathrooms</span>
-                                            </li>
-                                            <li class="the-icons">
-                                                <i class="flaticon-square mr-2" aria-hidden="true"></i>
-                                                <span>720 sq ft</span>
-                                            </li>
-                                            <li class="the-icons">
-                                                <i class="flaticon-car mr-2" aria-hidden="true"></i>
-                                                <span>2 Garages</span>
-                                            </li>
-                                        </ul>
-                                        <div class="footer">
-                                            <a href="agent-details.html">
-                                                <img src="{{URL::asset('assets/images/testimonials/ts-3.jpg')}}" alt="" class="mr-2"> katy Teddy
-                                            </a>
-                                            <span>2 months ago</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </section>
                 <!-- END SIMILAR PROPERTIES -->
             </div>
-        </section>
+</section>
         <!-- END SECTION PROPERTIES LISTING -->
 
         @endsection

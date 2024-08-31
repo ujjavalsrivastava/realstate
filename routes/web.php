@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\PostPropertyController;
 use App\Http\Controllers\PaymentgatewayController;
 /*
@@ -44,9 +45,16 @@ Route::get('show_res_com_details/{id}', [PostPropertyController::class, 'showRes
 Route::get('show_state/{id}', [PostPropertyController::class, 'showState']);
 Route::get('show_city/{id}', [PostPropertyController::class, 'showCity']);
 
-// fav pro
+// fav pro ----------
 Route::post('/fav-pro',[PostPropertyController::class, 'favoritePro']);
 
+// footer file
+Route::get('/about-us',[HomeController::class, 'aboutUs']);
+Route::get('/contact-us',[HomeController::class, 'contactUs']);
+Route::get('/terms-conditions',[HomeController::class, 'termsConditions']);
+
+// review
+Route::post('post-review',[ReviewController::class, 'postReview']);
 
 Route::get('/getReletiondata/{id}',[HomeController::class, 'getReletiondata']);
 Route::post('/orderGenerate',[PaymentgatewayController::class, 'orderGenerate']);

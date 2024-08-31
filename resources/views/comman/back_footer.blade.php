@@ -46,10 +46,10 @@
                                     </ul>
                                     <ul class="nav-right">
                                         <li><a href="agent-details.html">Agents Details</a></li>
-                                        <li><a href="about.html">About Us</a></li>
+                                        <li><a href="{{url('/about-us')}}">About Us</a></li>
                                         <li><a href="blog.html">Blog Default</a></li>
                                         <li><a href="blog-details.html">Blog Details</a></li>
-                                        <li class="no-mgb"><a href="contact-us.html">Contact Us</a></li>
+                                        <li class="no-mgb"><a href="{{url('/contact-us')}}">Contact Us</a></li>
                                     </ul>
                                 </div>
                             </div>

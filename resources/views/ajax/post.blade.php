@@ -6,7 +6,7 @@
                                     <!-- homes img -->
                                    <a href="single-property-1.html" class="homes-img">
                                     @if(count($post->getProFeature)>0)
-                                            <div class="homes-tag button alt featured">Featured</div>
+                                        <div class="homes-tag button alt featured">Featured</div>
                                     @endif
                                         <div class="homes-tag button alt sale">For @if($post->pro_type == 'R') Rant @else Sale @endif</div>
                                         <img src="{{asset('images')}}/{{@$post->getMedia[0]->file_name}}" alt="home-1" class="img-responsive">
@@ -41,10 +41,6 @@
                                         <i class="flaticon-square mr-2" aria-hidden="true"></i>
                                         <span>&#8377;{{$post->area_sq}} sq ft</span>
                                     </li>
-                                    <!-- <li class="the-icons">
-                                        <i class="flaticon-car mr-2" aria-hidden="true"></i>
-                                        <span>2 Garages</span>
-                                    </li> -->
                                 </ul>
                                 <div class="price-properties footer pt-3 pb-0">
                                     <h3 class="title mt-3">
@@ -57,10 +53,11 @@
                                         <a href="#" title="Share">
                                             <i class="flaticon-share"></i>
                                         </a>
-                                        @if(auth()->check())
+                                        @if(Auth()->check())
+
                                         @php
-                                        $fav = getFavirateUser($post->id);
-                                        @endphp
+                                        $fav = @$post->getFavProAuth;
+                                       @endphp       
                                         
                                         <a href="javascript:void(0)" onclick="addFav('{{$post->id}}')" title="Favorites">
                                         <i @if($fav) style="color:red" @endif id="fav_{{$post->id}}" class="flaticon-heart"></i>
@@ -68,8 +65,7 @@
                                         @else
                                         <a href="javascript:void(0)" onclick="openRegisterLoginModel()" title="Favorites">
                                             <i class="flaticon-heart"></i></a>
-                                        @endif
-                                       
+                                        @endif  
                                     </div>
                                 </div>
                             </div>

@@ -21,18 +21,29 @@ use App\Models\ProFeatureMasterModel;
 class HomeController extends Controller
 {
     function index(){
+        $getPost = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->get();
         $getCountries = CountryModel::get();
         $getStates = StateModel::get();
         $getCities = CityModel::get();
         $featureMaster = ProFeatureMasterModel::get();
         $popularPlace =  DB::select('select count(city) as cntcount,city as cityId,(select city from cities where id = cityId) cityname  from pro_description group by city limit 8');
 
-         return view('front.index',compact('getCountries','getStates','getCities','featureMaster','popularPlace'));
+         return view('front.index',compact('getCountries','getStates','getCities','featureMaster','popularPlace','getPost'));
     }
 
     function aboutUs(){
-        return view('front.aboutus');
+        return view('back.aboutus');
     }
+    
+    function contactUs(){
+        return view('back.contactus');
+    }
+
+    function termsConditions(){
+        return view('back.termsconditions');
+    }
+
+    
 
     function showForgetPass(){
         try{

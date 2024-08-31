@@ -193,19 +193,21 @@ class PostPropertyController extends Controller
 
     function getProperty($id){
         $pro = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->where('id',$id)->first();
+        $similarPro = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->where('city',$pro->city)->where('state',$pro->state)->limit(3)->get();
         $images = ProMediaModel::where('pro_des_id',$id)->get();
         $features = ProFeatureModel::with('getProFeatureMaster')->where('pro_des_id',$id)->get();
         $letistPro = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->orderBy('id','DESC')->limit(3)->get();
         $saidFeatures = ProDescriptionModel::with('getMedia','getCountry')->whereHas('getProFeature', function ($query){
             $query->where('feature_id' ,'>',0);
         })->orderBy('id','DESC')->limit(10)->get();
-        return view('front.property', compact('pro','images','features','letistPro','saidFeatures'));
+        return view('front.property', compact('pro','images','features','letistPro','saidFeatures','similarPro'));
     }
     
 
 
     function fatchPost(Request $request){
-        $getPost = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->paginate(6);
+        $getPost = ProDescriptionModel::with('getFavProAuth','getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->paginate(6);
+        
         return view('ajax.post', compact('getPost'));
     }
 

@@ -68,18 +68,19 @@
                                         </a>
 
 
-                                        @if(auth()->check())
-                                        @php
-                                        $fav = getFavirateUser($row->id);
-                                        @endphp
-                                        
-                                        <a href="javascript:void(0)" onclick="addFav('{{$row->id}}')" title="Favorites">
-                                        <i @if($fav) style="color:red" @endif id="fav_{{$row->id}}" class="flaticon-heart"></i>
-                                        </a>
-                                        @else
-                                        <a href="javascript:void(0)" onclick="openRegisterLoginModel()" title="Favorites">
-                                            <i class="flaticon-heart"></i></a>
-                                        @endif
+                                        @if(Auth()->check())
+
+                                            @php
+                                            $fav = @$row->getFavProAuth;
+                                            @endphp       
+
+                                            <a href="javascript:void(0)" onclick="addFav('{{$row->id}}')" title="Favorites">
+                                            <i @if($fav) style="color:red" @endif id="fav_{{$row->id}}" class="flaticon-heart"></i>
+                                            </a>
+                                            @else
+                                            <a href="javascript:void(0)" onclick="openRegisterLoginModel()" title="Favorites">
+                                                <i class="flaticon-heart"></i></a>
+                                            @endif  
                                     </div>
                                 </div>
                             </div>

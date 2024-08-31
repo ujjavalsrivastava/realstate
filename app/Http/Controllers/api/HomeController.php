@@ -9,6 +9,7 @@ use App\Models\ProDescriptionModel;
 use App\Models\ProFeatureModel;
 use App\Models\ProFeatureMasterModel;
 use App\Models\ProMediaModel;
+use App\Models\FavoriteProModel;
 use App\Models\User;
 use App\Models\Menu;
 use App\Models\CountryModel;
@@ -64,7 +65,6 @@ class HomeController extends Controller
               }
             $pro_des = new ProDescriptionModel();
             // video
-        
             $pro_des->user_id = $user->id;
             $pro_des->pro_title = $request->pro_title;
             $pro_des->pro_description = $request->pro_description;
@@ -128,13 +128,13 @@ class HomeController extends Controller
     }
 
     public function proDetail(Request $request){
-        $proDetail = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->where('id',$request->id)->first();
+        $proDetail = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity','getFavPro')->where('id',$request->id)->first();
         return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $proDetail]);
     }
 
     //get property Description
     public function getProDescription(){
-        $pro_description_list = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->get();
+        $pro_description_list = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity','getFavPro')->get();
         return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $pro_description_list]);
     }
 
@@ -146,7 +146,7 @@ class HomeController extends Controller
 
     // Data search
     public function getSearchProperty(Request $request){
-        $data = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->where('pro_type','like',"%{$request->pro_type}%");
+        $data = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity','getFavPro')->where('pro_type','like',"%{$request->pro_type}%");
                 if($request->country){
                     $data->where('country','like',"%{$request->country}%");
                 }
@@ -155,6 +155,22 @@ class HomeController extends Controller
                 }
                 if($request->city){
                     $data->where('city','like',"%{$request->city}%");
+                }
+                if(!empty($request->room)){
+                    $data->where('room',$request->room);
+                }
+                if(!empty($request->res_com_detail)){
+                    
+                    $data->where('res_com_detail','like',"%{$request->res_com_detail}%");
+ 
+                }
+                if(!empty($request->fromprice) && !empty($request->toprice)){
+                    $fromPrice = str_replace('₹','',$request->fromprice) ;
+                    $fromPrice = str_replace(',','',$fromPrice) ;
+                    $toPrice = str_replace('₹','',$request->toprice) ;
+                    $toPrice = str_replace(',','',$toPrice) ;
+                   
+                    $data->whereBetween('area_sq',[(int)$fromPrice,(int)$toPrice]);
                 }
                 $search = $data->get();
                 return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $search]);
@@ -177,4 +193,27 @@ class HomeController extends Controller
         $menu = Menu::get();
         return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $menu]);
      }
+
+     // for favorite property
+     function favoritePro(Request $request){
+        $user = JWTAuth::parseToken()->authenticate();
+        try{
+            if(FavoriteProModel::where('pro_des_id',$request->pro_des_id)->where('user_id',$user->id)->exists()){
+                FavoriteProModel::where('pro_des_id',$request->pro_des_id)->where('user_id',$user->id)->delete();
+                return response()->json(['status'=>'200','msg' => 'delete successfully','flag'=>'N']);
+            }else{
+                $fav = new FavoriteProModel();
+                $fav->user_id = $user->id;
+                $fav->pro_des_id = $request->pro_des_id;
+                $fav->fav_pro = 'Y';
+                $fav->save();
+                return response()->json(['status'=>'200','msg' => 'added successfully','flag'=>'Y']);
+            }
+            
+     
+            
+        }catch(\Exception $e){
+            return response()->json(['message' => $e->getMessage()], 400); 
+        }
+    }
 }
