@@ -170,7 +170,7 @@ class HomeController extends Controller
                     $toPrice = str_replace('₹','',$request->toprice) ;
                     $toPrice = str_replace(',','',$toPrice) ;
                    
-                    $data->whereBetween('area_sq',[(int)$fromPrice,(int)$toPrice]);
+                    $data->whereBetween('price',[(int)$fromPrice,(int)$toPrice]);
                 }
                 $search = $data->get();
                 return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $search]);

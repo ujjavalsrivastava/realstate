@@ -308,7 +308,7 @@ class PostPropertyController extends Controller
             $toPrice = str_replace('₹','',$request->toprice) ;
             $toPrice = str_replace(',','',$toPrice) ;
            
-            $getPost->whereBetween('area_sq',[(int)$fromPrice,(int)$toPrice]);
+            $getPost->whereBetween('price',[(int)$fromPrice,(int)$toPrice]);
         }
         $getPost=$getPost->paginate(6);
         return view('ajax.search', compact('getPost'));
