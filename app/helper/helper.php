@@ -71,3 +71,26 @@ $difference = $secondDifference/60;
 $FinalDifference = $difference; 
 return $FinalDifference;
 }
+
+function FindLatLong($addres){
+    $curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'https://api.opencagedata.com/geocode/v1/json?q='.$addres.'&key=495d36494a16466bb91bd5858c097051',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'GET',
+));
+
+$response = curl_exec($curl);
+
+curl_close($curl);
+$adress =$response->results[0]->formatted;
+$lat =$response->results[0]->geometry->lat;
+$log =$response->results[0]->geometry->lng;
+return [$adress,$lat,$log];
+}

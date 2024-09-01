@@ -34,6 +34,7 @@ Route::get('get-pro-type-list', [AuthController::class, 'getProTypList']);
 Route::get('get_res_com_type_details', [AuthController::class, 'getResComTypeDetails']);
 Route::post('change_password', [AuthController::class, 'changePassword']);
 Route::post('pro-detail', [HomeController::class, 'proDetail']);  
+Route::post('payment-detail', [HomeController::class, 'paymentDetail']);  
 
     Route::get('get_pro_feature_master', [HomeController::class, 'getProFeatureMas']);
     Route::get('get_pro_description', [HomeController::class, 'getProDescription']);  

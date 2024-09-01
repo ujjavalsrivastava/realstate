@@ -13,6 +13,7 @@ use App\Models\FavoriteProModel;
 use App\Models\User;
 use App\Models\Menu;
 use App\Models\CountryModel;
+use App\Models\PaymentDetails;
 use App\Models\StateModel;
 use App\Models\CityModel;
 use Illuminate\Http\Request;
@@ -50,7 +51,11 @@ class HomeController extends Controller
                         'email' => 'required|email',
                         'phone' => 'required|min:10|max:11',
                         'images.*' => 'required|mimes:jpg,jpeg,png|max:2048',
-                        'vedio' => 'file|mimes:mp4,mov,avi,flv|max:2048'
+                        'vedio' => 'file|mimes:mp4,mov,avi,flv|max:2048',
+                        'price' => 'required',
+                        'razorpay_order_id' => 'required',
+                        'razorpay_payment_id' => 'required',
+                        'razorpay_signature' => 'required',
                     ]);  
             if ($validator->fails()) {  
                return response()->json(['message'=>$validator->errors()], 400); 
@@ -63,6 +68,7 @@ class HomeController extends Controller
                     $request->file('video')->move($uploade_path,$filename);
                     // $videoFile = ProDescriptionModel::insert(['video' => $path]);
               }
+
             $pro_des = new ProDescriptionModel();
             // video
             $pro_des->user_id = $user->id;
@@ -88,6 +94,13 @@ class HomeController extends Controller
             $pro_des->phone = $request->phone;
             @$pro_des->video = @$path;
             $pro_des->save();
+
+            $payment = PaymentDetails::where('razorpay_order_id',$request->razorpay_order_id)->first();
+            $payment->razorpay_payment_id = $request->razorpay_payment_id;
+            $payment->razorpay_signature = $request->razorpay_signature;
+            $payment->post_id = $pro_des->id;
+            $payment->status = 'Success';
+            $payment->save();
             // feature 
              foreach ($request->feature_id as $item) {
                 $feature= ProFeatureModel::insert(['feature_id' => $item,
@@ -123,6 +136,33 @@ class HomeController extends Controller
             //DB::commit();
         }catch(\Exception $e){
            // DB::rollBack();
+            return response()->json(['message' => $e->getMessage()], 400); 
+        }
+    }
+
+    public function paymentDetail(Request $request){
+        try{
+            $validator = Validator::make($request->all(), 
+            [ 
+                'price' => 'required',
+                'razorpay_order_id' => 'required',
+                'razorpay_payment_id' => 'required',
+                'razorpay_signature' => 'required',
+            ]);  
+                if ($validator->fails()) {  
+                    return response()->json(['message'=>$validator->errors()], 400); 
+                } 
+
+            $user = JWTAuth::parseToken()->authenticate();
+            $payment =  new PaymentDetails();
+        $payment->user_id = $user->id;
+        $payment->price = $request->price;
+        $payment->razorpay_order_id = $request->razorpay_order_id;
+        $payment->razorpay_payment_id = $request->razorpay_payment_id;
+        $payment->razorpay_signature = $request->razorpay_signature;
+        $payment->save();
+            return response()->json(['msg' => 'Payment Successfuly'], 200);
+        }catch(\Exception $e){
             return response()->json(['message' => $e->getMessage()], 400); 
         }
     }
