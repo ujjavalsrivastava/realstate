@@ -21,7 +21,7 @@
                             <!-- homes content -->
                             <div class="homes-content">
                                 <!-- homes address -->
-                                <h3><a href="{{url('get_property')}}/{{$post->id}}">{{$post->pro_title}}</a></h3>
+                                <h3><a href="{{url('get_property')}}/{{$post->id}}">{{ucfirst($post->pro_title)}}</a></h3>
                                 <p class="homes-address mb-3">
                                     <a href="single-property-1.html">
                                         <i class="fa fa-map-marker"></i><span style="font-size:12px">{{strtoupper($post->address)}}, {{strtoupper(@$post->getCity->city)}}, {{strtoupper(@$post->getState->name)}}, {{strtoupper(@$post->getCountry->name)}}</span>

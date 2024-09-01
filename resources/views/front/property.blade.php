@@ -41,7 +41,7 @@
                                     </div>
                                 </section>
                                 <!-- main slider carousel items -->         
-                                @if($images)
+                                @if(count($images)>0)
                                 <div id="listingDetailsSlider" class="carousel listing-details-sliders slide mb-30">
                                     <h5 class="mb-4">Gallery</h5>
                                     <div class="carousel-inner">
@@ -273,95 +273,15 @@
                             <div id="map-contact" class="contact-map"></div>
                         </div>
                         <!-- Star Reviews -->
-                        <section class="reviews comments">
-                            <h3 class="mb-5">3 Reviews</h3>
-                            <div class="row mb-5">
-                                <ul class="col-12 commented pl-0">
-                                    <li class="comm-inf">
-                                        <div class="col-md-2">
-                                            <img src="{{URL::asset('assets/images/testimonials/ts-5.jpg')}}" class="img-fluid" alt="">
-                                        </div>
-                                        <div class="col-md-10 comments-info">
-                                            <div class="conra">
-                                                <h5 class="mb-2">Mary Smith</h5>
-                                                <div class="rating-box">
-                                                    <div class="detail-list-rating mr-0">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-o"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <p class="mb-4">May 30 2020</p>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam, quam congue dictum luctus, lacus magna congue ante, in finibus dui sapien eu dolor. Integer tincidunt suscipit erat, nec laoreet ipsum vestibulum sed.</p>
-                                            <div class="rest"><img src="{{URL::asset('assets/images/single-property/s-1.jpg')}}" class="img-fluid" alt=""></div>
-                                        </div>
-                                    </li>
+                        <section class="reviews comments list">
 
-                                </ul>
-                            </div>
-                            <div class="row">
-                                <ul class="col-12 commented pl-0">
-                                    <li class="comm-inf">
-                                        <div class="col-md-2">
-                                            <img src="{{URL::asset('assets/images/testimonials/ts-4.jpg')}}" class="img-fluid" alt="">
-                                        </div>
-                                        <div class="col-md-10 comments-info">
-                                            <div class="conra">
-                                                <h5 class="mb-2">Abraham Tyron</h5>
-                                                <div class="rating-box">
-                                                    <div class="detail-list-rating mr-0">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <p class="mb-4">june 1 2020</p>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam, quam congue dictum luctus, lacus magna congue ante, in finibus dui sapien eu dolor. Integer tincidunt suscipit erat, nec laoreet ipsum vestibulum sed.</p>
-                                        </div>
-                                    </li>
-
-                                </ul>
-                            </div>
-                            <div class="row mt-5">
-                                <ul class="col-12 commented mb-0 pl-0">
-                                    <li class="comm-inf">
-                                        <div class="col-md-2">
-                                            <img src="{{URL::asset('assets/images/testimonials/ts-3.jpg')}}" class="img-fluid" alt="">
-                                        </div>
-                                        <div class="col-md-10 comments-info">
-                                            <div class="conra">
-                                                <h5 class="mb-2">Lisa Williams</h5>
-                                                <div class="rating-box">
-                                                    <div class="detail-list-rating mr-0">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-o"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <p class="mb-4">jul 12 2020</p>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam, quam congue dictum luctus, lacus magna congue ante, in finibus dui sapien eu dolor. Integer tincidunt suscipit erat, nec laoreet ipsum vestibulum sed.</p>
-                                            <div class="resti">
-                                                <div class="rest"><img src="{{URL::asset('assets/images/single-property/s-2.jpg')}}" class="img-fluid" alt=""></div>
-                                                <div class="rest"><img src="{{URL::asset('assets/images/single-property/s-3.jpg')}}" class="img-fluid" alt=""></div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
                         </section>
                         <!-- End Reviews -->
                         <!-- Star Add Review -->
                         <section class="single reviews leve-comments details">
-                        <form action="">
+                        <form id="addForm"  method="post" enctype='multipart/form-data'>
+                            @csrf
+                            <input type="hidden" name="pro_des_id" id="pro_des_id" value="{{$pro->id}}" class="form-control" >
                             <div id="add-review" class="add-review-box">
                                 <!-- Add Review -->
                                 <h3 class="listing-desc-headline margin-bottom-20 mb-4">Add Review</h3>
@@ -372,15 +292,15 @@
                                         <!-- Leave Rating -->
                                         <div class="clearfix"></div>
                                         <div class="leave-rating margin-bottom-30">
-                                            <input type="radio" name="rating" id="rating-1" value="1" />
+                                            <input type="radio" name="reating" id="rating-1" value="5" />
                                             <label for="rating-1" class="fa fa-star"></label>
-                                            <input type="radio" name="rating" id="rating-2" value="2" />
+                                            <input type="radio" name="reating" id="rating-2" value="4" />
                                             <label for="rating-2" class="fa fa-star"></label>
-                                            <input type="radio" name="rating" id="rating-3" value="3" />
+                                            <input type="radio" name="reating" id="rating-3" value="3" />
                                             <label for="rating-3" class="fa fa-star"></label>
-                                            <input type="radio" name="rating" id="rating-4" value="4" />
+                                            <input type="radio" name="reating" id="rating-4" value="2" />
                                             <label for="rating-4" class="fa fa-star"></label>
-                                            <input type="radio" name="rating" id="rating-5" value="5" />
+                                            <input type="radio" name="reating" id="rating-5" value="1" />
                                             <label for="rating-5" class="fa fa-star"></label>
                                         </div>
                                         <div class="clearfix"></div>
@@ -390,7 +310,7 @@
                                         <div class="add-review-photos margin-bottom-30">
                                             <div class="photoUpload">
                                                 <span><i class="sl sl-icon-arrow-up-circle"></i> Upload Photos</span>
-                                                <input type="file" class="upload" />
+                                                <input type="file" name="images[]" class="upload" multiple>
                                             </div>
                                         </div>
                                     </div>
@@ -400,23 +320,23 @@
                                         <form action="#">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <input type="text" name="name" class="form-control" placeholder="First Name" required>
+                                                    <input type="text" name="first_name" id="first_name" class="form-control" placeholder="First Name" >
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <input type="text" name="name" class="form-control" placeholder="Last Name" required>
+                                                    <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Last Name" >
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <input type="email" name="email" class="form-control" placeholder="Email" required>
+                                                    <input type="email" name="email" id="email" class="form-control" placeholder="Email" >
                                                 </div>
                                             </div>
                                             <div class="col-md-12 form-group">
-                                                <textarea class="form-control" id="exampleTextarea" rows="8" placeholder="Review" required></textarea>
+                                                <textarea class="form-control" id="exampleTextarea" name="review" id="review" rows="8" placeholder="Review" ></textarea>
                                             </div>
-                                            <button type="submit" class="btn btn-primary btn-lg mt-2">Submit Review</button>
+                                            <button type="submit" id="review-sub" class="btn btn-primary btn-lg mt-2">Submit Review</button>
                                         </form>
                                     </div>
                                 </div>
@@ -490,7 +410,7 @@
                                         <div class="sidebar-widget author-widget2">
                                             <div class="author-box clearfix">
                                                 <img src="{{URL::asset('assets/images/user.jpg')}}" alt="author-image" class="author__img">
-                                                <h4 class="author__title">{{$pro->name}}</h4>
+                                                <h4 class="author__title">{{ucfirst($pro->name)}}</h4>
                                                 <p class="author__meta">Agent of Property</p>
                                             </div>
                                             <ul class="author__contact">
@@ -630,7 +550,7 @@
                                         <!-- homes content -->
                                         <div class="homes-content">
                                             <!-- homes address -->
-                                            <h3><a href="{{url('get_property')}}/{{$similar->id}}">{{$similar->pro_title}}</a></h3>
+                                            <h3><a href="{{url('get_property')}}/{{$similar->id}}">{{ucfirst($similar->pro_title)}}</a></h3>
                                             <p class="homes-address mb-3">
                                                 <a href="{{url('get_property')}}/{{$similar->id}}">
                                                     <i class="fa fa-map-marker"></i><span>{{strtoupper($similar->address)}}, {{strtoupper(@$similar->getCity->city)}}, {{strtoupper(@$similar->getState->name)}}, {{strtoupper(@$similar->getCountry->name)}}</span>
@@ -657,9 +577,9 @@
                                             </ul>
                                             <div class="footer">
                                                 <a href="agent-details.html">
-                                                    <img src="{{URL::asset('assets/images/testimonials/ts-1.jpg')}}" alt="" class="mr-2">{{ucfirst(@$similar->getUser[0]->name)}}
+                                                    <img src="{{URL::asset('assets/images/user.jpg')}}" alt="" class="mr-2">{{ucfirst(@$similar->getUser[0]->name)}}
                                                 </a>
-                                                <span>{{timeDifference($similar->created_at) }}</span>
+                                                <span>{{timeDifference(@$similar->created_at) }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -677,7 +597,50 @@
 
 @section('script')
 <script>
+ $(document).ready(function() {
+       $('#addForm').on('submit', function(event) {
+        event.preventDefault(); 
+              $('#review-sub').text('Processing....')
+              var reviewform = $('#addForm')[0];
+                var formData = new FormData(reviewform);
+           $.ajax({
+               url: "{{ url('/post-review') }}",
+               method: "POST",
+               data: formData,
+               processData: false,
+               contentType: false,
+               headers: {
+                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+               },
+               success: function(response) {
+                $('#successNotification').show();
+                $('#successMessage').text(response.success);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                   List('{{$pro->id}}');
+                   $('#addForm')[0].reset();       
+               },
+               error: function (response) {
+                $('#errorNotification').show();
+                $('#errorMessage').text(response.responseJSON.errors);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            },
+           });
+       });
+   });
 
+   function List(id){
+            $.ajax({
+                url: "/show-review-list/"+id,
+                type: 'Get',
+                success: function(response) {
+                   $('.list').html(response)
+                },
+                error: function(response) {
+                    alert('An error occurred while deleting the item.');
+                }
+            });
+        }
+        List('{{$pro->id}}');
 </script>
 	
 @endsection

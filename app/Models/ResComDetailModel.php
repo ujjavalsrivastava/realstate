@@ -16,7 +16,8 @@ class ResComDetailModel extends Model
      */
     protected $fillable = [
         'real_per_code',
-        'property_type'
+        'property_type',
+        'icons'
         
     ];
    protected $table='res_com_details';

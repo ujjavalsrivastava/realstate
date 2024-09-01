@@ -185,6 +185,15 @@ class AuthController extends Controller
         return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $pro_type_list]);
     }
 
+    public function getProTypList(Request $request)
+    {
+        $pro_type_lists = ResComDetailModel::select('property_type','icons')->get();
+        foreach ($pro_type_lists as $pro_type_list) {
+            $pro_type_list->icons = url('protypeicons/'. $pro_type_list->icons);
+        }
+        return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $pro_type_lists]);
+    }
+
     // Residentail Commercial Type and details List Get
     function getResComTypeDetails(request $request){
         $res_type_list = RealPerameterModel::with('getResComDetails')->where('controle_code','RES_COM_TYPE')->get();

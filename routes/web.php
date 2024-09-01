@@ -55,6 +55,7 @@ Route::get('/terms-conditions',[HomeController::class, 'termsConditions']);
 
 // review
 Route::post('post-review',[ReviewController::class, 'postReview']);
+Route::get('show-review-list/{id}',[ReviewController::class, 'showReviewList']);
 
 Route::get('/getReletiondata/{id}',[HomeController::class, 'getReletiondata']);
 Route::post('/orderGenerate',[PaymentgatewayController::class, 'orderGenerate']);

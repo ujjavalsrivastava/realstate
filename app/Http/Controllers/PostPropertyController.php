@@ -16,6 +16,7 @@ use App\Models\ProFeatureMasterModel;
 use App\Models\RealPerameterModel;
 use App\Models\ResComDetailModel;
 use App\Models\FavoriteProModel;
+use App\Models\ReviewModel;
 use App\Models\ProMediaModel;
 use App\Models\CountryModel;
 use App\Models\StateModel;
@@ -195,12 +196,13 @@ class PostPropertyController extends Controller
         $pro = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->where('id',$id)->first();
         $similarPro = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->where('city',$pro->city)->where('state',$pro->state)->limit(3)->get();
         $images = ProMediaModel::where('pro_des_id',$id)->get();
+        $reviewCount = ReviewModel::where('pro_des_id',$id)->count();
         $features = ProFeatureModel::with('getProFeatureMaster')->where('pro_des_id',$id)->get();
         $letistPro = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->orderBy('id','DESC')->limit(3)->get();
         $saidFeatures = ProDescriptionModel::with('getMedia','getCountry')->whereHas('getProFeature', function ($query){
             $query->where('feature_id' ,'>',0);
         })->orderBy('id','DESC')->limit(10)->get();
-        return view('front.property', compact('pro','images','features','letistPro','saidFeatures','similarPro'));
+        return view('front.property', compact('pro','images','features','letistPro','saidFeatures','similarPro','reviewCount'));
     }
     
 

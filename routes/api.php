@@ -28,6 +28,9 @@ Route::post('send_mail', [AuthController::class, 'sendMail']);
 Route::post('verify_otp', [AuthController::class, 'verifyOtp']);
 Route::get('get_type', [AuthController::class, 'getType']);
 Route::get('get_pro_type', [AuthController::class, 'getProType']);
+// res com destail (pro type)
+Route::get('get-pro-type-list', [AuthController::class, 'getProTypList']); 
+
 Route::get('get_res_com_type_details', [AuthController::class, 'getResComTypeDetails']);
 Route::post('change_password', [AuthController::class, 'changePassword']);
 Route::post('pro-detail', [HomeController::class, 'proDetail']);  
@@ -39,6 +42,7 @@ Route::post('pro-detail', [HomeController::class, 'proDetail']);
     Route::post('get-state', [HomeController::class, 'getState']); 
     Route::post('get-city', [HomeController::class, 'getCity']); 
     Route::get('get-menu', [HomeController::class, 'menu']); 
+    
 
 
 Route::group(['middleware' => ['jwt.verify']], function() {
