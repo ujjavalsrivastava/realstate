@@ -219,7 +219,7 @@ class HomeController extends Controller
                    
                     $data->whereBetween('price',[(int)$fromPrice,(int)$toPrice]);
                 }
-                $search = $data->get();
+                $search = $data->paginate(6);
                 return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $search]);
     }
 
