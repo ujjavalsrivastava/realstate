@@ -85,7 +85,7 @@
             <div class="main-overlay"></div>
             <div class="main-register-holder">
                 <div class="main-register fl-wrap">
-                    <div class="close-reg" onclick="closeRegisterLoginModel()"><i class="fa fa-times"></i></div>
+                    <!-- <div class="close-reg" onclick="closeRegisterLoginModel()"><i class="fa fa-times"></i></div> -->
                     <h3>Welcome to <span>Find<strong>Houses</strong></span></h3>
                     <!-- <div class="soc-log fl-wrap">
                         <p>Login</p>
