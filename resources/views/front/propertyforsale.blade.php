@@ -40,21 +40,26 @@
                                         </div>
                                     </div>
                                 </div>
+                            
                                 <div class="cod-pad single detail-wrapper mr-2 mt-0 d-flex justify-content-md-end align-items-center grid">
                                     <div class="input-group border rounded input-group-lg w-auto mr-4">
+                                        
                                         <label class="input-group-text bg-transparent border-0 text-uppercase letter-spacing-093 pr-1 pl-3" for="inputGroupSelect01"><i class="fas fa-align-left fs-16 pr-2"></i>Sortby:</label>
-                                        <select class="form-control border-0 bg-transparent shadow-none p-0 selectpicker sortby" data-style="bg-transparent border-0 font-weight-600 btn-lg pl-0 pr-3" id="inputGroupSelect01" name="sortby">
-                                            <option selected>Top Selling</option>
-                                            <option value="1">Most Viewed</option>
-                                            <option value="2">Price(low to high)</option>
-                                            <option value="3">Price(high to low)</option>
+                                        <select onchange="sortFun(this.value)" name="sort" class="form-control border-0 bg-transparent shadow-none p-0 selectpicker sortby" data-style="bg-transparent border-0 font-weight-600 btn-lg pl-0 pr-3" id="inputGroupSelect01" name="sortby">
+                                        <option value>select option</option>    
+                                        
+                                            <option value="top" @if(Request()->sort == 'top') selected @endif>Most Viewed</option>
+                                            <option value="asc" @if(Request()->sort == 'asc') selected @endif>Price(low to high)</option>
+                                            <option value="desc" @if(Request()->sort == 'desc') selected @endif>Price(high to low)</option>
                                         </select>
+
                                     </div>
                                     <!-- <div class="sorting-options">
                                         <a href="#" class="change-view-btn active-view-btn"><i class="fa fa-th-list"></i></a>
                                         <a href="properties-grid-4.html" class="change-view-btn lde"><i class="fa fa-th-large"></i></a>
                                     </div> -->
-                                </div>
+                                  </div>
+                        
                             </div>
                         </section>
                         <div class="row featured portfolio-items all-post">
@@ -266,6 +271,13 @@
 
 @section('script')
 <script>
+
+    function sortFun(sort){
+         var url = window.location.href;
+         hashes = url.split("?")[1]
+        window.location.href = "{{ url('property-for-sale') }}?"+hashes+"&sort=" + sort;
+
+    }
    
 
 var url = window.location.href;

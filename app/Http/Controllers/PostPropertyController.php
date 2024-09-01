@@ -267,6 +267,9 @@ class PostPropertyController extends Controller
            
             $getPost->whereBetween('area_sq',[(int)$fromPrice,(int)$toPrice]);
         }
+        if(!empty($request->sort)){
+            $getPost->orderBy('price',$request->sort);
+        }
         
         $getPostcount=$getPost->count();
         $letistPro = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->orderBy('id','DESC')->limit(3)->get();
@@ -320,6 +323,10 @@ class PostPropertyController extends Controller
            
             $getPost->whereBetween('price',[(int)$fromPrice,(int)$toPrice]);
         }
+        if(!empty($request->sort)){
+            $getPost->orderBy('price',$request->sort);
+        }
+      
         $getPost=$getPost->paginate(6);
         return view('ajax.search', compact('getPost'));
     }
