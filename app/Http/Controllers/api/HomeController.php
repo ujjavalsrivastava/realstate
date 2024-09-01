@@ -42,8 +42,8 @@ class HomeController extends Controller
                         'city' => 'required',
                         'state' => 'required',
                         'country' => 'required',
-                        'google_map_lat' => 'required',
-                        'google_map_log' => 'required',
+                        //'google_map_lat' => 'required',
+                        //'google_map_log' => 'required',
                         'age' => 'required',
                         'bathroom' => 'required',
                         'name' => 'required|max:50',
@@ -68,6 +68,13 @@ class HomeController extends Controller
                     $request->file('video')->move($uploade_path,$filename);
                     // $videoFile = ProDescriptionModel::insert(['video' => $path]);
               }
+              $findCity = CityModel::where('id',$request->city)->first()->city;
+              $add = $request->address.' '.$findCity;
+             // list[$address,$lat,$lng] = FindLatLong($add);
+              $map = FindLatLong($add);
+        $address = $map[0];
+        $lat = $map[1];
+        $lng = $map[2];
 
             $pro_des = new ProDescriptionModel();
             // video
@@ -81,11 +88,11 @@ class HomeController extends Controller
             $pro_des->room = $request->room;
             $pro_des->price = $request->price;
             $pro_des->city = $request->city;
-            $pro_des->address = $request->address;
+            $pro_des->address = @$address;
             $pro_des->state = $request->state;
             $pro_des->country = $request->country;
-            $pro_des->google_map_lat = $request->google_map_lat;
-            $pro_des->google_map_log = $request->google_map_log;
+            $pro_des->google_map_lat = @$lat;
+            $pro_des->google_map_log = @$lng;
             $pro_des->age = $request->age;
             $pro_des->bathroom = $request->bathroom;
             $pro_des->name = $request->name;

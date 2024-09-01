@@ -148,7 +148,7 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <!-- <div class="row">
                                     <div class="col-lg-6 col-md-12">
                                         <p class="no-mb first">
                                             <label for="latitude">Google Maps latitude</label>
@@ -161,7 +161,7 @@
                                             <input type="text" name="google_map_log" placeholder="Google Maps longitude" id="longitude">
                                         </p>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div class="single-add-property">
