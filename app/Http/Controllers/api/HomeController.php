@@ -12,8 +12,12 @@ use App\Models\ProMediaModel;
 use App\Models\FavoriteProModel;
 use App\Models\User;
 use App\Models\Menu;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ContactUsSendMail;
+use App\Models\ContactUsModel;
 use App\Models\CountryModel;
 use App\Models\PaymentDetails;
+use App\Models\RealPerameterModel;
 use App\Models\StateModel;
 use App\Models\CityModel;
 use Illuminate\Http\Request;
@@ -42,8 +46,6 @@ class HomeController extends Controller
                         'city' => 'required',
                         'state' => 'required',
                         'country' => 'required',
-                        //'google_map_lat' => 'required',
-                        //'google_map_log' => 'required',
                         'age' => 'required',
                         'bathroom' => 'required',
                         'name' => 'required|max:50',
@@ -61,20 +63,20 @@ class HomeController extends Controller
                return response()->json(['message'=>$validator->errors()], 400); 
             } 
             $user = JWTAuth::parseToken()->authenticate();
+
             if ($request->file('video')) {
                 $filename = uniqid() . '.' . $request->file('video')->getClientOriginalExtension();
                     $path = url('videos/'.$filename);
                     $uploade_path = public_path('videos');
                     $request->file('video')->move($uploade_path,$filename);
-                    // $videoFile = ProDescriptionModel::insert(['video' => $path]);
-              }
+            }
               $findCity = CityModel::where('id',$request->city)->first()->city;
               $add = $request->address.' '.$findCity;
              // list[$address,$lat,$lng] = FindLatLong($add);
               $map = FindLatLong($add);
-        $address = $map[0];
-        $lat = $map[1];
-        $lng = $map[2];
+            $address = $map[0];
+            $lat = $map[1];
+            $lng = $map[2];
 
             $pro_des = new ProDescriptionModel();
             // video
@@ -125,15 +127,6 @@ class HomeController extends Controller
                 }
         }
 
-        // // video
-        // if ($request->file('video')) {
-        //     $filename = uniqid() . '.' . $request->file('video')->getClientOriginalExtension();
-        //         $path = url('videos/'.$filename);
-        //         // $uploade_path = public_path('videos');
-                // $video->move($uploade_path,$filename);
-        //         $videoFile = ProDescriptionModel::insert(['video' => $path]);
-        //   }
-        
             return response()->json([
                 'status'=>'200',
                 'message'=>'Data save successfully',
@@ -161,13 +154,14 @@ class HomeController extends Controller
                 } 
 
             $user = JWTAuth::parseToken()->authenticate();
+
             $payment =  new PaymentDetails();
-        $payment->user_id = $user->id;
-        $payment->price = $request->price;
-        $payment->razorpay_order_id = $request->razorpay_order_id;
-        $payment->razorpay_payment_id = $request->razorpay_payment_id;
-        $payment->razorpay_signature = $request->razorpay_signature;
-        $payment->save();
+            $payment->user_id = $user->id;
+            $payment->price = $request->price;
+            $payment->razorpay_order_id = $request->razorpay_order_id;
+            $payment->razorpay_payment_id = $request->razorpay_payment_id;
+            $payment->razorpay_signature = $request->razorpay_signature;
+            $payment->save();
             return response()->json(['msg' => 'Payment Successfuly'], 200);
         }catch(\Exception $e){
             return response()->json(['message' => $e->getMessage()], 400); 
@@ -191,8 +185,47 @@ class HomeController extends Controller
         return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $feature_list]);
     }
 
+    public function postContatctUs(Request $request)
+    {
+        $validator = Validator::make($request->all(), 
+        [ 
+        'first_name' => 'required',
+        'last_name' => 'required',
+        'email' => 'required|email',
+        'message' => 'required',
+        ]);  
+        if ($validator->fails()) {  
+        return response()->json(['error'=>$validator->errors()->first()], 401); 
+        }   
+        try{
+            $user = new ContactUsModel();
+            $user->first_name = $request->first_name;
+            $user->last_name = $request->last_name;
+            $user->message = $request->message;
+            $user->email = $request->email;
+            $user->save();
+            $data=Mail::to('alphaland553@gmail.com')->send(new ContactUsSendMail($user));
+            return response()->json(['status'=>'200','msg'=>'Save Successfully!','data' => $user]); 
+        }catch(\Exception $e){
+            return response()->json(['message' => $e->getMessage()], 400); 
+        }
+   }
+
+    public function getAboutUs()
+    {
+        $about = RealPerameterModel::where('controle_code','About_Us')->get();
+        return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $about]);
+    }
+
+    public function termsConditions()
+    {
+        $terms = RealPerameterModel::where('controle_code','Terms_Condition')->get();
+        return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $terms]);
+    }
+
     // Data search
-    public function getSearchProperty(Request $request){
+    public function getSearchProperty(Request $request)
+    {
         $data = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity','getFavPro')->where('pro_type','like',"%{$request->pro_type}%");
                 if($request->country){
                     $data->where('country','like',"%{$request->country}%");
@@ -207,16 +240,13 @@ class HomeController extends Controller
                     $data->where('room',$request->room);
                 }
                 if(!empty($request->res_com_detail)){
-                    
                     $data->where('res_com_detail','like',"%{$request->res_com_detail}%");
- 
                 }
                 if(!empty($request->fromprice) && !empty($request->toprice)){
                     $fromPrice = str_replace('₹','',$request->fromprice) ;
                     $fromPrice = str_replace(',','',$fromPrice) ;
                     $toPrice = str_replace('₹','',$request->toprice) ;
                     $toPrice = str_replace(',','',$toPrice) ;
-                   
                     $data->whereBetween('price',[(int)$fromPrice,(int)$toPrice]);
                 }
                 $search = $data->paginate(6);
@@ -227,10 +257,12 @@ class HomeController extends Controller
         $country = CountryModel::get();
         return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $country]);
      }
+     
      function getState(Request $request){
         $state = StateModel::where('country_id',$request->country_id)->get();
         return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $state]);
      }
+
      function getCity(Request $request){
         $city = CityModel::where('state_id',$request->state_id)->get();
         return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $city]);
@@ -255,10 +287,7 @@ class HomeController extends Controller
                 $fav->fav_pro = 'Y';
                 $fav->save();
                 return response()->json(['status'=>'200','msg' => 'added successfully','flag'=>'Y']);
-            }
-            
-     
-            
+            }   
         }catch(\Exception $e){
             return response()->json(['message' => $e->getMessage()], 400); 
         }

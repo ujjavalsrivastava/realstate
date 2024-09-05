@@ -24,7 +24,7 @@ class ReviewController extends Controller
        if ($validator->fails()) {
            return response()->json(['errors' => $validator->errors()->first()], 422);
        }
-    $review = new ReviewModel();
+            $review = new ReviewModel();
             $review->pro_des_id = $request->pro_des_id;
             $review->first_name = $request->first_name;
             $review->last_name = $request->last_name;

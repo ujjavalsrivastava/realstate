@@ -41,6 +41,15 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     @yield('style')
     <style>
+        .newst{
+    border: 0px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: .8rem;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+}
 
 #loadingDiv{
 				position:fixed;
@@ -391,6 +400,35 @@ $('#loadingDiv').show();
 
         </script>
         <script>
+
+
+$('#newsletterForm').on('submit', function(e) {
+                
+                e.preventDefault(); 
+                $.ajax({
+                    type: "POST",
+                    url: "{{url('/news-subscription')}}",
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        if(response.status == '200'){
+                            $('#successNotification').show();
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                            $('#successMessage').text(response.success);
+                            $('#newsletterForm')[0].reset(); 
+                        }else{
+                            $('#errorNotification').show();
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                            $('#errorMessage').text(response.message);
+                        }   
+                    },
+                    error: function (response) {
+                     
+            $('#errorNotification').show();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            $('#errorMessage').text(response.responseJSON.error);
+        },
+                });
+            });
             
             function nextFun(){
                 var email = $('#emailId').val();
@@ -658,6 +696,7 @@ $('#loadingDiv').show();
                     }
                 }
             });
+
 
         </script>
 

@@ -64,7 +64,6 @@
                         </section>
                         <div class="row featured portfolio-items all-post">
                            
-                           
                         </div>
                     </div>
                     <aside class="col-lg-4 col-md-12 car">
@@ -154,20 +153,20 @@
                                 <!--/ End Search Form -->
                                 <!-- Price Fields -->
                                 <div class="main-search-field-2">
-                                                                        <!-- Area Range -->
-                                                                        <div class="range-slider">
-                                                                            <label>Area Size</label>
-                                                                            <div id="area-range" data-min="0" data-max="13000" data-unit="sq ft"></div>
-                                                                            <div class="clearfix"></div>
-                                                                        </div>
-                                                                        <br>
-                                                                        <!-- Price Range -->
-                                                                        <div class="range-slider">
-                                                                            <label>Price Range</label>
-                                                                            <div id="price-range" data-min="0" data-max="6000000" data-unit="₹"></div>
-                                                                            <div class="clearfix"></div>
-                                                                        </div>
-                                                                    </div>
+                                    <!-- Area Range -->
+                                    <div class="range-slider">
+                                        <label>Area Size</label>
+                                        <div id="area-range" data-min="0" data-max="13000" data-unit="sq ft"></div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <br>
+                                    <!-- Price Range -->
+                                    <div class="range-slider">
+                                        <label>Price Range</label>
+                                        <div id="price-range" data-min="0" data-max="6000000" data-unit="₹"></div>
+                                        <div class="clearfix"></div>
+                                        </div>
+                                    </div>
                                 <!-- More Search Options -->
                                 <a href="#" class="more-search-options-trigger margin-bottom-10 margin-top-30" data-open-title="Advanced Features" data-close-title="Advanced Features"></a>
 

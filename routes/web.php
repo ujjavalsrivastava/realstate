@@ -51,7 +51,9 @@ Route::post('/fav-pro',[PostPropertyController::class, 'favoritePro']);
 // footer file
 Route::get('/about-us',[HomeController::class, 'aboutUs']);
 Route::get('/contact-us',[HomeController::class, 'contactUs']);
+Route::post('/post-contact-us',[HomeController::class, 'postContactUs']);
 Route::get('/terms-conditions',[HomeController::class, 'termsConditions']);
+Route::post('/news-subscription',[HomeController::class, 'newsSubscription']);
 
 // review
 Route::post('post-review',[ReviewController::class, 'postReview']);

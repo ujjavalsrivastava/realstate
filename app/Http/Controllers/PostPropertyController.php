@@ -69,23 +69,17 @@ class PostPropertyController extends Controller
                         'pro_type' => 'required',
                         'res_com_type' => 'required',
                         'res_com_detail' => 'required',
-                        // 'room' => 'required',
                         'price' => 'required',
                         'area_sq' => 'required',
                         'address' => 'required',
                         'city' => 'required',
                         'state' => 'required',
                         'country' => 'required',
-                       // 'google_map_lat' => 'required',
-                        //'google_map_log' => 'required',
                         'age' => 'required',
-                        // 'bathroom' => 'required',
                         'name' => 'required|max:50',
                         'username' => 'required',
                         'email' => 'required|email',
                         'phone' => 'required|min:10|max:11',
-                        // 'feature_id' => 'required',
-                        // 'feature_id.*' => 'required',
                         'images.*' => 'required|mimes:jpg,jpeg,png|max:2048'
                     ]);  
             if ($validator->fails()) {  
@@ -118,14 +112,13 @@ class PostPropertyController extends Controller
                     $uploade_path = public_path('videos');
                     $request->file('video')->move($uploade_path,$filename);
               }
-        // dd($user->id);
-        $findCity = CityModel::where('id',$request->city)->first()->city;
-        $add = $request->address.' '.$findCity;
-        $map = FindLatLong($add);
+            $findCity = CityModel::where('id',$request->city)->first()->city;
+            $add = $request->address.' '.$findCity;
+            $map = FindLatLong($add);
         
-        $address = $map[0];
-        $lat = $map[1];
-        $lng = $map[2];        
+            $address = $map[0];
+            $lat = $map[1];
+            $lng = $map[2];        
 
             $pro_des = new ProDescriptionModel();
             $pro_des->user_id = $user->id;
@@ -222,7 +215,6 @@ class PostPropertyController extends Controller
     }
 
 
-
     function propertyForSale(Request $request)
     { 
         $f = $request->feature;
@@ -256,7 +248,6 @@ class PostPropertyController extends Controller
         if(!empty($request->fromarea) && !empty($request->toarea)){
             $fromArea = str_replace(' sq ft','',$request->fromarea) ;
             $toArea = str_replace(' sq ft','',$request->toarea) ;
-           
             $getPost->whereBetween('area_sq',[(int)$fromArea,(int)$toArea]);
         }
         if(!empty($request->fromprice) && !empty($request->toprice)){
@@ -264,7 +255,6 @@ class PostPropertyController extends Controller
             $fromPrice = str_replace(',','',$fromPrice) ;
             $toPrice = str_replace('₹','',$request->toprice) ;
             $toPrice = str_replace(',','',$toPrice) ;
-           
             $getPost->whereBetween('area_sq',[(int)$fromPrice,(int)$toPrice]);
         }
         if(!empty($request->sort)){
@@ -312,7 +302,6 @@ class PostPropertyController extends Controller
         if(!empty($request->fromarea) && !empty($request->toarea)){
             $fromArea = str_replace(' sq ft','',$request->fromarea) ;
             $toArea = str_replace(' sq ft','',$request->toarea) ;
-           
             $getPost->whereBetween('area_sq',[(int)$fromArea,(int)$toArea]);
         }
         if(!empty($request->fromprice) && !empty($request->toprice)){
@@ -346,9 +335,6 @@ class PostPropertyController extends Controller
                 $fav->save();
                 return response()->json(['status'=>'200','msg' => 'added successfully','flag'=>'Y']);
             }
-            
-     
-            
         }catch(\Exception $e){
             return response()->json(['message' => $e->getMessage()], 400); 
         }

@@ -28,7 +28,8 @@
                 <div class="row">
                     <div class="col-lg-8 col-md-12">
                         <h3 class="mb-4">Contact Us</h3>
-                        <form id="contactform" class="contact-form" name="contactform" method="post" novalidate>
+                        <form id="contactform" class="contact-form" method="post">
+                            @csrf
                             <div id="success" class="successform">
                                 <p class="alert alert-success font-weight-bold" role="alert">Your message was sent successfully!</p>
                             </div>
@@ -36,16 +37,16 @@
                                 <p>Something went wrong, try refreshing and submitting the form again.</p>
                             </div>
                             <div class="form-group">
-                                <input type="text" required class="form-control input-custom input-full" name="name" placeholder="First Name">
+                                <input type="text" class="form-control input-custom input-full" name="first_name" placeholder="First Name">
                             </div>
                             <div class="form-group">
-                                <input type="text" required class="form-control input-custom input-full" name="lastname" placeholder="Last Name">
+                                <input type="text" class="form-control input-custom input-full" name="last_name" placeholder="Last Name">
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control input-custom input-full" name="email" placeholder="Email">
                             </div>
                             <div class="form-group">
-                                <textarea class="form-control textarea-custom input-full" id="ccomment" name="message" required rows="8" placeholder="Message"></textarea>
+                                <textarea class="form-control textarea-custom input-full" id="ccomment" name="message" rows="8" placeholder="Message"></textarea>
                             </div>
                             <button type="submit" id="submit-contact" class="btn btn-primary btn-lg">Submit</button>
                         </form>
@@ -86,4 +87,37 @@
             </div>
         </section>
         <!-- END SECTION CONTACT US -->
+        @endsection
+
+        @section('script')
+<script>
+     $('#contactform').on('submit', function(e) {
+                e.preventDefault(); 
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: "POST",
+                    url: "{{url('/post-contact-us')}}",
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        if(response.status == '200'){
+                            $('#successNotification').show();
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                            $('#successMessage').text(response.success);
+                            $('#contactform')[0].reset(); 
+                        }else{
+                            $('#errorNotification').show();
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                            $('#errorMessage').text(response.message);
+                        }   
+                    },
+                    error: function (response) {
+                        $('#errorNotification').show();
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        $('#errorMessage').text(response.responseJSON.error);
+                    },
+                });
+            });
+</script>
         @endsection

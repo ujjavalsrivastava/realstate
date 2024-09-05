@@ -13,7 +13,10 @@ use App\Models\OtpVerifyModel;
 use App\Models\ProDescriptionModel;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OtpSendMail;
+use App\Mail\ContactUsSendMail;
 use App\Models\CountryModel;
+use App\Models\NewslettersModel;
+use App\Models\ContactUsModel;
 use App\Models\StateModel;
 use App\Models\CityModel;
 use App\Models\ProFeatureMasterModel;
@@ -39,11 +42,38 @@ class HomeController extends Controller
         return view('back.contactus');
     }
 
+    function postContactUs(Request $request)
+    {
+        $validator = Validator::make($request->all(), 
+        [ 
+        'first_name' => 'required',
+        'email' => 'required|email',
+        'last_name' => 'required',
+        'message' => 'required',
+        ]);  
+        if ($validator->fails()) {  
+        return response()->json(['error'=>$validator->errors()->first()], 401); 
+        }   
+        try{
+       $user = new ContactUsModel();
+       $user->first_name = $request->first_name;
+       $user->last_name = $request->last_name;
+       $user->message = $request->message;
+       $user->email = $request->email;
+       $user->save();
+
+        $data=Mail::to('alphaland553@gmail.com')->send(new ContactUsSendMail($user));
+
+        return response()->json(['status'=> 200,'success'=> 'Send Successfuly']); 
+            
+    }catch(\Exception $e){
+        return response()->json(['status'=>'400', 'message' => $e->getMessage()]); 
+    }
+   }
+
     function termsConditions(){
         return view('back.termsconditions');
     }
-
-    
 
     function showForgetPass(){
         try{
@@ -58,7 +88,7 @@ class HomeController extends Controller
             $changepass = User::where('email',$request->email)->update([
                 'password' => bcrypt($request->password),
             ]);
-            return response()->json(['message' => 'Password Change Successfully'], 200);
+            return response()->json(['success' => 'Password Change Successfully'], 200);
         }catch(\Exception $e){
             return response()->json(['message' => $e->getMessage()], 400); 
         }
@@ -67,6 +97,7 @@ class HomeController extends Controller
     function showlogin(){
         return view('login');   
     }
+    
     function loginPost(Request $request){
         $validator = Validator::make($request->all(), 
                       [ 
@@ -93,7 +124,8 @@ class HomeController extends Controller
         return redirect('/');
     }
 
-    function register(Request $request) {
+    function register(Request $request)
+     {
         $validator = Validator::make($request->all(), 
         [ 
         'name' => 'required',
@@ -124,9 +156,9 @@ class HomeController extends Controller
             //dd($credentials);
             if (Auth::attempt($credentials)) {
                 // Authentication passed
-                return response()->json(['status'=> 200,'message'=> 'Login Successfuly']); 
+                return response()->json(['status'=> 200,'success'=> 'Login Successfuly']); 
             }else{
-                return response()->json(['status'=> 201, 'message'=> 'Invalid  credentials ']); 
+                return response()->json(['status'=> 201, 'success'=> 'Invalid  credentials ']); 
             }
        return response()->json(['success' => true,'message' => 'Registered successfully'], 200);
     }catch(\Exception $e){
@@ -154,7 +186,7 @@ class HomeController extends Controller
         'email' => $request->input('email'),
         'otp' => $details['otp']
     ]);
-    return response()->json([ 'status'=>'200', 'message' => 'OTP Send on Your Email '], 200);
+    return response()->json([ 'status'=>'200', 'success' => 'OTP Send on Your Email '], 200);
 }catch(\Exception $e){
     return response()->json(['status'=>'400', 'message' => $e->getMessage()]); 
 }
@@ -181,7 +213,7 @@ class HomeController extends Controller
         User::where('email',$request->email)->update([
             'email_verified_at' => $ldate
         ]);
-        return response()->json(['status'=>'200','message' => 'OTP Verify successfully'], 200);
+        return response()->json(['status'=>'200','success' => 'OTP Verify successfully'], 200);
        }else{
         return response()->json(['status'=>'400','message' => 'Invelid OTP']);
        }
@@ -193,7 +225,7 @@ class HomeController extends Controller
 
 function changePassword(Request $request){
 
-    try{
+try{
 
     $validator = Validator::make($request->all(), 
     [ 
@@ -209,7 +241,7 @@ function changePassword(Request $request){
     User::where('email',$request->email)->update([
         'password' => Hash::make($request->forgetpasword)
     ]);
-    return response()->json(['status'=>'200','message' => 'changed  successfully'], 200);
+    return response()->json(['status'=>'200','success' => 'changed  successfully'], 200);
 
 }catch(\Exception $e){
     return response()->json(['status'=>'400','message' => $e->getMessage()]); 
@@ -253,10 +285,32 @@ function changePassword(Request $request){
                 'email' => $request->input('email'),
                 'otp' => $details['otp']
             ]);
-            return response()->json([ 'status'=>'200', 'message' => 'OTP Send on Your Email '], 200);
+            return response()->json([ 'status'=>'200', 'success' => 'OTP Send on Your Email '], 200);
         }catch(\Exception $e){
             return response()->json(['status'=>'400', 'message' => $e->getMessage()]); 
         }
 
+    }
+
+    function newsSubscription(Request $request)
+    {
+        try{
+
+            $validator = Validator::make($request->all(), 
+            [ 
+            'email' => 'required|email',  
+           ]);  
+            if ($validator->fails()) {  
+            return response()->json(['error'=>$validator->errors()->first()], 401); 
+            }
+            $user = new NewslettersModel();
+            $user->email = $request->email;
+            $user->save();
+            
+            return response()->json(['status'=>'200','success' => 'Add  successfully'], 200);
+        
+        }catch(\Exception $e){
+            return response()->json(['status'=>'400','message' => $e->getMessage()]); 
+        }
     }
 }

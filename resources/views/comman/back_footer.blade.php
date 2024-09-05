@@ -95,12 +95,14 @@
                                 <h3>Newsletters</h3>
                                 <p>Sign Up for Our Newsletter to get Latest Updates and Offers. Subscribe to receive news in your inbox.</p>
                             </div>
-                            <form class="bloq-email mailchimp form-inline" method="post">
-                                <label for="subscribeEmail" class="error"></label>
-                                <div class="email">
-                                    <input type="email" id="subscribeEmail" name="EMAIL" placeholder="Enter Your Email">
-                                    <input type="submit" value="Subscribe">
-                                    <p class="subscription-success"></p>
+                            <form class="bloq-email mailchimp form-inline" method="post" id="newsletterForm">
+                                @csrf
+                               <div class="email">
+                                    <input type="text" class="newst" id="subscribeEmail" name="email" placeholder="Enter Your Email">
+                                    <!-- <input type="submit" value="Subscribe"> -->
+                                    <input type="submit" value="Subscribe"> 
+                                    <!-- <button type="submit" class="subscription-success">Subscribe</button> -->
+                                    <!-- <p class="subscription-success"></p> -->
                                 </div>
                             </form>
                         </div>
