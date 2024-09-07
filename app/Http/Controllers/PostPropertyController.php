@@ -257,11 +257,10 @@ class PostPropertyController extends Controller
             $toPrice = str_replace(',','',$toPrice) ;
             $getPost->whereBetween('area_sq',[(int)$fromPrice,(int)$toPrice]);
         }
-        if(!empty($request->sort)){
-            $getPost->orderBy('price',$request->sort);
-        }
+       
         
         $getPostcount=$getPost->count();
+
         $letistPro = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->orderBy('id','DESC')->limit(3)->get();
         $getCountries = CountryModel::get();
         $getStates = StateModel::get();
@@ -312,8 +311,26 @@ class PostPropertyController extends Controller
            
             $getPost->whereBetween('price',[(int)$fromPrice,(int)$toPrice]);
         }
-        if(!empty($request->sort)){
-            $getPost->orderBy('price',$request->sort);
+         if(!empty($request->sort)){
+            $toArray = explode("_",$request->sort);
+            $val = $toArray[0];
+            $key = $toArray[1];
+            if($key == 'price'){
+                $getPost->orderBy('price', $val);
+            }
+            if($key == 'sqft'){
+                $getPost->orderBy('area_sq', $val);
+            }
+            if($key == 'sent'){
+                $getPost->orderBy('id', 'DESC');
+            }
+            // if($key == 'price'){
+            //     $getPost->orderBy('price', $val);
+            // }
+            // if($key == 'price'){
+            //     $getPost->orderBy('price', $val);
+            // }
+           
         }
       
         $getPost=$getPost->paginate(6);

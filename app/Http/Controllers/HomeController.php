@@ -23,7 +23,8 @@ use App\Models\ProFeatureMasterModel;
 
 class HomeController extends Controller
 {
-    function index(){
+    function index()
+    {
         $getPost = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->get();
         $getCountries = CountryModel::get();
         $getStates = StateModel::get();
@@ -31,7 +32,7 @@ class HomeController extends Controller
         $featureMaster = ProFeatureMasterModel::get();
         $popularPlace =  DB::select('select count(city) as cntcount,city as cityId,(select city from cities where id = cityId) cityname  from pro_description group by city limit 8');
 
-         return view('front.index',compact('getCountries','getStates','getCities','featureMaster','popularPlace','getPost'));
+        return view('front.index',compact('getCountries','getStates','getCities','featureMaster','popularPlace','getPost'));
     }
 
     function aboutUs(){
@@ -55,23 +56,22 @@ class HomeController extends Controller
         return response()->json(['error'=>$validator->errors()->first()], 401); 
         }   
         try{
-       $user = new ContactUsModel();
-       $user->first_name = $request->first_name;
-       $user->last_name = $request->last_name;
-       $user->message = $request->message;
-       $user->email = $request->email;
-       $user->save();
-
-        $data=Mail::to('alphaland553@gmail.com')->send(new ContactUsSendMail($user));
-
-        return response()->json(['status'=> 200,'success'=> 'Send Successfuly']); 
+            $user = new ContactUsModel();
+            $user->first_name = $request->first_name;
+            $user->last_name = $request->last_name;
+            $user->message = $request->message;
+            $user->email = $request->email;
+            $user->save();
+            $data=Mail::to('alphaland553@gmail.com')->send(new ContactUsSendMail($user));
+            return response()->json(['status'=> 200,'success'=> 'Send Successfuly']); 
             
-    }catch(\Exception $e){
-        return response()->json(['status'=>'400', 'message' => $e->getMessage()]); 
-    }
+        }catch(\Exception $e){
+            return response()->json(['status'=>'400', 'message' => $e->getMessage()]); 
+        }
    }
 
-    function termsConditions(){
+    function termsConditions()
+    {
         return view('back.termsconditions');
     }
 

@@ -403,7 +403,6 @@ $('#loadingDiv').show();
 
 
 $('#newsletterForm').on('submit', function(e) {
-                
                 e.preventDefault(); 
                 $.ajax({
                     type: "POST",
