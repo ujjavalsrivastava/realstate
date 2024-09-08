@@ -203,28 +203,20 @@ class AuthController extends Controller
         return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $res_type_list]);
     }
 
-    public function getAuthenticatedUser()
+    public function getAuthenticatedUser(Request $request)
             {
-                    try {
-
-                            if (! $user = JWTAuth::parseToken()->authenticate()) {
-                                    return response()->json(['user_not_found'], 404);
-                            }
-
-                    } catch (Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
-
-                            return response()->json(['token_expired'], $e->getStatusCode());
-
-                    } catch (Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
-
-                            return response()->json(['token_invalid'], $e->getStatusCode());
-
-                    } catch (Tymon\JWTAuth\Exceptions\JWTException $e) {
-
-                            return response()->json(['token_absent'], $e->getStatusCode());
-
+                    
+                try {
+                    $user = JWTAuth::parseToken()->authenticate();
+                    return response()->json(['status' => true,'msg' => 'verify  Token']);
+                } catch (\Exception $e) {
+                    if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException){
+                        return response()->json(['status' => false,'msg' => 'Token is Invalid']);
+                    }else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException){
+                        return response()->json(['status' => false,'msg' => 'Token is Expired']);
+                    }else{
+                        return response()->json(['status' => false,'msg' => 'Authorization Token not found']);
                     }
-
-                    return response()->json(compact('user'));
+                }
             }
 }
