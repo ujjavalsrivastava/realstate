@@ -50,20 +50,19 @@
                                         <a href="#" title="Compare">
                                             <i class="flaticon-compare"></i>
                                         </a>
-                                        <a href="#" title="Share">
+                                        <a href="#" title="Share" onclick="openShareModel()">
                                             <i class="flaticon-share"></i>
                                         </a>
                                         @if(Auth()->check())
-
-                                        @php
-                                        $fav = @$post->getFavProAuth;
-                                       @endphp       
+                                            @php
+                                                $fav = @$post->getFavProAuth;
+                                            @endphp       
                                         
-                                        <a href="javascript:void(0)" onclick="addFav('{{$post->id}}')" title="Favorites">
-                                        <i @if($fav) style="color:red" @endif id="fav_{{$post->id}}" class="flaticon-heart"></i>
-                                        </a>
+                                            <a href="javascript:void(0)" onclick="addFav('{{$post->id}}')" title="Favorites">
+                                            <i @if($fav) style="color:red" @endif id="fav_{{$post->id}}" class="flaticon-heart"></i>
+                                            </a>
                                         @else
-                                        <a href="javascript:void(0)" onclick="openRegisterLoginModel()" title="Favorites">
+                                            <a href="javascript:void(0)" onclick="openRegisterLoginModel()" title="Favorites">
                                             <i class="flaticon-heart"></i></a>
                                         @endif  
                                     </div>

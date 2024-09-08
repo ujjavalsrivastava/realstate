@@ -31,6 +31,7 @@ Route::post('changePassword', [HomeController::class, 'changePassword']);
 Route::get('/logout',[HomeController::class, 'logout']);
 Route::get('show-forget-pass',[HomeController::class, 'showForgetPass']);
 
+Route::post('password-change', [HomeController::class, 'passChange']);
 //property post ----
 Route::get('post-property', [PostPropertyController::class, 'postProperty']);
 Route::post('pro_post_des', [PostPropertyController::class, 'proPostDes']);

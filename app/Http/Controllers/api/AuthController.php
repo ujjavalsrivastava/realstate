@@ -68,9 +68,12 @@ class AuthController extends Controller
                 'message' => 'Invalid Email or Password',
             ], Response::HTTP_UNAUTHORIZED);
         }
+
+       $user = User::where('email',$request->email)->first();
             return response()->json([
             'success' => true,
             'token' => $jwt_token,
+            'data' => $user,
            
            
         ]);

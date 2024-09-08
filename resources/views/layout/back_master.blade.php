@@ -198,7 +198,33 @@
                 </div>
             </div>
         </div>
-
+ <!-- change password -->
+ <div class="change-form modal">
+            <div class="main-overlay"></div>
+            <div class="main-register-holder">
+                <div class="main-register fl-wrap">
+                    <div class="close-reg" onclick="closeRegisterLoginModel()"><i class="fa fa-times"></i></div>
+                    <h3>Welcome to <span>Find<strong>Houses</strong></span></h3>
+                     <div id="tabs-container">
+                     <form method="post"  id="changeForm">
+                            <div class="tab">
+                            <div id="forgetThird"  class="custom-form" style="display:none">
+                            <label> Current Password* </label>
+                            <input  type="password"  name="currentpass" id="currentpass">
+                                <label>New Password* </label>
+                                     <input  type="password"  name="newpass" id="newpass">
+                                     <label>Confirm Password* </label>
+                                     <input  type="password"  name="cpass" id="cpass">
+                                     <button type="submit" class="log-submit-btn" >Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <!-- change password end -->
        
         <!-- ARCHIVES JS -->
         <script src="{{URL::asset('assets/js/jquery-3.5.1.min.js')}}"></script>
@@ -339,15 +365,13 @@ $('#loadingDiv').show();
                 $.ajax({
                     type: "GET",
                     url: "{{url('/getReletiondata')}}/"+code,
-                    
                     success: function(response) {
-                       $('#redioResult').html(response)
+                       $('#redioResult').html(response);
                     },
                     error: function (response) {
-         
-            $('#errorNotification').show();
-            $('#errorMessage').text('some think went to worng');
-        },
+                        $('#errorNotification').show();
+                        $('#errorMessage').text('some think went to worng');
+                    },
                 });
             }
 
@@ -400,9 +424,35 @@ $('#loadingDiv').show();
 
         </script>
         <script>
+            function changePass(){
+                alert('test');
+                // $('.change-form').css("display", "block");
+                $('.change-form').modal('show');
+            }
+        $('#changeForm').on('submit', function(e) {
+                e.preventDefault(); 
+                $.ajax({
+                    type: "POST",
+                    url: "{{url('/password-change')}}",
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        if(response.status == '200'){
+                            $('#successNotification').show();
+                            $('#successMessage').text(response.message);
+                            location.reload().delay(5000);
+                        }else{
+                            $('#errorNotification').show();
+                            $('#errorMessage').text(response.error);
+                        }
+                    },
+                    error: function (response) {
+                    $('#errorNotification').show();
+                    $('#errorMessage').text(response.responseJSON.error);
+                    },
+                });
+        });
 
-
-$('#newsletterForm').on('submit', function(e) {
+            $('#newsletterForm').on('submit', function(e) {
                 e.preventDefault(); 
                 $.ajax({
                     type: "POST",
@@ -421,12 +471,11 @@ $('#newsletterForm').on('submit', function(e) {
                         }   
                     },
                     error: function (response) {
-                     
-            $('#errorNotification').show();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            $('#errorMessage').text(response.responseJSON.error);
-        },
-                });
+                    $('#errorNotification').show();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    $('#errorMessage').text(response.responseJSON.error);
+                },
+                        });
             });
             
             function nextFun(){
@@ -447,22 +496,19 @@ $('#newsletterForm').on('submit', function(e) {
                             $('#second').show();
                             $('#third').hide();
                             $('#successNotification').show();
-                            $('#successMessage').text(response.message);
-                           
+                            $('#successMessage').text(response.message); 
                         }else{
                             $('#errorNotification').show();
                             $('#errorMessage').text(response.message);
                         }
                     },
                     error: function (response) {
-         
                                 $('#errorNotification').show();
                                 $('#errorMessage').text(response.responseJSON.error);
                             },
-                });
+                });  
                 
-                
-              }
+            }
               
               function nextPage(){
                 var email = $('#emailId').val();

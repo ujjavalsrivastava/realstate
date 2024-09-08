@@ -248,6 +248,31 @@ try{
 }
 
 }
+
+function passChange(Request $request){
+
+    try{
+        $validator = Validator::make($request->all(), 
+        [ 
+        'currentpass' => 'required|email',
+        'newpass' => 'required|min:6',
+        'cpass' => 'required_with:newpass|same:newpass|min:6'
+        
+       ]);  
+        if ($validator->fails()) {  
+        return response()->json(['error'=>$validator->errors()->first()], 401); 
+        }
+    
+        User::where('password',$request->currentpass)->update([
+            'password' => Hash::make($request->forgetpasword)
+        ]);
+        return response()->json(['status'=>'200','success' => 'changed  successfully'], 200);
+    
+    }catch(\Exception $e){
+        return response()->json(['status'=>'400','message' => $e->getMessage()]); 
+    }
+    
+    }
     function getReletiondata($id){
        $data =  ResComDetailModel::where('real_per_code',$id)->get();
        return view('ajax.radio',compact('data'));

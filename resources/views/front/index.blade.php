@@ -780,12 +780,42 @@ $fav = @$post->getFavProAuth;
         </div>
         <!-- END SECTION PARTNERS -->
 
+        <!-- share Modal -->
+  <div class="modal fade" id="shereModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <!-- <button type="button" class="btn btn-default close" data-dismiss="modal">&times;</button> -->
+         </div>
+        <div class="modal-body">
+          <p style="text-align:center;">
+          <img src="{{url('shareimage/whatsapp.png')}}" alt="" style="height: 60px;">&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <img src="{{url('shareimage/emailshear.png')}}" alt="" style="height: 60px;">&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <img src="{{url('shareimage/facebook.png')}}" alt="" style="height: 60px;">&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <img src="{{url('shareimage/twiter.png')}}" alt="" style="height: 60px;">&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <!-- <input type="text" clase="form-control"> -->
+        </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+
 @endsection
 
 @section('script')
 
 <script type="text/javascript">
 
+    function openShareModel(){
+        $('#shereModal').modal('show');
+    }
     function fetureFun(){
         var arr = [];
         $('.checkboxall').each(function(i, obj) {
@@ -795,7 +825,7 @@ $fav = @$post->getFavProAuth;
             }
       });
       console.log(arr);
-$('#feature').val(arr.join());
+    $('#feature').val(arr.join());
     }
         var page = 1;
 
@@ -828,9 +858,7 @@ $('#feature').val(arr.join());
             .fail(function(jqXHR, ajaxOptions, thrownError) {
                 alert('Server not responding...');
             });
-        }
-
-        
+        } 
     </script>
 
 	
