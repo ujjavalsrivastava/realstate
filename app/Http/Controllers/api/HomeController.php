@@ -24,9 +24,41 @@ use Illuminate\Http\Request;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Controllers\Controller;
+use Razorpay\Api\Api;
 
 class HomeController extends Controller
 {
+
+    public function orderGenerate(Request $request)
+    {
+        $validator = Validator::make($request->all(), 
+                    [ 
+                        'price' => 'required',
+                         ]);  
+            if ($validator->fails()) {  
+               return response()->json(['message'=>$validator->errors()], 400); 
+            } 
+            $api = new Api(Config("values.razorpayKey"), Config("values.razorpaySecret"));
+            $orderData  = $api->order->create([
+                'receipt' => '111',
+                'amount' => $request->price * 100,
+                'currency' => 'INR'
+            ]); // Creates Razorpay order
+
+        $data = [
+            "key"               => Config("values.razorpayKey"),
+            "amount"            => $request->price,
+            "order_id"          => $orderData['id'],
+        ];
+        $user = JWTAuth::parseToken()->authenticate();
+        $payment =  new PaymentDetails();
+        $payment->user_id = $user->id;
+        $payment->price = $request->price;
+        $payment->razorpay_order_id = $orderData['id'];
+        $payment->save();
+        return response()->json($data, 200);
+    }
+
     public function proDescription(Request $request)
     {
         // dd($request->user_id);

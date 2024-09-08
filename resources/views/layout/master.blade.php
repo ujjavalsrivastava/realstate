@@ -262,7 +262,7 @@
                      <div id="tabs-container">
                      <form method="post"  id="changeForm">
                             <div class="tab">
-                            <div id="forgetThird"  class="custom-form" style="display:none">
+                            <div id=""  class="custom-form">
                             <label> Current Password* </label>
                             <input  type="password"  name="currentpass" id="currentpass">
                                 <label>New Password* </label>
@@ -381,6 +381,10 @@ $('#forgetForm').on('submit', function(e) {
                 });
 });
 
+function changePass(){
+                // $('.change-form').css("display", "block");
+                $('.change-form').modal('show');
+            }
             $('#changeForm').on('submit', function(e) {
                 e.preventDefault(); 
                 $.ajax({
@@ -728,10 +732,7 @@ $('#forgetForm').on('submit', function(e) {
         },
                 });
             });
-            function changePass(){
-                // $('.change-form').css("display", "block");
-                $('.change-form').modal('show');
-            }
+           
             function forgetPass(){
                 $('.forget-form').css("display", "block");
             }
