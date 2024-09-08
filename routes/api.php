@@ -56,4 +56,6 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 
     // fav pro ----------
     Route::post('/fav-pro',[HomeController::class, 'favoritePro']);   
+    Route::get('getAuthenticatedUser', [AuthController::class, 'getAuthenticatedUser']);
+    
 });
