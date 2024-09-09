@@ -320,22 +320,23 @@ function passChange(Request $request){
     function newsSubscription(Request $request)
     {
         try{
-
             $validator = Validator::make($request->all(), 
             [ 
             'email' => 'required|email',  
-           ]);  
+            ]);  
             if ($validator->fails()) {  
             return response()->json(['error'=>$validator->errors()->first()], 401); 
             }
             $user = new NewslettersModel();
             $user->email = $request->email;
             $user->save();
-            
-            return response()->json(['status'=>'200','success' => 'Add  successfully'], 200);
-        
+            return response()->json(['status'=>'200','success' => 'Add  Successfully'], 200);
         }catch(\Exception $e){
             return response()->json(['status'=>'400','message' => $e->getMessage()]); 
         }
+    }
+
+    function getEmiCalculater(){
+        return view('back.emicalculater');
     }
 }

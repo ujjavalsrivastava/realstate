@@ -65,3 +65,5 @@ Route::post('/orderGenerate',[PaymentgatewayController::class, 'orderGenerate'])
 Route::post('/verify',[PaymentgatewayController::class, 'verify']);
 
 
+Route::get('/emi-calculater',[HomeController::class, 'getEmiCalculater']);
+
