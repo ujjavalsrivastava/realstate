@@ -256,64 +256,10 @@
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
         <!-- Date Dropper Script-->
         <script>
-            let loanAmount = document.getElementById("amount");
-            let interestRate=document.getElementById("interest");
-            let loanDuration = document.getElementById("loanTenure");
-            let submit = document.getElementById("calculate");
+          
 
-            submit.addEventListener('click',(e)=>{
-                e.preventDefault();
-                calculateEMI();
-            })
-
-            function calculateEMI(){
-                // First calculate total number of months in loan tenure if selected year
-                let isYear = document.getElementById("year").checked;
-                let isMonth = document.getElementById("month").checked;
-                let amount = document.getElementById("amount").value;
-                let interest = document.getElementById("interest").value;
-                let loanTenure = document.getElementById("loanTenure").value;
-                let noOfMonths=0;
-                if(amount==""){
-                    $('#errorNotification').show();
-                    $('#errorMessage').text("Please Enter Amount");
-                    return false;
-                }
-                if(interest==""){
-                    $('#errorNotification').show();
-                    $('#errorMessage').text("Please Enter Interest");
-                    return false;
-                }
-                if(loanTenure==""){
-                    $('#errorNotification').show();
-                    $('#errorMessage').text("Please Enter Loan Tenure");
-                    return false;
-                }
-                if(isYear=="" && isMonth==""){
-                    $('#errorNotification').show();
-                    $('#errorMessage').text("Please select loan tenure type-> Month or year");
-                    return false;
-                    // alert("Please select loan tenure type-> Month or year");
-                }else{
-                    if(isYear==true){
-                        noOfMonths=loanDuration.value * 12 ;
-                    }else{
-                        noOfMonths=loanDuration.value;
-                    }
-                    let r = parseFloat(interestRate.value)/12/100;
-                    let P = loanAmount.value;
-                    let n = noOfMonths;
-                    let EMI = (P*r* Math.pow((1+r),n)) / (Math.pow((1+r),n)-1);
-                    let totalInterest =(EMI * n) - P;
-                    let totalPayment  = totalInterest + parseFloat(P);
-                    document.getElementById("emi").innerText = " ₹" + Math.round(EMI);
-                    document.getElementById("totalInterest").innerText=" ₹" + Math.round(totalInterest);
-                    document.getElementById("totalPayment").innerText=" ₹" + Math.round(totalPayment) ;
-                }
-            }
-function addFav(postid){
-
-$('#loadingDiv').show();
+        function addFav(postid){
+            $('#loadingDiv').show();
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -325,28 +271,24 @@ $('#loadingDiv').show();
                     $('#loadingDiv').hide();
                     if(response.flag=='N'){
                         $('#fav_'+postid).removeAttr( 'style' );
-
                     }else{
                         $('#fav_'+postid).css("color", "red");
-                    }
-                  
+                    }  
                 },
                 error: function (response) {
                     $('#loadingDiv').hide();
-                            $('#errorNotification').show();
-                            $('#errorMessage').text(response.responseJSON.error);
-                        },
+                    $('#errorNotification').show();
+                    $('#errorMessage').text(response.responseJSON.error);
+                },
             });
-
-}
+        }
            
-            $('#reservation-date').dateDropper();
-
+        $('#reservation-date').dateDropper();
             $(document).ready(function() {
-            $('.select2').select2({
-                theme: 'bootstrap4', // Use the Bootstrap theme for better compatibility
-                width: '100%' // Ensure it takes full width
-            });
+                $('.select2').select2({
+                    theme: 'bootstrap4', // Use the Bootstrap theme for better compatibility
+                    width: '100%' // Ensure it takes full width
+                });
             });
 
         </script>
@@ -390,7 +332,6 @@ $('#loadingDiv').show();
                     centerMode: true,
                     centerPadding: '0'
                 });
-
                 $(this).closest('.slick-slider-area').find('.slick-prev').on("click", function() {
                     slider.slick('slickPrev');
                 });
@@ -398,10 +339,9 @@ $('#loadingDiv').show();
                     slider.slick('slickNext');
                 });
             });
-
         </script>
 
-<script>
+        <script>
             $(window).on('scroll load', function() {
                 $("#header.cloned #logo img").attr("src", $('#header #logo img').attr('data-sticky-logo'));
             });
@@ -445,11 +385,10 @@ $('#loadingDiv').show();
                             $('#errorMessage').text(response.error);
                         }
                     },
-                    error: function (response) {
-         
-            $('#errorNotification').show();
-            $('#errorMessage').text(response.responseJSON.error);
-        },
+                error: function (response) {
+                    $('#errorNotification').show();
+                    $('#errorMessage').text(response.responseJSON.error);
+                },
                 });
             });
 
@@ -557,9 +496,9 @@ $('#loadingDiv').show();
                         }
                     },
                     error: function (response) {
-                                $('#errorNotification').show();
-                                $('#errorMessage').text(response.responseJSON.error);
-                            },
+                        $('#errorNotification').show();
+                        $('#errorMessage').text(response.responseJSON.error);
+                    },
                 });  
                 
             }
@@ -588,21 +527,17 @@ $('#loadingDiv').show();
                     data: {'email':email,'otp':otp},
                     success: function(response) {
                         if(response.status == '200'){
-
                             $('#first').hide();
                             $('#second').hide();
                             $('#third').show();
                             $('#successNotification').show();
-                            $('#successMessage').text(response.message);
-                           
-                          
+                            $('#successMessage').text(response.message);  
                         }else{
                             $('#errorNotification').show();
                             $('#errorMessage').text(response.message);
                         }
                     },
                     error: function (response) {
-                            
                                 $('#errorNotification').show();
                                 $('#errorMessage').text(response.responseJSON.error);
                             },
