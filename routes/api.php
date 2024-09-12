@@ -50,6 +50,7 @@ Route::post('post-contect-us', [HomeController::class, 'postContatctUs']);
 Route::get('about-us', [HomeController::class, 'getAboutUs']);  
 Route::get('terms-conditions', [HomeController::class, 'termsConditions']); 
 Route::get('getAuthenticatedUser', [AuthController::class, 'getAuthenticatedUser']);
+
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('logout', [AuthController::class, 'logout']);
     Route::post('pro_description', [HomeController::class, 'proDescription']); 

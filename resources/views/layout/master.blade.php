@@ -540,7 +540,7 @@ $('#forgetForm').on('submit', function(e) {
          
             $('#errorNotification').show();
             $('#errorMessage').text(response.responseJSON.error);
-        },
+            },
                 });
             });
 

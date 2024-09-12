@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\PostPropertyController;
 use App\Http\Controllers\PaymentgatewayController;
+use App\Http\Controllers\admin\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -67,3 +68,9 @@ Route::post('/verify',[PaymentgatewayController::class, 'verify']);
 
 Route::get('/emi-calculater',[HomeController::class, 'getEmiCalculater']);
 
+Route::prefix('admin')->group(function () {
+    Route::get('/login',[AdminController::class, 'getLogin']);
+    Route::post('/loginPost',[AdminController::class, 'loginPost']);
+
+    Route::get('/home',[AdminController::class, 'home']);
+});
