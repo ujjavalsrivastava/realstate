@@ -395,7 +395,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="payment-method.html" class="btn reservation btn-radius theme-btn full-width mrg-top-10">Submit Request</a>
+                                    <a href="#" class="btn reservation btn-radius theme-btn full-width mrg-top-10">Submit Request</a>
                                 </div>
                             </div>
                             <!-- End: Schedule a Tour -->
@@ -451,7 +451,7 @@
                                             @foreach($saidFeatures as $saidFeature)
                                                 <div class="agents-grid mr-0">
                                                     <div class="listing-item compact">
-                                                        <a href="properties-details.html" class="listing-img-container">
+                                                        <a href="#" class="listing-img-container">
                                                             <div class="listing-badges">
                                                                 <span class="featured">&#8377; {{@$saidFeature->price}}</span>
                                                                 <span>For @if($saidFeature->pro_type == 'R') Rent @else Sale @endif</span>
@@ -532,7 +532,7 @@
                                         <div class="project-inner project-head">
                                             <div class="homes">
                                                 <!-- homes img -->
-                                                <a href="single-property-1.html" class="homes-img">
+                                                <a href="#" class="homes-img">
                                                 @if(count($similar->getProFeature)>0)
                                                     <div class="homes-tag button alt featured">Featured</div>
                                                 @endif
@@ -544,7 +544,7 @@
                                             <div class="button-effect">
                                                 <a href="{{url('get_property')}}/{{$similar->id}}" class="btn"><i class="fa fa-link"></i></a>
                                                 <a href="https://www.youtube.com/watch?v=14semTlwyUY" class="btn popup-video popup-youtube"><i class="fas fa-video"></i></a>
-                                                <a href="single-property-2.html" class="img-poppu btn"><i class="fa fa-photo"></i></a>
+                                                <a href="#" class="img-poppu btn"><i class="fa fa-photo"></i></a>
                                             </div>
                                         </div>
                                         <!-- homes content -->
@@ -576,7 +576,7 @@
                                                 </li> -->
                                             </ul>
                                             <div class="footer">
-                                                <a href="agent-details.html">
+                                                <a href="#">
                                                     <img src="{{URL::asset('assets/images/user.jpg')}}" alt="" class="mr-2">{{ucfirst(@$similar->getUser[0]->name)}}
                                                 </a>
                                                 <span>{{timeDifference(@$similar->created_at) }}</span>

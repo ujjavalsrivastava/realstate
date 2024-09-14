@@ -11,7 +11,7 @@
             <div class="text-heading text-center">
                 <div class="container">
                     <h1>About Our Company</h1>
-                    <h2><a href="index.html">Home </a> &nbsp;/&nbsp; About Us</h2>
+                    <h2><a href="{{url('/')}}">Home </a> &nbsp;/&nbsp; About Us</h2>
                 </div>
             </div>
         </section>
@@ -176,7 +176,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <span><a href="team-details.html">View Profile</a></span>
+                                    <span><a href="t#">View Profile</a></span>
                                 </div>
                             </div>
                         </div>
@@ -199,7 +199,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <span><a href="team-details.html">View Profile</a></span>
+                                    <span><a href="#">View Profile</a></span>
                                 </div>
                             </div>
                         </div>
@@ -222,7 +222,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <span><a href="team-details.html">View Profile</a></span>
+                                    <span><a href="#">View Profile</a></span>
                                 </div>
                             </div>
                         </div>
@@ -245,7 +245,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <span><a href="team-details.html">View Profile</a></span>
+                                    <span><a href="#">View Profile</a></span>
                                 </div>
                             </div>
                         </div>

@@ -5,7 +5,7 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-6">
                             <div class="netabout">
-                                <a href="index.html" class="logo">
+                                <a href="{{url('/')}}" class="logo">
                                     <img src="images/logo-footer.svg" alt="netcom">
                                 </a>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum incidunt architecto soluta laboriosam, perspiciatis, aspernatur officiis esse.</p>
@@ -38,17 +38,17 @@
                                 <h3>Navigation</h3>
                                 <div class="nav-footer">
                                     <ul>
-                                        <li><a href="index.html">Home One</a></li>
-                                        <li><a href="properties-right-sidebar.html">Properties Right</a></li>
-                                        <li><a href="properties-full-list.html">Properties List</a></li>
-                                        <li><a href="properties-details.html">Property Details</a></li>
-                                        <li class="no-mgb"><a href="agents-listing-grid.html">Agents Listing</a></li>
+                                        <li><a href="{{url('/')}}">Home One</a></li>
+                                        <li><a href="#">Properties Right</a></li>
+                                        <li><a href="#">Properties List</a></li>
+                                        <li><a href="#">Property Details</a></li>
+                                        <li class="no-mgb"><a href="#">Agents Listing</a></li>
                                     </ul>
                                     <ul class="nav-right">
-                                        <li><a href="agent-details.html">Agents Details</a></li>
+                                        <li><a href="#">Agents Details</a></li>
                                         <li><a href="{{url('/about-us')}}">About Us</a></li>
-                                        <li><a href="blog.html">Blog Default</a></li>
-                                        <li><a href="blog-details.html">Blog Details</a></li>
+                                        <li><a href="#">Blog Default</a></li>
+                                        <li><a href="#">Blog Details</a></li>
                                         <li class="no-mgb"><a href="{{url('/contact-us')}}">Contact Us</a></li>
                                     </ul>
                                 </div>

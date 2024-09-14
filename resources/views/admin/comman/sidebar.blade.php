@@ -1,5 +1,5 @@
-<div class="user-profile-box mb-0">
-                            <div class="sidebar-header"><img src="images/logo-blue.svg" alt="header-logo2.png"> </div>
+                    <div class="user-profile-box mb-0">
+                         <div class="sidebar-header"><img src="images/logo-blue.svg" alt="header-logo2.png"> </div>
                             <div class="header clearfix">
                                 <img src="images/testimonials/ts-1.jpg" alt="avatar" class="img-fluid profile-img">
                             </div>
@@ -9,47 +9,17 @@
                             <div class="detail clearfix">
                                 <ul class="mb-0">
                                     <li>
-                                        <a href="dashboard.html">
+                                        <a href="{{url('admin/home')}}">
                                             <i class="fa fa-map-marker"></i> Dashboard
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="user-profile.html">
-                                            <i class="fa fa-user"></i>Profile
+                                        <a href="{{url('admin/payment-list')}}">
+                                            <i class="fa fa-user"></i>Payment List
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="active" href="my-listings.html">
-                                            <i class="fa fa-list" aria-hidden="true"></i>My Properties
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="favorited-listings.html">
-                                            <i class="fa fa-heart" aria-hidden="true"></i>Favorited Properties
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="add-property.html">
-                                            <i class="fa fa-list" aria-hidden="true"></i>Add Property
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="payment-method.html">
-                                            <i class="fas fa-credit-card"></i>Payments
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="invoice.html">
-                                            <i class="fas fa-paste"></i>Invoices
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="change-password.html">
-                                            <i class="fa fa-lock"></i>Change Password
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="index.html">
+                                        <a href="{{url('admin/logout')}}">
                                             <i class="fas fa-sign-out-alt"></i>Log Out
                                         </a>
                                     </li>

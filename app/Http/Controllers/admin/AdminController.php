@@ -34,14 +34,11 @@ class AdminController extends Controller
                       'email' => 'required|email',
                       'password' => 'required', 
                      ]);  
-         if ($validator->fails()) {  
+            if ($validator->fails()) {  
                return response()->json(['error'=>$validator->errors()->first()], 401); 
             }  
-           // dd($request->all());
             $credentials = $request->only('email', 'password','type');
-            //dd($credentials);
-            
-            if (Auth::attempt($credentials)) {
+            if (Auth::attempt($credentials)){
                 // Authentication passed
                 return response()->json(['status'=> 200,'success'=> 'Login Successfuly']); 
             }else{
@@ -49,8 +46,27 @@ class AdminController extends Controller
             } 
     }
 
+    function logout(){
+        Auth::logout();
+        return redirect('admin/login');
+    }
+
     function home(){
-        return view('admin.layout.master');
+        return view('admin.home');
+    }
+
+    function paymentList(){
+        $user = Auth::user();
+        $data = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity','getReview');
+        $data->whereHas('getPayment', function($query) use($user){
+            $query->whereNotNull('post_id');
+            if($user->type != 'Admin'){
+                $query->where('user_id',$user->id);
+            }
+         }); 
+        $getPosts = $data->get();
+        // with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity','getReview');
+        return view('admin.payment',compact('getPosts'));
     }
 
 }

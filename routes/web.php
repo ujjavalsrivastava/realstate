@@ -71,6 +71,10 @@ Route::get('/emi-calculater',[HomeController::class, 'getEmiCalculater']);
 Route::prefix('admin')->group(function () {
     Route::get('/login',[AdminController::class, 'getLogin']);
     Route::post('/loginPost',[AdminController::class, 'loginPost']);
+    Route::get('/logout',[AdminController::class, 'logout']);
 
-    Route::get('/home',[AdminController::class, 'home']);
+    Route::group(['middleware' => ['check.user']], function() {
+        Route::get('/home',[AdminController::class, 'home']);
+        Route::get('/payment-list',[AdminController::class, 'paymentList']);
+    });
 });

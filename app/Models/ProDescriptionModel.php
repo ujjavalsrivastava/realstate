@@ -12,6 +12,7 @@ use App\Models\CountryModel;
 use App\Models\StateModel;
 use App\Models\CityModel;
 use App\Models\ReviewModel;
+use App\Models\PaymentDetails;
 use JWTAuth;
 use Auth;
 use App\Models\ProFeatureModel;
@@ -95,6 +96,10 @@ class ProDescriptionModel extends Model
     public function getReview()
     {
         return $this->hasMany(ReviewModel::class, 'pro_des_id','id')->with('getReviewMedia')->orderBy('id','DESC');
+    }
+    public function getPayment()
+    {
+        return $this->belongsTo(PaymentDetails::class, 'id','post_id');
     }
     public function getFavPro()
     {

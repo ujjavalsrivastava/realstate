@@ -54,7 +54,7 @@
                         <!-- inclod side bar -->
                         @include('admin.comman.sidebar')
                     </div>
-                    @yield('content');
+                    @yield('content')
                     
                 </div>
             </div>

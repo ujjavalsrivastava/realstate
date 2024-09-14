@@ -36,7 +36,7 @@
 
     <!-- <script src="script.js"></script> -->
       <!-- START SECTION SUBMIT PROPERTY -->
-      <section class="royal-add-property-area section_100">
+    <section class="royal-add-property-area section_100">
         <form>
             @csrf
             <div class="container">
@@ -97,7 +97,7 @@
                 </div>
             </div>
         </form>
-        </section>
+    </section>
         <!-- END SECTION SUBMIT PROPERTY -->
 @endsection
 @section('script')

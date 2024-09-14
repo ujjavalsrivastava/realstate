@@ -189,7 +189,7 @@
                         if(response.status == '200'){
                             $('#successNotification').show();
                             $('#successMessage').text(response.success);
-                           
+                            window.location = "{{url('admin/home')}}";
                         }else{
                             $('#errorNotification').show();
                             $('#errorMessage').text(response.error);

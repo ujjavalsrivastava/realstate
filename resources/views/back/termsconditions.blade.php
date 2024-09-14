@@ -11,7 +11,7 @@
             <div class="text-heading text-center">
                 <div class="container">
                     <h1>Terms & Conditions Our Company</h1>
-                    <h2><a href="index.html">Home </a> &nbsp;/&nbsp; Terms & Conditions</h2>
+                    <h2><a href="{{url('/')}}">Home </a> &nbsp;/&nbsp; Terms & Conditions</h2>
                 </div>
             </div>
         </section>
@@ -200,7 +200,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <span><a href="team-details.html">View Profile</a></span>
+                                    <span><a href="#">View Profile</a></span>
                                 </div>
                             </div>
                         </div>
@@ -223,7 +223,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <span><a href="team-details.html">View Profile</a></span>
+                                    <span><a href="#">View Profile</a></span>
                                 </div>
                             </div>
                         </div>
@@ -246,7 +246,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <span><a href="team-details.html">View Profile</a></span>
+                                    <span><a href="#">View Profile</a></span>
                                 </div>
                             </div>
                         </div>
@@ -269,7 +269,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <span><a href="team-details.html">View Profile</a></span>
+                                    <span><a href="#">View Profile</a></span>
                                 </div>
                             </div>
                         </div>

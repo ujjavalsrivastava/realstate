@@ -472,7 +472,7 @@
                                     <div class="project-inner project-head">
                                         <div class="homes">
                                             <!-- homes img -->
-                                            <a href="single-property-1.html" class="homes-img">
+                                            <a href="#" class="homes-img">
                                             @if(count($post->getProFeature)>0)
                                                 <div class="homes-tag button alt featured">Featured</div>
                                             @endif
@@ -481,9 +481,9 @@
                                             </a>
                                         </div>
                                         <div class="button-effect">
-                                            <a href="single-property-1.html" class="btn"><i class="fa fa-link"></i></a>
+                                            <a href="#" class="btn"><i class="fa fa-link"></i></a>
                                             <a href="https://www.youtube.com/watch?v=14semTlwyUY" class="btn popup-video popup-youtube"><i class="fas fa-video"></i></a>
-                                            <a href="single-property-2.html" class="img-poppu btn"><i class="fa fa-photo"></i></a>
+                                            <a href="#" class="img-poppu btn"><i class="fa fa-photo"></i></a>
                                         </div>
                                     </div>
                                     <!-- homes content -->
@@ -491,7 +491,7 @@
                                         <!-- homes address -->
                                         <h3><a href="{{url('get_property')}}/{{$post->id}}">{{$post->pro_title}}</a></h3>
                                         <p class="homes-address mb-3">
-                                            <a href="single-property-1.html">
+                                            <a href="{{url('get_property')}}/{{$post->id}}">
                                                 <i class="fa fa-map-marker"></i><span>{{strtoupper($post->address)}}, {{strtoupper(@$post->getCity->city)}}, {{strtoupper(@$post->getState->name)}}, {{strtoupper(@$post->getCountry->name)}}</span>
                                             </a>
                                         </p>
@@ -516,7 +516,7 @@
                                         </ul>
                                         <div class="price-properties footer pt-3 pb-0">
                                             <h3 class="title mt-3">
-                                                <a href="single-property-1.html">&#8377; {{$post->price}}</a>
+                                                <a href="#">&#8377; {{$post->price}}</a>
                                             </h3>
                                             <div class="compare">
                                                 <a href="#" title="Compare">
@@ -526,18 +526,16 @@
                                                     <i class="flaticon-share"></i>
                                                 </a>
                                                 @if(Auth()->check())
-
-@php
-$fav = @$post->getFavProAuth;
-@endphp       
-
-<a href="javascript:void(0)" onclick="addFav('{{$post->id}}')" title="Favorites">
-<i @if($fav) style="color:red" @endif id="fav_{{$post->id}}" class="flaticon-heart"></i>
-</a>
-@else
-<a href="javascript:void(0)" onclick="openRegisterLoginModel()" title="Favorites">
-    <i class="flaticon-heart"></i></a>
-@endif  
+                                                @php
+                                                $fav = @$post->getFavProAuth;
+                                                @endphp       
+                                                <a href="javascript:void(0)" onclick="addFav('{{$post->id}}')" title="Favorites">
+                                                <i @if($fav) style="color:red" @endif id="fav_{{$post->id}}" class="flaticon-heart"></i>
+                                                </a>
+                                                @else
+                                                <a href="javascript:void(0)" onclick="openRegisterLoginModel()" title="Favorites">
+                                                    <i class="flaticon-heart"></i></a>
+                                                @endif  
                                             </div>
                                         </div>
                                     </div>
@@ -552,7 +550,6 @@ $fav = @$post->getFavProAuth;
             </div>
         </section>
         <!-- END SECTION RECENTLY PROPERTIES -->
-
         <!-- START SECTION AGENTS -->
         <section class="team bg-white rec-pro">
             <div class="container-fluid">
@@ -565,7 +562,7 @@ $fav = @$post->getFavProAuth;
                     <div class="team-block col-sm-6 col-md-4 col-lg-4 col-xl-2" data-aos="fade-up" data-aos-delay="150">
                         <div class="inner-box team-details">
                             <div class="image team-head">
-                                <a href="agents-listing-grid.html"><img src="{{URL::asset('assets/images/team/t-5.jpg')}}" alt="" /></a>
+                                <a href="#"><img src="{{URL::asset('assets/images/team/t-5.jpg')}}" alt="" /></a>
                                 <div class="team-hover">
                                     <ul class="team-social">
                                         <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
@@ -576,7 +573,7 @@ $fav = @$post->getFavProAuth;
                                 </div>
                             </div>
                             <div class="lower-box">
-                                <h3><a href="agents-listing-grid.html">Carls Jhons</a></h3>
+                                <h3><a href="#">Carls Jhons</a></h3>
                                 <div class="designation">Real Estate Agent</div>
                             </div>
                         </div>
@@ -585,7 +582,7 @@ $fav = @$post->getFavProAuth;
                     <div class="team-block col-sm-6 col-md-4 col-lg-4 col-xl-2" data-aos="fade-up" data-aos-delay="250">
                         <div class="inner-box team-details">
                             <div class="image team-head">
-                                <a href="agents-listing-grid.html"><img src="{{URL::asset('assets/images/team/t-6.jpg')}}" alt="" /></a>
+                                <a href="#"><img src="{{URL::asset('assets/images/team/t-6.jpg')}}" alt="" /></a>
                                 <div class="team-hover">
                                     <ul class="team-social">
                                         <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
@@ -596,7 +593,7 @@ $fav = @$post->getFavProAuth;
                                 </div>
                             </div>
                             <div class="lower-box">
-                                <h3><a href="agents-listing-grid.html">Arling Tracy</a></h3>
+                                <h3><a href="#">Arling Tracy</a></h3>
                                 <div class="designation">Real Estate Agent</div>
                             </div>
                         </div>
@@ -605,7 +602,7 @@ $fav = @$post->getFavProAuth;
                     <div class="team-block col-sm-6 col-md-4 col-lg-4 col-xl-2" data-aos="fade-up" data-aos-delay="350">
                         <div class="inner-box team-details">
                             <div class="image team-head">
-                                <a href="agents-listing-grid.html"><img src="{{URL::asset('assets/images/team/t-7.jpg')}}" alt="" /></a>
+                                <a href="#"><img src="{{URL::asset('assets/images/team/t-7.jpg')}}" alt="" /></a>
                                 <div class="team-hover">
                                     <ul class="team-social">
                                         <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
@@ -616,7 +613,7 @@ $fav = @$post->getFavProAuth;
                                 </div>
                             </div>
                             <div class="lower-box">
-                                <h3><a href="agents-listing-grid.html">Mark Web</a></h3>
+                                <h3><a href="#">Mark Web</a></h3>
                                 <div class="designation">Real Estate Agent</div>
                             </div>
                         </div>
@@ -625,7 +622,7 @@ $fav = @$post->getFavProAuth;
                     <div class="team-block col-sm-6 col-md-4 col-lg-4 col-xl-2 pb-none" data-aos="fade-up" data-aos-delay="450">
                         <div class="inner-box team-details">
                             <div class="image team-head">
-                                <a href="agents-listing-grid.html"><img src="{{URL::asset('assets/images/team/t-8.jpg')}}" alt="" /></a>
+                                <a href="#"><img src="{{URL::asset('assets/images/team/t-8.jpg')}}" alt="" /></a>
                                 <div class="team-hover">
                                     <ul class="team-social">
                                         <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
@@ -636,7 +633,7 @@ $fav = @$post->getFavProAuth;
                                 </div>
                             </div>
                             <div class="lower-box">
-                                <h3><a href="agents-listing-grid.html">Katy Grace</a></h3>
+                                <h3><a href="#">Katy Grace</a></h3>
                                 <div class="designation">Real Estate Agent</div>
                             </div>
                         </div>
@@ -644,7 +641,7 @@ $fav = @$post->getFavProAuth;
                     <div class="team-block col-sm-6 col-md-4 col-lg-4 col-xl-2 pb-none" data-aos="fade-up" data-aos-delay="550">
                         <div class="inner-box team-details">
                             <div class="image team-head">
-                                <a href="agents-listing-grid.html"><img src="{{URL::asset('assets/images/team/team-image-2.jpg')}}" alt="" /></a>
+                                <a href="#"><img src="{{URL::asset('assets/images/team/team-image-2.jpg')}}" alt="" /></a>
                                 <div class="team-hover">
                                     <ul class="team-social">
                                         <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
@@ -655,7 +652,7 @@ $fav = @$post->getFavProAuth;
                                 </div>
                             </div>
                             <div class="lower-box">
-                                <h3><a href="agents-listing-grid.html">Chris Melo</a></h3>
+                                <h3><a href="#">Chris Melo</a></h3>
                                 <div class="designation">Real Estate Agent</div>
                             </div>
                         </div>
@@ -663,7 +660,7 @@ $fav = @$post->getFavProAuth;
                     <div class="team-block col-sm-6 col-md-4 col-lg-4 col-xl-2 pb-none" data-aos="fade-up" data-aos-delay="650">
                         <div class="inner-box team-details">
                             <div class="image team-head">
-                                <a href="agents-listing-grid.html"><img src="{{URL::asset('assets/images/team/team-image-7.jpg')}}" alt="" /></a>
+                                <a href="#"><img src="{{URL::asset('assets/images/team/team-image-7.jpg')}}" alt="" /></a>
                                 <div class="team-hover">
                                     <ul class="team-social">
                                         <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
@@ -674,7 +671,7 @@ $fav = @$post->getFavProAuth;
                                 </div>
                             </div>
                             <div class="lower-box">
-                                <h3><a href="agents-listing-grid.html">Nina Thomas</a></h3>
+                                <h3><a href="#">Nina Thomas</a></h3>
                                 <div class="designation">Real Estate Agent</div>
                             </div>
                         </div>

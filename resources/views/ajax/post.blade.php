@@ -4,7 +4,7 @@
                             <div class="project-inner project-head">
                                 <div class="homes">
                                     <!-- homes img -->
-                                   <a href="single-property-1.html" class="homes-img">
+                                   <a href="#" class="homes-img">
                                     @if(count($post->getProFeature)>0)
                                         <div class="homes-tag button alt featured">Featured</div>
                                     @endif
@@ -13,9 +13,9 @@
                                     </a>
                                 </div>
                                 <div class="button-effect">
-                                    <a href="single-property-1.html" class="btn"><i class="fa fa-link"></i></a>
+                                    <a href="#" class="btn"><i class="fa fa-link"></i></a>
                                     <a href="https://www.youtube.com/watch?v=14semTlwyUY" class="btn popup-video popup-youtube"><i class="fas fa-video"></i></a>
-                                    <a href="single-property-2.html" class="img-poppu btn"><i class="fa fa-photo"></i></a>
+                                    <a href="#" class="img-poppu btn"><i class="fa fa-photo"></i></a>
                                 </div>
                             </div>
                             <!-- homes content -->
@@ -23,7 +23,7 @@
                                 <!-- homes address -->
                                 <h3><a href="{{url('get_property')}}/{{$post->id}}">{{ucfirst($post->pro_title)}}</a></h3>
                                 <p class="homes-address mb-3">
-                                    <a href="single-property-1.html">
+                                    <a href="#">
                                         <i class="fa fa-map-marker"></i><span style="font-size:12px">{{strtoupper($post->address)}}, {{strtoupper(@$post->getCity->city)}}, {{strtoupper(@$post->getState->name)}}, {{strtoupper(@$post->getCountry->name)}}</span>
                                     </a>
                                 </p>
@@ -44,7 +44,7 @@
                                 </ul>
                                 <div class="price-properties footer pt-3 pb-0">
                                     <h3 class="title mt-3">
-                                     <a href="single-property-1.html">&#8377; {{$post->price}}</a>
+                                     <a href="#">&#8377; {{$post->price}}</a>
                                     </h3>
                                     <div class="compare">
                                         <a href="#" title="Compare">

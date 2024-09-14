@@ -1,5 +1,5 @@
   <!-- START FOOTER -->
-  <footer class="first-footer">
+  <footer class="first-footer" style="margin-left: 20%;">
             <div class="second-footer">
                 <div class="container">
                     <p>2021 © Copyright - All Rights Reserved.</p>
