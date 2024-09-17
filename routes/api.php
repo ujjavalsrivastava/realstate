@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\HomeController;
+use App\Http\Controllers\api\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,9 +55,9 @@ Route::get('getAuthenticatedUser', [AuthController::class, 'getAuthenticatedUser
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('logout', [AuthController::class, 'logout']);
     Route::post('pro_description', [HomeController::class, 'proDescription']); 
+    Route::get('user-post', [PostController::class, 'UserPost']); 
     Route::post('/orderGenerate',[HomeController::class, 'orderGenerate']);
     // fav pro ----------
     Route::post('/fav-pro',[HomeController::class, 'favoritePro']);   
-
     
 });
