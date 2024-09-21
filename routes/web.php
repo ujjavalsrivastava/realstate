@@ -39,6 +39,7 @@ Route::post('pro_post_des', [PostPropertyController::class, 'proPostDes']);
 Route::get('fatch_post', [PostPropertyController::class, 'fatchPost']);
 Route::get('property-for-sale', [PostPropertyController::class, 'propertyForSale']);
 Route::get('search-property', [PostPropertyController::class, 'searchPos']);
+Route::post('post-views', [PostPropertyController::class, 'postViews']);
 //property post details -------
 Route::get('get_property/{id}', [PostPropertyController::class, 'getProperty']);
 

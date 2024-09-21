@@ -356,4 +356,9 @@ class PostPropertyController extends Controller
             return response()->json(['message' => $e->getMessage()], 400); 
         }
     }
+
+    function postViews(Request $request)
+    {
+        
+    }
 }
