@@ -1046,7 +1046,7 @@
             //  chat box
 
 
-            const currentUserId = {{ auth()->user()->id }};
+            const currentUserId = {{ @auth()->user()->id }};
     
     // Listen to the current user's private channel for messages
     Echo.private(`private-chat.${currentUserId}`)
