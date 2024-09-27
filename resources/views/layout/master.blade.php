@@ -149,6 +149,8 @@
          height:auto;
          border:1px solid #ccc;  
          overflow: hidden;
+         background: #efefef;
+         z-index: 1;
          }
          .chat-box-body:after {
          content: "";
@@ -276,6 +278,100 @@
          margin-bottom: 70px;
          }
          /* chat box end */
+
+         .pro-sidebar {
+    background: #ffffff;
+    width: 280px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 170px;
+    transform: translate(-80%);
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    overflow: hidden;
+    overflow-y: scroll;
+    box-shadow: 0 0 128px 0 rgba(0, 0, 0, 0.1), 0 32px 64px -48px rgba(0, 0, 0, 0.5);
+    z-index: -1;
+    transition: all .7s ease-in-out;
+}
+
+.pro-sidebar:hover {
+    transform: translate(-100%);
+    left: 0;
+}
+
+.pro-sidebar .side-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding: 3px 10px;
+    cursor: pointer;
+    transition: .3s ease-in-out;
+}
+
+.pro-sidebar .side-box:hover {
+    background: #f2f2f2;
+}
+
+.pro-sidebar .side-box .pro-img img {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #0c83d4;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.pro-sidebar .side-box .emp-name span {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.pro-sidebar .search-bar {
+    display: block;
+    padding: 8px 10px;
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.pro-sidebar .search-bar input {
+    padding: 7px 10px;
+    outline: none;
+    width: 100%;
+    font-size: 13px;
+    color: #424247;
+    font-weight: 400;
+    border: 1px solid #e3e3e3;
+    border-radius: 5px;
+}
+
+.pro-sidebar .bottom-text span {
+    font-size: 11px;
+    color: #999;
+}
+
+.pro-sidebar::-webkit-scrollbar {
+    height: 5px;
+    width: 5px;
+}
+
+.pro-sidebar::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+.pro-sidebar::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background-color: #666;
+    cursor: pointer;
+}
+
+.pro-sidebar::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px #c2c2c2;
+    border-radius: 6px;
+}
       </style>
       @yield('style')
    </head>
@@ -296,16 +392,171 @@
          <div class="chat-box-body">
             <div class="chat-box-overlay">   
             </div>
-            <div class="chat-logs">
+            <div class="chat-logs" id="chat-window">
             </div>
             <!--chat-log -->
          </div>
          <div class="chat-input">
             <form>
                <input type="text" id="chat-input" placeholder="Send a message..."/>
+               <input type="hidden" name="receiver_id" id="receiver_id">
                <button type="submit" class="chat-submit" id="chat-submit"><i class="fa fa-paper-plane"></i></button>
             </form>
          </div>
+         <div class="pro-sidebar">
+         <div class="chat-box-header">
+         </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search here...">
+            </div>
+            @foreach($chatuser as $row)
+            
+            <div class="side-box" onclick="findUser('{{$row->id}}','{{$row->name}}')">
+                <div class="pro-img">
+                    <img src="{{URL::asset('assets/images/user.jpg')}}" alt="">
+                </div>
+                <div class="pro-name">
+                    <div class="emp-name">
+                        <span>{{$row->name}}</span>
+                    </div>
+                    <div class="bottom-text"><span>{{$row->type}}</span></div>
+                </div>
+            </div>
+            @endforeach
+
+            <!-- <div class="side-box">
+                <div class="pro-img">
+                    <img src="{{URL::asset('assets/images/user.jpg')}}" alt="">
+                </div>
+                <div class="pro-name">
+                    <div class="emp-name">
+                        <span>John Devid</span>
+                    </div>
+                    <div class="bottom-text"><span>SAP (ABAP)</span></div>
+                </div>
+            </div>
+
+            <div class="side-box">
+                <div class="pro-img">
+                    <img src="{{URL::asset('assets/images/user.jpg')}}" alt="">
+                </div>
+                <div class="pro-name">
+                    <div class="emp-name">
+                        <span>John Devid</span>
+                    </div>
+                    <div class="bottom-text"><span>SAP (ABAP)</span></div>
+                </div>
+            </div>
+
+            <div class="side-box">
+                <div class="pro-img">
+                    <img src="{{URL::asset('assets/images/user.jpg')}}" alt="">
+                </div>
+                <div class="pro-name">
+                    <div class="emp-name">
+                        <span>John Devid</span>
+                    </div>
+                    <div class="bottom-text"><span>SAP (ABAP)</span></div>
+                </div>
+            </div>
+
+            <div class="side-box">
+                <div class="pro-img">
+                    <img src="{{URL::asset('assets/images/user.jpg')}}" alt="">
+                </div>
+                <div class="pro-name">
+                    <div class="emp-name">
+                        <span>John Devid</span>
+                    </div>
+                    <div class="bottom-text"><span>SAP (ABAP)</span></div>
+                </div>
+            </div>
+
+            <div class="side-box">
+                <div class="pro-img">
+                    <img src="{{URL::asset('assets/images/user.jpg')}}" alt="">
+                </div>
+                <div class="pro-name">
+                    <div class="emp-name">
+                        <span>John Devid</span>
+                    </div>
+                    <div class="bottom-text"><span>SAP (ABAP)</span></div>
+                </div>
+            </div>
+
+            <div class="side-box">
+                <div class="pro-img">
+                    <img src="{{URL::asset('assets/images/user.jpg')}}" alt="">
+                </div>
+                <div class="pro-name">
+                    <div class="emp-name">
+                        <span>John Devid</span>
+                    </div>
+                    <div class="bottom-text"><span>SAP (ABAP)</span></div>
+                </div>
+            </div>
+
+            <div class="side-box">
+                <div class="pro-img">
+                    <img src="{{URL::asset('assets/images/user.jpg')}}" alt="">
+                </div>
+                <div class="pro-name">
+                    <div class="emp-name">
+                        <span>John Devid</span>
+                    </div>
+                    <div class="bottom-text"><span>SAP (ABAP)</span></div>
+                </div>
+            </div>
+
+            <div class="side-box">
+                <div class="pro-img">
+                    <img src="{{URL::asset('assets/images/user.jpg')}}" alt="">
+                </div>
+                <div class="pro-name">
+                    <div class="emp-name">
+                        <span>John Devid</span>
+                    </div>
+                    <div class="bottom-text"><span>SAP (ABAP)</span></div>
+                </div>
+            </div>
+
+            <div class="side-box">
+                <div class="pro-img">
+                    <img src="{{URL::asset('assets/images/user.jpg')}}" alt="">
+                </div>
+                <div class="pro-name">
+                    <div class="emp-name">
+                        <span>John Devid</span>
+                    </div>
+                    <div class="bottom-text"><span>SAP (ABAP)</span></div>
+                </div>
+            </div>
+
+            <div class="side-box">
+                <div class="pro-img">
+                    <img src="{{URL::asset('assets/images/user.jpg')}}" alt="">
+                </div>
+                <div class="pro-name">
+                    <div class="emp-name">
+                        <span>John Devid</span>
+                    </div>
+                    <div class="bottom-text"><span>SAP (ABAP)</span></div>
+                </div>
+            </div>
+
+            <div class="side-box">
+                <div class="pro-img">
+                    <img src="{{URL::asset('assets/images/user.jpg')}}" alt="">
+                </div>
+                <div class="pro-name">
+                    <div class="emp-name">
+                        <span>John Devid</span>
+                    </div>
+                    <div class="bottom-text"><span>SAP (ABAP)</span></div>
+                </div>
+            </div> -->
+        </div>
+
       </div>
       @endif
       <!-- chat box end -->
@@ -546,7 +797,29 @@
          <script src="{{ URL::asset('assets/js/range.js')}}"></script>
          <script src="{{ URL::asset('assets/js/color-switcher.js')}}"></script>
          <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+         <script src="{{ mix('js/app.js') }}"></script>
          <script>
+         function findUser(id,name){
+            $('.chat-box-header').text(name);
+            $('#receiver_id').val(id);
+
+            $.ajax({
+                    url: "{{url('showChat')}}/"+id, // The route that handles the request
+                    type: 'GET',
+                    success: function(response) {
+                     $('#chat-window').html(response);
+                      
+                    },
+                    error: function (response) {
+                        $('#loadingDiv').hide();
+                                $('#errorNotification').show();
+                                $('#errorMessage').text(response.responseJSON.error);
+                            },
+                });
+         }
+
+
+
             function changePass(){
                 $('.forget-form').css("display", "block");
             }
@@ -771,29 +1044,65 @@
                 $('#'+closeId).hide();
              }
             //  chat box
+
+
+            const currentUserId = {{ auth()->user()->id }};
+    
+    // Listen to the current user's private channel for messages
+    Echo.private(`private-chat.${currentUserId}`)
+        .listen('MessageSent', (e) => {
+            let chatWindow = document.getElementById('chat-window');
+
+            // Check if the message was sent by the current user (to distinguish sent and received messages)
+            if (e.sender_id == currentUserId) {
+                chatWindow.innerHTML += `
+                  <div id="cm-msg-1" class="chat-msg self" >     
+         <span class="msg-avatar">          
+                <img src="http://127.0.0.1:8000/assets/images/user.jpg">       
+        </span>        
+     <div class="cm-msg-text">${e.message} </div>   
+ </div>`;
+            } else {
+                chatWindow.innerHTML += `
+                
+ <div id="cm-msg-2" class="chat-msg user" style="">   
+           <span class="msg-avatar">         
+                <img src="http://127.0.0.1:8000/assets/images/user.jpg">        
+              </span>          <div class="cm-msg-text">${e.message}       
+         </div>    
+                
+</div>`;
+            }
+
+            // Scroll chat window to the bottom after new message
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+        });
+
+
             $(function() {
             var INDEX = 0; 
             $("#chat-submit").click(function(e) {
             e.preventDefault();
-            var msg = $("#chat-input").val(); 
-            if(msg.trim() == ''){
-            return false;
-            }
-            generate_message(msg, 'self');
-            var buttons = [
-            {
-            name: 'Existing User',
-            value: 'existing'
-            },
-            {
-            name: 'New User',
-            value: 'new'
-            }
-            ];
-            setTimeout(function() {      
-            generate_message(msg, 'user');  
-            }, 1000)
-            
+            var message = $("#chat-input").val(); 
+            var receiverId = $("#receiver_id").val(); 
+         
+           // let message = document.getElementById('message-input').value;
+        //let receiverId = document.getElementById('receiver-id').value;
+
+        // Send the message using Axios
+        axios.post('/send-message', {
+            message: message,
+            receiver_id: receiverId
+        })
+        .then(response => {
+            console.log('Message sent successfully');
+            document.getElementById('chat-input').value = ''; // Clear the input field
+        })
+        .catch(error => {
+            console.error('Error sending message:', error);
+        });
+
+           
             })
             
             function generate_message(msg, type) {

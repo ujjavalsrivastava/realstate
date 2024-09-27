@@ -6,6 +6,8 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\PostPropertyController;
 use App\Http\Controllers\PaymentgatewayController;
 use App\Http\Controllers\admin\AdminController;
+use App\Events\MessageSent;
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +18,26 @@ use App\Http\Controllers\admin\AdminController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+Route::get('/chat', function (Request $request) {
+   return view('front.chat');
+});
+Route::post('/send-message',[HomeController::class, 'sendMsg'])->middleware('auth');
+
+Route::get('/showChat/{id}',[HomeController::class, 'showChat']);
+// Route::post('/send-message', function (Request $request) {
+//     $user = auth()->user();  // Get the authenticated user
+//     $message = $request->message;
+
+    
+//     // You can save the message to the database here (optional)
+
+//     // Broadcast the message to other users
+//     broadcast(new MessageSent($message, $user))->toOthers();
+
+//     return ['status' => 'Message Sent!'];
+// })->middleware('auth');
 
 
 Route::get('/',[HomeController::class, 'index']);
