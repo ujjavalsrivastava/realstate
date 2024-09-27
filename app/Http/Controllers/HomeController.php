@@ -9,6 +9,7 @@ use Validator;
 use Hash;
 use App\Models\User;
 use App\Models\ResComDetailModel;
+use App\Models\Chats;
 use App\Models\OtpVerifyModel;
 use App\Models\ProDescriptionModel;
 use Illuminate\Support\Facades\Mail;
@@ -20,9 +21,47 @@ use App\Models\ContactUsModel;
 use App\Models\StateModel;
 use App\Models\CityModel;
 use App\Models\ProFeatureMasterModel;
-
+use App\Events\MessageSent;
 class HomeController extends Controller
 {
+
+
+    function sendMsg(Request $request){
+
+        $sender = Auth::user();  // User A (the sender)
+        $receiver = User::find($request->receiver_id);  // User B (the receiver)
+      
+        $message = $request->message;
+
+        if (!$receiver) {
+            return response()->json(['error' => 'User not found.'], 404);
+        }
+
+        Chats::create([
+            'sender_id' => $sender->id,
+            'receiver_id' => $receiver->id,
+            'msg' => $message,
+        ]);
+
+        // Broadcast the event to User B's private channel
+        broadcast(new MessageSent($message, $sender,$receiver))->toOthers();
+    
+        return ['status' => 'Message Sent!'];
+    }
+
+      // Display chat between two users
+      public function showChat($userId)
+      {
+          $user = User::find(auth()->id()); // Current logged-in user
+          $messages = Chats::where(function ($query) use ($userId) {
+              $query->where('sender_id', auth()->id())->where('receiver_id', $userId);
+          })->orWhere(function ($query) use ($userId) {
+              $query->where('sender_id', $userId)->where('receiver_id', auth()->id());
+          })->orderBy('created_at', 'asc')->get();
+  
+          return view('ajax.message', compact('messages'));
+      }
+
     function index()
     {
         $getPost = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->get();
