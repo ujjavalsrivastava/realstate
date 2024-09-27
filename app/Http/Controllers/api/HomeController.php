@@ -207,7 +207,7 @@ class HomeController extends Controller
 
     //get property Description
     public function getProDescription(){
-        $pro_description_list = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity','getFavPro')->get();
+        $pro_description_list = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity','getFavPro')->paginate(9);
         return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $pro_description_list]);
     }
 
