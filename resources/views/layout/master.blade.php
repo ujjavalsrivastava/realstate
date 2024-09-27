@@ -1058,7 +1058,7 @@
                 chatWindow.innerHTML += `
                   <div id="cm-msg-1" class="chat-msg self" >     
          <span class="msg-avatar">          
-                <img src="http://127.0.0.1:8000/assets/images/user.jpg">       
+                <img src="{{url('assets/images/user.jpg')}}">       
         </span>        
      <div class="cm-msg-text">${e.message} </div>   
  </div>`;
@@ -1067,7 +1067,7 @@
                 
  <div id="cm-msg-2" class="chat-msg user" style="">   
            <span class="msg-avatar">         
-                <img src="http://127.0.0.1:8000/assets/images/user.jpg">        
+                <img src="{{url('assets/images/user.jpg')}}">        
               </span>          <div class="cm-msg-text">${e.message}       
          </div>    
                 
