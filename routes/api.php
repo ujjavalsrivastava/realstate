@@ -58,6 +58,9 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('user-post', [PostController::class, 'UserPost']); 
     Route::post('/orderGenerate',[HomeController::class, 'orderGenerate']);
     // fav pro ----------
-    Route::post('/fav-pro',[HomeController::class, 'favoritePro']);   
-    
+    Route::post('/fav-pro',[HomeController::class, 'favoritePro']);  
+
+    // chat 
+    Route::post('/send-message',[HomeController::class, 'sendMsg']);
+Route::get('/show-chat/{id}',[HomeController::class, 'showChat']);
 });
