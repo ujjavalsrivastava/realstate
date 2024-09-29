@@ -25,7 +25,7 @@ use App\Events\MessageSent;
 class HomeController extends Controller
 {
 
-
+// chat
     function sendMsg(Request $request){
 
         $sender = Auth::user();  // User A (the sender)
@@ -57,10 +57,33 @@ class HomeController extends Controller
               $query->where('sender_id', auth()->id())->where('receiver_id', $userId);
           })->orWhere(function ($query) use ($userId) {
               $query->where('sender_id', $userId)->where('receiver_id', auth()->id());
-          })->orderBy('created_at', 'asc')->get();
+          });
+          
+          $update =  $messages->update(['view'=>1]);
+
+          $messages = $messages->orderBy('created_at', 'asc')->get();
   
           return view('ajax.message', compact('messages'));
       }
+
+      public function userChatList(Request $request){
+        $user = Auth::user(); 
+        $chatUser = User::where('id','!=',$user->id);
+        if($user->type != 'Admin'){
+            
+            $chatUser->where('type','Admin');
+        }
+        if(!empty($request->search)){
+            
+            $chatUser->where('name', 'like', "%$request->search%");
+
+        }
+        $chatUser = $chatUser->limit(10)->get();
+        
+        return view('ajax.chatuserlist', compact('chatUser'));
+      }
+
+    //   end chat
 
     function index()
     {
@@ -152,6 +175,7 @@ class HomeController extends Controller
             
             if (Auth::attempt($credentials)) {
                 // Authentication passed
+                user::where('email',$request->email)->update(['updated_at'=>date('Y-m-d h:i:s')]);
                 return response()->json(['status'=> 200,'success'=> 'Login Successfuly']); 
             }else{
                 return response()->json(['status'=> 201, 'error'=> 'Invalid  credentials ']); 
@@ -219,7 +243,7 @@ class HomeController extends Controller
     $details = [
         'otp' => rand(1000,9999)  
     ];
-  // $data=Mail::to($request->input('email'))->send(new OtpSendMail($details));
+  $data=Mail::to($request->input('email'))->send(new OtpSendMail($details));
   $delete = OtpVerifyModel::where('email',$request->email)->delete();
     $getotp = OtpVerifyModel::insert([
         'email' => $request->input('email'),

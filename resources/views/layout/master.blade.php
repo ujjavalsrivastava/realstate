@@ -396,7 +396,7 @@
             </div>
             <!--chat-log -->
          </div>
-         <div class="chat-input">
+         <div class="chat-input" style="display:none">
             <form>
                <input type="text" id="chat-input" placeholder="Send a message..."/>
                <input type="hidden" name="receiver_id" id="receiver_id">
@@ -407,22 +407,11 @@
          <div class="chat-box-header">
          </div>
             <div class="search-bar">
-                <input type="text" placeholder="Search here...">
+                <input type="text" onkeyup="getChatUserList(this.value)" placeholder="Search here...">
             </div>
-            @foreach($chatuser as $row)
-            
-            <div class="side-box" onclick="findUser('{{$row->id}}','{{$row->name}}')">
-                <div class="pro-img">
-                    <img src="{{URL::asset('assets/images/user.jpg')}}" alt="">
-                </div>
-                <div class="pro-name">
-                    <div class="emp-name">
-                        <span>{{$row->name}}</span>
-                    </div>
-                    <div class="bottom-text"><span>{{$row->type}}</span></div>
-                </div>
+            <div id="user-list">
             </div>
-            @endforeach
+           
 
             <!-- <div class="side-box">
                 <div class="pro-img">
@@ -799,9 +788,13 @@
          <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
          <script src="{{ mix('js/app.js') }}"></script>
          <script>
+            function capitalizeFirstLetter(str) {
+                return str.charAt(0).toUpperCase() + str.slice(1);
+             }
          function findUser(id,name){
-            $('.chat-box-header').text(name);
+            $('.chat-box-header').text(capitalizeFirstLetter(name));
             $('#receiver_id').val(id);
+            $('.chat-input').show();
 
             $.ajax({
                     url: "{{url('showChat')}}/"+id, // The route that handles the request
@@ -1047,6 +1040,10 @@
 
 
             const currentUserId = {{(auth()->check()) ? auth()->user()->id : 0}};
+
+
+            
+
     
     // Listen to the current user's private channel for messages
     Echo.private(`private-chat.${currentUserId}`)
@@ -1179,7 +1176,19 @@
             })
             
             })
+            getChatUserList();
+            function getChatUserList(name=""){
+                $.ajax({
+                    type: "GET",
+                    url: "{{url('/user-chat-list')}}?search="+name,
+                   success: function(response) {
+                       $('#user-list').html(response)
+                    },
+                    error: function (response) {
             
+                     },
+                });
+            }
             //   chat box end
          </script>
          <!-- Slider Revolution scripts -->

@@ -23,9 +23,14 @@ use Illuminate\Http\Request;
 Route::get('/chat', function (Request $request) {
    return view('front.chat');
 });
-Route::post('/send-message',[HomeController::class, 'sendMsg'])->middleware('auth');
 
+// chat
+Route::post('/send-message',[HomeController::class, 'sendMsg'])->middleware('auth');
 Route::get('/showChat/{id}',[HomeController::class, 'showChat']);
+Route::get('/user-chat-list',[HomeController::class, 'userChatList']);
+// end chat
+
+
 // Route::post('/send-message', function (Request $request) {
 //     $user = auth()->user();  // Get the authenticated user
 //     $message = $request->message;
