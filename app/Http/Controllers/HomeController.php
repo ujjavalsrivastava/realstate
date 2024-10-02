@@ -52,7 +52,7 @@ class HomeController extends Controller
       // Display chat between two users
       public function showChat($userId)
       {
-          $user = User::find(auth()->id()); // Current logged-in user
+          //$user = User::find(auth()->id()); // Current logged-in user
           $messages = Chats::where(function ($query) use ($userId) {
               $query->where('sender_id', auth()->id())->where('receiver_id', $userId);
           })->orWhere(function ($query) use ($userId) {

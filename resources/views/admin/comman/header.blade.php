@@ -211,7 +211,7 @@
             <!-- Right Side Content / --> 
             <div class="header-user-menu user-menu">
                <div class="header-user-name">
-                  <span><img src="images/testimonials/ts-1.jpg" alt=""></span>Hi, Mary!
+                  <span><img src="{{URL::asset('assets/images/user.jpg')}}" alt=""></span>Hi, {{ucfirst(Auth::user()->name)}}!
                </div>
                <ul>
                   <li><a href="user-profile.html"> Edit profile</a></li>

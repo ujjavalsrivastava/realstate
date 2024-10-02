@@ -1,10 +1,10 @@
                     <div class="user-profile-box mb-0">
-                         <div class="sidebar-header"><img src="images/logo-blue.svg" alt="header-logo2.png"> </div>
+                         <div class="sidebar-header"><img src="{{URL::asset('assets/images/logo.jpeg')}}" alt="header-logo2.png" style="height:76px; width:340px"> </div>
                             <div class="header clearfix">
-                                <img src="images/testimonials/ts-1.jpg" alt="avatar" class="img-fluid profile-img">
+                                <img src="{{URL::asset('assets/images/user.jpg')}}" alt="avatar" class="img-fluid profile-img">
                             </div>
                             <div class="active-user">
-                                <h2>Mary Smith</h2>
+                                <h2>{{ucfirst(Auth::user()->name)}}</h2>
                             </div>
                             <div class="detail clearfix">
                                 <ul class="mb-0">
@@ -19,8 +19,13 @@
                                         </a>
                                     </li>
                                     <li>
+                                        <a href="{{url('admin/sub-plan')}}">
+                                            <i class="fa fa-compress"></i>Subscription Plan
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="{{url('admin/logout')}}">
-                                            <i class="fas fa-sign-out-alt"></i>Log Out
+                                            <i class="fa fa-sign-out"></i>Log Out
                                         </a>
                                     </li>
                                 </ul>

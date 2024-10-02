@@ -19,6 +19,7 @@ use App\Models\NewslettersModel;
 use App\Models\ContactUsModel;
 use App\Models\StateModel;
 use App\Models\CityModel;
+use App\Models\PlanModel;
 use App\Models\ProFeatureMasterModel;
 use App\Http\Controllers\Controller;
 
@@ -67,6 +68,21 @@ class AdminController extends Controller
         $getPosts = $data->get();
         // with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity','getReview');
         return view('admin.payment',compact('getPosts'));
+    }
+
+    function subPlan(){
+        $getPlan = PlanModel::get();
+        return view('admin.subplan',compact('getPlan'));
+    }
+
+    function subPlanDelete($id){
+        $record = PlanModel::find($id);
+        if ($record) {
+            $record->delete();
+            return response()->json(['success' => 'Record deleted successfully']);
+        }
+    
+        return response()->json(['error' => 'Record not found'], 404);
     }
 
 }

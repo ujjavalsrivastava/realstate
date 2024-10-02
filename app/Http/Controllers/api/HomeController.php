@@ -366,7 +366,7 @@ class HomeController extends Controller
           $messages = Chats::where(function ($query) use ($senderId,$recieverId) {
               $query->where('sender_id',  $senderId)->where('receiver_id', $recieverId);
           })->orWhere(function ($query) use ($senderId,$recieverId) {
-              $query->where('sender_id', $senderId)->where('receiver_id',  $recieverId);
+              $query->where('sender_id', $recieverId)->where('receiver_id',  $senderId);
           });
           
           $update =  $messages->update(['view'=>1]);

@@ -59,53 +59,33 @@
     <table class="table-responsive">
       <thead>
         <tr>
-          <th class="pl-2">My Properties</th>
-          <th class="p-0"></th>
-          <th>User Name</th>
-          <th>Payment</th>
-          <th>Status</th>
-          <th>Date Added</th>
-          <th>Views</th>
-          <!-- <th>Actions</th> -->
+          <th class="pl-2">Plan</th>
+         <th>Description</th>
+          <th>Price</th>
+          <th>Created Date</th>
+          <th>Updated Date</th>
+          <!-- <th>Views</th> -->
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        @foreach($getPosts as $getPost)
-      <tr>
-          <td class="image myelist">
+        @foreach($getPlan as $plan)
+      <tr id="record-{{$plan->id}}">
+          <!-- <td class="image myelist">
             <a href="single-property-1.html"><img alt="my-properties-3" src="{{asset('images')}}/{{@$getPost->getMedia[0]->file_name}}" class="img-fluid" style="height:100px; wight:129px"></a>
-          </td>
-          <td>
-            <div class="inner">
-              <a href="single-property-1.html">
-                <h2>{{$getPost->pro_title}}</h2>
-              </a>
-              <figure><i class="lni-map-marker"></i> {{strtoupper(@$getPost->address)}}, {{strtoupper(@$getPost->getCity->city)}}, {{strtoupper(@$getPost->getState->name)}}, {{strtoupper(@$getPost->getCountry->name)}}</figure>
-              <!-- <ul class="starts text-left mb-0">
-              @foreach($getPost->getReview as $data)
-                <li class="mb-0"> 
-                @for($i=1; $i<=5; $i++)
-                  @if($i <= $data->reating)
-                    <i class="fa fa-star"></i>
-                  @else
-                    <i class="fa fa-star-o"></i>
-                  @endif
-                @endfor
-                </li>
-                <li class="ml-3">({{@$data->reating}} Reviews)</li>
-              @endforeach
-              </ul> -->
-            </div>
-          </td>
-          <td>{{ucfirst($getPost->getUser[0]->name)}}</td>
-          <td>&#8377;{{ucfirst(@$getPost->getPayment->price)}}</td>
-          <td>{{ucfirst(@$getPost->getPayment->status)}}</td>
-          <td>{{date('d.m.Y', strtotime($getPost->created_at))}}</td>
-          <td>{{ucfirst(@$getPost->view)}}</td>
-          <!-- <td class="actions">
-            <a href="#" class="edit"><i class="lni-pencil"></i>Edit</a>
-            <a href="#"><i class="far fa-trash-alt"></i></a>
           </td> -->
+          <td>
+              <h2>{{$plan->plan}}</h2>
+          </td>
+          <td>{{ucfirst($plan->description)}}</td>
+          <td> &#8377;{{$plan->price}}</td>
+          <td>{{$plan->created_at}}</td>
+          <td>{{$plan->updated_at}}</td>
+         
+          <td class="actions">
+            <a href="#" class="edit"><i class="lni-pencil"></i>Edit</a>
+            <a href="#" class="delete-btn"><i class="fa fa-trash"></i></a>
+          </td>
         </tr>
        @endforeach
       </tbody>
@@ -123,4 +103,30 @@
     </div> -->
   </div>
 </div>
+@endsection
+@section('script')
+<script>
+$(document).ready(function() {
+    $('.delete-btn').click(function() {
+        var recordId = $(this).data('id');
+
+        if (confirm('Are you sure you want to delete this record?')) {
+            $.ajax({
+                url: '{{url('admin/sub-plan-delete/')}}' + recordId,
+                type: 'Get',
+                data: {
+                    _token: '{{ csrf_token() }}' // Include CSRF token
+                },
+                success: function(response) {
+                    alert(response.success);
+                    $('#record-' + recordId).remove(); // Remove the record from the UI
+                },
+                error: function(xhr) {
+                    alert(xhr.responseJSON.error);
+                }
+            });
+        }
+    });
+});
+</script>
 @endsection
