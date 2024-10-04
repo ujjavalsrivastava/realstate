@@ -79,8 +79,11 @@ class HomeController extends Controller
 
         }
         $chatUser = $chatUser->limit(10)->get();
+
+        $message = view('ajax.chatuserlist', compact('chatUser'))->render();
+        $selfChatCount  =  Chats::where('receiver_id', auth()->id())->where('view',0)->count();
+        return response()->json(['status'=> 200,'success'=> 'fetch Successfuly','message' =>$message, 'selfChatCount' => $selfChatCount]); 
         
-        return view('ajax.chatuserlist', compact('chatUser'));
       }
 
     //   end chat
@@ -175,7 +178,7 @@ class HomeController extends Controller
             
             if (Auth::attempt($credentials)) {
                 // Authentication passed
-                user::where('email',$request->email)->update(['updated_at'=>date('Y-m-d h:i:s')]);
+                user::where('email',$request->email)->update(['online' => 1,'updated_at'=>date('Y-m-d h:i:s')]);
                 return response()->json(['status'=> 200,'success'=> 'Login Successfuly']); 
             }else{
                 return response()->json(['status'=> 201, 'error'=> 'Invalid  credentials ']); 
@@ -183,6 +186,8 @@ class HomeController extends Controller
     }
 
     function logout(){
+
+        user::where('id',auth()->id())->update(['online' => 0,'updated_at'=>date('Y-m-d h:i:s')]);
         Auth::logout();
         return redirect('/');
     }

@@ -372,6 +372,33 @@
     -webkit-box-shadow: inset 0 0 6px #c2c2c2;
     border-radius: 6px;
 }
+
+.dot {
+  height: 25px;
+  width: 25px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  position: absolute;
+    top: -9px;
+    right: 14px;
+    background: black;
+}
+
+.msgCount {
+  height: 25px;
+  width: 25px;
+  background-color: green;
+  color:white;
+  border-radius: 50%;
+  display: inline-block;
+  margin-top:'20px';
+
+   text-align: center;
+    position: relative;
+    right: -110px;
+
+}
       </style>
       @yield('style')
    </head>
@@ -380,7 +407,9 @@
       <!-- chat box -->
       @if(Auth::check())
       <div id="body">
+        
       <div id="chat-circle" class="btn btn-raised">
+        <span class="dot">0</span>
          <div id="chat-overlay"></div>
          <i class="fa fa-comments"></i>
       </div>
@@ -801,7 +830,7 @@
                     type: 'GET',
                     success: function(response) {
                      $('#chat-window').html(response);
-                      
+                     getChatUserList(); 
                     },
                     error: function (response) {
                         $('#loadingDiv').hide();
@@ -1182,7 +1211,8 @@
                     type: "GET",
                     url: "{{url('/user-chat-list')}}?search="+name,
                    success: function(response) {
-                       $('#user-list').html(response)
+                       $('#user-list').html(response.message);
+                       $('.dot').html(response.selfChatCount);
                     },
                     error: function (response) {
             
