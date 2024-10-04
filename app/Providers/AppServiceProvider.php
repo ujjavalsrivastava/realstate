@@ -29,7 +29,6 @@ class AppServiceProvider extends ServiceProvider
     {
 
     
-       $currentUser = Auth::user();
  
      $menu = Menu::with('getSubMenu')->where('status','active')->get();
     

@@ -1,6 +1,6 @@
 <?php
 use App\Models\FavoriteProModel;
-
+use App\Models\Chats;
 
 // function getFavirateUser($postId)
 // {
@@ -98,4 +98,12 @@ function FindLatLong($addres){
     $log =$response->results[0]->geometry->lng;
     return [$adress,$lat,$log];
    
+}
+
+
+function UserUnseenMsg($userId){
+    $count = Chats::where(function ($query) use ($userId) {
+    $query->where('view',0)->where('sender_id', $userId)->where('receiver_id', auth()->id());
+    })->count();
+    return $count;
 }
