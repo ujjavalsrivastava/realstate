@@ -83,8 +83,9 @@
           <td>{{$plan->updated_at}}</td>
          
           <td class="actions">
-            <a href="#" class="edit"><i class="lni-pencil"></i>Edit</a>
-            <a href="#" class="delete-btn"><i class="fa fa-trash"></i></a>
+            <a href="{{url('admin/edit-sub-plan')}}/{{$plan->id}}" class="edit"><i class="lni-pencil"></i>Edit</a>
+            <a href="#" class="delete-btn" onclick= "deletePlan('{{$plan->id}}')" ><i class="fa fa-trash"></i></a>
+            <!-- <input type="hidden" value="{{$plan->id}}" id="id"> -->
           </td>
         </tr>
        @endforeach
@@ -105,28 +106,24 @@
 </div>
 @endsection
 @section('script')
-<script>
-$(document).ready(function() {
-    $('.delete-btn').click(function() {
-        var recordId = $(this).data('id');
+      <script>
 
-        if (confirm('Are you sure you want to delete this record?')) {
-            $.ajax({
-                url: '{{url('admin/sub-plan-delete/')}}' + recordId,
-                type: 'Get',
-                data: {
-                    _token: '{{ csrf_token() }}' // Include CSRF token
-                },
-                success: function(response) {
-                    alert(response.success);
-                    $('#record-' + recordId).remove(); // Remove the record from the UI
-                },
-                error: function(xhr) {
-                    alert(xhr.responseJSON.error);
-                }
-            });
-        }
-    });
-});
-</script>
+              function deletePlan(id){
+                  $.ajax({
+                    url: '{{url('admin/sub-plan-d')}}/' + id,
+                    type: 'Get',
+                    data: {
+                        _token: '{{ csrf_token() }}' // Include CSRF token
+                    },
+                    success: function(response) {
+                        alert(response);
+                        $('#record-' + id).remove(); // Remove the record from the UI
+                    },
+                    error: function(xhr) {
+                        alert(xhr.responseJSON.error);
+                    }
+                 });
+              }
+  
+      </script>
 @endsection

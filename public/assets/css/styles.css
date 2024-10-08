@@ -7816,9 +7816,9 @@ html input[disabled] {
   width: 180px !important;
   padding: 15px 34px 15px 34px;
   border-radius: 8px;
-  line-height: 47px;
+  line-height: 27px;
   margin: 0 15px 0 15px;
-  border: 1px solid #ebebeb;
+  /* border: 1px solid #ebebeb; */
   width: 150px;
   position: relative;
 }

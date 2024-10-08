@@ -36,8 +36,9 @@
       <div id="wrapper" class="int_main_wraapper">
          <!-- START SECTION HEADINGS -->
          <!-- inclode header -->
-         @include('comman.notify')
+         
          @include('admin.comman.header') 
+       
          <!-- START SECTION USER PROFILE -->
          <section class="user-page section-padding pt-5">
             <div class="container-fluid">
@@ -45,7 +46,9 @@
                   <div class="col-lg-3 col-md-12 col-xs-12 pl-0 pr-0 user-dash">
                      <!-- inclod side bar -->
                      @include('admin.comman.sidebar')
+                   
                   </div>
+                  @include('comman.notify')
                   @yield('content')
                </div>
             </div>
@@ -97,9 +100,12 @@
                 $(".header-user-menu ul").toggleClass("hu-menu-vis");
                 $(this).toggleClass("hu-menu-visdec");
             });
-            
+            function closeAlert(closeId){
+                $('#'+closeId).hide();
+             }
          </script>
       </div>
+      @yield('script')
       <!-- Wrapper / End -->
    </body>
    <!-- Mirrored from code-theme.com/html/findhouses/my-listings.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 30 Jul 2024 06:22:16 GMT -->

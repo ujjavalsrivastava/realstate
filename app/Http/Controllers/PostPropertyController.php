@@ -22,6 +22,8 @@ use App\Models\CountryModel;
 use App\Models\StateModel;
 use App\Models\CityModel;
 use App\Models\User;
+use App\Models\PlanModel;
+
 
 class PostPropertyController extends Controller
 {
@@ -29,8 +31,9 @@ class PostPropertyController extends Controller
         $getfeatureMasters = ProFeatureMasterModel::get();
         $getProTypes = RealPerameterModel::where('controle_code','PRO_TYPE')->get();
         $getResComTypes = RealPerameterModel::where('controle_code','RES_COM_TYPE')->get();
+        $plan = PlanModel::orderBy('id','DESC')->get();
         $countries = CountryModel::get();
-        return view('back.postProperty', compact('getfeatureMasters','getProTypes','getResComTypes','countries'));
+        return view('back.postProperty', compact('getfeatureMasters','getProTypes','getResComTypes','countries','plan'));
     }
 
     // for dropdown
@@ -143,6 +146,7 @@ class PostPropertyController extends Controller
             $pro_des->username = $request->username;
             $pro_des->email = $request->email;
             $pro_des->phone = $request->phone;
+            $pro_des->plan = $request->payPrice;
             @$pro_des->video = @$path;
             $pro_des->save();
 
@@ -209,7 +213,7 @@ class PostPropertyController extends Controller
 
 
     function fatchPost(Request $request){
-        $getPost = ProDescriptionModel::with('getFavProAuth','getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->paginate(6);
+        $getPost = ProDescriptionModel::with('getFavProAuth','getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->orderBy('plan','DESC')->paginate(6);
         
         return view('ajax.post', compact('getPost'));
     }

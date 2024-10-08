@@ -79,10 +79,38 @@ class AdminController extends Controller
         $record = PlanModel::find($id);
         if ($record) {
             $record->delete();
-            return response()->json(['success' => 'Record deleted successfully']);
+            return response()->json(['status'=> 200,'success' => 'Record deleted successfully']);
         }
     
-        return response()->json(['error' => 'Record not found'], 404);
+        return response()->json(['status'=> 201,'error' => 'Record not found']);
+    }
+
+    function editSubPlan($id){
+        $data = PlanModel::where('id',$id)->first();
+        return view('admin.editsubplan',compact('data'));
+    }
+
+    function updateSubPlan(Request $request, $id){
+        $validator = Validator::make($request->all(), 
+        [ 
+        'plan' => 'required',
+        'description' => 'required', 
+        'price' => 'required'
+       ]);  
+        if ($validator->fails()) {  
+        return response()->json(['error'=>$validator->errors()->first()], 401); 
+        }  
+        try{
+            $update = PlanModel::where('id',$id)->update([
+                'plan' => $request->plan,
+                'description' => $request->description,
+                'price' => $request->price,
+            ]);
+    
+            return response()->json(['status'=> 200,'success' => 'Record Update successfully']);
+        }catch(\Exception $e){
+            return response()->json(['status'=>'400', 'message' => $e->getMessage()]); 
+        }
     }
 
 }

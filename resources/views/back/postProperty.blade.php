@@ -238,12 +238,38 @@
                      </div>
                   </div>
                </div>
+          
+
+
+               <div class="single-add-property">
+                  <h3>Plans</h3>
+                  <div class="property-form-group">
+                     <div class="row">
+                        <div class="col-md-12">
+                           <ul class="pro-feature-add pl-0">
+                              @foreach($plan as $k => $row)
+                              <li class="fl-wrap filter-tags clearfix">
+                                 <div class="checkboxes float-left">
+                                    <div class="filter-tags-wrap">
+                                       <input id="check-a{{$row->id}}" onclick="getPlan('{{$row->price}}')" @if($k == 0) checked @endif type="radio" name="plan" value = "{{$row->price}}">{{$row->plan}}</
+
+                                    </div>
+                                 </div>
+                              </li>
+                              @endforeach
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+
                <div class="add-property-button">
                   <div class="row">
                      <div class="col-md-12">
                         <div class="prperty-submit-button">
                            <button type="submit" id="btnsubmit" style="display:none">Submit Property</button>
-                           <input type="hidden" value="945" id="payPrice">
+                           <input type="hidden" name="payPrice" value="{{@$plan[0]->price}}" id="payPrice">
                            <input type="hidden" name="razorpay_payment_id" id="razorpay_payment_id">
                            <input type="hidden" name="razorpay_signature" id="razorpay_signature">
                            <input type="hidden" name="razorpay_order_id" id="razorpay_order_id">
@@ -252,6 +278,7 @@
                      </div>
                   </div>
                </div>
+
             </div>
          </div>
       </div>
@@ -262,6 +289,10 @@
 @section('script')
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
+
+   function getPlan(price){
+      $('#payPrice').val(price);
+   }
    @if(!Auth::check())
       $('.openModal').click();
     @endif

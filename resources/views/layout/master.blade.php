@@ -415,7 +415,7 @@
       </div>
       <div class="chat-box">
          <div class="chat-box-header">
-            ChatBot
+          <span id="chatboxName">  ChatBot</span>
             <span class="chat-box-toggle"><i class="fa fa-times"></i></span>
          </div>
          <div class="chat-box-body">
@@ -442,137 +442,6 @@
             </div>
            
 
-            <!-- <div class="side-box">
-                <div class="pro-img">
-                    <img src="{{URL::asset('assets/images/user.jpg')}}" alt="">
-                </div>
-                <div class="pro-name">
-                    <div class="emp-name">
-                        <span>John Devid</span>
-                    </div>
-                    <div class="bottom-text"><span>SAP (ABAP)</span></div>
-                </div>
-            </div>
-
-            <div class="side-box">
-                <div class="pro-img">
-                    <img src="{{URL::asset('assets/images/user.jpg')}}" alt="">
-                </div>
-                <div class="pro-name">
-                    <div class="emp-name">
-                        <span>John Devid</span>
-                    </div>
-                    <div class="bottom-text"><span>SAP (ABAP)</span></div>
-                </div>
-            </div>
-
-            <div class="side-box">
-                <div class="pro-img">
-                    <img src="{{URL::asset('assets/images/user.jpg')}}" alt="">
-                </div>
-                <div class="pro-name">
-                    <div class="emp-name">
-                        <span>John Devid</span>
-                    </div>
-                    <div class="bottom-text"><span>SAP (ABAP)</span></div>
-                </div>
-            </div>
-
-            <div class="side-box">
-                <div class="pro-img">
-                    <img src="{{URL::asset('assets/images/user.jpg')}}" alt="">
-                </div>
-                <div class="pro-name">
-                    <div class="emp-name">
-                        <span>John Devid</span>
-                    </div>
-                    <div class="bottom-text"><span>SAP (ABAP)</span></div>
-                </div>
-            </div>
-
-            <div class="side-box">
-                <div class="pro-img">
-                    <img src="{{URL::asset('assets/images/user.jpg')}}" alt="">
-                </div>
-                <div class="pro-name">
-                    <div class="emp-name">
-                        <span>John Devid</span>
-                    </div>
-                    <div class="bottom-text"><span>SAP (ABAP)</span></div>
-                </div>
-            </div>
-
-            <div class="side-box">
-                <div class="pro-img">
-                    <img src="{{URL::asset('assets/images/user.jpg')}}" alt="">
-                </div>
-                <div class="pro-name">
-                    <div class="emp-name">
-                        <span>John Devid</span>
-                    </div>
-                    <div class="bottom-text"><span>SAP (ABAP)</span></div>
-                </div>
-            </div>
-
-            <div class="side-box">
-                <div class="pro-img">
-                    <img src="{{URL::asset('assets/images/user.jpg')}}" alt="">
-                </div>
-                <div class="pro-name">
-                    <div class="emp-name">
-                        <span>John Devid</span>
-                    </div>
-                    <div class="bottom-text"><span>SAP (ABAP)</span></div>
-                </div>
-            </div>
-
-            <div class="side-box">
-                <div class="pro-img">
-                    <img src="{{URL::asset('assets/images/user.jpg')}}" alt="">
-                </div>
-                <div class="pro-name">
-                    <div class="emp-name">
-                        <span>John Devid</span>
-                    </div>
-                    <div class="bottom-text"><span>SAP (ABAP)</span></div>
-                </div>
-            </div>
-
-            <div class="side-box">
-                <div class="pro-img">
-                    <img src="{{URL::asset('assets/images/user.jpg')}}" alt="">
-                </div>
-                <div class="pro-name">
-                    <div class="emp-name">
-                        <span>John Devid</span>
-                    </div>
-                    <div class="bottom-text"><span>SAP (ABAP)</span></div>
-                </div>
-            </div>
-
-            <div class="side-box">
-                <div class="pro-img">
-                    <img src="{{URL::asset('assets/images/user.jpg')}}" alt="">
-                </div>
-                <div class="pro-name">
-                    <div class="emp-name">
-                        <span>John Devid</span>
-                    </div>
-                    <div class="bottom-text"><span>SAP (ABAP)</span></div>
-                </div>
-            </div>
-
-            <div class="side-box">
-                <div class="pro-img">
-                    <img src="{{URL::asset('assets/images/user.jpg')}}" alt="">
-                </div>
-                <div class="pro-name">
-                    <div class="emp-name">
-                        <span>John Devid</span>
-                    </div>
-                    <div class="bottom-text"><span>SAP (ABAP)</span></div>
-                </div>
-            </div> -->
         </div>
 
       </div>
@@ -821,7 +690,7 @@
                 return str.charAt(0).toUpperCase() + str.slice(1);
              }
          function findUser(id,name){
-            $('.chat-box-header').text(capitalizeFirstLetter(name));
+            $('#chatboxName').text(capitalizeFirstLetter(name));
             $('#receiver_id').val(id);
             $('.chat-input').show();
 

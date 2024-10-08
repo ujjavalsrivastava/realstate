@@ -5,9 +5,13 @@
                     <img src="{{URL::asset('assets/images/user.jpg')}}" alt="">
                 </div>
                 <div class="pro-name">
-               
+               @php
+
+               $count = UserUnseenMsg($row->id)??0;
+
+               @endphp
                     <div class="emp-name">
-                        <span>{{ucfirst($row->name)}}</span>    <span class="msgCount">{{UserUnseenMsg($row->id)??0}}</span>
+                        <span>{{ucfirst($row->name)}}</span>  @if( $count > 0)  <span class="msgCount">{{$count}}</span>@endif
                     </div>
                     <div class="bottom-text"><span>{{ucfirst($row->type)}}</span></div>
                 </div>

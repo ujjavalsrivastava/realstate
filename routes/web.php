@@ -99,7 +99,9 @@ Route::get('/emi-calculater',[HomeController::class, 'getEmiCalculater']);
 Route::prefix('admin')->group(function () {
     Route::get('/login',[AdminController::class, 'getLogin']);
     Route::get('/sub-plan',[AdminController::class, 'subPlan']);
-    Route::get('/sub-plan-delete/{id}', [AdminController::class, 'subPlanDelete']);
+    Route::get('/sub-plan-d/{id}', [AdminController::class, 'subPlanDelete']);
+    Route::get('/edit-sub-plan/{id}',[AdminController::class, 'editSubPlan']);
+    Route::post('/update-sub-plan/{id}',[AdminController::class, 'updateSubPlan']);
     Route::post('/loginPost',[AdminController::class, 'loginPost']);
     Route::get('/logout',[AdminController::class, 'logout']);
 
