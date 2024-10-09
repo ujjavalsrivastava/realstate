@@ -111,7 +111,7 @@
    </div>
    <div class="second-footer rec-pro">
       <div class="container-fluid sd-f">
-         <p>2021 © Copyright - All Rights Reserved.</p>
+         <p>{{date('Y')}} © Copyright - All Rights Reserved.</p>
          <ul class="netsocials">
             <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
             <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>

@@ -6,7 +6,7 @@
             <div class="col-lg-3 col-md-6">
                <div class="netabout">
                   <a href="{{url('/')}}" class="logo">
-                  <img src="images/logo-footer.svg" alt="netcom">
+                  <img src="{{URL::asset('assets/images/logo.jpeg')}}" style="width:30%"  class="img-responsive" alt="netcom">
                   </a>
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum incidunt architecto soluta laboriosam, perspiciatis, aspernatur officiis esse.</p>
                </div>
@@ -111,7 +111,7 @@
    </div>
    <div class="second-footer">
       <div class="container">
-         <p>2021 © Copyright - All Rights Reserved.</p>
+         <p>{{date('Y')}} © Copyright - All Rights Reserved.</p>
          <ul class="netsocials">
             <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
             <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>

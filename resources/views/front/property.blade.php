@@ -112,11 +112,11 @@
                   @endforeach
                </ul>
             </div>
-            <div class="floor-plan property wprt-image-video w50 pro">
+            <!-- <div class="floor-plan property wprt-image-video w50 pro">
                <h5>Floor Plans</h5>
                <img alt="image" src="{{URL::asset('assets/images/bg/floor-plan-1.png')}}">
-            </div>
-            <div class="floor-plan property wprt-image-video w50 pro">
+            </div> -->
+            <!-- <div class="floor-plan property wprt-image-video w50 pro">
                <h5>What's Nearby</h5>
                <div class="property-nearby">
                   <div class="row">
@@ -250,7 +250,7 @@
                      </div>
                   </div>
                </div>
-            </div>
+            </div> -->
             @if(!empty($pro->video))
             <div class="property wprt-image-video w50 pro">
                <h5>Property Video</h5>
