@@ -356,7 +356,7 @@
                               $fav = @$post->getFavProAuth;
                               @endphp       
                               <a href="javascript:void(0)" onclick="addFav('{{$post->id}}')" title="Favorites">
-                              <i @if($fav) style="color:red" @endif id="fav_{{$post->id}}" class="flaticon-heart"></i>
+                              <i @if($fav) style="color:red" @endif id="fav_{{$post->id}}" class="flaticon-heart fav_{{$post->id}}"></i>
                               </a>
                               @else
                               <a href="javascript:void(0)" onclick="openRegisterLoginModel()" title="Favorites">
@@ -639,8 +639,8 @@
    $('#feature').val(arr.join());
    }
        var page = 1;
-   
-       loadMoreData(1);
+       setTimeout(function() { loadMoreData(1); }, 5000);
+       
    
        function loadmore(){
            var page = $('#loadmorepage').val();

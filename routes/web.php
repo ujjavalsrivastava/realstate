@@ -64,6 +64,7 @@ Route::post('password-change', [HomeController::class, 'passChange']);
 Route::get('post-property', [PostPropertyController::class, 'postProperty']);
 Route::post('pro_post_des', [PostPropertyController::class, 'proPostDes']);
 Route::get('fatch_post', [PostPropertyController::class, 'fatchPost']);
+
 Route::get('property-for-sale', [PostPropertyController::class, 'propertyForSale']);
 Route::get('search-property', [PostPropertyController::class, 'searchPos']);
 Route::post('post-views', [PostPropertyController::class, 'postViews']);

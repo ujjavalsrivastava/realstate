@@ -732,10 +732,10 @@
                     success: function(response) {
                         $('#loadingDiv').hide();
                         if(response.flag=='N'){
-                            $('#fav_'+postid).removeAttr( 'style' );
+                            $('.fav_'+postid).removeAttr( 'style' );
             
                         }else{
-                            $('#fav_'+postid).css("color", "red");
+                            $('.fav_'+postid).css("color", "red");
                         }
                       
                     },
@@ -1074,7 +1074,8 @@
             })
             
             })
-            getChatUserList();
+            setTimeout(function() { getChatUserList(); }, 10000);
+            ;
             function getChatUserList(name=""){
                 $.ajax({
                     type: "GET",

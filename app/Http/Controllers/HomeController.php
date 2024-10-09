@@ -90,7 +90,7 @@ class HomeController extends Controller
 
     function index()
     {
-        $getPost = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->get();
+       $getPost = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->orderBy('plan','DESC')->orderBy('id','DESC')->limit(10)->get();
         $getCountries = CountryModel::get();
         $getStates = StateModel::get();
         $getCities = CityModel::get();
@@ -99,6 +99,8 @@ class HomeController extends Controller
 
         return view('front.index',compact('getCountries','getStates','getCities','featureMaster','popularPlace','getPost'));
     }
+
+    
 
     function aboutUs(){
         return view('back.aboutus');

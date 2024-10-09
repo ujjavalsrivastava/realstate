@@ -213,12 +213,17 @@ class PostPropertyController extends Controller
 
 
     function fatchPost(Request $request){
-        $getPost = ProDescriptionModel::with('getFavProAuth','getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->orderBy('plan','DESC')->paginate(6);
+        $getPost = ProDescriptionModel::with('getFavProAuth','getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->orderBy('plan','DESC')->orderBy('id','DESC')->paginate(6);
         
         return view('ajax.post', compact('getPost'));
     }
 
-
+    function popular()
+    {
+        $getPost = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->orderBy('plan','DESC')->orderBy('id','DESC')->limit(10)->get();
+       
+        return view('ajax.popular',compact('getPost'));
+    }
     function propertyForSale(Request $request)
     { 
         $f = $request->feature;
