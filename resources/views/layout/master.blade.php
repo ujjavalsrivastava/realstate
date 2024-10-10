@@ -946,8 +946,9 @@
     // Listen to the current user's private channel for messages
     Echo.private(`private-chat.${currentUserId}`)
         .listen('MessageSent', (e) => {
+            getChatUserList();
             let chatWindow = document.getElementById('chat-window');
-
+      
             // Check if the message was sent by the current user (to distinguish sent and received messages)
             if (e.sender_id == currentUserId) {
                 chatWindow.innerHTML += `
@@ -971,7 +972,7 @@
 
             // Scroll chat window to the bottom after new message
             chatWindow.scrollTop = chatWindow.scrollHeight;
-            getChatUserList();
+            
         });
 
 
