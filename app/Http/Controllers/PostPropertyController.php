@@ -198,8 +198,11 @@ class PostPropertyController extends Controller
 
 
     function getProperty($id){
-        $pro = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->where('id',$id)->first();
-        $similarPro = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->where('city',$pro->city)->where('state',$pro->state)->limit(3)->get();
+
+        $pro = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->where('id',$id);
+        $udpate = $pro->increment('view');
+        $pro= $pro->first();
+        $similarPro = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->where('city',$pro->city)->where('state',$pro->state)->limit(10)->get();
         $images = ProMediaModel::where('pro_des_id',$id)->get();
         $reviewCount = ReviewModel::where('pro_des_id',$id)->count();
         $features = ProFeatureModel::with('getProFeatureMaster')->where('pro_des_id',$id)->get();
@@ -333,9 +336,9 @@ class PostPropertyController extends Controller
             if($key == 'sent'){
                 $getPost->orderBy('id', 'DESC');
             }
-            // if($key == 'price'){
-            //     $getPost->orderBy('price', $val);
-            // }
+            if($key == 'viewed'){
+                $getPost->orderBy('view', 'DESC');
+            }
             // if($key == 'price'){
             //     $getPost->orderBy('price', $val);
             // }
