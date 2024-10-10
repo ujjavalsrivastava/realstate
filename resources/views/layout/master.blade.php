@@ -971,6 +971,7 @@
 
             // Scroll chat window to the bottom after new message
             chatWindow.scrollTop = chatWindow.scrollHeight;
+            getChatUserList();
         });
 
 
