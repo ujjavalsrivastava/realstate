@@ -396,7 +396,7 @@
 
    text-align: center;
     position: relative;
-    right: -110px;
+    right: -80px;
 
 }
       </style>
