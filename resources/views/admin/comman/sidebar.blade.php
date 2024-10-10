@@ -18,11 +18,13 @@
                                             <i class="fa fa-user"></i>Payment List
                                         </a>
                                     </li>
+                                    @if(auth()->user()->role == 'admin')
                                     <li>
                                         <a href="{{url('admin/sub-plan')}}">
                                             <i class="fa fa-compress"></i>Subscription Plan
                                         </a>
                                     </li>
+                                    @endif
                                     <li>
                                         <a href="{{url('admin/logout')}}">
                                             <i class="fa fa-sign-out"></i>Log Out

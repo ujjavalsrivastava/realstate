@@ -80,7 +80,7 @@
                      <div class="row">
                         <div class="col-md-12">
                            <img onclick="openImage()" src="{{asset('assets/images/fileimage.png')}}" class="responsive">
-                           <input type="file" name="images[]" id="imageupload" style="display:none" multiple>
+                           <input type="file" name="images[]" accept="image/*" id="imageupload" style="display:none" multiple>
                         </div>
                      </div>
                   </div>
@@ -90,7 +90,8 @@
                   <div class="property-form-group">
                      <div class="row">
                         <div class="col-md-12">
-                           <input type="file" name="video" id="video" accept="video/*">
+                        <img onclick="openVideo()" src="{{asset('assets/images/fileimage.png')}}" class="responsive">
+                           <input type="file" name="video" id="video" style="display:none" accept="video/*">
                         </div>
                      </div>
                   </div>
@@ -160,20 +161,19 @@
                   <h3>Extra Information</h3>
                   <div class="property-form-group">
                      <div class="row">
-                        <div class="col-lg-6 col-md-12">
-                           <div class="dropdown faq-drop no-mb">
-                              <div class="col-lg-4 col-md-12">
-                              </div>
-                              <label for="room">Rooms <span>(optional)</span></label>
-                              <input type="number" name="room" placeholder="Room" id="room">
-                           </div>
+                     <div class="col-lg-6 col-md-12">
+                           <p>
+                              <label for="con-name">Rooms</label>
+                              <input type="number" placeholder="Enter Your Name" id="room" name="room">
+                           </p>
                         </div>
                         <div class="col-lg-6 col-md-12">
-                           <div class="dropdown faq-drop no-mb last">
-                              <label for="bathroom">Bathrooms <span>(optional)</span></label>
-                              <input type="number" name="bathroom" placeholder="Room" id="bathroom">
-                           </div>
+                           <p>
+                              <label for="con-user">Bathrooms</label>
+                              <input type="number" placeholder="Enter Your Username" id="bathroom" name="bathroom">
+                           </p>
                         </div>
+                        
                      </div>
                   </div>
                </div>
@@ -363,6 +363,10 @@
    function openImage(){
    $('#imageupload').click();
    }
+   function openVideo(){
+   $('#video').click();
+   }
+   
    
    $('#postform').on('submit', function(e) {
              e.preventDefault(); 
