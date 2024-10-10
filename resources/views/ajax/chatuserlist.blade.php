@@ -7,7 +7,7 @@
                 <div class="pro-name">
                @php
 
-               $count = UserUnseenMsg($row->id)??0;
+               $count = UserUnseenMsg($row->id);
 
                @endphp
                     <div class="emp-name">
