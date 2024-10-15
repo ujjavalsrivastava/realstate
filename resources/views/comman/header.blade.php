@@ -57,9 +57,9 @@
             </div>
             <ul>
                <li><a href="#"> Edit profile</a></li>
-               <li><a href="#"> Add Property</a></li>
-               <li><a href="#">  Payments</a></li>
-               <li><a href="javascript:void(0)" class="modal-open" onclick="changePass()"> Change Password</a></li>
+           
+               <li><a href="{{url('/admin/payment-list')}}">  Payments</a></li>
+               <li><a href="{{url('/admin/get-change-password')}}" > Change Password</a></li>
                <li><a href="{{url('/logout')}}">Log Out</a></li>
             </ul>
          </div>

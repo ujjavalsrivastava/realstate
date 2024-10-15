@@ -72,7 +72,7 @@
                         <select class="nice-select form-control wide select2"name="country" onchange="getstate(this.value)">
                            <option value="">Country</option>
                            @foreach($getCountries as $country)
-                           <option value="{{$country->id}}">{{$country->name}}</option>
+                           <option value="{{$country->id}}" >{{$country->name}}</option>
                            @endforeach
                         </select>
                      </div>
@@ -249,10 +249,39 @@
       </div>
    </div>
 </section>
+
+<div class="modal fade" id="shereModal" role="dialog">
+   <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+         <div class="modal-header">
+            <!-- <button type="button" class="btn btn-default close" data-dismiss="modal">&times;</button> -->
+         </div>
+         <div class="modal-body">
+            <p style="text-align:center;">
+               <img src="{{url('shareimage/whatsapp.png')}}" alt="" style="height: 60px;">&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <img src="{{url('shareimage/emailshear.png')}}" alt="" style="height: 60px;">&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <img src="{{url('shareimage/facebook.png')}}" alt="" style="height: 60px;">&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <img src="{{url('shareimage/twiter.png')}}" alt="" style="height: 60px;">&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <!-- <input type="text" clase="form-control"> -->
+            </p>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+         </div>
+      </div>
+   </div>
+</div>
+
 <!-- END SECTION PROPERTIES LISTING -->
 @endsection
 @section('script')
 <script>
+
+function openShareModel(){
+       $('#shereModal').modal('show');
+   }
+
    function sortFun(sort){
         var url = window.location.href;
         hashes = url.split("?")[1]

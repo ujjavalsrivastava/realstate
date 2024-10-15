@@ -43,7 +43,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="change-password.html">
+                                            <a href="{{url('admin/get-change-password')}}">
                                                 <i class="fa fa-lock mr-3"></i>Change Password
                                             </a>
                                         </li>
@@ -66,21 +66,21 @@
                                     <label for="title">Plan</label>
                                         <div class="col-md-12">
                                                
-                                                <input type="text" name="plan" id="plan" value="{{$data->plan}}"p laceholder="Enter your Plan">
+                                                <input type="text" class="form-control" name="plan" id="plan" value="{{$data->plan}}"p laceholder="Enter your Plan">
                                           </div>
                                     </div><br>
                                     <div class="row">
                                     <label for="description">Description</label>
                                         <div class="col-md-12">
                                                 
-                                                <input id="description" type="text" name="description" value="{{$data->description}}" placeholder="Describe about your property">
+                                                <input id="description" class="form-control" type="text" name="description" value="{{$data->description}}" placeholder="Describe about your property">
                                         </div>
                                     </div><br>
                                     <div class="row">
                                     <label for="description">Price</label>
                                     <div class="col-md-12">
                                                
-                                                <input id="price" name="price" value="{{$data->price}}" placeholder="Price">
+                                                <input id="price" name="price" class="form-control" value="{{$data->price}}" placeholder="Price">
                                          </div><br><br>
                                         <div>
                                             <button type="submit" class="log-submit-btn">Submit</button>

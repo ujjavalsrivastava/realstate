@@ -113,4 +113,32 @@ class AdminController extends Controller
         }
     }
 
+    function getChangePassword(){
+        return view('admin.changepassword');
+    }
+    function changePass(Request $request){
+
+        $validator = Validator::make($request->all(), 
+        [ 
+        'old_pass' => 'required',
+      
+
+        'new_pass' => 'min:6|required_with:conf_pass|same:conf_pass',
+        'conf_pass' => 'required|min:6'
+
+       ]);  
+        if ($validator->fails()) {  
+        return response()->json(['error'=>$validator->errors()->first()], 401); 
+        }  
+        $user = Auth::user();
+        if(\Hash::check($request->old_pass, $user->password)){
+         User::where('email',$user->email)->update([
+            'password'=> \Hash::make($request->new_pass)
+         ]);           
+         return response()->json(['status'=> 200,'success' => 'Record Update successfully']);
+        }else{
+            return response()->json(['status'=> 201,'error' => 'invalid password']);
+        }
+    }
+
 }

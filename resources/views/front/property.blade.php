@@ -400,12 +400,13 @@
                      <div class="widget-boxed-header">
                         <h4>Agent Information</h4>
                      </div>
+                     
                      <div class="widget-boxed-body">
                         <div class="sidebar-widget author-widget2">
                            <div class="author-box clearfix">
                               <img src="{{URL::asset('assets/images/user.jpg')}}" alt="author-image" class="author__img">
                               <h4 class="author__title">{{ucfirst($pro->name)}}</h4>
-                              <p class="author__meta">Agent of Property</p>
+                              <p class="author__meta">{{$pro->getUser->type}} Property</p>
                            </div>
                            <ul class="author__contact">
                               <li><span class="la la-phone"><i class="fa fa-phone" aria-hidden="true"></i></span><a href="#">{{$pro->phone}}</a></li>

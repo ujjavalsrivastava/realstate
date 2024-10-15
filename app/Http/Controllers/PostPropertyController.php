@@ -197,7 +197,8 @@ class PostPropertyController extends Controller
 
 
 
-    function getProperty($id){
+    function getProperty(request $request){
+        $id = $request->id;
 
         $pro = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity')->where('id',$id);
         $udpate = $pro->increment('view');

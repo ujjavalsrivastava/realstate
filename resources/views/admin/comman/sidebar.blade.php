@@ -1,5 +1,5 @@
                     <div class="user-profile-box mb-0">
-                         <div class="sidebar-header"><img src="{{URL::asset('assets/images/logo.jpeg')}}" alt="header-logo2.png" style="height:76px; width:340px"> </div>
+                         <div class="sidebar-header" style="text-align:center"><img src="{{URL::asset('assets/images/logo.jpeg')}}" alt="header-logo2.png" style="height:76px; width:100px"> </div>
                             <div class="header clearfix">
                                 <img src="{{URL::asset('assets/images/user.jpg')}}" alt="avatar" class="img-fluid profile-img">
                             </div>
@@ -18,7 +18,7 @@
                                             <i class="fa fa-user"></i>Payment List
                                         </a>
                                     </li>
-                                    @if(auth()->user()->role == 'admin')
+                                    @if(auth()->user()->type == 'Admin')
                                     <li>
                                         <a href="{{url('admin/sub-plan')}}">
                                             <i class="fa fa-compress"></i>Subscription Plan

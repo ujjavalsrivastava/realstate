@@ -27,7 +27,12 @@
 <!-- homes content -->
 <div class="col-lg-7 col-md-12 homes-content pb-0 mb-44 mt" data-aos="fade-up" style="margin-bottom:20px">
    <!-- homes address -->
-   <h3><a href="{{url('get_property')}}/{{$row->id}}">{{ucfirst($row->pro_title)}}</a></h3>
+    @php
+
+    $slug = str_replace(' ','-',strtolower($row->pro_title));
+
+    @endphp
+   <h3><a href="{{url('get_property')}}/{{$slug}}?id={{$row->id}}">{{ucfirst($row->pro_title)}}</a></h3>
    <p class="homes-address mb-3">
       <a href="#">
       <i class="fa fa-map-marker"></i><span>{{$row->address}} {{ucwords($row->getCity->city)}} {{ucwords($row->getState->name)}} {{ucwords($row->getCountry->name)}}</span>
@@ -58,11 +63,9 @@
          <a href="#">&#8377; {{$row->price}}</a>
       </h3>
       <div class="compare">
-         <a href="#" title="Compare">
-         <i class="fas fa-exchange-alt"></i>
-         </a>
-         <a href="#" title="Share">
-         <i class="fas fa-share-alt"></i>
+         
+         <a href="#" title="Share" onclick="openShareModel()">
+         <i class="fa fa-share-alt"  aria-hidden="true"></i>
          </a>
          @if(Auth()->check())
          @php

@@ -57,33 +57,34 @@
                             </div>
                         </div>
                         <div class="single-add-property">
-                            <h3>Add Plan</h3>
+                            <h3>Change Password</h3>
                             <div class="property-form-group">
-                                <form action="{{url('admin/add-sub-plan')}}/{{$data->id}}" method="POST" id="editPlanId"> 
+                                <form method="POST"  id="chngepass"> 
                                 @csrf
-                                <input type="hidden" value="{{$data->id}}" id="editInput">
-                                    <div class="row">
-                                    <label for="title">Plan</label>
+                                   <div class="row">
+
                                         <div class="col-md-12">
-                                               
-                                                <input type="text" name="plan" id="plan" value="{{$data->plan}}"p laceholder="Enter your Plan">
+                                        <label for="title">Old Password</label>
+                                                <input type="password" class="form-control" name="old_pass" id="plan" placeholder="Enter your Password">
                                           </div>
-                                    </div><br>
-                                    <div class="row">
-                                    <label for="description">Description</label>
-                                        <div class="col-md-12">
-                                                
-                                                <input id="description" type="text" name="description" value="{{$data->description}}" placeholder="Describe about your property">
+                                    
+                                    
+                                    
+                                        <div class="col-md-12"> 
+                                        <label for="description">New Password</label>
+                                                <input id="password" type="password" class="form-control"  name="new_pass"  placeholder="password">
                                         </div>
-                                    </div><br>
-                                    <div class="row">
-                                    <label for="description">Price</label>
+                                    
+                                
+
                                     <div class="col-md-12">
-                                               
-                                                <input id="price" name="price" value="{{$data->price}}" placeholder="Price">
-                                         </div><br><br>
-                                        <div>
-                                            <button type="submit" class="log-submit-btn">Submit</button>
+                                    <label for="description">Confirm Password</label>
+                                                <input id="password" type="password"  name="conf_pass" class="form-control" placeholder="password">
+                                     </div>
+                                     <div class="col-md-12" style="padding: 17px 9px 3px 12px;>
+                                     <label for="description">&nbsp;</label>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
                                         </div>
                                 </form>
                             </div>
@@ -93,17 +94,19 @@
                     @endsection
                     @section('script')
                     <script>
-                $('#editPlanId').on('submit', function(e) {
+                $('#chngepass').on('submit', function(e) {
                         e.preventDefault(); 
-                        var Id = $('#editInput').val();
+                      //  var Id = $('#editInput').val();
                         $.ajax({
                             type: "POST",
-                            url: '{{url('admin/update-sub-plan')}}/' + Id,
+                            url: '{{url('admin/change-password')}}',
                             data: $(this).serialize(),
                             success: function(response) {
                                 if(response.status == '200'){
                                     $('#successNotification').show();
                                     $('#successMessage').text(response.success);
+                                    $('#chngepass')[0].reset();
+
                                     // location.reload().delay(5000);
                                 }else{
                                     $('#errorNotification').show();

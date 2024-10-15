@@ -378,27 +378,27 @@
 <section class="team bg-white rec-pro">
    <div class="container-fluid">
       <div class="sec-title">
-         <h2><span>Meet Our </span>Agents</h2>
-         <p>Our Agents are here to help you</p>
+         <h2><span>Meet Our </span>Founder</h2>
+         <p>Our Founder are here to help you</p>
       </div>
       <div class="row team-all">
          <!--Team Block-->
-         <div class="team-block col-sm-6 col-md-4 col-lg-4 col-xl-2" data-aos="fade-up" data-aos-delay="150">
+         <div class="team-block col-sm-6 col-md-4 col-lg-4 col-xl-2 offset-sm-4" data-aos="fade-up" data-aos-delay="150">
             <div class="inner-box team-details">
                <div class="image team-head">
-                  <a href="#"><img src="{{URL::asset('assets/images/team/t-5.jpg')}}" alt="" /></a>
+                  <a href="#"><img src="{{URL::asset('assets/images/team/founder.jpeg')}}" alt="" /></a>
                   <div class="team-hover">
                      <ul class="team-social">
                         <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                        <!-- <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li> -->
                         <li><a href="#" class="instagram"><i class="fa fa-instagram"></i></a></li>
-                        <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+                        <!-- <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li> -->
                      </ul>
                   </div>
                </div>
                <div class="lower-box">
-                  <h3><a href="#">Carls Jhons</a></h3>
-                  <div class="designation">Real Estate Agent</div>
+                  <h3><a href="#">Founder- Kaustubh Singh                   </a></h3>
+                  <div class="designation">Qualification/Skils- B.pharm, Diploma in mechanical engineering and 2 years modelling experience</div>
                </div>
             </div>
          </div>
@@ -406,24 +406,24 @@
          <div class="team-block col-sm-6 col-md-4 col-lg-4 col-xl-2" data-aos="fade-up" data-aos-delay="250">
             <div class="inner-box team-details">
                <div class="image team-head">
-                  <a href="#"><img src="{{URL::asset('assets/images/team/t-6.jpg')}}" alt="" /></a>
+                  <a href="#"><img src="{{URL::asset('assets/images/team/co-founder.jpeg')}}" alt="" /></a>
                   <div class="team-hover">
                      <ul class="team-social">
                         <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                        <!-- <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li> -->
                         <li><a href="#" class="instagram"><i class="fa fa-instagram"></i></a></li>
-                        <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+                        <!-- <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li> -->
                      </ul>
                   </div>
                </div>
                <div class="lower-box">
-                  <h3><a href="#">Arling Tracy</a></h3>
-                  <div class="designation">Real Estate Agent</div>
+                  <h3><a href="#">Co-founder- Pratibha Singh </a></h3>
+                  <div class="designation">Qualification/Skills- BBA and B.pharm</div>
                </div>
             </div>
          </div>
          <!--Team Block-->
-         <div class="team-block col-sm-6 col-md-4 col-lg-4 col-xl-2" data-aos="fade-up" data-aos-delay="350">
+         <!-- <div class="team-block col-sm-6 col-md-4 col-lg-4 col-xl-2" data-aos="fade-up" data-aos-delay="350">
             <div class="inner-box team-details">
                <div class="image team-head">
                   <a href="#"><img src="{{URL::asset('assets/images/team/t-7.jpg')}}" alt="" /></a>
@@ -441,9 +441,9 @@
                   <div class="designation">Real Estate Agent</div>
                </div>
             </div>
-         </div>
+         </div> -->
          <!--Team Block-->
-         <div class="team-block col-sm-6 col-md-4 col-lg-4 col-xl-2 pb-none" data-aos="fade-up" data-aos-delay="450">
+         <!-- <div class="team-block col-sm-6 col-md-4 col-lg-4 col-xl-2 pb-none" data-aos="fade-up" data-aos-delay="450">
             <div class="inner-box team-details">
                <div class="image team-head">
                   <a href="#"><img src="{{URL::asset('assets/images/team/t-8.jpg')}}" alt="" /></a>
@@ -499,13 +499,13 @@
                   <div class="designation">Real Estate Agent</div>
                </div>
             </div>
-         </div>
+         </div> -->
       </div>
    </div>
 </section>
 <!-- END SECTION AGENTS -->
 <!-- START SECTION TESTIMONIALS -->
-<section class="testimonials bg-white-2 rec-pro">
+<!-- <section class="testimonials bg-white-2 rec-pro">
    <div class="container-fluid">
       <div class="sec-title">
          <h2><span>Clients </span>Testimonials</h2>
@@ -574,10 +574,10 @@
          </div>
       </div>
    </div>
-</section>
+</section> -->
 <!-- END SECTION TESTIMONIALS -->
 <!-- STAR SECTION PARTNERS -->
-<div class="partners bg-white rec-pro">
+<!-- <div class="partners bg-white rec-pro">
    <div class="container-fluid">
       <div class="sec-title">
          <h2><span>Our </span>Partners</h2>
@@ -596,7 +596,7 @@
          <div class="owl-item" data-aos="fade-up"><img src="{{URL::asset('assets/images/partners/13.jpg')}}" alt=""></div>
       </div>
    </div>
-</div>
+</div> -->
 <!-- END SECTION PARTNERS -->
 <!-- share Modal -->
 <div class="modal fade" id="shereModal" role="dialog">

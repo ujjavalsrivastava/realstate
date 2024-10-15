@@ -59,7 +59,7 @@ class ProDescriptionModel extends Model
 
    public function getUser()
     {
-        return $this->hasMany(User::class, 'id','user_id');
+        return $this->hasOne(User::class, 'id','user_id');
     }
 
    public function getProType()

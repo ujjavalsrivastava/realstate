@@ -251,7 +251,7 @@
                               <li class="fl-wrap filter-tags clearfix">
                                  <div class="checkboxes float-left">
                                     <div class="filter-tags-wrap">
-                                       <input id="check-a{{$row->id}}" onclick="getPlan('{{$row->price}}')" @if($k == 0) checked @endif type="radio" name="plan" value = "{{$row->price}}">{{$row->plan}}
+                                       <input id="check-a{{$row->id}}" onclick="getPlan('{{$row->price}}')" @if($k == 0) checked @endif type="radio" name="plan" value = "{{$row->price}}"><span>{{$row->plan}}</span>
                                        <p> <strong>Feature </strong>: {{$row->description}}</p>
 
                                     </div>

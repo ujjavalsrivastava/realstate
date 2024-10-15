@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\ProDescriptionModel;
 use App\Models\ResComDetailModel;
 use App\Models\OtpVerifyModel;
+use App\Models\PlanModel;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,5 +23,12 @@ class PostController extends Controller
         $user = JWTAuth::parseToken()->authenticate();
         $post = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity','getFavPro')->where('user_id',$user->id)->get();
         return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $post]);
+    }
+
+    function getPlan()
+    {
+        // $user = JWTAuth::parseToken()->authenticate();
+        $plan = PlanModel::get();
+        return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $plan]);
     }
 }

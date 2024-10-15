@@ -42,7 +42,7 @@
             </a>
           </li>
           <li>
-            <a href="change-password.html">
+            <a href="{{url('admin/get-change-password')}}">
               <i class="fa fa-lock mr-3"></i>Change Password
             </a>
           </li>

@@ -56,6 +56,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('logout', [AuthController::class, 'logout']);
     Route::post('pro_description', [HomeController::class, 'proDescription']); 
     Route::get('user-post', [PostController::class, 'UserPost']); 
+    Route::get('plan', [PostController::class, 'getPlan']); 
     Route::post('/orderGenerate',[HomeController::class, 'orderGenerate']);
     // fav pro ----------
     Route::post('/fav-pro',[HomeController::class, 'favoritePro']);  

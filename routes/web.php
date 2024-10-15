@@ -95,6 +95,7 @@ Route::post('/orderGenerate',[PaymentgatewayController::class, 'orderGenerate'])
 Route::post('/verify',[PaymentgatewayController::class, 'verify']);
 
 
+
 Route::get('/emi-calculater',[HomeController::class, 'getEmiCalculater']);
 
 Route::prefix('admin')->group(function () {
@@ -105,9 +106,12 @@ Route::prefix('admin')->group(function () {
     Route::post('/update-sub-plan/{id}',[AdminController::class, 'updateSubPlan']);
     Route::post('/loginPost',[AdminController::class, 'loginPost']);
     Route::get('/logout',[AdminController::class, 'logout']);
+// commen
+    Route::get('/get-change-password',[AdminController::class, 'getChangePassword']);
 
     Route::group(['middleware' => ['check.user']], function() {
         Route::get('/home',[AdminController::class, 'home']);
         Route::get('/payment-list',[AdminController::class, 'paymentList']);
+        Route::post('/change-password',[AdminController::class, 'changePass']);
     });
 });

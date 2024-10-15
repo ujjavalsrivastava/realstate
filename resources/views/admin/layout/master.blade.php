@@ -30,6 +30,16 @@
       <link rel="stylesheet" href="{{ URL::asset('assets/css/slick.css')}}">
       <link rel="stylesheet" href="{{ URL::asset('assets/css/styles.css')}}">
       <link rel="stylesheet" id="color" href="{{ URL::asset('assets/css/default.css')}}">
+   <style>
+      .first-footer {
+
+    line-height: 60px; /* Vertically center text */
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+      </style>
    </head>
    <body class="maxw1600 m0a dashboard-bd">
       <!-- Wrapper -->
