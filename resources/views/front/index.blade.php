@@ -389,9 +389,9 @@
                   <a href="#"><img src="{{URL::asset('assets/images/team/founder.jpeg')}}" alt="" /></a>
                   <div class="team-hover">
                      <ul class="team-social">
-                        <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="https://www.facebook.com/profile.php?id=100023186014759&mibextid=ZbWKwL" class="facebook"><i class="fa fa-facebook"></i></a></li>
                         <!-- <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li> -->
-                        <li><a href="#" class="instagram"><i class="fa fa-instagram"></i></a></li>
+                        <li><a href="https://www.instagram.com/kaustyy/profilecard/?igsh=am0zd3R2aGtvNGVn" class="instagram"><i class="fa fa-instagram"></i></a></li>
                         <!-- <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li> -->
                      </ul>
                   </div>
@@ -409,9 +409,9 @@
                   <a href="#"><img src="{{URL::asset('assets/images/team/co-founder.jpeg')}}" alt="" /></a>
                   <div class="team-hover">
                      <ul class="team-social">
-                        <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                        <!-- <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li> -->
                         <!-- <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li> -->
-                        <li><a href="#" class="instagram"><i class="fa fa-instagram"></i></a></li>
+                        <!-- <li><a href="#" class="instagram"><i class="fa fa-instagram"></i></a></li> -->
                         <!-- <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li> -->
                      </ul>
                   </div>
@@ -607,14 +607,16 @@
             <!-- <button type="button" class="btn btn-default close" data-dismiss="modal">&times;</button> -->
          </div>
          <div class="modal-body">
+         <input type="hidden" id="shareLink">
             <p style="text-align:center;">
-               <img src="{{url('shareimage/whatsapp.png')}}" alt="" style="height: 60px;">&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-               <img src="{{url('shareimage/emailshear.png')}}" alt="" style="height: 60px;">&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-               <img src="{{url('shareimage/facebook.png')}}" alt="" style="height: 60px;">&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-               <img src="{{url('shareimage/twiter.png')}}" alt="" style="height: 60px;">&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             <a href="javascript:void(0)" onclick="shareOnWhatsApp()">  <img src="{{url('shareimage/whatsapp.png')}}" alt="" style="height: 60px;">&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </a>
+             <a href="javascript:void(0)" onclick="sendEmail()">    <img src="{{url('shareimage/emailshear.png')}}"  style="height: 60px;">&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+             <a href="javascript:void(0)" onclick="shareOnFacebook()">   <img src="{{url('shareimage/facebook.png')}}" alt="" style="height: 60px;">&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+             <a href="javascript:void(0)" onclick="shareOnTwitter()">   <img src="{{url('shareimage/twiter.png')}}" alt="" style="height: 60px;">&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                <!-- <input type="text" clase="form-control"> -->
             </p>
          </div>
+         
          <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
          </div>
@@ -624,9 +626,40 @@
 @endsection
 @section('script')
 <script type="text/javascript">
-   function openShareModel(){
+  function openShareModel(id){
+   var link = $('#share_'+id).val();
+   console.log(link);
+   $('#shareLink').val(link);
        $('#shereModal').modal('show');
    }
+
+
+
+
+   function sendEmail() {
+         var link = $('#shareLink').val();
+            window.location.href = `mailto:?subject=Share Link&body=${link}`;
+        }
+    
+        function shareOnWhatsApp() {
+         var link = $('#shareLink').val();
+    var url = `https://api.whatsapp.com/send?text=${link}`;
+    window.open(url, '_blank');
+}
+function shareOnFacebook() {
+   var link = $('#shareLink').val();
+    var url = `https://www.facebook.com/sharer/sharer.php?u=${link}`;
+    window.open(url, '_blank');
+}
+
+function shareOnTwitter() {
+   var link = $('#shareLink').val();
+
+    var url = `https://twitter.com/intent/tweet?text=${link}`;
+    window.open(url, '_blank');
+}
+
+
    function fetureFun(){
        var arr = [];
        $('.checkboxall').each(function(i, obj) {

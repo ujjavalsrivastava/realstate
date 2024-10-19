@@ -27,6 +27,7 @@ $slug = str_replace(' ','-',strtolower($post->pro_title));
 
 @endphp
          <h3><a href="{{url('get_property')}}/{{$slug}}?id={{$post->id}}">{{ucfirst($post->pro_title)}}</a></h3>
+         <input type="hidden" id="share_{{$post->id}}" value="{{url('get_property')}}/{{$slug}}?id={{$post->id}}">
          <p class="homes-address mb-3">
             <a href="#">
             <i class="fa fa-map-marker"></i><span style="font-size:12px">{{strtoupper($post->address)}}, {{strtoupper(@$post->getCity->city)}}, {{strtoupper(@$post->getState->name)}}, {{strtoupper(@$post->getCountry->name)}}</span>
@@ -55,7 +56,7 @@ $slug = str_replace(' ','-',strtolower($post->pro_title));
                <a href="#" title="Compare">
                <i class="flaticon-compare"></i>
                </a>
-               <a href="#" title="Share" onclick="openShareModel()">
+               <a href="#" title="Share" onclick="openShareModel('{{$post->id}}')">
                <i class="flaticon-share"></i>
                </a>
                

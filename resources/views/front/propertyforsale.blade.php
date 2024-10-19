@@ -257,12 +257,13 @@
          <div class="modal-header">
             <!-- <button type="button" class="btn btn-default close" data-dismiss="modal">&times;</button> -->
          </div>
+         <input type="hidden" id="shareLink">
          <div class="modal-body">
             <p style="text-align:center;">
-               <img src="{{url('shareimage/whatsapp.png')}}" alt="" style="height: 60px;">&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-               <img src="{{url('shareimage/emailshear.png')}}" alt="" style="height: 60px;">&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-               <img src="{{url('shareimage/facebook.png')}}" alt="" style="height: 60px;">&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-               <img src="{{url('shareimage/twiter.png')}}" alt="" style="height: 60px;">&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             <a href="javascript:void(0)" onclick="shareOnWhatsApp()">  <img src="{{url('shareimage/whatsapp.png')}}" alt="" style="height: 60px;">&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </a>
+             <a href="javascript:void(0)" onclick="sendEmail()">    <img src="{{url('shareimage/emailshear.png')}}"  style="height: 60px;">&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+             <a href="javascript:void(0)" onclick="shareOnFacebook()">   <img src="{{url('shareimage/facebook.png')}}" alt="" style="height: 60px;">&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+             <a href="javascript:void(0)" onclick="shareOnTwitter()">   <img src="{{url('shareimage/twiter.png')}}" alt="" style="height: 60px;">&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                <!-- <input type="text" clase="form-control"> -->
             </p>
          </div>
@@ -278,7 +279,37 @@
 @section('script')
 <script>
 
-function openShareModel(){
+
+        function sendEmail() {
+         var link = $('#shareLink').val();
+            window.location.href = `mailto:?subject=Share Link&body=${link}`;
+        }
+    
+        function shareOnWhatsApp() {
+         var link = $('#shareLink').val();
+    var url = `https://api.whatsapp.com/send?text=${link}`;
+    window.open(url, '_blank');
+}
+function shareOnFacebook() {
+   var link = $('#shareLink').val();
+    var url = `https://www.facebook.com/sharer/sharer.php?u=${link}`;
+    window.open(url, '_blank');
+}
+
+function shareOnTwitter() {
+   var link = $('#shareLink').val();
+
+    var url = `https://twitter.com/intent/tweet?text=${link}`;
+    window.open(url, '_blank');
+}
+
+
+
+
+function openShareModel(id){
+   var link = $('#share_'+id).val();
+   console.log(link);
+   $('#shareLink').val(link);
        $('#shereModal').modal('show');
    }
 

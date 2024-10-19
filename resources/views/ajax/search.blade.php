@@ -33,6 +33,7 @@
 
     @endphp
    <h3><a href="{{url('get_property')}}/{{$slug}}?id={{$row->id}}">{{ucfirst($row->pro_title)}}</a></h3>
+   <input type="hidden" id="share_{{$row->id}}" value="{{url('get_property')}}/{{$slug}}?id={{$row->id}}">
    <p class="homes-address mb-3">
       <a href="#">
       <i class="fa fa-map-marker"></i><span>{{$row->address}} {{ucwords($row->getCity->city)}} {{ucwords($row->getState->name)}} {{ucwords($row->getCountry->name)}}</span>
@@ -64,8 +65,8 @@
       </h3>
       <div class="compare">
          
-         <a href="#" title="Share" onclick="openShareModel()">
-         <i class="fa fa-share-alt"  aria-hidden="true"></i>
+         <a href="#" title="Share" onclick="openShareModel('{{$row->id}}')">
+         <i class="fa fa-share-alt"   aria-hidden="true"></i>
          </a>
          @if(Auth()->check())
          @php
