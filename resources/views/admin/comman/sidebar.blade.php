@@ -18,6 +18,11 @@
                                             <i class="fa fa-user"></i>Payment List
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="{{url('admin/favorite-list')}}">
+                                            <i class="fa fa-user"></i>Favorite List
+                                        </a>
+                                    </li>
                                     @if(auth()->user()->type == 'Admin')
                                     <li>
                                         <a href="{{url('admin/sub-plan')}}">

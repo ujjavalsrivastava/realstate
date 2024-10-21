@@ -257,8 +257,9 @@
          <div class="modal-header">
             <!-- <button type="button" class="btn btn-default close" data-dismiss="modal">&times;</button> -->
          </div>
-         <input type="hidden" id="shareLink">
+        
          <div class="modal-body">
+         <input type="hidden" id="shareLink">
             <p style="text-align:center;">
              <a href="javascript:void(0)" onclick="shareOnWhatsApp()">  <img src="{{url('shareimage/whatsapp.png')}}" alt="" style="height: 60px;">&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </a>
              <a href="javascript:void(0)" onclick="sendEmail()">    <img src="{{url('shareimage/emailshear.png')}}"  style="height: 60px;">&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>

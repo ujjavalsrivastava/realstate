@@ -113,5 +113,6 @@ Route::prefix('admin')->group(function () {
         Route::get('/home',[AdminController::class, 'home']);
         Route::get('/payment-list',[AdminController::class, 'paymentList']);
         Route::post('/change-password',[AdminController::class, 'changePass']);
+        Route::get('/favorite-list',[AdminController::class, 'favoriteList']);
     });
 });

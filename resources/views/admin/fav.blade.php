@@ -1,3 +1,4 @@
+
 @extends('admin.layout.master')
 @section('content')
 <div class="col-lg-9 col-md-12 col-xs-12 pl-0 user-dash2">
@@ -60,10 +61,9 @@
       <thead>
         <tr>
           <th class="pl-2">My Properties</th>
-          <th class="p-0"></th>
-          <th>User Name</th>
-          <th>Payment</th>
-          <th>Status</th>
+          <th class="p-0">Addresh</th>
+          
+        
           <th>Date Added</th>
           <th>Views</th>
           <!-- <th>Actions</th> -->
@@ -73,35 +73,21 @@
         @foreach($getPosts as $getPost)
       <tr>
           <td class="image myelist">
-            <a href="single-property-1.html"><img alt="my-properties-3" src="{{asset('images')}}/{{@$getPost->getMedia[0]->file_name}}" class="img-fluid" style="height:100px; wight:129px"></a>
+            <a href="single-property-1.html"><img alt="my-properties-3" src="{{asset('images')}}/{{@$getPost->getProperty->getMedia[0]->file_name}}" class="img-fluid" style="height:100px; wight:129px"></a>
           </td>
           <td>
             <div class="inner">
               <a href="single-property-1.html">
-                <h2>{{$getPost->pro_title}}</h2>
+                <h2>{{$getPost->getProperty->pro_title}}</h2>
               </a>
-              <figure><i class="lni-map-marker"></i> {{strtoupper(@$getPost->address)}}, {{strtoupper(@$getPost->getCity->city)}}, {{strtoupper(@$getPost->getState->name)}}, {{strtoupper(@$getPost->getCountry->name)}}</figure>
-              <!-- <ul class="starts text-left mb-0">
-              @foreach($getPost->getReview as $data)
-                <li class="mb-0"> 
-                @for($i=1; $i<=5; $i++)
-                  @if($i <= $data->reating)
-                    <i class="fa fa-star"></i>
-                  @else
-                    <i class="fa fa-star-o"></i>
-                  @endif
-                @endfor
-                </li>
-                <li class="ml-3">({{@$data->reating}} Reviews)</li>
-              @endforeach
-              </ul> -->
-            </div>
+              <figure><i class="lni-map-marker"></i> {{strtoupper(@$getPost->getProperty->address)}}</figure>
+             </div>
           </td>
-          <td>{{ucfirst(@$getPost->getUser[0]->name)}}</td>
-          <td>&#8377;{{ucfirst(@$getPost->getPayment->price)}}</td>
-          <td>{{ucfirst(@$getPost->getPayment->status)}}</td>
-          <td>{{date('d.m.Y', strtotime($getPost->created_at))}}</td>
-          <td>{{ucfirst(@$getPost->view)}}</td>
+          
+          
+          
+          <td>{{date('d.m.Y', strtotime($getPost->getProperty->created_at))}}</td>
+          <td>{{ucfirst(@$getPost->getProperty->view)}}</td>
           <!-- <td class="actions">
             <a href="#" class="edit"><i class="lni-pencil"></i>Edit</a>
             <a href="#"><i class="far fa-trash-alt"></i></a>

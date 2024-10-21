@@ -21,6 +21,8 @@ use App\Models\StateModel;
 use App\Models\CityModel;
 use App\Models\PlanModel;
 use App\Models\ProFeatureMasterModel;
+use App\Models\FavoriteProModel;
+
 use App\Http\Controllers\Controller;
 
 class AdminController extends Controller
@@ -111,6 +113,18 @@ class AdminController extends Controller
         }catch(\Exception $e){
             return response()->json(['status'=>'400', 'message' => $e->getMessage()]); 
         }
+    }
+
+    function favoriteList(){
+
+        $user = Auth::user();
+        $data = FavoriteProModel::with('getProperty','getProperty.getMedia')->where('user_id',$user->id);
+        
+        $getPosts = $data->get();
+        
+        // with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity','getReview');
+        return view('admin.fav',compact('getPosts'));
+
     }
 
     function getChangePassword(){
