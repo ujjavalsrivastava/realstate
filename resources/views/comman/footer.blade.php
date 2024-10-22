@@ -6,7 +6,7 @@
             <div class="col-lg-3 col-md-6">
                <div class="netabout">
                   <a href="{{url('/')}}" class="logo">
-                  <img src="{{URL::asset('assets/images/logo.jpeg')}}" style="width:30%" alt="netcom">
+                  <img src="{{URL::asset('assets/images/logo.png')}}" style="width:30%" alt="netcom">
                   </a>
                   <p>Alpha land India's most innovative real estate advertising platform for homeowners, landlords, developers, and real estate brokers. The company offers listings for new homes, resale homes, rentals, </p>
                </div>

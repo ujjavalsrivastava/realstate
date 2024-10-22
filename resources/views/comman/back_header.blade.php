@@ -6,7 +6,7 @@
          <div class="left-side">
             <!-- Logo -->
             <div id="logo">
-               <a href="{{url('/')}}"><img src="{{URL::asset('assets/images/logo.jpeg')}}" alt=""></a>
+               <a href="{{url('/')}}"><img src="{{URL::asset('assets/images/logo.png')}}" alt=""></a>
             </div>
             <!-- Mobile Navigation -->
             <div class="mmenu-trigger">

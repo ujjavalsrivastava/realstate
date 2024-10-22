@@ -6,7 +6,7 @@
             <div class="col-lg-3 col-md-6">
                <div class="netabout">
                   <a href="{{url('/')}}" class="logo">
-                  <img src="{{URL::asset('assets/images/logo.jpeg')}}" style="width:30%"  class="img-responsive" alt="netcom">
+                  <img src="{{URL::asset('assets/images/logo.png')}}" style="width:30%"  class="img-responsive" alt="netcom">
                   </a>
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum incidunt architecto soluta laboriosam, perspiciatis, aspernatur officiis esse.</p>
                </div>
