@@ -251,7 +251,7 @@
                               <li class="fl-wrap filter-tags clearfix">
                                  <div class="checkboxes float-left">
                                     <div class="filter-tags-wrap">
-                                       <input id="check-a{{$row->id}}" onclick="getPlan('{{$row->price}}')" @if($k == 0) checked @endif type="radio" name="plan" value = "{{$row->price}}"><span>{{$row->plan}}</span>
+                                       <input id="check-a{{$row->id}}" class="findcheckbox" data-name="{{$row->plan}}" onclick="getPlan('{{$row->price}}')" @if($k == 0) checked @endif type="radio" name="plan" value = "{{$row->price}}"><span>{{$row->plan}}</span><span style="float:right">₹ {{$row->price}}</span>
                                        <p> <strong>Feature </strong>: {{$row->description}}</p>
 
                                     </div>
@@ -364,7 +364,22 @@
    $('#imageupload').click();
    }
    function openVideo(){
-   $('#video').click();
+      $('input[type="radio"]').each(function() {
+      if ($(this).prop('checked')) {
+        console.log($(this).data('name') + ' is checked');
+        if($(this).data('name') === 'Gold'){
+            $('#video').click();
+            return false;
+        }else{
+         $('#errorNotification').show();
+                           $('#errorMessage').text('Not Upload Video this plan');
+                           window.scrollTo({ top: 0, behavior: 'smooth' });
+                           return false;
+      }
+      } 
+    });
+    
+  
    }
    
    
