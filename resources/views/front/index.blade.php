@@ -63,7 +63,9 @@
                                        </div>
                                        <div class="explore__form-checkbox-list full-filter">
                                           <div class="row">
-                                             <div class="col-lg-4 col-md-6 py-1 pr-30 pl-0">
+
+                                          
+                                             <div class="col-lg-3 col-md-6 py-1 pr-30 pl-0">
                                                 <!-- Form Property Status -->
                                                 <div class="form-group categories">
                                                    <select class="nice-select form-control wide" name="pro_type" >
@@ -74,7 +76,21 @@
                                                 </div>
                                                 <!--/ End Form Property Status -->
                                              </div>
-                                             <div class="col-lg-4 col-md-6 py-1 pr-30 pl-0 ">
+
+                                             <div class="col-lg-3 col-md-6 py-1 pr-30 pl-0">
+                                                <!-- Form Property Status -->
+                                                <div class="form-group categories">
+                                                   <select class="nice-select form-control wide" name="res_com_detail" >
+                                                      <option value=""> <i class="fa fa-home"></i> Property Type</option>
+                                                      @foreach($propertyType as $row)
+                                                      <option value="{{$row->property_type}}">{{$row->property_type}}</option>
+                                                      @endforeach
+                                                      
+                                                   </select>
+                                                </div>
+                                                <!--/ End Form Property Status -->
+                                             </div>
+                                             <div class="col-lg-3 col-md-6 py-1 pr-30 pl-0 ">
                                                 <!-- Form Bedrooms -->
                                                 <div class="form-group beds">
                                                    <select class="nice-select form-control wide" name="room" >
@@ -87,7 +103,7 @@
                                                 </div>
                                                 <!--/ End Form Bedrooms -->
                                              </div>
-                                             <div class="col-lg-4 col-md-6 py-1 pr-30 pl-0">
+                                             <div class="col-lg-3 col-md-6 py-1 pr-30 pl-0">
                                                 <!-- Form Bathrooms -->
                                                 <div class="form-group bath">
                                                    <select class="nice-select form-control wide" name="room" >

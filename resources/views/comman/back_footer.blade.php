@@ -8,26 +8,22 @@
                   <a href="{{url('/')}}" class="logo">
                   <img src="{{URL::asset('assets/images/logo.png')}}" style="width:30%"  class="img-responsive" alt="netcom">
                   </a>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum incidunt architecto soluta laboriosam, perspiciatis, aspernatur officiis esse.</p>
-               </div>
+                  <p>Alpha land India's most innovative real estate advertising platform for homeowners, landlords, developers, and real estate brokers. The company offers listings for new homes, resale homes, rentals, </p>
+                </div>
                <div class="contactus">
                   <ul>
-                     <li>
-                        <div class="info">
-                           <i class="fa fa-map-marker" aria-hidden="true"></i>
-                           <p class="in-p">95 South Park Avenue, USA</p>
-                        </div>
-                     </li>
-                     <li>
+
+                  <li>
                         <div class="info">
                            <i class="fa fa-phone" aria-hidden="true"></i>
-                           <p class="in-p">+456 875 369 208</p>
+                           <p class="in-p">+91-7991892358
+                           </p>
                         </div>
                      </li>
                      <li>
                         <div class="info">
                            <i class="fa fa-envelope" aria-hidden="true"></i>
-                           <p class="in-p ti">support@findhouses.com</p>
+                           <p class="in-p ti">info@alphaland.in</p>
                         </div>
                      </li>
                   </ul>

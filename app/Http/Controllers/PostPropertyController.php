@@ -251,6 +251,9 @@ class PostPropertyController extends Controller
         if(!empty($request->city)){
             $getPost->where('city',$request->city);
         }
+        if(!empty($request->res_com_detail)){
+            $getPost->where('res_com_detail',$request->res_com_detail);
+        }
 
         if(!empty($request->pro_type)){
             $getPost->where('pro_type',$request->pro_type);
@@ -307,6 +310,10 @@ class PostPropertyController extends Controller
 
         if(!empty($request->pro_type)){
             $getPost->where('pro_type',$request->pro_type);
+        }
+
+        if(!empty($request->res_com_detail)){
+            $getPost->where('res_com_detail',$request->res_com_detail);
         }
         if(!empty($request->room)){
             $getPost->where('room',$request->room);

@@ -19,6 +19,7 @@ use App\Models\CountryModel;
 use App\Models\NewslettersModel;
 use App\Models\ContactUsModel;
 use App\Models\StateModel;
+
 use App\Models\CityModel;
 use App\Models\ProFeatureMasterModel;
 use App\Events\MessageSent;
@@ -95,9 +96,10 @@ class HomeController extends Controller
         $getStates = StateModel::get();
         $getCities = CityModel::get();
         $featureMaster = ProFeatureMasterModel::get();
+        $propertyType =  ResComDetailModel::all();
         $popularPlace =  DB::select('select count(city) as cntcount,city as cityId,(select city from cities where id = cityId) cityname  from pro_description group by city limit 8');
 
-        return view('front.index',compact('getCountries','getStates','getCities','featureMaster','popularPlace','getPost'));
+        return view('front.index',compact('getCountries','getStates','getCities','featureMaster','popularPlace','getPost','propertyType'));
     }
 
     
