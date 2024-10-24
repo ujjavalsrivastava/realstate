@@ -70,10 +70,10 @@ class HomeController extends Controller
       public function userChatList(Request $request){
         $user = Auth::user(); 
         $chatUser = User::where('id','!=',$user->id);
-        if($user->type != 'Admin'){
+        // if($user->type != 'Admin'){
             
-            $chatUser->where('type','Admin');
-        }
+        //     $chatUser->where('type','Admin');
+        // }
         if(!empty($request->search)){
             
             $chatUser->where('name', 'like', "%$request->search%");
