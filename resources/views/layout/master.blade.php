@@ -504,7 +504,7 @@
                         <div class="tab">
                            <div id="tab-2" class="tab-contents">
                               <div class="custom-form">
-                                 <form method="post"  id="registerform" >
+                                 <form method="post"  id="registerform" enctype="multipart/form-data">
                                     @csrf()
                                     <div id="first">
                                        <ul class="tabs-menu">
@@ -514,9 +514,9 @@
                                        </ul>
                                        <input type="hidden" name="type" id="type" value="Owner">
                                        <label>Full Name * </label>
-                                       <input  type="text" name="name">
+                                       <input  type="text" name="name" id="name">
                                        <label>Mobile No *</labe>
-                                       <input name="mobile" type="text" >
+                                       <input name="mobile" type="text"  id="mobile">
                                        <label>Email Address *</label>
                                        <input name="email" id="emailId" type="text" >
                                        <label>Password *</label>
@@ -558,7 +558,10 @@
                                        <label> Address *</label>
                                        <input name="address" id="address" type="text" >
                                        <label> Pin Code *</label>
-                                       <input name="pin_no" id="pin_no" type="text" >                           
+                                       <input name="pin_no" id="pin_no" type="text" >       
+                                       
+                                       <label> profile Upload *</label>
+                                       <input name="profile" id="profile" type="file" >                           
                                        <button type="submit" class="log-submit-btn"><span>Register</span></button>
                                        <div> 
                                        </div>
@@ -1110,6 +1113,23 @@
          </script>
          <script>
             function nextFun(){
+                var name = $('#name').val();
+                if(name == ''){
+                    $('#errorNotification').show();
+                    $('#errorMessage').text('Name is required');
+                    return false;
+                }
+                var mobile = $('#mobile').val();
+                if(mobile == ''){
+                    $('#errorNotification').show();
+                    $('#errorMessage').text('Mobile is required');
+                    return false;
+                }
+                if(mobile.length != '10'){
+                    $('#errorNotification').show();
+                    $('#errorMessage').text('invoid Mobile');
+                    return false;
+                }
                 var email = $('#emailId').val();
                 if(email == ''){
                     $('#errorNotification').show();
@@ -1118,7 +1138,7 @@
                 }
                 $('#loadingDiv').show();
                 $.ajax({
-                    url: "{{url('send_mail')}}?email="+email, // The route that handles the request
+                    url: "{{url('send_mail')}}?email="+email+'&type=register', // The route that handles the request
                     type: 'GET',
                     success: function(response) {
                         $('#loadingDiv').hide();
@@ -1127,14 +1147,14 @@
                             $('#second').show();
                             $('#third').hide();
                             $('#successNotification').show();
-                            $('#successMessage').text(response.message);   
+                            $('#successMessage').text(response.success);   
                         }else{
                             $('#errorNotification').show();
                             $('#errorMessage').text(response.message);
                         }
                     },
                     error: function (response) {
-            
+                        $('#loadingDiv').hide();
                                 $('#errorNotification').show();
                                 $('#errorMessage').text(response.responseJSON.error);
                             },
@@ -1230,10 +1250,15 @@
             
             $('#registerform').on('submit', function(e) {
                 e.preventDefault(); 
+                var formData = new FormData(e.target);
+
                 $.ajax({
                     type: "POST",
                     url: "{{url('/register')}}",
-                    data: $(this).serialize(),
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+
                     success: function(response) {
                         if(response.status == '200'){
                             $('#successNotification').show();

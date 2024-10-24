@@ -222,6 +222,13 @@ class HomeController extends Controller
        $user->address = $request->address;
        $user->pin_no = $request->pin_no;
        $user->password = bcrypt($request->password);
+       if ($request->file('profile')) {
+        $filename = uniqid() . '.' . $request->file('profile')->getClientOriginalExtension();
+            $path = url('pic/'.$filename);
+            $uploade_path = public_path('pic');
+            $request->file('profile')->move($uploade_path,$filename);
+            $user->profile = url('pic/').'/'.$filename;
+      }
        $user->save();
 
        $credentials = $request->only('email', 'password');
@@ -240,13 +247,18 @@ class HomeController extends Controller
  // Otp send on mail 
  public function sendMail(Request $request){
     try{
+        
     $validator = Validator::make($request->all(), 
-    [ 
-    'email' => 'required|email',
-    
-   ]);  
+    !empty($request->type)?   [ 
+        'email' => 'required|email|unique:users',
+        
+       ] :    [ 
+        'email' => 'required|email',
+        
+       ]
+   );  
     if ($validator->fails()) {  
-    return response()->json(['error'=>$validator->errors()], 401); 
+    return response()->json(['error'=>$validator->errors()->first()], 401); 
     }   
 
     $details = [

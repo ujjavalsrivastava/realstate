@@ -44,6 +44,13 @@ class AuthController extends Controller
         $user->address = $request->address;
         $user->pin_no = $request->pin_no;
         $user->password = bcrypt($request->password);
+        if ($request->file('profile')) {
+            $filename = uniqid() . '.' . $request->file('profile')->getClientOriginalExtension();
+                $path = url('pic/'.$filename);
+                $uploade_path = public_path('pic');
+                $request->file('profile')->move($uploade_path,$filename);
+                $user->profile = url('pic/').'/'.$filename;
+          }
         $user->save();
 
         if ($this->token) {

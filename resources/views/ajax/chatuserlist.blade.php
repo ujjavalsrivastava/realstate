@@ -2,7 +2,12 @@
             
             <div class="side-box" onclick="findUser('{{$row->id}}','{{$row->name}}')">
                 <div class="pro-img">
+                    @if($row->profile)
+                    <img src="{{$row->profile}}" alt="">
+                    @else
                     <img src="{{URL::asset('assets/images/user.jpg')}}" alt="">
+
+                    @endif
                 </div>
                 <div class="pro-name">
                @php
