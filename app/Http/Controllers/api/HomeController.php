@@ -423,7 +423,7 @@ class HomeController extends Controller
         ChatPost::create([
             'sender_id' => $sender->id,
             'receiver_id' => $receiver->id,
-            'post_id' => $receiver->post_id,
+            'post_id' => $request->post_id,
             'msg' => $message,
         ]);
 
