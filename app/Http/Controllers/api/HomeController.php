@@ -13,6 +13,7 @@ use App\Models\FavoriteProModel;
 use App\Models\User;
 use App\Models\Menu;
 use App\Models\Chats;
+use App\Models\ChatPost;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactUsSendMail;
 use App\Models\ContactUsModel;
@@ -380,6 +381,8 @@ class HomeController extends Controller
         // return ['status' => 'Message Sent!'];
     }
 
+    
+
       // Display chat between two users
       public function showChat($recieverId)
       {
@@ -398,5 +401,53 @@ class HomeController extends Controller
         //   return view('ajax.message', compact('messages'));
       }
 
+      function sendMsgPost(Request $request){
+        $validator = Validator::make($request->all(), 
+        [ 
+            'receiver_id' => 'required',
+            'post_id' => 'required',
+            'message' => 'required',
+             ]);  
+        if ($validator->fails()) {  
+        return response()->json(['message'=>$validator->errors()], 400); 
+        } 
+        $sender = JWTAuth::parseToken()->authenticate();  // User A (the sender)
+        $receiver = User::find($request->receiver_id);  // User B (the receiver)
+      
+        $message = $request->message;
+
+        if (!$receiver) {
+            return response()->json(['error' => 'User not found.'], 404);
+        }
+
+        ChatPost::create([
+            'sender_id' => $sender->id,
+            'receiver_id' => $receiver->id,
+            'post_id' => $receiver->post_id,
+            'msg' => $message,
+        ]);
+
+        // Broadcast the event to User B's private channel
+        broadcast(new MessageSent($message, $sender,$receiver))->toOthers();
+        return response()->json(['status'=>'200','msg' => 'Save successfully']);
+      }
+
+      function showChatPost($postId){
+        
+        $recieverId = ProDescriptionModel::where('id',$postId)->first()->user_id;
+        $user = JWTAuth::parseToken()->authenticate();
+        $senderId = $user->id;
+        $messages = ChatPost::where('post_id',$postId)->where(function ($query) use ($senderId,$recieverId) {
+            $query->where('sender_id',  $senderId)->where('receiver_id', $recieverId);
+        })->orWhere(function ($query) use ($senderId,$recieverId) {
+            $query->where('sender_id', $recieverId)->where('receiver_id',  $senderId);
+        });
+        
+        $update =  $messages->update(['view'=>1]);
+
+        $messages = $messages->orderBy('created_at', 'asc')->get();
+        return response()->json(['status'=>'200','msg' => 'Fatch successfully','data'=> $messages]);
+
+      }
     
 }

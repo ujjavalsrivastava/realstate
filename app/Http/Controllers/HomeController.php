@@ -10,6 +10,8 @@ use Hash;
 use App\Models\User;
 use App\Models\ResComDetailModel;
 use App\Models\Chats;
+use App\Models\ChatPost;
+
 use App\Models\OtpVerifyModel;
 use App\Models\ProDescriptionModel;
 use Illuminate\Support\Facades\Mail;
@@ -49,6 +51,31 @@ class HomeController extends Controller
     
         return ['status' => 'Message Sent!'];
     }
+    function sendMsgPost(Request $request){
+
+        $sender = Auth::user();  // User A (the sender)
+        $receiver = User::find($request->receiver_id);  // User B (the receiver)
+      
+        $message = $request->message;
+
+        if (!$receiver) {
+            return response()->json(['error' => 'User not found.'], 404);
+        }
+
+        ChatPost::create([
+            'sender_id' => $sender->id,
+            'receiver_id' => $receiver->id,
+            'post_id' => $request->post_id,
+            'msg' => $message,
+        ]);
+
+        // Broadcast the event to User B's private channel
+       // broadcast(new MessageSent($message, $sender,$receiver))->toOthers();
+       return response()->json(['status'=> 200,'message'=> 'Message Sent']); 
+        //return ['status' => 'Message Sent!'];
+    }
+
+    
 
       // Display chat between two users
       public function showChat($userId)
