@@ -428,7 +428,7 @@ class HomeController extends Controller
         ]);
 
         // Broadcast the event to User B's private channel
-        broadcast(new MessageSent($message, $sender,$receiver))->toOthers();
+       // broadcast(new MessageSent($message, $sender,$receiver))->toOthers();
         return response()->json(['status'=>'200','msg' => 'Save successfully']);
       }
 
