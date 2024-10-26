@@ -50,7 +50,7 @@
          @if(Auth::check())
          <div class="header-user-menu user-menu add">
             <div class="header-user-name">
-               <span><img src="{{URL::asset('assets/images/user.jpg')}}" alt=""></span>{{ucfirst(Auth::user()->name)}}
+               <span><img src="{{URL::asset('assets/images/user.jpg')}}" alt=""></span>{{ucfirst(Auth::user()->name)}} @if(Auth::user()->user_verified)<img src="{{URL::asset('assets/images/bluetick.png')}}"  width="20px" alt="">@endif
             </div>
             <ul>
                <li><a href="#"> Edit profile</a></li>
