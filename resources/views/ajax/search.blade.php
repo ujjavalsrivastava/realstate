@@ -67,7 +67,7 @@
 
             @if($row->getUser->user_verified)
               
-              <i class="fa fa-check-circle" title="Verified Property" style="color:#5ab2ff;font-size: 25px;margin-right: 20px;" aria-hidden="true"></i>
+              <i class="fa fa-check-circle" title="Verified Property" style="color:#5ab2ff;font-size: 20px;margin-right: 20px;" aria-hidden="true"></i>
              
               @endif
          
