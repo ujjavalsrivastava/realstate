@@ -75,6 +75,7 @@ class PaymentgatewayController extends Controller
         $payment->razorpay_order_id = $request->orderId;
         $payment->razorpay_payment_id = $request->paymentId;
         $payment->razorpay_signature = $request->sign;
+        $payment->status = 'Success';
         $payment->save();
         $updateUser = User::where('id',$user->id)->first();
         $updateUser->user_verified = true;
