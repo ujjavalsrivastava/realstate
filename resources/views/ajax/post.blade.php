@@ -57,7 +57,7 @@ $slug = str_replace(' ','-',strtolower($post->pro_title));
                <!-- <a href="#" title="Compare">
                <i class="flaticon-compare"></i>
                </a> -->
-               <i class="fa fa-check-circle" style="color:#5ab2ff;font-size:30px" aria-hidden="true"></i>
+               <i class="fa fa-check-circle" style="font-size: 25px;margin-right: 20px;" aria-hidden="true"></i>
               
                @endif
                <a href="#" title="Share" onclick="openShareModel('{{$post->id}}')">
