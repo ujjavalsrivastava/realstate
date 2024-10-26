@@ -405,7 +405,6 @@ class HomeController extends Controller
       function sendMsgPost(Request $request){
         $validator = Validator::make($request->all(), 
         [ 
-            'receiver_id' => 'required',
             'post_id' => 'required',
             'message' => 'required',
              ]);  
@@ -413,7 +412,7 @@ class HomeController extends Controller
         return response()->json(['message'=>$validator->errors()], 400); 
         } 
         $sender = JWTAuth::parseToken()->authenticate();  // User A (the sender)
-        $receiver = User::find($request->receiver_id);  // User B (the receiver)
+        $recieverId = ProDescriptionModel::where('id',$request->post_id)->first()->user_id; // User B (the receiver)
       
         $message = $request->message;
 
@@ -423,7 +422,7 @@ class HomeController extends Controller
 
         ChatPost::create([
             'sender_id' => $sender->id,
-            'receiver_id' => $receiver->id,
+            'receiver_id' =>  $recieverId,
             'post_id' => $request->post_id,
             'msg' => $message,
         ]);
