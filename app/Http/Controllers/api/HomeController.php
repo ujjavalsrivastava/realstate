@@ -416,9 +416,7 @@ class HomeController extends Controller
       
         $message = $request->message;
 
-        if (!$receiver) {
-            return response()->json(['error' => 'User not found.'], 404);
-        }
+      
 
         ChatPost::create([
             'sender_id' => $sender->id,
