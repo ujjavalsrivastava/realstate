@@ -758,7 +758,7 @@
                    headers: {
                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                        },
-                    url: "{{url('savePayment')}}/", // The route that handles the request
+                    url: "{{url('savePayment')}}", // The route that handles the request
                     type: 'POST',
                     data:{orderId:orderId,paymentId:paymentId,sign:sign},
                     success: function(response) {
