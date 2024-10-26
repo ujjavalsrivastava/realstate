@@ -60,16 +60,22 @@
                   <img src="{{URL::asset('assets/images/user.jpg')}}" alt="">
                   @endif
             
-            </span>{{ucfirst(Auth::user()->name)}}
+            </span>{{ucfirst(Auth::user()->name)}} @if(Auth::user()->user_verified)<img src="{{URL::asset('assets/images/bluetick.png')}}"  width="20px" alt="">@endif
             </div>
             <ul>
+               <li>@if(!Auth::user()->user_verified) <a href="javascript:void(0)"  onclick="purchageBlueTick(this)"> Un-Verified </a> @endif</li>
                <li><a href="#"> Edit profile</a></li>
-           
+             
                <li><a href="{{url('/admin/payment-list')}}">  Payments</a></li>
                <li><a href="{{url('/admin/get-change-password')}}" > Change Password</a></li>
                <li><a href="{{url('/logout')}}">Log Out</a></li>
             </ul>
          </div>
+
+                           <!-- <input type="hidden" name="payPrice" value="500" id="payPrice">
+                           <input type="hidden" name="razorpay_payment_id" id="razorpay_payment_id">
+                           <input type="hidden" name="razorpay_signature" id="razorpay_signature">
+                           <input type="hidden" name="razorpay_order_id" id="razorpay_order_id"> -->
          <!-- Right Side Content / End -->
          @else
          <div class="right-side d-none d-none d-lg-none d-xl-flex sign ml-0">

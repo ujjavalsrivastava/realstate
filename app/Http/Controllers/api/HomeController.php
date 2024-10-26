@@ -61,6 +61,28 @@ class HomeController extends Controller
         return response()->json($data, 200);
     }
 
+
+    function savePayment(Request $request){
+     
+        try{
+            $user = JWTAuth::parseToken()->authenticate();
+        $payment =  new PaymentDetails();
+        $payment->type = 'verified';
+        $payment->user_id = $user->id;
+        $payment->price = 500;
+        $payment->razorpay_order_id = $request->orderId;
+        $payment->razorpay_payment_id = $request->paymentId;
+        $payment->razorpay_signature = $request->sign;
+        $payment->save();
+        $updateUser = User::where('id',$user->id)->first();
+        $updateUser->user_verified = true;
+        $updateUser->save();
+        return response()->json(['msg' => 'Payment Successfuly'], 200);
+        }catch(\Exception $e){
+            return response()->json(['message' => $e->getMessage()], 400); 
+        }
+    }
+
     public function proDescription(Request $request)
     {
         // dd($request->user_id);

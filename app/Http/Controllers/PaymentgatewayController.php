@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Razorpay\Api\Api;
 use Razorpay\Api\Errors\SignatureVerificationError;
 use App\Models\PaymentDetails;
+use App\Models\User;
 class PaymentgatewayController extends Controller
 {
     public function orderGenerate(Request $request)
@@ -60,6 +61,27 @@ class PaymentgatewayController extends Controller
             // Redirect to payment page with error
             // Pass $error along with route
             return response()->json(['msg' => 'Field Successfuly'], 400);
+        }
+    }
+
+    function savePayment(Request $request){
+     
+        try{
+        $user = Auth::user();
+        $payment =  new PaymentDetails();
+        $payment->type = 'verified';
+        $payment->user_id = $user->id;
+        $payment->price = 500;
+        $payment->razorpay_order_id = $request->orderId;
+        $payment->razorpay_payment_id = $request->paymentId;
+        $payment->razorpay_signature = $request->sign;
+        $payment->save();
+        $updateUser = User::where('id',$user->id)->first();
+        $updateUser->user_verified = true;
+        $updateUser->save();
+        return response()->json(['msg' => 'Payment Successfuly'], 200);
+        }catch(\Exception $e){
+            return response()->json(['message' => $e->getMessage()], 400); 
         }
     }
 }

@@ -688,7 +688,92 @@
          <script src="{{ URL::asset('assets/js/color-switcher.js')}}"></script>
          <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
          <script src="{{ mix('js/app.js') }}"></script>
+         <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
          <script>
+
+
+            function purchageBlueTick(thisval){
+              
+       
+       $(thisval).text('Proccessing...');
+                   $.ajax({
+                       headers: {
+                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                   },
+                   type: "POST",
+                   url: "{{url('/orderGenerate')}}",
+                   data: {price:'500'},
+                   success: function(response) {
+                       $(thisval).hide();
+                       
+                       console.log(response);
+                       
+                      
+                       //   $('#razorpay_order_id').val(response.order_id);
+                          PaymentNow(response.order_id);
+                      
+                   },
+                   error: function (response) {
+        
+           $('#errorNotification').show();
+           $('#errorMessage').text(response.responseJSON.error);
+       },
+               });
+   
+            }
+
+            function PaymentNow(orderId){
+   var options = {
+   "key": "rzp_test_vDBwnM5DROejIY",
+   "amount": '500',
+   "currency": "INR",
+   "name": "YOUR COMPANY NAME",
+   "description": "YOUR COMPANY DESCRIPTION",
+   "image": "YOUR COMPANY IMAGE",
+   "order_id": orderId,
+   "handler": function(response) {
+    console.log('response '+ JSON.stringify(response) );
+     savePaymentDetails(orderId,response.razorpay_payment_id,response.razorpay_signature);
+   },
+   "theme": {
+    "color": "#F37254"
+   }
+   };
+   
+   var rzp1 = new Razorpay(options);
+   rzp1.on('payment.failed', function(response) {
+   alert(response.error.code);
+   alert(response.error.description);
+   alert(response.error.source);
+   alert(response.error.step);
+   alert(response.error.reason);
+   alert(response.error.metadata.order_id);
+   alert(response.error.metadata.payment_id);
+   });
+   rzp1.open();
+   }
+
+   function savePaymentDetails(orderId,paymentId,sign){
+    $.ajax({
+                   headers: {
+                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                       },
+                    url: "{{url('savePayment')}}/", // The route that handles the request
+                    type: 'POST',
+                    data:{orderId:orderId,paymentId:paymentId,sign:sign},
+                    success: function(response) {
+                        $('#successNotification').show();
+                            $('#successMessage').text(response.msg);
+                            location.reload().delay(5000); 
+                    },
+                    error: function (response) {
+                        $('#loadingDiv').hide();
+                                $('#errorNotification').show();
+                                $('#errorMessage').text(response.responseJSON.error);
+                            },
+                });
+   }
+
             function capitalizeFirstLetter(str) {
                 return str.charAt(0).toUpperCase() + str.slice(1);
              }
