@@ -70,9 +70,9 @@ class HomeController extends Controller
         $payment->type = 'verified';
         $payment->user_id = $user->id;
         $payment->price = 500;
-        $payment->razorpay_order_id = $request->orderId;
-        $payment->razorpay_payment_id = $request->paymentId;
-        $payment->razorpay_signature = $request->sign;
+        $payment->razorpay_order_id = $request->razorpay_order_id;
+        $payment->razorpay_payment_id = $request->razorpay_payment_id;
+        $payment->razorpay_signature = $request->razorpay_signature;
         $payment->save();
         $updateUser = User::where('id',$user->id)->first();
         $updateUser->user_verified = true;
