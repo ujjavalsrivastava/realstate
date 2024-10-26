@@ -93,7 +93,7 @@ Route::get('show-review-list/{id}',[ReviewController::class, 'showReviewList']);
 Route::get('/getReletiondata/{id}',[HomeController::class, 'getReletiondata']);
 Route::post('/orderGenerate',[PaymentgatewayController::class, 'orderGenerate']);
 Route::post('/verify',[PaymentgatewayController::class, 'verify']);
-
+Route::post('/savePayment',[PaymentgatewayController::class, 'savePayment']);
 
 
 Route::get('/emi-calculater',[HomeController::class, 'getEmiCalculater']);

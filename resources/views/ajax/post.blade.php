@@ -53,9 +53,13 @@ $slug = str_replace(' ','-',strtolower($post->pro_title));
                <a href="#">&#8377; {{$post->price}}</a>
             </h3>
             <div class="compare">
-               <a href="#" title="Compare">
+               @if($post->getUser->user_verified)
+               <!-- <a href="#" title="Compare">
                <i class="flaticon-compare"></i>
-               </a>
+               </a> -->
+               <i class="fa fa-check-circle" style="color:#5ab2ff;font-size:30px" aria-hidden="true"></i>
+              
+               @endif
                <a href="#" title="Share" onclick="openShareModel('{{$post->id}}')">
                <i class="flaticon-share"></i>
                </a>

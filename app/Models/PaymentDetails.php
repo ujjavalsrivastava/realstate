@@ -18,6 +18,7 @@ class PaymentDetails extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'type',
         'user_id',
         'price',
         'razorpay_order_id',
