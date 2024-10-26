@@ -64,6 +64,12 @@
          <a href="#">&#8377; {{$row->price}}</a>
       </h3>
       <div class="compare">
+
+            @if($row->getUser->user_verified)
+              
+              <i class="fa fa-check-circle" title="Verified Property" style="color:#5ab2ff;font-size: 25px;margin-right: 20px;" aria-hidden="true"></i>
+             
+              @endif
          
          <a href="#" title="Share" onclick="openShareModel('{{$row->id}}')">
          <i class="fa fa-share-alt"   aria-hidden="true"></i>
