@@ -430,9 +430,9 @@ class HomeController extends Controller
         return response()->json(['status'=>'200','msg' => 'Save successfully']);
       }
 
-      function showChatPost($postId){
+      function showChatPost($postId,$userId){
         
-        $recieverId = ProDescriptionModel::where('id',$postId)->first()->user_id;
+        $recieverId = $userId;
         $user = JWTAuth::parseToken()->authenticate();
         $senderId = $user->id;
         $messages = ChatPost::where('post_id',$postId)->where(function ($query) use ($senderId,$recieverId) {
@@ -445,6 +445,15 @@ class HomeController extends Controller
 
         $messages = $messages->orderBy('created_at', 'asc')->get();
         return response()->json(['status'=>'200','msg' => 'Fatch successfully','data'=> $messages]);
+
+      }
+
+      function userListPost($postId){
+        $user = JWTAuth::parseToken()->authenticate();
+        $senderId = $user->id;
+
+      $data =  ChatPost::where('post_id',$postId)->where('receiver_id',$senderId)->where('view',0)->with('sender')->groupby('sender_id')->select('sender_id',DB::raw('count("sender_id") as msgcount'))->get();
+      return response()->json(['status'=>'200','msg' => 'Fatch successfully','data'=> $data]);
 
       }
     

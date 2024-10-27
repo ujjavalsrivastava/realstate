@@ -67,6 +67,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     // chat 
     Route::post('/send-message',[HomeController::class, 'sendMsg']);
     Route::post('/send-message-post',[HomeController::class, 'sendMsgPost']);
-    Route::get('/show-message-post/{postId}',[HomeController::class, 'showChatPost']);
+    Route::get('/show-message-post/{postId}/{userId}',[HomeController::class, 'showChatPost']);
+    Route::get('/user-list-post/{postId}',[HomeController::class, 'userListPost']);
 Route::get('/show-chat/{id}',[HomeController::class, 'showChat']);
 });
