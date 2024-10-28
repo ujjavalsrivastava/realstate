@@ -444,7 +444,7 @@ class HomeController extends Controller
         $update =  $messages->update(['view'=>1]);
 
         $messages = $messages->orderBy('created_at', 'asc')->get();
-        return response()->json(['status'=>'200','msg' => 'Fatch successfully','data'=> $messages]);
+        return response()->json(['status'=>'200','msg' => 'Fatch data successfully','data'=> $messages]);
 
       }
 
