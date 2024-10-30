@@ -96,7 +96,7 @@ Route::post('/verify',[PaymentgatewayController::class, 'verify']);
 Route::post('/savePayment',[PaymentgatewayController::class, 'savePayment']);
 Route::get('/3Deffect/{id}', function ($id) {
       $img = base64_decode($id);
-    return view('front.3Dimagge',compact('img')) ;
+    return view('front.3DImage',compact('img')) ;
 });
 
 Route::get('/emi-calculater',[HomeController::class, 'getEmiCalculater']);
