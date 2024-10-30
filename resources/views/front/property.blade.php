@@ -41,22 +41,27 @@
                   <div id="listingDetailsSlider" class="carousel listing-details-sliders slide mb-30">
                      <h5 class="mb-4">Gallery</h5>
                      <div class="carousel-inner">
-                        <div class="active item carousel-item" data-slide-number="0">
+                        <!-- <div class="active item carousel-item" data-slide-number="0">
                            <img src="{{asset('images')}}/{{@$pro->getMedia[0]->file_name}}" class="img-fluid" alt="slider-listing">
-                        </div>
-                        @foreach($images as $image)
-                        <div class="item carousel-item" data-slide-number="1">
+                        </div> -->
+                        @foreach($images as $k=> $image)
+
+                        @php   $base = base64_encode($image->file_name)     @endphp
+                      
+                        <div class=" @if($k == 0) active @endif item carousel-item" data-slide-number="{{$k}}">
                            <img src="{{asset('images')}}/{{@$image->file_name}}" class="img-fluid" alt="slider-listing">
+                           <a href="javascript:void(0)" onclick="ThreeDView('{{$base}}')"  class="btn btn-info" style="position: relative;top: -40px;">3D View</a>
                         </div>
+                       
                         @endforeach
                         <a class="carousel-control left" href="#listingDetailsSlider" data-slide="prev"><i class="fa fa-angle-left"></i></a>
                         <a class="carousel-control right" href="#listingDetailsSlider" data-slide="next"><i class="fa fa-angle-right"></i></a>
                      </div>
                      <!-- main slider carousel nav controls -->
                      <ul class="carousel-indicators smail-listing list-inline">
-                        @foreach($images as $image)
+                     @foreach($images as $key => $image)
                         <li class="list-inline-item active">
-                           <a id="carousel-selector-0" class="selected" data-slide-to="0" data-target="#listingDetailsSlider">
+                           <a id="carousel-selector-{{$key}}" class="selected" data-slide-to="{{$key}}" data-target="#listingDetailsSlider">
                            <img src="{{asset('images')}}/{{@$image->file_name}}" class="img-fluid" alt="listing-small">
                            </a>
                         </li>
@@ -591,6 +596,17 @@
 @endsection
 @section('script')
 <script>
+
+function ThreeDView(imageName){
+   var url = "{{url('3Deffect')}}/"+imageName;
+   window.open(
+         url,  // URL to open
+        'newwindow',            // Window name
+        'width=900,height=600'  // Window dimensions
+    );
+}
+
+
    if ($('#map-contact').length) {
    		var map = L.map('map-contact', {
    			zoom: 5,
