@@ -598,7 +598,7 @@
 <script>
 
 function ThreeDView(imageName){
-   var url = "{{url('3Deffect')}}/"+imageName;
+   var url = "{{url('threeDeffect')}}/"+imageName;
    window.open(
          url,  // URL to open
         'newwindow',            // Window name
