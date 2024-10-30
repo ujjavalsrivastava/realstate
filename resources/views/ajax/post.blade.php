@@ -54,9 +54,7 @@ $slug = str_replace(' ','-',strtolower($post->pro_title));
             </h3>
             <div class="compare">
                @if($post->getUser->user_verified)
-               <!-- <a href="#" title="Compare">
-               <i class="flaticon-compare"></i>
-               </a> -->
+              
                <i class="fa fa-check-circle" title="Verified Property" style="color:#5ab2ff;font-size: 25px;margin-right: 20px;" aria-hidden="true"></i>
               
                @endif
