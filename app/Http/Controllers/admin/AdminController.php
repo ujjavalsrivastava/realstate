@@ -9,6 +9,8 @@ use Validator;
 use Hash;
 use App\Models\User;
 use App\Models\ResComDetailModel;
+use App\Models\PaymentDetails;
+
 use App\Models\OtpVerifyModel;
 use App\Models\ProDescriptionModel;
 use Illuminate\Support\Facades\Mail;
@@ -153,6 +155,12 @@ class AdminController extends Controller
         }else{
             return response()->json(['status'=> 201,'error' => 'invalid password']);
         }
+    }
+
+    function Bluetick(){
+        $detail =  PaymentDetails::where('type','verified')->get();
+       
+        return view('admin.bluetick',compact('detail'));
     }
 
 }

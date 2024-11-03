@@ -23,6 +23,12 @@
                                             <i class="fa fa-user"></i>Favorite List
                                         </a>
                                     </li>
+
+                                    <li>
+                                        <a href="{{url('admin/blue-tick')}}">
+                                            <i class="fa fa-user"></i>Blue Tick
+                                        </a>
+                                    </li>
                                     @if(auth()->user()->type == 'Admin')
                                     <li>
                                         <a href="{{url('admin/sub-plan')}}">
