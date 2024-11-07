@@ -435,9 +435,9 @@ class HomeController extends Controller
         $recieverId = $userId;
         $user = JWTAuth::parseToken()->authenticate();
         $senderId = $user->id;
-        $messages = ChatPost::where('post_id',$postId)->where(function ($query) use ($senderId,$recieverId) {
-            $query->where('sender_id',  $senderId)->where('receiver_id', $recieverId);
-        })->orWhere(function ($query) use ($senderId,$recieverId) {
+        $messages = ChatPost::where('post_id',$postId)->where(function ($query) use ($senderId,$recieverId,$postId) {
+            $query->where('post_id',$postId)->where('sender_id',  $senderId)->where('receiver_id', $recieverId);
+        })->where('post_id',$postId)->orWhere(function ($query) use ($senderId,$recieverId) {
             $query->where('sender_id', $recieverId)->where('receiver_id',  $senderId);
         });
         
@@ -454,7 +454,12 @@ class HomeController extends Controller
         $recieverId = ProDescriptionModel::where('id',$postId)->first()->user_id; // User B (the receiver)
       
       $data =  ChatPost::where('post_id',$postId)->with('sender')->groupby('sender_id')->select('sender_id',DB::raw('count("sender_id") as msgcount'))->get();
-      return response()->json(['status'=>'200','msg' => 'Fatch successfully','data'=> $data]);
+      $userList = [];
+      foreach($data as $row){
+        if($row->sender_id != $senderId)
+        $userList[] = $row
+       }
+      return response()->json(['status'=>'200','msg' => 'Fatch successfully','data'=> $userList]);
 
       }
     
