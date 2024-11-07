@@ -437,8 +437,8 @@ class HomeController extends Controller
         $senderId = $user->id;
         $messages = ChatPost::where('post_id',$postId)->where(function ($query) use ($senderId,$recieverId,$postId) {
             $query->where('post_id',$postId)->where('sender_id',  $senderId)->where('receiver_id', $recieverId);
-        })->where('post_id',$postId)->orWhere(function ($query) use ($senderId,$recieverId) {
-            $query->where('sender_id', $recieverId)->where('receiver_id',  $senderId);
+        })->orWhere(function ($query) use ($senderId,$recieverId,$postId) {
+            $query->where('post_id',$postId)->where('sender_id', $recieverId)->where('receiver_id',  $senderId);
         });
         
         $update =  $messages->update(['view'=>1]);
