@@ -453,10 +453,7 @@ class HomeController extends Controller
         $senderId = $user->id;
         $recieverId = ProDescriptionModel::where('id',$postId)->first()->user_id; // User B (the receiver)
       
-      $data =  ChatPost::where('post_id',$postId)->where(function ($query) use ($senderId,$recieverId) {
-        $query->where('sender_id',  $recieverId)->where('receiver_id', $senderId);
-    
-    })->with('sender')->groupby('sender_id')->select('sender_id',DB::raw('count("sender_id") as msgcount'))->get();
+      $data =  ChatPost::where('post_id',$postId)->with('sender')->groupby('sender_id')->select('sender_id',DB::raw('count("sender_id") as msgcount'))->get();
       return response()->json(['status'=>'200','msg' => 'Fatch successfully','data'=> $data]);
 
       }
