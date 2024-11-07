@@ -406,13 +406,14 @@ class HomeController extends Controller
         $validator = Validator::make($request->all(), 
         [ 
             'post_id' => 'required',
+            'reciever_id' => 'required',
             'message' => 'required',
              ]);  
         if ($validator->fails()) {  
         return response()->json(['message'=>$validator->errors()], 400); 
         } 
         $sender = JWTAuth::parseToken()->authenticate();  // User A (the sender)
-        $recieverId = ProDescriptionModel::where('id',$request->post_id)->first()->user_id; // User B (the receiver)
+        $recieverId = $request->reciever_id; // User B (the receiver)
       
         $message = $request->message;
 
