@@ -457,7 +457,7 @@ class HomeController extends Controller
       $userList = [];
       foreach($data as $row){
         if($row->sender_id != $senderId)
-        $userList[] = $row
+        $userList[] = $row;
        }
       return response()->json(['status'=>'200','msg' => 'Fatch successfully','data'=> $userList]);
 
