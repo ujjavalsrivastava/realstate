@@ -233,13 +233,8 @@ class HomeController extends Controller
 
     //get property Description
     public function getProDescription(){
-        $user = JWTAuth::parseToken()->authenticate();
-        $pro_description_list = ProDescriptionModel::query();
-        if(!empty($user)){
-            $pro_description_list->where('user_id','!=',$user->id);
-        }
         
-        $pro_description_list= $pro_description_list->with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity','getFavPro')->paginate(9);
+        $pro_description_list = ProDescriptionModel::with('getUser','getProType','getResComType','getResComDetails','getProFeature','getMedia','getCountry','getState','getCity','getFavPro')->paginate(9);
         return response()->json(['status'=>'200','msg'=>'Fetch Successfully!','data' => $pro_description_list]);
     }
 
