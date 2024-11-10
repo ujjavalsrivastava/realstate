@@ -63,6 +63,41 @@ class AuthController extends Controller
         ], Response::HTTP_OK);
     }
 
+    // uplod profile
+
+    function profileUpload(Request $request,$id){
+
+        $validator = Validator::make($request->all(), 
+        [ 
+        'profile' => 'required|image|mimes:jpeg,jpg,png,gif',
+
+      ]);  
+            if ($validator->fails()) {  
+            return response()->json(['error'=>$validator->errors()], 401); 
+            }   
+     try{
+        $user = User::where('id',$id)->first();
+
+        if ($request->file('profile')) {
+            $filename = uniqid() . '.' . $request->file('profile')->getClientOriginalExtension();
+                $path = url('pic/'.$filename);
+                $uploade_path = public_path('pic');
+                $request->file('profile')->move($uploade_path,$filename);
+                $user->profile = url('pic/').'/'.$filename;
+          }
+        $user->save();
+
+        return response()->json([
+            'success' => true,
+            'message'=> 'Profile pic upload successfully',
+            'data' => $user
+        ], Response::HTTP_OK);
+
+    }catch(\Exception $e){
+        return response()->json(['message' => $e->getMessage()], 400); 
+    }
+    }
+
     // login 
     public function login(Request $request)
     {
