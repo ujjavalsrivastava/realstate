@@ -25,8 +25,8 @@
                                     </li>
 
                                     <li>
-                                        <a href="{{url('admin/blue-tick')}}">
-                                            <i class="fa fa-user"></i>Blue Tick
+                                        <a href="{{url('admin/verified')}}">
+                                            <i class="fa fa-user"></i>Verified User
                                         </a>
                                     </li>
                                     @if(auth()->user()->type == 'Admin')
