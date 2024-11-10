@@ -157,7 +157,7 @@ class AdminController extends Controller
         }
     }
 
-    function Bluetick(){
+    function verified(){
         $detail =  PaymentDetails::where('type','verified')->get();
        
         return view('admin.bluetick',compact('detail'));
