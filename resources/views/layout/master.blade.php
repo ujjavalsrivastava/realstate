@@ -1034,7 +1034,7 @@
     // Listen to the current user's private channel for messages
     Echo.private(`private-chat.${currentUserId}`)
         .listen('MessageSent', (e) => {
-            console.log(e);
+            
             getChatUserList();
             let chatWindow = document.getElementById('chat-window');
       
@@ -1055,12 +1055,14 @@
             } else {
                 chatWindow.innerHTML += `
                 
-                  <div id="cm-msg-2" class="chat-msg user"> 
-                  
+ <div id="cm-msg-2" class="chat-msg user" style="">   
+           <span class="msg-avatar">         
+                    @if(@Auth::user()->profile)
+                  <img src="{{Auth::user()->profile}}" alt="">
+                  @else
                   <img src="{{URL::asset('assets/images/user.jpg')}}" alt="">
-                  
-                  
-                 <div class="cm-msg-text">${e.message}       
+                  @endif 
+              </span>          <div class="cm-msg-text">${e.message}       
          </div>    
                 
 </div>`;
