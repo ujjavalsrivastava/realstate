@@ -1036,11 +1036,11 @@
         .listen('MessageSent', (e) => {
             
             getChatUserList();
-          // let chatWindowscroll = document.getElementById('chat-window');
-              var chatWindow = ``;
+            let chatWindow = document.getElementById('chat-window');
+             var recieverChat = ``;
             // Check if the message was sent by the current user (to distinguish sent and received messages)
             if (e.sender_id == currentUserId) {
-                chatWindow += `
+                chatWindow.innerHTML += `
                   <div id="cm-msg-1" class="chat-msg self" >     
          <span class="msg-avatar">    
                 @if(@Auth::user()->profile)
@@ -1053,24 +1053,27 @@
      <div class="cm-msg-text">${e.message} </div>   
  </div>`;
             } else {
-                chatWindow += `
+                
+                recieverChat = `
                 
  <div id="cm-msg-2" class="chat-msg user" style="">   
            <span class="msg-avatar">`;         
                     if(e.receiver.profile){
-                    chatWindow += `<img src="${e.receiver.profile}" alt="">`;
+                        recieverChat += `<img src="${e.receiver.profile}" alt="">`;
                     }else{
-                    chatWindow += `<img src="{{URL::asset('assets/images/user.jpg')}}" alt="">`;
+                        recieverChat += `<img src="{{URL::asset('assets/images/user.jpg')}}" alt="">`;
                     }
                  
-              chatWindow += `</span> <div class="cm-msg-text">${e.message}       
+                    recieverChat += `</span> <div class="cm-msg-text">${e.message}       
          </div>    
                 
 </div>`;
+
+               chatWindow.innerHTML += recieverChat;
             }
-              $('#chat-window').append(chatWindow);
+
             // Scroll chat window to the bottom after new message
-            $('#chat-window').scrollTop = $('#chat-window').scrollHeight;
+            chatWindow.scrollTop = chatWindow.scrollHeight;
             
         });
 
