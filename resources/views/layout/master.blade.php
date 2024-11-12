@@ -1034,6 +1034,7 @@
     // Listen to the current user's private channel for messages
     Echo.private(`private-chat.${currentUserId}`)
         .listen('MessageSent', (e) => {
+            console.log(e);
             getChatUserList();
             let chatWindow = document.getElementById('chat-window');
       
@@ -1041,8 +1042,13 @@
             if (e.sender_id == currentUserId) {
                 chatWindow.innerHTML += `
                   <div id="cm-msg-1" class="chat-msg self" >     
-         <span class="msg-avatar">          
-                <img src="{{url('assets/images/user.jpg')}}">       
+         <span class="msg-avatar">    
+                @if(@Auth::user()->profile)
+                  <img src="{{Auth::user()->profile}}" alt="">
+                  @else
+                  <img src="{{URL::asset('assets/images/user.jpg')}}" alt="">
+                  @endif       
+    
         </span>        
      <div class="cm-msg-text">${e.message} </div>   
  </div>`;
@@ -1050,9 +1056,15 @@
                 chatWindow.innerHTML += `
                 
  <div id="cm-msg-2" class="chat-msg user" style="">   
-           <span class="msg-avatar">         
-                <img src="{{url('assets/images/user.jpg')}}">        
-              </span>          <div class="cm-msg-text">${e.message}       
+           <span class="msg-avatar">`;         
+                 if(e.receiver.profile){
+                    chatWindow.innerHTML += `<img src="${e.receiver.profile}" alt="">`;
+                 }else{
+                    chatWindow.innerHTML += `<img src="{{URL::asset('assets/images/user.jpg')}}" alt="">`;
+                 }
+                  
+                  
+                 chatWindow.innerHTML += `<</span>          <div class="cm-msg-text">${e.message}       
          </div>    
                 
 </div>`;

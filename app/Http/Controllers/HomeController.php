@@ -80,8 +80,8 @@ class HomeController extends Controller
       // Display chat between two users
       public function showChat($userId)
       {
-          //$user = User::find(auth()->id()); // Current logged-in user
-          $messages = Chats::where(function ($query) use ($userId) {
+          $recieveDetails = User::find($userId); // Current logged-in user
+          $messages = Chats::with(['sender','receiver'])->where(function ($query) use ($userId) {
               $query->where('sender_id', auth()->id())->where('receiver_id', $userId);
           })->orWhere(function ($query) use ($userId) {
               $query->where('sender_id', $userId)->where('receiver_id', auth()->id());
@@ -90,8 +90,9 @@ class HomeController extends Controller
           $update =  $messages->update(['view'=>1]);
 
           $messages = $messages->orderBy('created_at', 'asc')->get();
+         
   
-          return view('ajax.message', compact('messages'));
+          return view('ajax.message', compact('messages','recieveDetails'));
       }
 
       public function userChatList(Request $request){

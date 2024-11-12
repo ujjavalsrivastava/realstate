@@ -37,7 +37,8 @@ class MessageSent implements ShouldBroadcast
         return [
             'message' => $this->message,
             'sender' => $this->sender->name,
-            'sender_id' => $this->sender->id,  // Add sender ID to distinguish between sent and received messages
+            'sender_id' => $this->sender->id, 
+            'receiver' => $this->receiver,   // Add sender ID to distinguish between sent and received messages
         ];
     }
 }

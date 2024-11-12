@@ -7,7 +7,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       <meta name="description" content="html 5 template">
       <meta name="author" content="">
-      <title>Find Houses - HTML5 Template</title>
+      <title>Real state Dashboard</title>
       <!-- FAVICON -->
       <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
       <link rel="stylesheet" href="{{ URL::asset('assets/css/jquery-ui.css')}}">
