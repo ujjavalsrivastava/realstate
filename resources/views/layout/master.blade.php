@@ -1036,11 +1036,11 @@
         .listen('MessageSent', (e) => {
             
             getChatUserList();
-            let chatWindow = document.getElementById('chat-window');
-      
+          //  let chatWindow = document.getElementById('chat-window');
+              var chatWindow = ``;
             // Check if the message was sent by the current user (to distinguish sent and received messages)
             if (e.sender_id == currentUserId) {
-                chatWindow.innerHTML += `
+                chatWindow += `
                   <div id="cm-msg-1" class="chat-msg self" >     
          <span class="msg-avatar">    
                 @if(@Auth::user()->profile)
@@ -1053,24 +1053,24 @@
      <div class="cm-msg-text">${e.message} </div>   
  </div>`;
             } else {
-                chatWindow.innerHTML += `
+                chatWindow += `
                 
  <div id="cm-msg-2" class="chat-msg user" style="">   
            <span class="msg-avatar">`;         
                     if(e.receiver.profile){
-                    chatWindow.innerHTML += `<img src="${e.receiver.profile}" alt="">`;
+                    chatWindow += `<img src="${e.receiver.profile}" alt="">`;
                     }else{
-                    chatWindow.innerHTML += `<img src="{{URL::asset('assets/images/user.jpg')}}" alt="">`;
+                    chatWindow += `<img src="{{URL::asset('assets/images/user.jpg')}}" alt="">`;
                     }
                  
-              chatWindow.innerHTML += `</span> <div class="cm-msg-text">${e.message}       
+              chatWindow += `</span> <div class="cm-msg-text">${e.message}       
          </div>    
                 
 </div>`;
             }
-
+              $('#chat-window').html(chatWindow);
             // Scroll chat window to the bottom after new message
-            chatWindow.scrollTop = chatWindow.scrollHeight;
+            //chatWindow.scrollTop = chatWindow.scrollHeight;
             
         });
 
