@@ -1055,16 +1055,12 @@
             } else {
                 chatWindow.innerHTML += `
                 
- <div id="cm-msg-2" class="chat-msg user" style="">`;   
+                  <div id="cm-msg-2" class="chat-msg user"> 
                   
-                 if(e.receiver.profile){
-                    chatWindow.innerHTML += `<span class="msg-avatar"><img src="${e.receiver.profile}" ></span>`;
-                 }else{
-                    chatWindow.innerHTML += `<span class="msg-avatar"><img src="{{URL::asset('assets/images/user.jpg')}}" ></span>`;
-                 }
+                  <img src="{{URL::asset('assets/images/user.jpg')}}" alt="">
                   
                   
-                 chatWindow.innerHTML += `<div class="cm-msg-text">${e.message}       
+                 <div class="cm-msg-text">${e.message}       
          </div>    
                 
 </div>`;
