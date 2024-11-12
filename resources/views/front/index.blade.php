@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title', 'MIL - Payroll- Bank Master')
+@section('title', 'Alphaland Home Page')
 @section('styles')
 @endsection
 @section('content')
@@ -308,6 +308,12 @@
       <div class="portfolio col-xl-12">
          <div class="slick-lancers">
             @foreach($getPost as $post)
+
+            @php
+
+$slug = str_replace(' ','-',strtolower($post->pro_title));
+
+@endphp
             <div class="agents-grid" data-aos="fade-up" data-aos-delay="150">
                <div class="landscapes">
                   <div class="project-single">
@@ -331,7 +337,7 @@
                      <!-- homes content -->
                      <div class="homes-content">
                         <!-- homes address -->
-                        <h3><a href="{{url('get_property')}}/{{$post->id}}">{{$post->pro_title}}</a></h3>
+                        <h3><a href="{{url('get_property')}}/{{$slug}}?id={{$post->id}}">{{$post->pro_title}}</a></h3>
                         <p class="homes-address mb-3">
                            <a href="{{url('get_property')}}/{{$post->id}}">
                            <i class="fa fa-map-marker"></i><span>{{strtoupper($post->address)}}, {{strtoupper(@$post->getCity->city)}}, {{strtoupper(@$post->getState->name)}}, {{strtoupper(@$post->getCountry->name)}}</span>
