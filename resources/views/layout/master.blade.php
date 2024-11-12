@@ -1064,7 +1064,7 @@
                  }
                   
                   
-                 chatWindow.innerHTML += `<</span>          <div class="cm-msg-text">${e.message}       
+                 chatWindow.innerHTML += `</span>          <div class="cm-msg-text">${e.message}       
          </div>    
                 
 </div>`;
