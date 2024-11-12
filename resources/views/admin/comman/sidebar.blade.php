@@ -25,8 +25,19 @@
                                     </li>
 
                                     <li>
-                                        <a href="{{url('admin/blue-tick')}}">
-                                            <i class="fa fa-user"></i>Blue Tick
+                                        <a href="{{url('admin/verified')}}">
+                                            <i class="fa fa-user"></i>Verified User
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{url('admin/get-change-password')}}">
+                                            <i class="fa fa-user"></i>Change Password
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="{{url('admin/upload Profile')}}">
+                                            <i class="fa fa-user"></i>Upload Profile Pic
                                         </a>
                                     </li>
                                     @if(auth()->user()->type == 'Admin')

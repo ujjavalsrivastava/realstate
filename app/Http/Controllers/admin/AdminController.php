@@ -132,6 +132,32 @@ class AdminController extends Controller
     function getChangePassword(){
         return view('admin.changepassword');
     }
+
+    function uploadprofile(){
+        return view('admin.upload');
+    }
+
+    function uploadPic(request $request){
+
+   try{
+        $user = Auth::user();
+        $user = User::where('id', $user->id)->first();
+
+        if ($request->file('profile')) {
+            $filename = uniqid() . '.' . $request->file('profile')->getClientOriginalExtension();
+                $path = url('pic/'.$filename);
+                $uploade_path = public_path('pic');
+                $request->file('profile')->move($uploade_path,$filename);
+                $user->profile = url('pic/').'/'.$filename;
+          }
+          $user->save();
+
+          return response()->json(['status'=> 200,'success' => 'Profile  Update successfully']);
+
+        }catch(\Exception $e){
+            return response()->json(['status'=>'400', 'message' => $e->getMessage()]); 
+        }
+    }
     function changePass(Request $request){
 
         $validator = Validator::make($request->all(), 
@@ -157,7 +183,7 @@ class AdminController extends Controller
         }
     }
 
-    function Bluetick(){
+    function verified(){
         $detail =  PaymentDetails::where('type','verified')->get();
        
         return view('admin.bluetick',compact('detail'));
