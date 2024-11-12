@@ -32,7 +32,7 @@
                     @section('script')
                     <script>
                 $('#upload').on('submit', function(e) {
-                    alert('adf');
+                    
                         e.preventDefault(); 
                         var formData = new FormData(e.target);
 
@@ -53,7 +53,7 @@
                                     $('#successMessage').text(response.success);
                                     $('#chngepass')[0].reset();
 
-                                    // location.reload().delay(5000);
+                                    location.reload().delay(5000);
                                 }else{
                                     $('#errorNotification').show();
                                     $('#errorMessage').text(response.error);

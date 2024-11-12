@@ -1,5 +1,5 @@
                     <div class="user-profile-box mb-0">
-                         <div class="sidebar-header" style="text-align:center"><img src="{{URL::asset('assets/images/logo.jpeg')}}" alt="header-logo2.png" style="height:76px; width:100px"> </div>
+                         <div class="sidebar-header" style="text-align:center"><a href="{{url('/')}}"><img src="{{URL::asset('assets/images/logo.png')}}" alt="header-logo2.png" style="height:76px; width:100px"></a> </div>
                             <div class="header clearfix">
                                 <img src="{{URL::asset('assets/images/user.jpg')}}" alt="avatar" class="img-fluid profile-img">
                             </div>
