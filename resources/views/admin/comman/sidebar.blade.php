@@ -23,11 +23,7 @@
                                             <i class="fa fa-user"></i>Favorite List
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="{{url('admin/get-change-password')}}">
-                                            <i class="fa fa-user"></i>Change Password 
-                                        </a>
-                                    </li>
+
                                     
                                     @if(auth()->user()->type == 'Admin')
                                     <li>

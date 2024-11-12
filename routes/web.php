@@ -115,8 +115,14 @@ Route::prefix('admin')->group(function () {
     Route::group(['middleware' => ['check.user']], function() {
         Route::get('/home',[AdminController::class, 'home']);
         Route::get('/payment-list',[AdminController::class, 'paymentList']);
-        Route::get('/verified',[AdminController::class, 'verified']);
+
+        Route::get('verified',[AdminController::class, 'verified']);
+
         Route::post('/change-password',[AdminController::class, 'changePass']);
         Route::get('/favorite-list',[AdminController::class, 'favoriteList']);
+        Route::get('/upload-profile',[AdminController::class, 'uploadprofile']);
+        Route::post('/uploadPic',[AdminController::class, 'uploadPic']);
+        
+        
     });
 });
