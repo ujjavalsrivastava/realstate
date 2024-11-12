@@ -27,9 +27,17 @@
             <!-- Left Side Content / End -->
             <!-- Right Side Content / --> 
             <div class="header-user-menu user-menu">
-               <div class="header-user-name">
-                  <span><img src="{{URL::asset('assets/images/user.jpg')}}" alt=""></span>Hi, {{ucfirst(Auth::user()->name)}}!
-               </div>
+            <div class="header-user-name">
+               <span>
+                  @if(Auth::user()->profile)
+                  <img src="{{Auth::user()->profile}}" alt="">
+                  @else
+                  <img src="{{URL::asset('assets/images/user.jpg')}}" alt="">
+                  @endif
+            
+            </span>
+            {{ucfirst(Auth::user()->name)}} @if(Auth::user()->user_verified)<img src="{{URL::asset('assets/images/bluetick.png')}}"  width="20px" alt="">@endif
+            </div>
                <ul>
                   <li><a href="user-profile.html"> Edit profile</a></li>
                   

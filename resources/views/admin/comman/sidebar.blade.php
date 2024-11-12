@@ -1,5 +1,5 @@
                     <div class="user-profile-box mb-0">
-                         <div class="sidebar-header" style="text-align:center"><img src="{{URL::asset('assets/images/logo.jpeg')}}" alt="header-logo2.png" style="height:76px; width:100px"> </div>
+                         <div class="sidebar-header" style="text-align:center"><a href="{{url('/')}}"> <img src="{{URL::asset('assets/images/logo.png')}}" alt="header-logo2.png" style="height:76px; width:100px"></a> </div>
                             <div class="header clearfix">
                                 <img src="{{URL::asset('assets/images/user.jpg')}}" alt="avatar" class="img-fluid profile-img">
                             </div>
@@ -24,26 +24,16 @@
                                         </a>
                                     </li>
 
-                                    <li>
-                                        <a href="{{url('admin/verified')}}">
-                                            <i class="fa fa-user"></i>Verified User
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="{{url('admin/get-change-password')}}">
-                                            <i class="fa fa-user"></i>Change Password
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a href="{{url('admin/upload Profile')}}">
-                                            <i class="fa fa-user"></i>Upload Profile Pic
-                                        </a>
-                                    </li>
+                                    
                                     @if(auth()->user()->type == 'Admin')
                                     <li>
                                         <a href="{{url('admin/sub-plan')}}">
                                             <i class="fa fa-compress"></i>Subscription Plan
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{url('admin/verified')}}">
+                                            <i class="fa fa-user"></i>Verified User
                                         </a>
                                     </li>
                                     @endif
