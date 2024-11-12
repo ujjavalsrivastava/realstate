@@ -1056,13 +1056,14 @@
                 chatWindow.innerHTML += `
                 
  <div id="cm-msg-2" class="chat-msg user" style="">   
-           <span class="msg-avatar">         
-                    @if(@Auth::user()->profile)
-                  <img src="{{Auth::user()->profile}}" alt="">
-                  @else
-                  <img src="{{URL::asset('assets/images/user.jpg')}}" alt="">
-                  @endif 
-              </span>          <div class="cm-msg-text">${e.message}       
+           <span class="msg-avatar">`;         
+                    if(e.receiver.profile){
+                    chatWindow.innerHTML += `<img src="${e.receiver.profile}" alt="">`;
+                    }else{
+                    chatWindow.innerHTML += `<img src="{{URL::asset('assets/images/user.jpg')}}" alt="">`;
+                    }
+                 
+              chatWindow.innerHTML += `</span> <div class="cm-msg-text">${e.message}       
          </div>    
                 
 </div>`;
