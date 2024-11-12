@@ -20,7 +20,7 @@
                                     </li>
                                     <li>
                                         <a href="{{url('admin/favorite-list')}}">
-                                            <i class="fa fa-user"></i>Favorite List 1
+                                            <i class="fa fa-user"></i>Favorite List 
                                         </a>
                                     </li>
 
