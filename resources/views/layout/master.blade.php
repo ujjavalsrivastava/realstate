@@ -1036,7 +1036,7 @@
         .listen('MessageSent', (e) => {
             
             getChatUserList();
-          //  let chatWindow = document.getElementById('chat-window');
+          // let chatWindowscroll = document.getElementById('chat-window');
               var chatWindow = ``;
             // Check if the message was sent by the current user (to distinguish sent and received messages)
             if (e.sender_id == currentUserId) {
@@ -1070,7 +1070,7 @@
             }
               $('#chat-window').append(chatWindow);
             // Scroll chat window to the bottom after new message
-            //chatWindow.scrollTop = chatWindow.scrollHeight;
+            $('#chat-window').scrollTop = $('#chat-window').scrollHeight;
             
         });
 
