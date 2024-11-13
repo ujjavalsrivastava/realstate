@@ -16,7 +16,12 @@
 
                @endphp
                     <div class="emp-name">
-                        <span>{{ucfirst($row->name)}}</span>    <span class="msgCount">{{$count}}</span>
+                        <div class="">
+                            <span>{{ucfirst($row->name)}}</span>
+                        </div>
+                        <div class="">
+                            <span class="msgCount">{{$count}}</span>
+                        </div>
                     </div>
                     <div class="bottom-text"><span>{{ucfirst($row->type)}}</span></div>
                 </div>
