@@ -36,7 +36,7 @@
                   @endif
             
             </span>
-            {{ucfirst(output(Auth::user()->name))}} @if(Auth::user()->user_verified)<img src="{{URL::asset('assets/images/bluetick.png')}}"  width="20px" alt="">@endif
+            {{ucfirst(output(Auth::user()->name,10))}} @if(Auth::user()->user_verified)<img src="{{URL::asset('assets/images/bluetick.png')}}"  width="20px" alt="">@endif
             </div>
                <ul>
                   <li><a href="user-profile.html"> Edit profile</a></li>
