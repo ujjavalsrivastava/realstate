@@ -111,10 +111,10 @@ function UserUnseenMsg($userId){
 }
 
 function output($string, $maxLen) {
-    $string = '';
-    $string .= substr($string, 0, $maxLen); 
+    $name = '';
+    $name .= substr($string, 0, $maxLen); 
     if(strlen($string) > $maxLen){
-        $string .= ' ...';
+        $name .= ' ...';
     }
-    return $string;
+    return $name;
 }
