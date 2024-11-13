@@ -786,7 +786,12 @@
                     url: "{{url('showChat')}}/"+id, // The route that handles the request
                     type: 'GET',
                     success: function(response) {
-                     $('#chat-window').html(response);
+                          let chatWindow = document.getElementById('chat-window');
+
+                           chatWindow.innerHTML += response;
+
+                            chatWindow.scrollTop = chatWindow.scrollHeight;
+                     //$('#chat-window').html(response);
                      getChatUserList(); 
                     },
                     error: function (response) {
