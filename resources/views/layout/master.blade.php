@@ -1037,7 +1037,7 @@
             
             getChatUserList();
             let chatWindow = document.getElementById('chat-window');
-             var recieverChat = ``;
+      
             // Check if the message was sent by the current user (to distinguish sent and received messages)
             if (e.sender_id == currentUserId) {
                 chatWindow.innerHTML += `
@@ -1053,8 +1053,8 @@
      <div class="cm-msg-text">${e.message} </div>   
  </div>`;
             } else {
-                
-                recieverChat = `
+                var recieverChat = ``;
+                recieverChat += `
                 
  <div id="cm-msg-2" class="chat-msg user" style="">   
            <span class="msg-avatar">`;         
