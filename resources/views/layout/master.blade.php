@@ -1058,8 +1058,8 @@
                 
  <div id="cm-msg-2" class="chat-msg user" style="">   
            <span class="msg-avatar">`;         
-                    if(e.receiver.profile){
-                        recieverChat += `<img src="${e.receiver.profile}" alt="">`;
+                    if(e.senderDetail.profile){
+                        recieverChat += `<img src="${e.senderDetail.profile}" alt="">`;
                     }else{
                         recieverChat += `<img src="{{URL::asset('assets/images/user.jpg')}}" alt="">`;
                     }
