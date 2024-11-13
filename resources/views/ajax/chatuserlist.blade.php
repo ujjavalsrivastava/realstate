@@ -13,11 +13,11 @@
                @php
 
                $count = UserUnseenMsg($row->id);
-
+              
                @endphp
                     <div class="emp-name">
                         <div class="" style="display: inline-block;float: left;">
-                            <span>{{ucfirst($row->name)}}</span>
+                            <span>{{ucfirst(output($row->name,10) )}} </span>
                         </div>
                         <div class="" style="display: inline-block;float: right;">
                             <span class="msgCount">{{$count}}</span>

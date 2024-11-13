@@ -109,3 +109,12 @@ function UserUnseenMsg($userId){
     })->count();
     return $count;
 }
+
+function output($string, $maxLen) {
+    $string = '';
+    $string .= substr($string, 0, $maxLen); 
+    if(strlen($string) > $maxLen){
+        $string .= ' ...';
+    }
+    return $string;
+}
