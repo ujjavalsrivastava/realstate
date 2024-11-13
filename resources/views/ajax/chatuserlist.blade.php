@@ -20,7 +20,9 @@
                             <span>{{ucfirst(output($row->name,10) )}} </span>
                         </div>
                         <div class="" style="display: inline-block;float: right;">
+                            @if($count > 0)
                             <span class="msgCount">{{$count}}</span>
+                            @endif
                         </div>
                     </div>
                     <div class="bottom-text" style="position: relative;top: 17px;right: 26px;"><span>{{ucfirst($row->type)}}</span></div>
