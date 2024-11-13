@@ -16,7 +16,7 @@
 
                @endphp
                     <div class="emp-name">
-                        <span>{{ucfirst($row->name)}}</span>  @if( $count > 0)  <span class="msgCount">{{$count}}</span>@endif
+                        <span>{{ucfirst($row->name)}}</span>    <span class="msgCount">{{$count}}</span>
                     </div>
                     <div class="bottom-text"><span>{{ucfirst($row->type)}}</span></div>
                 </div>
