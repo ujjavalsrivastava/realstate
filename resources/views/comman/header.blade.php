@@ -61,7 +61,7 @@
                   @endif
             
             </span>
-            {{ucfirst(output(Auth::user()->name))}} @if(Auth::user()->user_verified)<img src="{{URL::asset('assets/images/bluetick.png')}}"  width="20px" alt="">@endif
+            {{ucfirst(output(Auth::user()->name,10))}} @if(Auth::user()->user_verified)<img src="{{URL::asset('assets/images/bluetick.png')}}"  width="20px" alt="">@endif
             </div>
             <ul>
                <li>@if(!Auth::user()->user_verified) <a href="javascript:void(0)"  onclick="purchageBlueTick(this)"> Un-Verified </a> @endif</li>
