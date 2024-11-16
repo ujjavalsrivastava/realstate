@@ -240,7 +240,7 @@ class HomeController extends Controller
         'pro_type' => 'required',
         'address' => 'required',
         'pin_no' => 'required|min:6|max:8',
-        'profile' => 'required|mimes:jpg,jpeg,png|max:2048'
+        'profile' => 'required|mimes:jpg,jpeg,png|max:1024'
       ]);  
         if ($validator->fails()) {  
         return response()->json(['error'=>$validator->errors()->first()], 401); 
