@@ -135,6 +135,10 @@ class HomeController extends Controller
     function aboutUs(){
         return view('back.aboutus');
     }
+
+    function policy(){
+        return view('back.policy');
+    }
     
     function contactUs(){
         return view('back.contactus');
