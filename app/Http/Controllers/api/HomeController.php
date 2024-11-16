@@ -390,7 +390,7 @@ class HomeController extends Controller
       {
           $user = JWTAuth::parseToken()->authenticate();
           $senderId = $user->id;
-          $messages = Chats::where(function ($query) use ($senderId,$recieverId) {
+          $messages = Chats::with(['sender','receiver'])->where(function ($query) use ($senderId,$recieverId) {
               $query->where('sender_id',  $senderId)->where('receiver_id', $recieverId);
           })->orWhere(function ($query) use ($senderId,$recieverId) {
               $query->where('sender_id', $recieverId)->where('receiver_id',  $senderId);
