@@ -39,7 +39,8 @@
             {{ucfirst(output(Auth::user()->name,10))}} @if(Auth::user()->user_verified)<img src="{{URL::asset('assets/images/bluetick.png')}}"  width="20px" alt="">@endif
             </div>
                <ul>
-                  <li><a href="user-profile.html"> Edit profile</a></li>
+               <li><a href="{{url('admin/upload-profile')}}"> Edit profile</a></li>
+          
                   
                   <li><a href="{{url('admin/payment-list')}}">  Payments</a></li>
                   <li><a href="{{url('admin/get-change-password')}}"> Change Password</a></li>

@@ -65,7 +65,7 @@
             </div>
             <ul>
                <li>@if(!Auth::user()->user_verified) <a href="javascript:void(0)"  onclick="purchageBlueTick(this)"> Un-Verified </a> @endif</li>
-               <li><a href="#"> Edit profile</a></li>
+               <li><a href="{{url('admin/upload-profile')}}"> Edit profile</a></li>
              
                <li><a href="{{url('/admin/payment-list')}}">  Payments</a></li>
                <li><a href="{{url('/admin/get-change-password')}}" > Change Password</a></li>

@@ -31,8 +31,9 @@
                      </div>
                      <div class="row">
                         <div class="col-lg-4 col-md-12">
+                        <label for="description">Property Type</label>
                            <div class="dropdown faq-drop">
-                              <select class="form-control wide" name="pro_type" id="pro_type">
+                              <select class="form-control wide" name="pro_type" id="pro_type" style="height:42px">
                                  <option value="">Select Type</option>
                                  @foreach($getProTypes as $getProType)
                                  <option value="{{$getProType->code}}">{{ucfirst($getProType->description)}}</option>
@@ -41,8 +42,9 @@
                            </div>
                         </div>
                         <div class="col-lg-4 col-md-12">
+                        <label for="description"> Property Type  </label>
                            <div class="dropdown faq-drop">
-                              <select class="form-control wide" name="res_com_type" id="res_com_type" onchange="getResComDes(this.value)">
+                              <select class="form-control wide" name="res_com_type" id="res_com_type" onchange="getResComDes(this.value)" style="height:42px">
                                  <option value="">Select Property Type</option>
                                  @foreach($getResComTypes as $getResComType)
                                  <option value="{{$getResComType->code}}">{{ucfirst($getResComType->description)}}</option>
@@ -51,8 +53,9 @@
                            </div>
                         </div>
                         <div class="col-lg-4 col-md-12">
+                        <label for="description"> Property Detail  </label>
                            <div class="dropdown faq-drop">
-                              <select class="form-control wide" name="res_com_detail" id="res_com_detail">
+                              <select class="form-control wide" name="res_com_detail" id="res_com_detail" style="height:42px">
                                  <option value="">Select Property Detail</option>
                               </select>
                            </div>

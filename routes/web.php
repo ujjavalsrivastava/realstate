@@ -82,7 +82,7 @@ Route::post('/fav-pro',[PostPropertyController::class, 'favoritePro']);
 // footer file
 Route::get('/about-us',[HomeController::class, 'aboutUs']);
 
-Route::get('/privacy-policy ',[HomeController::class, 'policy']);
+Route::get('/privacy-policy',[HomeController::class, 'policy']);
 Route::get('/contact-us',[HomeController::class, 'contactUs']);
 Route::post('/post-contact-us',[HomeController::class, 'postContactUs']);
 Route::get('/terms-conditions',[HomeController::class, 'termsConditions']);
