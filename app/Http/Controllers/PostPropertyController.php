@@ -169,7 +169,7 @@ class PostPropertyController extends Controller
         if(!empty($request->file('images'))){
             foreach ($request->file('images') as $image) {
                 $filename = uniqid() . '.' . $image->getClientOriginalExtension();
-                $path = url('public/images/'.$filename);
+                $path = url('images/'.$filename);
                 $uploade_path = public_path('images');
                 $image->move($uploade_path,$filename);
                 $imageFile = ProMediaModel::insert(['file_name' => $filename,'file_path' => $path,
