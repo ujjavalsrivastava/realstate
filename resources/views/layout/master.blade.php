@@ -583,7 +583,7 @@
                      <div class="close-reg" onclick="closeRegisterLoginModel()"><i class="fa fa-times"></i></div>
                      <h3>Welcome to <span>Find<strong>Houses</strong></span></h3>
                      <div id="tabs-container">
-                        <form method="post"  id="forgetForm">
+                        <form method="post"  id="forgetForm1">
                            <div class="tab">
                               <div id="tab-1" class="tab-contents">
                                  <div id="forgetFirst" class="custom-form">
@@ -842,17 +842,19 @@
             }
             
             
-            $('#forgetForm').on('submit', function(e) {
-                e.preventDefault(); 
+             $('#forgetForm1').on('submit', function(e) {
+               e.preventDefault(); 
+               console.log($(this).serialize());
                 $.ajax({
                     type: "POST",
-                    url: "{{url('/changePassword')}}",
+                   url: "{{url('/changePassword')}}",
                     data: $(this).serialize(),
                     success: function(response) {
                         if(response.status == '200'){
                             $('#successNotification').show();
-                            $('#successMessage').text(response.message);
-                            location.reload().delay(5000);
+                            $('#successMessage').text(response.success);
+                            $('.forget-form modal').css("display", "none");
+                           // location.reload().delay(5000);
                         }else{
                             $('#errorNotification').show();
                             $('#errorMessage').text(response.error);
@@ -913,7 +915,7 @@
                             $('#forgetSecond').hide();
                             $('#forgetThird').show();
                             $('#successNotification').show();
-                            $('#successMessage').text(response.message);
+                            $('#successMessage').text(response.success);
                            
                         }else{
                             $('#errorNotification').show();
@@ -950,7 +952,7 @@
                             $('#forgetSecond').show();
                             $('#forgetThird').hide();
                             $('#successNotification').show();
-                            $('#successMessage').text(response.message);
+                            $('#successMessage').text(response.success);
                            
                         }else{
                             $('#errorNotification').show();

@@ -361,7 +361,7 @@ try{
     return response()->json(['status'=>'200','success' => 'changed  successfully'], 200);
 
 }catch(\Exception $e){
-    return response()->json(['status'=>'400','message' => $e->getMessage()]); 
+    return response()->json(['status'=>'400','error' => $e->getMessage()],401); 
 }
 
 }
