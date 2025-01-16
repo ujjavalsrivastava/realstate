@@ -355,10 +355,15 @@ try{
     return response()->json(['error'=>$validator->errors()->first()], 401); 
     }
 
-    User::where('email',$request->email)->update([
+    $res = User::where('email',$request->forgetemail)->update([
         'password' => Hash::make($request->forgetpasword)
     ]);
-    return response()->json(['status'=>'200','success' => 'changed  successfully'], 200);
+    if($res){
+        return response()->json(['status'=>'200','success' => 'changed  successfully'], 200);
+    }else{
+        return response()->json(['status'=>'200','error' => 'not changed  password'], 401); 
+    }
+   
 
 }catch(\Exception $e){
     return response()->json(['status'=>'400','error' => $e->getMessage()],401); 

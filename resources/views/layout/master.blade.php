@@ -853,7 +853,7 @@
                         if(response.status == '200'){
                             $('#successNotification').show();
                             $('#successMessage').text(response.success);
-                            $('.forget-form modal').css("display", "none");
+                            $('.forget-form').css("display", "none");
                            // location.reload().delay(5000);
                         }else{
                             $('#errorNotification').show();
