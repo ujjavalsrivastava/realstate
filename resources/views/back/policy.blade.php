@@ -1,5 +1,5 @@
 @extends('layout.back_master')
-@section('title', 'About Us')
+@section('title', 'Privacy Policy')
 @section('styles')
 @endsection
 @section('content')
