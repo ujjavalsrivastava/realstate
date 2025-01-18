@@ -108,10 +108,10 @@
       <div class="container">
          <p>{{date('Y')}} © Copyright - All Rights Reserved.</p>
          <ul class="netsocials">
-            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-            <li><a href="#"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
+         <li><a href="https://www.facebook.com/profile.php?id=61567009538969&mibextid=ZbWKwL"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+            <!-- <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li> -->
+            <li><a href="https://www.instagram.com/alphalanding/profilecard/?igsh=MWVjNXFvdG1tZ2F5eA=="><i class="fa fa-instagram"></i></a></li>
+            
          </ul>
       </div>
    </div>
