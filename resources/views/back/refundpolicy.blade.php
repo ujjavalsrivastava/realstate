@@ -29,7 +29,7 @@
 
             
                </p>
-               <h4>Subscreption Plans</h4>
+               <h4>Subscription Plans</h4>
                <p>
 i. Alpha land offers a combination of Services which the User may subscribe to, subject to the need of the User, upon payment of applicable fees.
 ii. The subscription fee paid by the User is non-refundable except when the User selects the Moneyback Plan as detailed on the Site.
