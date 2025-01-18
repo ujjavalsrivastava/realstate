@@ -139,6 +139,9 @@ class HomeController extends Controller
     function policy(){
         return view('back.policy');
     }
+    function refundpolicy(){
+        return view('back.refundpolicy');
+    }
     
     function contactUs(){
         return view('back.contactus');

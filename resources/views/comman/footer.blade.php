@@ -48,7 +48,7 @@
                      <ul class="nav-right">
                         <li><a href="{{url('privacy-policy')}}">Privacy Policy</a></li>
                         <li><a href="{{url('/about-us')}}">About Us</a></li>
-                        <li><a href="#">Blog Default</a></li>
+                        <li><a href="refund-policy">Refund Policy</a></li>
                         <li><a href="#">Blog Details</a></li>
                         <li class="no-mgb"><a href="{{url('/contact-us')}}">Contact Us</a></li>
                      </ul>
