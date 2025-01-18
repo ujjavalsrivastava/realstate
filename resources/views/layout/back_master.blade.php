@@ -8,7 +8,7 @@
       <meta name="description" content="html 5 template">
       <meta name="csrf-token" content="{{ csrf_token() }}">
       <meta name="author" content="">
-      <title>Property Details</title>
+      <title>@yield('title')</title>
       <!-- FAVICON -->
       <link rel="shortcut icon" type="image/x-icon" href="{{ URL::asset('assets/favicon.ico')}}">
       <link rel="stylesheet" href="{{ URL::asset('assets/css/jquery-ui.css')}}">
