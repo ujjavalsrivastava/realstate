@@ -48,12 +48,13 @@ iii. Alpha Land reserves the right to revise the fee of any subscription plan wi
 
 <h4>Contact Us</h4>
 <p>Please send your feedback, complaints, comments, requests for technical support on info@alphaland.in</p>
-
+<p>Bissness Name is Alpha Land</p>
 <p>For any requirement of information, please mail us on info@alphaland.in</p>
 <p>For any refund related queries, Kindly mail us on info@alphaland.in</p>
 <p>For any enrolment queries and money related concerns, Kindly WhatsApp us on: +91 7991892358</p>
 <p>Customer Support Number: +91 7991892358</p>
 <p>(Available: Monday – Sunday 9:30 AM-6:00 PM)</p>
+<p>Address is a Dandupur, Ring road, Varanasi</p>
 
 
 
