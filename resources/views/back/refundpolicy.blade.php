@@ -35,6 +35,28 @@ i. Alpha land offers a combination of Services which the User may subscribe to, 
 ii. The subscription fee paid by the User is non-refundable except when the User selects the Moneyback Plan as detailed on the Site.
 iii. Alpha Land reserves the right to revise the fee of any subscription plan without notice to the User at any time prior to, at the time of, during the tenor or post subscription of the plan by the User. Alpha land shall intimate the User of such revised fees and the User undertakes to pay to Alpha Land the difference in the amount after such revision.
 </p>
+
+<h4>Process for Refund Request</h4>
+<p>For the refund request, you need to mail at info@alphaland.in In the following format with registered email ID only-:</p>
+
+<p>Full Name –<p>
+<p>Registered e-mail ID –</p>
+<p>Registration date –</p>
+<p>Screenshot of Payment Invoice with date and time (You must have received on e-mail/message when you paid) –</p>
+<p>Reason for refund –</p>
+<p>Note-: For the “Refund” you need to mail us only at info@alphaland.in</p>
+
+<h4>Contact Us</h4>
+<p>Please send your feedback, complaints, comments, requests for technical support on info@alphaland.in</p>
+
+<p>For any requirement of information, please mail us on info@alphaland.in</p>
+<p>For any refund related queries, Kindly mail us on info@alphaland.in</p>
+<p>For any enrolment queries and money related concerns, Kindly WhatsApp us on: +91 7991892358</p>
+<p>Customer Support Number: +91 7991892358</p>
+<p>(Available: Monday – Sunday 9:30 AM-6:00 PM)</p>
+
+
+
             </div>
             <!-- <div class="box bg-2">
                <a href="about.html" class="text-center button button--moema button--text-thick button--text-upper button--size-s">read More</a>
