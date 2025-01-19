@@ -46,10 +46,10 @@
                         <li class="no-mgb"><a href="#">Agents Listing</a></li>
                      </ul>
                      <ul class="nav-right">
-                        <li><a href="{{url('privacy-policy')}}">Privacy Policy</a></li>
+                        <li><a href="{{url('/privacy-policy')}}">Privacy Policy</a></li>
                         <li><a href="{{url('/about-us')}}">About Us</a></li>
-                        <li><a href="refund-policy">Refund Policy</a></li>
-                        <!-- <li><a href="#">Blog Details</a></li> -->
+                        <li><a href="{{url('/refund-policy')}}">Refund Policy</a></li>
+                        <li><a href="{{url('/terms-conditions')}}"> Terms and Condition</a></li>
                         <li class="no-mgb"><a href="{{url('/contact-us')}}">Contact Us</a></li>
                      </ul>
                   </div>
