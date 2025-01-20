@@ -43,7 +43,7 @@
                         <li><a href="#">Properties Right</a></li>
                         <li><a href="#">Properties List</a></li>
                         <li><a href="#">Property Details</a></li>
-                        <li class="no-mgb"><a href="#">Agents Listing</a></li>
+                        <li class="no-mgb"><a href="{{url('/post-property')}}">Agents Listing</a></li>
                      </ul>
                      <ul class="nav-right">
                         <li><a href="{{url('/privacy-policy')}}">Privacy Policy</a></li>
@@ -57,36 +57,28 @@
             </div>
             <div class="col-lg-3 col-md-6">
                <div class="widget">
-                  <h3>Twitter Feeds</h3>
+                  <h3>Social media Page</h3>
                   <div class="twitter-widget contuct">
                      <div class="twitter-area">
                         <div class="single-item">
                            <div class="icon-holder">
-                              <i class="fa fa-twitter" aria-hidden="true"></i>
+                              <i class="fa fa-facebook" aria-hidden="true"></i>
                            </div>
                            <div class="text">
-                              <h5><a href="#">@findhouses</a> all share them with me baby said inspet.</h5>
-                              <h4>about 5 days ago</h4>
+                              <h5><a href="https://www.facebook.com/people/Alpha-Land/61567009538969/?mibextid=ZbWKwL">@findhouses</a> Please follow the page.</h5>
+
                            </div>
                         </div>
                         <div class="single-item">
                            <div class="icon-holder">
-                              <i class="fa fa-twitter" aria-hidden="true"></i>
+                              <i class="fa fa-instagram" aria-hidden="true"></i>
                            </div>
                            <div class="text">
-                              <h5><a href="#">@findhouses</a> all share them with me baby said inspet.</h5>
-                              <h4>about 5 days ago</h4>
+                              <h5><a href="https://www.instagram.com/alphalanding/profilecard/?igsh=MWVjNXFvdG1tZ2F5eA==">@findhouses</a> Please follow the page</h5>
+
                            </div>
                         </div>
-                        <div class="single-item">
-                           <div class="icon-holder">
-                              <i class="fa fa-twitter" aria-hidden="true"></i>
-                           </div>
-                           <div class="text">
-                              <h5><a href="#">@findhouses</a> all share them with me baby said inspet.</h5>
-                              <h4>about 5 days ago</h4>
-                           </div>
-                        </div>
+                       
                      </div>
                   </div>
                </div>

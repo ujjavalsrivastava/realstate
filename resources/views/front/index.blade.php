@@ -257,7 +257,7 @@
                   <h3>Wide Renge Of Properties</h3>
                </div>
                <div class="service-text-p">
-                  <p class="text-center">lorem ipsum dolor sit amet, consectetur pro adipisici consectetur debits adipisicing lacus consectetur Business Directory.</p>
+                  <p class="text-center">Wide Range of Properties offers an extensive selection of real estate options, from residential homes to commercial spaces, catering to diverse</p>
                </div>
             </div>
          </article>
@@ -268,7 +268,7 @@
                   <h3>Trusted by thousands</h3>
                </div>
                <div class="service-text-p">
-                  <p class="text-center">lorem ipsum dolor sit amet, consectetur pro adipisici consectetur debits adipisicing lacus consectetur Business Directory.</p>
+                  <p class="text-center">Trusted by thousands, we deliver reliable services and exceptional experiences that earn the confidence of our clients every day.</p>
                </div>
             </div>
          </article>
@@ -279,7 +279,7 @@
                   <h3>Financing made easy</h3>
                </div>
                <div class="service-text-p">
-                  <p class="text-center">lorem ipsum dolor sit amet, consectetur pro adipisici consectetur debits adipisicing lacus consectetur Business Directory.</p>
+                  <p class="text-center">Financing made easy with flexible options tailored to fit your needs, ensuring a hassle-free process from start to finish.</p>
                </div>
             </div>
          </article>
@@ -287,10 +287,10 @@
             <div class="serv-flex">
                <div class="art-1 img-14">
                   <img src="{{URL::asset('assets/images/icons/icon-15.svg')}}" alt="">
-                  <h3>We are here near you</h3>
+                  <h3>Find home in dream </h3>
                </div>
                <div class="service-text-p">
-                  <p class="text-center">lorem ipsum dolor sit amet, consectetur pro adipisici consectetur debits adipisicing lacus consectetur Business Directory.</p>
+                  <p class="text-center">Find your dream home effortlessly with personalized options that match your vision and lifestyle perfectly."</p>
                </div>
             </div>
          </article>

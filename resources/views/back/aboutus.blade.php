@@ -59,7 +59,7 @@
 </section>
 <!-- END SECTION ABOUT -->
 <!-- START SECTION WHY CHOOSE US -->
-<section class="how-it-works bg-white-2">
+<!-- <section class="how-it-works bg-white-2">
    <div class="container">
       <div class="sec-title">
          <h2><span>Why </span>Choose Us</h2>
@@ -101,10 +101,10 @@
          </article>
       </div>
    </div>
-</section>
+</section> -->
 <!-- END SECTION WHY CHOOSE US -->
 <!-- START SECTION COUNTER UP -->
-<section class="counterup">
+<!-- <section class="counterup">
    <div class="container">
       <div class="row">
          <div class="col-lg-3 col-md-6 col-xs-12">
@@ -145,10 +145,10 @@
          </div>
       </div>
    </div>
-</section>
+</section> -->
 <!-- END SECTION COUNTER UP -->
 <!-- START SECTION AGENTS -->
-<section class="team">
+<!-- <section class="team">
    <div class="container">
       <div class="sec-title">
          <h2><span>Our </span>Team</h2>
@@ -249,10 +249,10 @@
          </div>
       </div>
    </div>
-</section>
+</section> -->
 <!-- END SECTION AGENTS -->
 <!-- START SECTION TESTIMONIALS -->
-<section class="testimonials home18 bg-white">
+<!-- <section class="testimonials home18 bg-white">
    <div class="container">
       <div class="sec-title">
          <h2><span>Clients </span>Testimonials</h2>
@@ -369,10 +369,10 @@
          </div>
       </div>
    </div>
-</section>
+</section> -->
 <!-- END SECTION TESTIMONIALS -->
 <!-- STAR SECTION PARTNERS -->
-<div class="partners bg-white-2">
+<!-- <div class="partners bg-white-2">
    <div class="container">
       <div class="sec-title">
          <h2><span>Our </span>Partners</h2>
@@ -391,6 +391,6 @@
          <div class="owl-item"><img src="images/partners/13.jpg" alt=""></div>
       </div>
    </div>
-</div>
+</div> -->
 <!-- END SECTION PARTNERS -->
 @endsection
