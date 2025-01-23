@@ -26,6 +26,12 @@
                            <p class="in-p ti">info@alphaland.in</p>
                         </div>
                      </li>
+                     <li>
+                        <div class="info">
+                           <i class="fa fa-map-marker" aria-hidden="true"></i>
+                           <p class="in-p ti">Dandupur, Ring Road, Christ nagar near Gautam Upavan lawn, Varanasi, Uttar Pradesh Pin Code-221003</p>
+                        </div>
+                     </li>
                   </ul>
                </div>
             </div>
