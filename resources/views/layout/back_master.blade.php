@@ -10,7 +10,8 @@
       <meta name="author" content="">
       <title>@yield('title')</title>
       <!-- FAVICON -->
-      <link rel="shortcut icon" type="image/x-icon" href="{{ URL::asset('assets/favicon.ico')}}">
+      <link rel="shortcut icon" type="image/x-icon" href="{{ URL::asset('assets/images/favicon.ico')}}">
+  
       <link rel="stylesheet" href="{{ URL::asset('assets/css/jquery-ui.css')}}">
       <!-- GOOGLE FONTS -->
       <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i%7CMontserrat:500,600,800" rel="stylesheet">
