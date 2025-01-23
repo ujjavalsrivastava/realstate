@@ -1,5 +1,5 @@
 @extends('layout.back_master')
-@section('title', 'About Us')
+@section('title', 'Contact Us')
 @section('styles')
 @endsection
 @section('content')
@@ -54,7 +54,8 @@
                   <li>
                      <div class="info">
                         <i class="fa fa-map-marker" aria-hidden="true"></i>
-                        <p class="in-p">95 South Park Ave, India</p>
+                        <p class="in-p">Dandupur, Ring Road, Christ nagar near  Gautam Upavan lawn, Varanasi, Uttar Pradesh 
+                        Pin Code-221003</p>
                      </div>
                   </li>
                   <li>
