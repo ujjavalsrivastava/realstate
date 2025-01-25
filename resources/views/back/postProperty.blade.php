@@ -403,7 +403,11 @@
                            $('#successNotification').show();
                            $('#successMessage').text(response.message);
                            window.scrollTo({ top: 0, behavior: 'smooth' });
-                           location.reload().delay(5000);
+                           setTimeout(function () {
+                              location.reload();
+               // window.location.href = "https://example.com"; // Replace with your desired URL
+                                }, 5000);
+                           
                        }else{
                            $('#errorNotification').show();
                            $('#errorMessage').text(response.message);
