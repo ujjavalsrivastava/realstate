@@ -1,6 +1,11 @@
 @extends('layout.back_master')
 @section('title', 'Property')
 @section('styles')
+<style>
+.select2-container--bootstrap4{
+   border:1px solid !important;
+}
+   </style>
 @endsection
 @section('content')
 <!-- START SECTION SUBMIT PROPERTY -->

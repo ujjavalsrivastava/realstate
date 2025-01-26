@@ -10,12 +10,12 @@ use Hash;
 use App\Models\User;
 use App\Models\ResComDetailModel;
 use App\Models\PaymentDetails;
-
+use App\Models\RefundModel;
 use App\Models\OtpVerifyModel;
 use App\Models\ProDescriptionModel;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OtpSendMail;
-use App\Mail\ContactUsSendMail;
+use App\Mail\RefundSendMail;
 use App\Models\CountryModel;
 use App\Models\NewslettersModel;
 use App\Models\ContactUsModel;
@@ -187,6 +187,41 @@ class AdminController extends Controller
         $detail =  PaymentDetails::where('type','verified')->get();
        
         return view('admin.bluetick',compact('detail'));
+    }
+
+    function refund(){
+        return view('back.refund');
+    }
+
+    function saveRefund(Request $request){
+        $validator = Validator::make($request->all(), 
+        [ 
+        'first_name' => 'required',
+        'email' => 'required|email',
+        'last_name' => 'required',
+        'image' => 'required|file|mimes:jpg,png,jpeg|max:2048',
+        ]);  
+        if ($validator->fails()) {  
+        return response()->json(['error'=>$validator->errors()->first()], 401); 
+        }   
+        // $imagePath = $request->file('image')->store('refundScreeenShort', 'public');
+        $fileName = time() . '_' . $request->file('image')->getClientOriginalName();
+        $imagePath = $request->file('image')->storeAs('refundScreeenShort', $fileName, 'public');
+        $user = Auth::user();
+        try{
+            $userRefund = new RefundModel();
+            $userRefund->first_name = $request->first_name;
+            $userRefund->last_name = $request->last_name;
+            
+            $userRefund->email = $request->email;
+            $userRefund->image = $imagePath;
+            $userRefund->created_by = $user->id;
+            $userRefund->save();
+            $data=Mail::to('info@alphaland.in')->send(new RefundSendMail($userRefund));
+            return response()->json(['status'=> 200,'success'=> 'Send Successfuly']); 
+        }catch(\Exception $e){
+            return response()->json(['status'=>'400', 'message' => $e->getMessage()]); 
+        }
     }
 
 }

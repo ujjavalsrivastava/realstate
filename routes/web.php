@@ -104,6 +104,9 @@ Route::get('/threeDeffect/{id}', function ($id) {
       $img = base64_decode($id);
     return view('front.threeDImage',compact('img')) ;
 });
+ 
+Route::get('/refund',[AdminController::class, 'refund']);
+Route::post('/save-refund',[AdminController::class, 'saveRefund']);
 
 Route::get('/emi-calculater',[HomeController::class, 'getEmiCalculater']);
 
@@ -128,7 +131,6 @@ Route::prefix('admin')->group(function () {
         Route::get('/favorite-list',[AdminController::class, 'favoriteList']);
         Route::get('/upload-profile',[AdminController::class, 'uploadprofile']);
         Route::post('/uploadPic',[AdminController::class, 'uploadPic']);
-        
-        
+       
     });
 });

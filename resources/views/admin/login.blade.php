@@ -80,8 +80,7 @@
                      <div class="float-right mt-1"><a id="forgot" href="javascript:void(0);">Forgot Password?</a></div>
                   </div>
                   <button type="submit" class="btn_1 rounded full-width">Login to Find Houses</button>
-                  <div class="text-center add_top_10">New to Find Houses? <strong><a href="register.html">Sign up!</a></strong></div>
-               </form>
+      </form>
             </div>
          </div>
          <!-- END SECTION LOGIN -->

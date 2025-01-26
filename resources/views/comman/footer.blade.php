@@ -47,17 +47,20 @@
                   <div class="nav-footer">
                      <ul>
                         <li><a href="{{url('/')}}">Home One</a></li>
-                        <li><a href="#">Properties Right</a></li>
-                        <li><a href="#">Properties List</a></li>
-                        <li><a href="#">Property Details</a></li>
+                        <li><a href="{{url('/about-us')}}">About Us</a></li>
+                        <li class="no-mgb"><a href="{{url('/contact-us')}}">Contact Us</a></li>
+
+                        <!-- <li><a href="#">Properties List</a></li> -->
+                        <!-- <li><a href="#">Property Details</a></li> -->
                         <li class="no-mgb"><a href="{{url('/post-property')}}">Agents Listing</a></li>
                      </ul>
                      <ul class="nav-right">
                         <li><a href="{{url('/privacy-policy')}}">Privacy Policy</a></li>
-                        <li><a href="{{url('/about-us')}}">About Us</a></li>
+                        <li><a href="{{url('/refund')}}">Refund Form</a></li>
+                    
                         <li><a href="{{url('/refund-policy')}}">Refund Policy</a></li>
                         <li><a href="{{url('/terms-conditions')}}"> Terms and Condition</a></li>
-                        <li class="no-mgb"><a href="{{url('/contact-us')}}">Contact Us</a></li>
+                   
                      </ul>
                   </div>
                </div>

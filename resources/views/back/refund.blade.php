@@ -1,5 +1,5 @@
 @extends('layout.back_master')
-@section('title', 'Contact Us')
+@section('title', 'Refund Form')
 @section('styles')
 @endsection
 @section('content')
@@ -15,15 +15,15 @@
 <!-- START SECTION CONTACT US -->
 <section class="contact-us">
    <div class="container">
-      <div class="property-location mb-5">
+      <!-- <div class="property-location mb-5">
          <h3>Our Location</h3>
          <div class="divider-fade"></div>
          <div id="map-contact" class="contact-map"></div>
-      </div>
+      </div> -->
       <div class="row">
          <div class="col-lg-8 col-md-12">
-            <h3 class="mb-4">Refund</h3>
-            <form id="contactform" class="contact-form" method="post">
+            <h3 class="mb-4">Refund Request Form</h3>
+            <form id="refundform" class="contact-form" enctype="multipart/form-data">
                @csrf
                <div id="success" class="successform">
                   <p class="alert alert-success font-weight-bold" role="alert">Your message was sent successfully!</p>
@@ -41,9 +41,9 @@
                   <input type="text" class="form-control input-custom input-full" name="email" placeholder="Registered Email">
                </div>
                <div class="form-group">
-                  <input type="file" class="form-control textarea-custom input-full" id="image" name="image" rows="8" placeholder="Screenshot of Payment Invoice with date and time (You must have received on e-mail/message when you paid)">
+                  <input type="file" class="form-control textarea-custom input-full" id="image" name="image" rows="8" >
                </div>
-               <button type="submit" id="submit-contact" class="btn btn-primary btn-lg">Submit</button>
+               <button type="submit" id="submit-refund" class="btn btn-primary btn-lg">Submit</button>
             </form>
          </div>
          <div class="col-lg-4 col-md-12 bgc">
@@ -86,21 +86,30 @@
 @endsection
 @section('script')
 <script>
-   $('#contactform').on('submit', function(e) {
+
+   $('#refundform').on('submit', function(e) {
               e.preventDefault(); 
+              $('#submit-refund').text('Proccessing...');
+              $('#submit-refund').prop('disabled', true);
+              let formData = new FormData(this);
+              console.log(formData);
               $.ajax({
                   headers: {
                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                   },
                   type: "POST",
-                  url: "{{url('/post-contact-us')}}",
-                  data: $(this).serialize(),
+                  url: "{{url('save-refund')}}",
+                  data: formData,
+                  processData: false, // FormData ke saath false rakhna zaroori hai
+                  contentType: false,
                   success: function(response) {
+                     $('#submit-refund').text('Submit');
+                     $('#submit-refund').prop('disabled', false);
                       if(response.status == '200'){
                           $('#successNotification').show();
                           window.scrollTo({ top: 0, behavior: 'smooth' });
                           $('#successMessage').text(response.success);
-                          $('#contactform')[0].reset(); 
+                          $('#refundform')[0].reset(); 
                       }else{
                           $('#errorNotification').show();
                           window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -108,6 +117,8 @@
                       }   
                   },
                   error: function (response) {
+                     $('#submit-refund').text('Submit');
+                     $('#submit-refund').prop('disabled', false);
                       $('#errorNotification').show();
                       window.scrollTo({ top: 0, behavior: 'smooth' });
                       $('#errorMessage').text(response.responseJSON.error);
