@@ -710,7 +710,7 @@
                        
                       
                        //   $('#razorpay_order_id').val(response.order_id);
-                          PaymentNow(response.order_id);
+                          PaymentNow(response.order_id,response.key);
                       
                    },
                    error: function (response) {
@@ -722,14 +722,14 @@
    
             }
 
-            function PaymentNow(orderId){
+            function PaymentNow(orderId,key){
    var options = {
-   "key": "rzp_test_vDBwnM5DROejIY",
-   "amount": '500',
+   "key": key,
+   "amount": '100',
    "currency": "INR",
-   "name": "YOUR COMPANY NAME",
-   "description": "YOUR COMPANY DESCRIPTION",
-   "image": "YOUR COMPANY IMAGE",
+   "name": "Alpha Land",
+   "description": "Alpha land India's most innovative real estate advertising platform for homeowners, landlords, developers, and real estate brokers. The company offers listings for new homes, resale homes, rentals,",
+   "image": "https://alphaland.in/assets/images/logo.png",
    "order_id": orderId,
    "handler": function(response) {
     console.log('response '+ JSON.stringify(response) );
