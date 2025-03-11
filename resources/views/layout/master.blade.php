@@ -702,7 +702,7 @@
                    },
                    type: "POST",
                    url: "{{url('/orderGenerate')}}",
-                   data: {price:'500'},
+                   data: {price:'1'},
                    success: function(response) {
                        $(thisval).hide();
                        
@@ -710,7 +710,7 @@
                        
                       
                        //   $('#razorpay_order_id').val(response.order_id);
-                          PaymentNow(response.order_id,response.key);
+                          PaymentNow(response.order_id,response.key,response.amount);
                       
                    },
                    error: function (response) {
@@ -722,10 +722,10 @@
    
             }
 
-            function PaymentNow(orderId,key){
+            function PaymentNow(orderId,key,amount){
    var options = {
    "key": key,
-   "amount": '100',
+   "amount": amount,
    "currency": "INR",
    "name": "Alpha Land",
    "description": "Alpha land India's most innovative real estate advertising platform for homeowners, landlords, developers, and real estate brokers. The company offers listings for new homes, resale homes, rentals,",
